@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>羊羊金和狗狗雅的小角落 | Love Diary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================
+           童话风格主题系统
+           ======================================== */
+        :root {
+            --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-main: 'Noto Serif SC', serif;
+            --font-display: 'ZCOOL XiaoWei', serif;
+            --font-handwriting: 'Caveat', 'ZCOOL XiaoWei', cursive;
+            
+            --bg-primary: #1a1a3e;
+            --text-primary: #e8e4f0;
+            --text-secondary: #a09ab8;
+            --accent: #9d7cd8;
+            --accent-glow: rgba(157, 124, 216, 0.5);
+            --nav-bg: rgba(26, 26, 62, 0.8);
+        }
+
+        body[data-active-page="home"] {
+            --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            --text-primary: #e8e4f0; --accent: #b28dff; --nav-bg: rgba(15, 12, 41, 0.7);
+        }
+        body[data-active-page="photos"] {
+            --bg-primary: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            --text-primary: #5d4e37; --text-secondary: #8b7355; --accent: #ff9a9e; --nav-bg: rgba(253, 251, 251, 0.8);
+        }
+        body[data-active-page="wishes"] {
+            --bg-primary: linear-gradient(to bottom, #0b0c10 0%, #1f2833 60%, #45a29e 100%);
+            --text-primary: #fcfcfc; --text-secondary: #66fcf1; --accent: #66fcf1; --nav-bg: rgba(11, 12, 16, 0.8);
+        }
+        body[data-active-page="messages"] {
+            --bg-primary: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+            --text-primary: #4a4a4a; --text-secondary: #7a7a7a; --accent: #a18cd1; --nav-bg: rgba(243, 231, 233, 0.8);
+        }
+        body[data-active-page="settings"] {
+            --bg-primary: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+            --text-primary: #333; --text-secondary: #555; --accent: #667eea; --nav-bg: rgba(224, 195, 252, 0.8);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-main); background: var(--bg-primary);
+            background-attachment: fixed; color: var(--text-primary);
+            min-height: 100vh; overflow-x: hidden;
+            transition: background 1.5s ease, color 1.5s ease; line-height: 1.8;
+        }
+
+        /* 导航 */
+        .nav-container {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            background: var(--nav-bg); backdrop-filter: blur(15px); transition: var(--transition-smooth);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+        .nav-logo { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-primary); text-decoration: none; letter-spacing: 0.15em; text-shadow: 0 0 15px var(--accent-glow); }
+        .nav-menu { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .nav-item {
+            padding: 0.6rem 1.2rem; color: var(--text-primary); opacity: 0.7; text-decoration: none;
+            font-size: 0.9rem; border-radius: 20px; transition: var(--transition-smooth);
+            cursor: pointer; border: none; background: transparent; font-family: inherit;
+        }
+        .nav-item:hover, .nav-item.active { opacity: 1; background: rgba(255, 255, 255, 0.15); box-shadow: 0 0 15px var(--accent-glow); }
+
+        .page {
+            display: none; min-height: 100vh; padding: 6rem 2rem 8rem;
+            opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .page.active { display: block; }
+        .page.visible { opacity: 1; transform: translateY(0); }
+        .page-title { font-family: var(--font-display); font-size: 2.8rem; text-align: center; margin-bottom: 0.5rem; color: var(--text-primary); text-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .page-subtitle { text-align: center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 3rem; opacity: 0.8; }
+
+        /* ================= 1. 情绪星空 ================= */
+        .star-container {
+            position: relative; width: 100%; height: 60vh; min-height: 400px; max-width: 1200px; margin: 0 auto;
+            cursor: crosshair; overflow: hidden; border-radius: 30px;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            box-shadow: 0 0 40px rgba(178, 141, 255, 0.2), inset 0 0 80px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;
+        }
+        .star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .star {
+            position: absolute; width: 4px; height: 4px; border-radius: 50%;
+            background: #fff; cursor: pointer; transition: all 0.5s ease;
+            animation: twinkle 3s infinite ease-in-out; box-shadow: 0 0 10px #fff, 0 0 20px var(--accent);
+        }
+        .star:hover { transform: scale(2.5); box-shadow: 0 0 20px #fff; }
+        @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+
+        /* 特效升级：星云迷雾浮现 */
+        .star-message {
+            position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
+            padding: 1.5rem 3rem; background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px; color: #fff; font-size: 1.15rem;
+            opacity: 0; pointer-events: none;
+            letter-spacing: 2px; max-width: 85%; text-align: center; line-height: 1.8;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+        }
+        .star-message.show { animation: mysticReveal 6s ease-in-out forwards; }
+        
+        @keyframes mysticReveal {
+            0% { opacity: 0; transform: translate(-50%, 20px) scale(0.95); filter: blur(8px); }
+            15% { opacity: 1; transform: translate(-50%, 0) scale(1); filter: blur(0px); }
+            85% { opacity: 1; transform: translate(-50%, -10px) scale(1); filter: blur(0px); }
+            100% { opacity: 0; transform: translate(-50%, -30px) scale(1.05); filter: blur(8px); }
+        }
+
+        /* ================= 2. 光影相册 ================= */
+        .photo-gallery {
+            max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 3.5rem;
+            padding: 2rem; perspective: 1000px;
+        }
+        .photo-card {
+            position: relative; width: 280px; background: #fff;
+            padding: 15px 15px 55px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: var(--transition-smooth); z-index: 1;
+        }
+        .photo-card::before {
+            content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
+            width: 100px; height: 30px; background: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); backdrop-filter: blur(2px); z-index: 2;
+        }
+        .photo-card:hover { transform: translateY(-20px) rotate(0deg) scale(1.08) !important; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .photo-card img { width: 100%; height: 280px; object-fit: cover; filter: sepia(10%); border-radius: 2px; cursor: pointer; }
+        .photo-caption { position: absolute; bottom: 15px; left: 0; right: 0; text-align: center; color: #444; font-family: var(--font-handwriting); font-size: 1.3rem; }
+        
+        .photo-add { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 350px; background: rgba(255,255,255,0.5); border: 2px dashed #bbb; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+        .photo-add:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.8); transform: translateY(-10px) !important; }
+
+        /* ================= 3. 许愿池 ================= */
+        .wish-scene {
+            position: relative; width: 100%; max-width: 900px; margin: 0 auto; min-height: 75vh; 
+            padding: 3rem 2rem 250px 2rem; display: flex; flex-direction: column; align-items: center;
+        }
+        .scene-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; border-radius: 30px; overflow: hidden; background: rgba(255, 255, 255, 0.02); box-shadow: inset 0 0 50px rgba(0,0,0,0.2); }
+        .scene-moon { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, #fffbdb 0%, #f4e38e 100%); box-shadow: 0 0 60px #f4e38e, 0 0 120px rgba(244, 227, 142, 0.4); }
+        .scene-hill { position: absolute; bottom: -150px; left: -25%; width: 150%; height: 350px; border-radius: 50%; background: #0b0c10; }
+        .scene-girl { position: absolute; bottom: 180px; left: 50%; transform: translateX(-50%); width: 80px; height: 100px; }
+        .scene-girl svg { width: 100%; height: 100%; fill: #0b0c10; }
+
+        .wish-input-container { display: flex; gap: 1.2rem; margin-bottom: 3.5rem; width: 100%; max-width: 650px; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 40px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); z-index: 2; }
+        .wish-input { flex: 1; padding: 1rem 1.5rem; border: none; background: transparent; color: #fff; font-size: 1.1rem; outline: none; }
+        .wish-input::placeholder { color: rgba(255,255,255,0.6); }
+        .wish-submit { padding: 1rem 2.5rem; border: none; border-radius: 30px; background: var(--accent); color: #000; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+        .wish-submit:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--accent-glow); }
+
+        .wish-list { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 650px; z-index: 2; }
+        .wish-item { position: relative; display: flex; align-items: center; gap: 1.2rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; backdrop-filter: blur(12px); color: #fff; font-size: 1.1rem; transition: var(--transition-smooth); }
+        .wish-item:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
+        .wish-item.completed span { opacity: 0.5; text-decoration: line-through; }
+        .wish-checkbox { width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
+        .wish-checkbox.checked { background: var(--accent); }
+
+        /* ================= 4. 共享小角落 ================= */
+        .board-container { max-width: 1200px; margin: 0 auto; }
+        .message-input-container { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-bottom: 5rem; }
+        .message-input { width: 100%; max-width: 600px; padding: 1.8rem; background: rgba(255,255,255,0.8); border: none; border-radius: 15px; font-family: var(--font-handwriting); font-size: 1.4rem; color: #333; resize: none; min-height: 140px; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05), 0 5px 15px rgba(0,0,0,0.05); }
+        .message-cards { display: flex; flex-wrap: wrap; gap: 3rem; justify-content: center; }
+        .message-card { position: relative; width: 260px; min-height: 260px; padding: 2.5rem 1.8rem; background: #ffeb3b; box-shadow: 3px 5px 15px rgba(0,0,0,0.1); color: #333; font-family: var(--font-handwriting); font-size: 1.4rem; line-height: 1.6; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
+        .message-card::after { content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8a80, #d50000); box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 2px 5px 5px rgba(0,0,0,0.2); }
+        .message-card:hover { transform: scale(1.08) rotate(0deg) !important; z-index: 10; box-shadow: 5px 12px 25px rgba(0,0,0,0.2); }
+        .message-time { font-size: 0.9rem; color: rgba(0,0,0,0.5); text-align: right; font-family: sans-serif; }
+
+        /* ================= 精致的删除按钮 ================= */
+        .delete-btn {
+            position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%;
+            background: rgba(255, 71, 87, 0.8); color: white; border: none; font-size: 1.2rem;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
+            opacity: 0; transition: all 0.3s ease; z-index: 20; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        /* 愿望的删除按钮位置 */
+        .wish-item .delete-btn { top: 50%; transform: translateY(-50%); right: 20px; background: rgba(255, 255, 255, 0.2); }
+        
+        .photo-card:hover .delete-btn, .message-card:hover .delete-btn, .wish-item:hover .delete-btn { opacity: 1; }
+        .delete-btn:hover { background: #ff4757; transform: scale(1.1) !important; }
+        .wish-item .delete-btn:hover { background: rgba(255, 71, 87, 0.9); }
+
+        /* 灯箱和其他 */
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.5s; }
+        .lightbox.show { display: flex; opacity: 1; }
+        .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 5px; border: 10px solid #fff; }
+        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: #fff; font-size: 2.5rem; cursor: pointer; background: none; border: none; }
+        .companion-trigger { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid var(--accent); color: var(--accent); font-size: 1.8rem; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: 0.5s; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
+        .companion-trigger:hover { transform: scale(1.1); background: var(--accent); color: #fff; box-shadow: 0 0 25px var(--accent-glow); }
+        .companion-effect { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0; transition: opacity 1.5s ease; background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%); }
+        .companion-effect.show { opacity: 0.5; animation: breathe 4s ease-in-out; }
+        @keyframes breathe { 0%, 100% { opacity: 0; } 50% { opacity: 0.6; transform: scale(1.1); } }
+    </style>
+</head>
+<body data-active-page="home">
+
+    <nav class="nav-container">
+        <a href="#" class="nav-logo" onclick="showPage('home')">Love Diary</a>
+        <div class="nav-menu">
+            <button class="nav-item active" data-page="home">情绪星空</button>
+            <button class="nav-item" data-page="photos">光影相册</button>
+            <button class="nav-item" data-page="wishes">星空许愿</button>
+            <button class="nav-item" data-page="messages">便签角落</button>
+        </div>
+    </nav>
+
+    <!-- 1. 首页 -->
+    <section class="page active visible" id="page-home">
+        <h1 class="page-title">情绪星空</h1>
+        <p class="page-subtitle">轻轻点击星空，留下一颗属于此刻的星星</p>
+        <div class="star-container" id="starContainer">
+            <canvas class="star-canvas" id="starCanvas"></canvas>
+            <div class="star-message" id="starMessage"></div>
+        </div>
+    </section>
+
+    <!-- 2. 相册 -->
+    <section class="page" id="page-photos">
+        <h1 class="page-title">散落的记忆</h1>
+        <p class="page-subtitle">每个定格，都是一首安静的诗</p>
+        <div class="photo-gallery" id="photoGallery">
+            <div class="photo-card photo-add" onclick="addPhoto()">
+                <span style="font-size: 4rem; color: #bbb;">+</span>
+                <span style="color: #888; font-size: 1.1rem; margin-top: 10px;">存入新的光影</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. 许愿池 -->
+    <section class="page" id="page-wishes">
+        <h1 class="page-title">星夜祈愿</h1>
+        <p class="page-subtitle">在月光下，所有柔软的愿望都会被听见</p>
+        <div class="wish-scene">
+            <div class="scene-bg">
+                <div class="scene-moon"></div>
+                <div class="scene-hill"></div>
+                <div class="scene-girl">
+                    <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M50 40 C42 40 38 28 48 25 C58 22 60 38 50 40 Z"/>
+                        <path d="M48 42 C40 45 35 60 38 80 C40 90 45 100 35 120 L65 120 C55 100 60 90 62 80 C65 60 58 45 48 42 Z"/>
+                        <path d="M50 45 C60 55 65 65 55 70 C48 75 45 60 50 45 Z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="wish-input-container">
+                <input type="text" class="wish-input" id="wishInput" placeholder="写下一个愿望..." maxlength="50">
+                <button class="wish-submit" onclick="addWish()">托付给星星</button>
+            </div>
+            <div class="wish-list" id="wishList"></div>
+        </div>
+    </section>
+
+    <!-- 4. 便签墙 -->
+    <section class="page" id="page-messages">
+        <h1 class="page-title">治愈便签墙</h1>
+        <p class="page-subtitle">随手写下的絮语，贴在这里</p>
+        <div class="board-container">
+            <div class="message-input-container">
+                <textarea class="message-input" id="messageInput" placeholder="今天遇到了一朵形状很像小狗的云..." maxlength="200"></textarea>
+                <button class="wish-submit" style="background: #a18cd1;" onclick="addMessage()">贴上便签</button>
+            </div>
+            <div class="message-cards" id="messageCards"></div>
+        </div>
+    </section>
+
+    <button class="companion-trigger" onclick="triggerCompanion()" title="我在">✧</button>
+    <div class="companion-effect" id="companionEffect"></div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <img id="lightboxImg" src="" alt="">
+    </div>
+
+    <script>
+        const STORAGE_KEYS = {
+            stars: 'fairy_diary_stars', photos: 'fairy_diary_photos',
+            wishes: 'fairy_diary_wishes', messages: 'fairy_diary_messages'
+        };
+
+        // 升级版长文案：充满治愈感与温度
+        const longTexts =[
+"想让你当……", "梦里好像见过", "距离好像变近了", "猫猫不是一个人哦", "很安静", "可能是我在想你", "小崔大人我们一起玩……", "想和你说好多话", "想和你一起看星星", "抱抱", "最喜欢小崔猫猫啦","我来见你啦小猫"
+        ];
+
+        const noteColors =['#ffeb3b', '#ffcdd2', '#c8e6c9', '#bbdefb', '#e1bee7', '#ffe0b2'];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation(); initStarCanvas(); loadStars(); loadPhotos(); loadWishes(); loadMessages();
+        });
+
+        function initNavigation() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', () => showPage(item.dataset.page));
+            });
+        }
+
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(p => { p.classList.remove('visible'); setTimeout(() => p.classList.remove('active'), 500); });
+            setTimeout(() => { const target = document.getElementById(`page-${pageName}`); if (target) { target.classList.add('active'); setTimeout(() => target.classList.add('visible'), 50); } }, 550);
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            document.querySelector(`.nav-item[data-page="${pageName}"]`).classList.add('active');
+            document.body.setAttribute('data-active-page', pageName);
+            window.scrollTo(0, 0);
+        }
+
+        // ================= 星空 =================
+        function initStarCanvas() {
+            const container = document.getElementById('starContainer');
+            container.addEventListener('click', (e) => {
+                if (e.target.classList.contains('star')) return;
+                const rect = container.getBoundingClientRect();
+                createStar(e.clientX - rect.left, e.clientY - rect.top, true);
+            });
+        }
+        function createStar(x, y, save = false) {
+            const container = document.getElementById('starContainer');
+            const star = document.createElement('div'); star.className = 'star';
+            star.style.left = x + 'px'; star.style.top = y + 'px';
+            const size = Math.random() * 3 + 2; star.style.width = size + 'px'; star.style.height = size + 'px';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            container.appendChild(star);
+
+            if (save) {
+                showStarMessage();
+                const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]');
+                stars.push({x, y}); localStorage.setItem(STORAGE_KEYS.stars, JSON.stringify(stars));
+            }
+        }
+        function showStarMessage() {
+            const msg = document.getElementById('starMessage');
+            msg.textContent = longTexts[Math.floor(Math.random() * longTexts.length)];
+            // 重新触发动画
+            msg.classList.remove('show');
+            void msg.offsetWidth;
+            msg.classList.add('show');
+        }
+        function loadStars() {
+            const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]');
+            stars.forEach(s => createStar(s.x, s.y, false));
+        }
+
+        // ================= 照片相册 (带前端无损压缩) =================
+        function loadPhotos() {
+            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
+            const gallery = document.getElementById('photoGallery');
+            const addBtn = gallery.querySelector('.photo-add');
+            gallery.innerHTML = '';
+            
+            photos.forEach((photo, index) => {
+                const card = document.createElement('div'); card.className = 'photo-card';
+                const rot = Math.random() * 20 - 10; card.style.transform = `rotate(${rot}deg)`;
+                
+                card.innerHTML = `
+                    <button class="delete-btn" onclick="deletePhoto(${index}, event)" title="删除这张照片">×</button>
+                    <img src="${photo.src}" onclick="openLightbox(${index})">
+                    <p class="photo-caption">${photo.caption}</p>
+                `;
+                gallery.appendChild(card);
+            });
+            gallery.appendChild(addBtn);
+        }
+
+        function addPhoto() {
+            const input = document.createElement('input');
+            input.type = 'file'; input.accept = 'image/*';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        // 核心：利用 Canvas 进行图片压缩，突破 localStorage 容量限制
+                        const canvas = document.createElement('canvas');
+                        const MAX_WIDTH = 1000; // 限制最大宽度
+                        const MAX_HEIGHT = 1000;
+                        let width = img.width; let height = img.height;
+
+                        if (width > height) {
+                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
+                        } else {
+                            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
+                        }
+
+                        canvas.width = width; canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, width, height);
+                        
+                        // 导出为体积极小的 JPEG (质量 0.7 足够网页清晰度)
+                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
+
+                        const caption = prompt('为这段光影写一句简短的批注吧:') || '';
+                        const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
+                        photos.push({ src: compressedBase64, caption });
+                        
+                        try {
+                            localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos));
+                            loadPhotos();
+                        } catch (err) {
+                            alert("哎呀，虽然已经尽力压缩了，但空间还是满了！请先删除几张旧照片吧~");
+                        }
+                    };
+                };
+                reader.readAsDataURL(file);
+            };
+            input.click();
+        }
+
+        function deletePhoto(index, event) {
+            event.stopPropagation(); // 防止触发放大灯箱
+            if(confirm("确定要删除这张照片吗？")) {
+                const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
+                photos.splice(index, 1);
+                localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos));
+                loadPhotos();
+            }
+        }
+
+        function openLightbox(idx) {
+            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
+            document.getElementById('lightboxImg').src = photos[idx].src;
+            document.getElementById('lightbox').classList.add('show');
+        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('show'); }
+
+        // ================= 许愿池 =================
+        function loadWishes() {
+            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
+            document.getElementById('wishList').innerHTML = wishes.map((wish, i) => `
+                <div class="wish-item ${wish.completed ? 'completed' : ''}">
+                    <div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="toggleWish(${i})"></div>
+                    <span style="flex:1;">${wish.text}</span>
+                    <button class="delete-btn" onclick="deleteWish(${i})" title="删除愿望">×</button>
+                </div>
+            `).join('');
+        }
+        function addWish() {
+            const input = document.getElementById('wishInput');
+            if(!input.value.trim()) return;
+            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
+            wishes.unshift({ text: input.value.trim(), completed: false });
+            localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes));
+            input.value = ''; loadWishes();
+        }
+        function toggleWish(i) {
+            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
+            wishes[i].completed = !wishes[i].completed;
+            localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); loadWishes();
+        }
+        function deleteWish(index) {
+            if(confirm("确定要删除这个愿望吗？")) {
+                const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
+                wishes.splice(index, 1);
+                localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes));
+                loadWishes();
+            }
+        }
+
+        // ================= 便签墙 =================
+        function loadMessages() {
+            const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]');
+            document.getElementById('messageCards').innerHTML = msgs.map((msg, index) => {
+                const rot = Math.random() * 10 - 5;
+                return `
+                <div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);">
+                    <button class="delete-btn" onclick="deleteMessage(${index}, event)" title="撕下便签">×</button>
+                    <div>${msg.text}</div>
+                    <div class="message-time">${msg.date}</div>
+                </div>
+            `}).join('');
+        }
+        function addMessage() {
+            const input = document.getElementById('messageInput');
+            if(!input.value.trim()) return;
+            const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]');
+            msgs.unshift({ text: input.value.trim(), color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() });
+            localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs));
+            input.value = ''; loadMessages();
+        }function deleteMessage(index, event) {
+            event.stopPropagation();
+            if(confirm("确定要撕下这张便签吗？")) {
+                const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]');
+                msgs.splice(index, 1);
+                localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs));
+                loadMessages();
+            }
+        }
+
+        // ================= 陪伴触发 =================
+        function triggerCompanion() {
+            const effect = document.getElementById('companionEffect');
+            effect.classList.remove('show');
+            void effect.offsetWidth; // 触发重绘
+            effect.classList.add('show');
+        }
+
+        // ================= 数据管理 =================
+        function exportData() {
+            const data = {};
+            Object.values(STORAGE_KEYS).forEach(k => data[k] = localStorage.getItem(k));
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'love_diary_backup.json'; a.click();
+        }
+        
+        function importData(input) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = JSON.parse(e.target.result);
+                Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
+                alert('记忆已恢复'); location.reload();
+            };
+            reader.readAsText(input.files[0]);
+        }
+        
+        function clearAllData() {
+            if(confirm('清空后就像下了一场大雪，什么都不会留下。确定吗？')) {
+                Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
