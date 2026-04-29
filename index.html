@@ -289,8 +289,27 @@
 
         const noteColors =['#ffeb3b', '#ffcdd2', '#c8e6c9', '#bbdefb', '#e1bee7', '#ffe0b2'];
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initNavigation(); initStarCanvas(); loadStars(); loadPhotos(); loadWishes(); loadMessages();
+        document.addEventListener('DOMContentLoaded', async () => {
+            initNavigation(); initStarCanvas();
+            // ── 自动从 data.json 同步共享数据 ──────────────────────────────
+            // 新用户(localStorage为空)直接加载远程数据，否则比较版本号
+            try {
+                const res = await fetch('./data.json?_=' + Date.now());
+                if (res.ok) {
+                    const remote = await res.json();
+                    const localVer  = Number(localStorage.getItem('love_diary_version') || '0');
+                    const remoteVer = Number(remote['love_diary_version'] || '0');
+                    
+                    // 新用户或者远程版本更新时，加载远程数据
+                    if (localVer === 0 || remoteVer > localVer) {
+                        Object.keys(remote).forEach(k => {
+                            if (remote[k] != null) localStorage.setItem(k, remote[k]);
+                        });
+                    }
+                }
+            } catch (e) { console.log('同步数据失败:', e); }
+            // ─────────────────────────────────────────────────────────────
+            loadStars(); loadPhotos(); loadWishes(); loadMessages();
         });
 
         function initNavigation() {
@@ -503,12 +522,16 @@
 
         // ================= 数据管理 =================
         function exportData() {
-            const data = {};
+            // 写入一个版本号（毫秒时间戳），让其他访客的页面知道该更新了
+            const version = Date.now().toString();
+            localStorage.setItem('love_diary_version', version);
+
+            const data = { love_diary_version: version };
             Object.values(STORAGE_KEYS).forEach(k => data[k] = localStorage.getItem(k));
             const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = url; a.download = 'love_diary_backup.json'; a.click();
+            a.href = url; a.download = 'data.json'; a.click();
         }
         
         function importData(input) {
