@@ -607,7 +607,40 @@
 
         function escapeHtml(str) { return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        // 从data.json加载初始数据
+        async function loadInitialData() {
+            try {
+                const response = await fetch('./data.json');
+                if (!response.ok) throw new Error('Failed to load data.json');
+                const data = await response.json();
+                
+                // 如果localStorage为空，则使用data.json中的数据初始化
+                if (!localStorage.getItem(STORAGE_KEYS.stars)) {
+                    localStorage.setItem(STORAGE_KEYS.stars, JSON.stringify(data.stars || []));
+                }
+                if (!localStorage.getItem(STORAGE_KEYS.photos)) {
+                    localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(data.photos || []));
+                }
+                if (!localStorage.getItem(STORAGE_KEYS.wishes)) {
+                    localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(data.wishes || []));
+                }
+                if (!localStorage.getItem(STORAGE_KEYS.messages)) {
+                    localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(data.messages || []));
+                }
+                if (!localStorage.getItem(STORAGE_KEYS.achievements)) {
+                    localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(data.achievements || ACHIEVEMENTS_DATA));
+                }
+            } catch (error) {
+                console.log('使用本地数据初始化:', error.message);
+                // 如果无法加载data.json，使用默认数据
+                if (!localStorage.getItem(STORAGE_KEYS.achievements)) {
+                    localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(ACHIEVEMENTS_DATA));
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadInitialData(); // 先加载初始数据
             initNavigation(); initStarCanvas(); initIconPicker();
             loadStars(); loadPhotos(); loadWishes(); loadAchievements(); loadMessages(); updateTogetherDays();
         });
@@ -866,6 +899,33 @@
         }
 
         function updateTogetherDays() { const target = document.getElementById('togetherCounter'); const now = new Date(); const start = new Date(RELATIONSHIP_START + 'T00:00:00'); const diff  = Math.max(0, Math.floor((now - start) / 86400000)); target.innerHTML = `<span class="counter-days-num">${diff}</span><span class="counter-label">days of us</span><div class="counter-gems">✦ ✦ ✦</div>`; }
+
+        // 导出数据函数
+        function exportData() {
+            const data = {
+                version: "1",
+                stars: JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]'),
+                photos: JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]'),
+                wishes: JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'),
+                messages: JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'),
+                achievements: JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || JSON.stringify(ACHIEVEMENTS_DATA))
+            };
+            
+            const dataStr = JSON.stringify(data, null, 2);
+            const blob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'data.json';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            console.log('数据已导出为 data.json 文件');
+            console.log('请将此文件上传到 GitHub 替换原有的 data.json');
+        }
     </script>
 </body>
 </html>
