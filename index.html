@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>羊羊金和狗狗雅的小角落 | Love Diary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Dancing+Script:wght@600;700&family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&family=Caveat:wght@500&display=swap" rel="stylesheet">
     <style>
         /* ========================================
            童话风格主题系统
@@ -14,138 +14,156 @@
             --font-main: 'Noto Serif SC', serif;
             --font-display: 'ZCOOL XiaoWei', serif;
             --font-handwriting: 'Caveat', 'ZCOOL XiaoWei', cursive;
-            
-            --bg-primary: #1a1a3e;
-            --text-primary: #e8e4f0;
-            --text-secondary: #a09ab8;
-            --accent: #9d7cd8;
-            --accent-glow: rgba(157, 124, 216, 0.5);
-            --nav-bg: rgba(26, 26, 62, 0.8);
+            --font-playfair: 'Playfair Display', serif;
+            --font-dancing: 'Dancing Script', cursive;
+
+            --bg-primary: #1a1a3e; --text-primary: #e8e4f0; --text-secondary: #a09ab8;
+            --accent: #9d7cd8; --accent-glow: rgba(157, 124, 216, 0.5); --nav-bg: rgba(26, 26, 62, 0.8);
         }
 
-        body[data-active-page="home"] {
-            --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-            --text-primary: #e8e4f0; --accent: #b28dff; --nav-bg: rgba(15, 12, 41, 0.7);
+        body[data-active-page="home"] { --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); --text-primary: #e8e4f0; --accent: #b28dff; --nav-bg: rgba(15, 12, 41, 0.7); }
+        
+        /* 相册：晨曦回忆画廊 */
+        body[data-active-page="photos"] { 
+            --bg-primary: #fdfaf6; 
+            --text-primary: #5a4b3c; 
+            --text-secondary: #8c7b6d; 
+            --accent: #d97b5a; 
+            --nav-bg: rgba(253, 250, 246, 0.85); 
         }
-        body[data-active-page="photos"] {
-            --bg-primary: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            --text-primary: #5d4e37; --text-secondary: #8b7355; --accent: #ff9a9e; --nav-bg: rgba(253, 251, 251, 0.8);
-        }
-        body[data-active-page="wishes"] {
-            --bg-primary: linear-gradient(to bottom, #0b0c10 0%, #1f2833 60%, #45a29e 100%);
-            --text-primary: #fcfcfc; --text-secondary: #66fcf1; --accent: #66fcf1; --nav-bg: rgba(11, 12, 16, 0.8);
-        }
-        body[data-active-page="messages"] {
-            --bg-primary: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
-            --text-primary: #4a4a4a; --text-secondary: #7a7a7a; --accent: #a18cd1; --nav-bg: rgba(243, 231, 233, 0.8);
-        }
-        body[data-active-page="settings"] {
-            --bg-primary: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
-            --text-primary: #333; --text-secondary: #555; --accent: #667eea; --nav-bg: rgba(224, 195, 252, 0.8);
+        
+        body[data-active-page="wishes"] { --bg-primary: linear-gradient(to bottom, #0b0c10 0%, #1f2833 60%, #45a29e 100%); --text-primary: #fcfcfc; --text-secondary: #66fcf1; --accent: #66fcf1; --nav-bg: rgba(11, 12, 16, 0.8); }
+        body[data-active-page="messages"] { --bg-primary: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%); --text-primary: #4a4a4a; --text-secondary: #7a7a7a; --accent: #a18cd1; --nav-bg: rgba(243, 231, 233, 0.8); }
+        
+        /* 成就花园：暮光魔法温室 */
+        body[data-active-page="achievements"] { 
+            --bg-primary: linear-gradient(180deg, #110f24 0%, #2a1b38 40%, #5c3546 80%, #a86255 100%); 
+            --text-primary: #fff8f0; 
+            --text-secondary: #f0d5c9; 
+            --accent: #ffb7b2; 
+            --nav-bg: rgba(17, 15, 36, 0.85); 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+        body { font-family: var(--font-main); background: var(--bg-primary); background-attachment: fixed; color: var(--text-primary); min-height: 100vh; overflow-x: hidden; transition: background 1.5s ease, color 1.5s ease; line-height: 1.8; }
 
-        body {
-            font-family: var(--font-main); background: var(--bg-primary);
-            background-attachment: fixed; color: var(--text-primary);
-            min-height: 100vh; overflow-x: hidden;
-            transition: background 1.5s ease, color 1.5s ease; line-height: 1.8;
-        }
-
-        /* 导航 */
-        .nav-container {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center;
-            background: var(--nav-bg); backdrop-filter: blur(15px); transition: var(--transition-smooth);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-        }
+        .nav-container { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; background: var(--nav-bg); backdrop-filter: blur(15px); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); }
         .nav-logo { font-family: var(--font-display); font-size: 1.5rem; color: var(--text-primary); text-decoration: none; letter-spacing: 0.15em; text-shadow: 0 0 15px var(--accent-glow); }
         .nav-menu { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-        .nav-item {
-            padding: 0.6rem 1.2rem; color: var(--text-primary); opacity: 0.7; text-decoration: none;
-            font-size: 0.9rem; border-radius: 20px; transition: var(--transition-smooth);
-            cursor: pointer; border: none; background: transparent; font-family: inherit;
-        }
+        .nav-item { padding: 0.6rem 1.2rem; color: var(--text-primary); opacity: 0.7; text-decoration: none; font-size: 0.9rem; border-radius: 20px; transition: var(--transition-smooth); cursor: pointer; border: none; background: transparent; font-family: inherit; }
         .nav-item:hover, .nav-item.active { opacity: 1; background: rgba(255, 255, 255, 0.15); box-shadow: 0 0 15px var(--accent-glow); }
 
-        .page {
-            display: none; min-height: 100vh; padding: 6rem 2rem 8rem;
-            opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease;
-        }
+        .page { display: none; min-height: 100vh; padding: 6rem 2rem 8rem; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; position: relative; z-index: 1; }
         .page.active { display: block; }
         .page.visible { opacity: 1; transform: translateY(0); }
-        .page-title { font-family: var(--font-display); font-size: 2.8rem; text-align: center; margin-bottom: 0.5rem; color: var(--text-primary); text-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        .page-subtitle { text-align: center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 3rem; opacity: 0.8; }
+        .page-title { font-family: var(--font-display); font-size: 2.8rem; text-align: center; margin-bottom: 0.5rem; color: var(--text-primary); text-shadow: 0 2px 10px rgba(0,0,0,0.1); position: relative; z-index: 2; }
+        .page-subtitle { text-align: center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 3rem; opacity: 0.8; position: relative; z-index: 2; }
 
         /* ================= 1. 情绪星空 ================= */
-        .star-container {
-            position: relative; width: 100%; height: 60vh; min-height: 400px; max-width: 1200px; margin: 0 auto;
-            cursor: crosshair; overflow: hidden; border-radius: 30px;
-            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-            box-shadow: 0 0 40px rgba(178, 141, 255, 0.2), inset 0 0 80px rgba(0,0,0,0.8);
-            border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem;
-        }
+        .star-container { position: relative; width: 100%; height: 60vh; min-height: 400px; max-width: 1200px; margin: 0 auto; cursor: crosshair; overflow: hidden; border-radius: 30px; background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); box-shadow: 0 0 40px rgba(178, 141, 255, 0.2), inset 0 0 80px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem; }
         .star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-        .star {
-            position: absolute; width: 4px; height: 4px; border-radius: 50%;
-            background: #fff; cursor: pointer; transition: all 0.5s ease;
-            animation: twinkle 3s infinite ease-in-out; box-shadow: 0 0 10px #fff, 0 0 20px var(--accent);
-        }
+        .star { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #fff; cursor: pointer; transition: all 0.5s ease; animation: twinkle 3s infinite ease-in-out; box-shadow: 0 0 10px #fff, 0 0 20px var(--accent); }
         .star:hover { transform: scale(2.5); box-shadow: 0 0 20px #fff; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
-
-        /* 特效升级：星云迷雾浮现 */
-        .star-message {
-            position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%);
-            padding: 1.5rem 3rem; background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px; color: #fff; font-size: 1.15rem;
-            opacity: 0; pointer-events: none;
-            letter-spacing: 2px; max-width: 85%; text-align: center; line-height: 1.8;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-        }
+        .star-message { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); padding: 1.5rem 3rem; background: rgba(255, 255, 255, 0.1); border-radius: 20px; color: #fff; font-size: 1.15rem; opacity: 0; pointer-events: none; letter-spacing: 2px; max-width: 85%; text-align: center; line-height: 1.8; box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
         .star-message.show { animation: mysticReveal 6s ease-in-out forwards; }
+        @keyframes mysticReveal { 0% { opacity: 0; transform: translate(-50%, 20px) scale(0.95); filter: blur(8px); } 15% { opacity: 1; transform: translate(-50%, 0) scale(1); filter: blur(0px); } 85% { opacity: 1; transform: translate(-50%, -10px) scale(1); filter: blur(0px); } 100% { opacity: 0; transform: translate(-50%, -30px) scale(1.05); filter: blur(8px); } }
+
+        /* ================= 2. 光影相册 (晨曦画廊) ================= */
+        .photo-decorations { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
         
-        @keyframes mysticReveal {
-            0% { opacity: 0; transform: translate(-50%, 20px) scale(0.95); filter: blur(8px); }
-            15% { opacity: 1; transform: translate(-50%, 0) scale(1); filter: blur(0px); }
-            85% { opacity: 1; transform: translate(-50%, -10px) scale(1); filter: blur(0px); }
-            100% { opacity: 0; transform: translate(-50%, -30px) scale(1.05); filter: blur(8px); }
+        /* 柔和水彩晕染光轮 */
+        .memory-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; z-index: 0; }
+        .orb-1 { width: 55vw; height: 55vw; top: -15vw; left: -15vw; background: #ffe4e1; }
+        .orb-2 { width: 45vw; height: 45vw; bottom: -10vw; right: -10vw; background: #e6e6fa; }
+        .orb-3 { width: 40vw; height: 40vw; top: 35vh; left: 35vw; background: #fff0f5; }
+
+        /* 巨大的手写体浮水印 */
+        .bg-watermark {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg);
+            font-family: var(--font-dancing); font-size: 15vw; color: rgba(210, 180, 150, 0.08);
+            white-space: nowrap; font-weight: bold; user-select: none;
         }
 
-        /* ================= 2. 光影相册 ================= */
-        .photo-gallery {
-            max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 3.5rem;
-            padding: 2rem; perspective: 1000px;
+        /* 复古烫金双层拱门 */
+        .vintage-arch {
+            position: absolute; top: 3vh; bottom: 3vh; left: 3vw; right: 3vw;
+            border: 2px solid rgba(210, 180, 150, 0.35); border-radius: 45vw 45vw 12px 12px; z-index: 1;
         }
-        .photo-card {
-            position: relative; width: 280px; background: #fff;
-            padding: 15px 15px 55px 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            transition: var(--transition-smooth); z-index: 1;
+        .vintage-arch::after {
+            content: ''; position: absolute; inset: 16px;
+            border: 1px dashed rgba(210, 180, 150, 0.45); border-radius: calc(45vw - 16px) calc(45vw - 16px) 6px 6px;
         }
-        .photo-card::before {
-            content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg);
-            width: 100px; height: 30px; background: rgba(255, 255, 255, 0.4);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1); backdrop-filter: blur(2px); z-index: 2;
-        }
-        .photo-card:hover { transform: translateY(-20px) rotate(0deg) scale(1.08) !important; z-index: 10; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
-        .photo-card img { width: 100%; height: 280px; object-fit: cover; filter: sepia(10%); border-radius: 2px; cursor: pointer; }
-        .photo-caption { position: absolute; bottom: 15px; left: 0; right: 0; text-align: center; color: #444; font-family: var(--font-handwriting); font-size: 1.3rem; }
+
+        /* 垂坠精灵花藤 */
+        .memory-branch { position: absolute; top: 0; width: 140px; height: 280px; color: rgba(210, 180, 150, 0.5); z-index: 1; }
+        .memory-branch.left { left: 4vw; }
+        .memory-branch.right { right: 4vw; transform: scaleX(-1); }
+
+        /* 漂浮的小星星 */
+        .memory-star { position: absolute; font-size: 1.5rem; color: rgba(210, 180, 150, 0.6); animation: twinkleStar linear infinite alternate; }
+        @keyframes twinkleStar { 0% { opacity: 0.2; transform: scale(0.8) rotate(0deg); } 100% { opacity: 0.9; transform: scale(1.2) rotate(20deg); text-shadow: 0 0 12px rgba(210, 180, 150, 0.6); } }
+
+        .photo-gallery { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 3.5rem; padding: 2rem; perspective: 1000px; }
+        .photo-card { position: relative; width: 280px; background: #fff; padding: 15px 15px 50px 15px; box-shadow: 0 15px 35px rgba(100,80,60,0.12); transition: var(--transition-smooth); z-index: 1; cursor: pointer; border-radius: 2px; }
+        .photo-card::before { content: ''; position: absolute; top: -12px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 100px; height: 30px; background: rgba(255, 255, 255, 0.6); box-shadow: 0 2px 6px rgba(0,0,0,0.08); backdrop-filter: blur(4px); z-index: 2; }
+        .photo-card:hover { transform: translateY(-15px) rotate(0deg) scale(1.05) !important; z-index: 10; box-shadow: 0 30px 60px rgba(100,80,60,0.22); }
+        .photo-img-wrap { position: relative; overflow: hidden; border-radius: 2px; }
+        .photo-img-wrap img { width: 100%; height: 260px; object-fit: cover; filter: sepia(8%) contrast(0.95); display: block; }
+        .photo-caption { text-align: center; color: #5a4b3c; font-family: var(--font-handwriting); font-size: 1.3rem; margin-top: 0.8rem; line-height: 1.35; font-weight: bold; }
         
-        .photo-add { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 350px; background: rgba(255,255,255,0.5); border: 2px dashed #bbb; border-radius: 10px; cursor: pointer; transition: 0.3s; }
-        .photo-add:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.8); transform: translateY(-10px) !important; }
+        .photo-add { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 350px; background: rgba(255,255,255,0.4); border: 2px dashed rgba(210,180,150,0.6); border-radius: 10px; cursor: pointer; transition: 0.3s; box-shadow: none; backdrop-filter: blur(5px); }
+        .photo-add:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.8); }
+
+        /* 相册画框弹窗 */
+        .photo-modal { position: fixed; inset: 0; background: rgba(40, 35, 30, 0.85); backdrop-filter: blur(12px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s ease; padding: 2rem; }
+        .photo-modal.show { display: flex; opacity: 1; }
+        .pm-content { background: #fffdfa; width: 100%; max-width: 1000px; max-height: 85vh; border-radius: 20px; display: flex; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative; transform: scale(0.95) translateY(20px); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .photo-modal.show .pm-content { transform: scale(1) translateY(0); }
+        .pm-left { flex: 1.2; background: #0b0c10; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .pm-left img { width: 100%; height: 100%; object-fit: contain; }
+        .pm-right { width: 380px; padding: 2.5rem 2rem; overflow-y: auto; display: flex; flex-direction: column; background: #fffcf8; position: relative; }
+        .pm-close { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; color: #a09ab8; cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10; font-family: sans-serif; }
+        .pm-close:hover { color: #ff4757; transform: rotate(90deg); }
+
+        .pm-title { font-family: var(--font-main); font-size: 1.4rem; font-weight: 600; color: #3c2a18; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px dashed #d2a880; }
+        .pm-section { margin-bottom: 1.5rem; }
+        .pm-label { font-family: var(--font-dancing); font-size: 1.8rem; color: #d97b5a; margin-bottom: 0.2rem; line-height: 1; font-weight: 700; letter-spacing: 0.05em; }
+        .pm-value { font-family: var(--font-handwriting); font-size: 1.15rem; color: #5a3d22; line-height: 1.6; min-height: 1.5rem; }
+        .pm-value.memory-text { font-style: italic; }
+
+        .pm-hidden-edit-trigger { position: absolute; bottom: 20px; right: 20px; width: 38px; height: 38px; border-radius: 50%; background: rgba(217,123,90,0.1); color: #d97b5a; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; opacity: 0; transition: all 0.3s ease; z-index: 5; }
+        .pm-right:hover .pm-hidden-edit-trigger { opacity: 1; }
+        .pm-hidden-edit-trigger:hover { background: #d97b5a; color: #fff; transform: scale(1.1); box-shadow: 0 4px 12px rgba(217,123,90,0.4); }
+
+        .pm-edit-view { display: none; }
+        .pm-input { width: 100%; padding: 8px 12px; font-family: var(--font-main); font-size: 0.95rem; border: 1px solid rgba(210,168,128,0.6); border-radius: 8px; background: rgba(255,255,255,0.8); color: #3c2a18; outline: none; margin-top: 4px; transition: 0.3s; }
+        .pm-input:focus { border-color: #d97b5a; background: #fff; box-shadow: 0 0 0 3px rgba(217,123,90,0.1); }
+        textarea.pm-input { resize: vertical; min-height: 90px; }
+        
+        .pm-actions { margin-top: 1.5rem; padding-top: 1.5rem; display: flex; gap: 8px; border-top: 1px dashed #d2a880; }
+        .pm-btn { flex: 1; padding: 0.7rem; border-radius: 12px; font-family: var(--font-main); font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; border: none; }
+        .btn-save { background: #d97b5a; color: #fff; box-shadow: 0 5px 15px rgba(217,123,90,0.3); }
+        .btn-save:hover { background: #b8511f; transform: translateY(-2px); }
+        .btn-delete { background: rgba(255, 71, 87, 0.1); color: #ff4757; }
+        .btn-delete:hover { background: #ff4757; color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3); }
+        .btn-cancel { background: rgba(160,154,184,0.15); color: #7a6080; flex: 0.7; }
+        .btn-cancel:hover { background: rgba(160,154,184,0.3); }
+
+        @media(max-width: 768px) {
+            .pm-content { flex-direction: column; overflow-y: auto; max-height: 90vh; }
+            .pm-left { height: 45vh; flex: none; }
+            .pm-left img { height: 100%; object-fit: cover; }
+            .pm-right { width: 100%; padding: 1.5rem; }
+        }
 
         /* ================= 3. 许愿池 ================= */
-        .wish-scene {
-            position: relative; width: 100%; max-width: 900px; margin: 0 auto; min-height: 75vh; 
-            padding: 3rem 2rem 250px 2rem; display: flex; flex-direction: column; align-items: center;
-        }
+        .wish-scene { position: relative; width: 100%; max-width: 900px; margin: 0 auto; min-height: 75vh; padding: 3rem 2rem 250px 2rem; display: flex; flex-direction: column; align-items: center; }
         .scene-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; border-radius: 30px; overflow: hidden; background: rgba(255, 255, 255, 0.02); box-shadow: inset 0 0 50px rgba(0,0,0,0.2); }
         .scene-moon { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, #fffbdb 0%, #f4e38e 100%); box-shadow: 0 0 60px #f4e38e, 0 0 120px rgba(244, 227, 142, 0.4); }
         .scene-hill { position: absolute; bottom: -150px; left: -25%; width: 150%; height: 350px; border-radius: 50%; background: #0b0c10; }
-        .scene-girl { position: absolute; bottom: 180px; left: 50%; transform: translateX(-50%); width: 80px; height: 100px; }
+        .scene-girl { position: absolute; bottom: 150px; left: 50%; transform: translateX(-50%); width: 100px; height: 150px; }
         .scene-girl svg { width: 100%; height: 100%; fill: #0b0c10; }
 
         .wish-input-container { display: flex; gap: 1.2rem; margin-bottom: 3.5rem; width: 100%; max-width: 650px; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 40px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); z-index: 2; }
@@ -158,45 +176,165 @@
         .wish-item { position: relative; display: flex; align-items: center; gap: 1.2rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; backdrop-filter: blur(12px); color: #fff; font-size: 1.1rem; transition: var(--transition-smooth); }
         .wish-item:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
         .wish-item.completed span { opacity: 0.5; text-decoration: line-through; }
-        .wish-checkbox { width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
+        .wish-checkbox { width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .wish-checkbox.checked { background: var(--accent); }
 
-        /* ================= 4. 共享小角落 ================= */
+        .delete-btn { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255, 71, 87, 0.8); color: white; border: none; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: all 0.3s ease; z-index: 20; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .wish-item .delete-btn { top: 50%; transform: translateY(-50%); right: 20px; background: rgba(255, 255, 255, 0.2); }
+        .message-card:hover .delete-btn, .wish-item:hover .delete-btn, .achievement-card:hover .delete-btn { opacity: 1; }
+        .delete-btn:hover { background: #ff4757; transform: scale(1.1) !important; }
+
+        /* ================= 4. 成就花园 (魔法暮光温室) ================= */
+        #page-achievements { position: relative; overflow-x: hidden; z-index: 1; }
+        
+        #page-achievements .page-title { 
+            background: linear-gradient(125deg, #ffd7b5 0%, #ffb7b2 48%, #ffd7b5 100%); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; 
+        }
+
+        /* 浪漫童话背景层 */
+        .garden-decorations { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        
+        /* 巨大魔法月亮 */
+        .magic-moon { 
+            position: absolute; top: 12vh; right: 12vw; width: 180px; height: 180px; border-radius: 50%; 
+            background: radial-gradient(circle at 30% 30%, #fffde6 0%, #f7dca1 100%); 
+            box-shadow: 0 0 60px rgba(247, 220, 161, 0.4), 0 0 120px rgba(247, 220, 161, 0.2); opacity: 0.95; 
+        }
+        
+        /* 繁星与萤火虫 */
+        .garden-star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
+        .garden-firefly { 
+            position: absolute; width: 5px; height: 5px; background: #ffe180; border-radius: 50%; 
+            box-shadow: 0 0 12px 3px rgba(255, 225, 128, 0.8); 
+            animation: fireflyFloat 12s infinite cubic-bezier(0.4, 0, 0.2, 1) alternate; 
+        }
+        @keyframes fireflyFloat { 0% { transform: translate(0, 0) scale(0.8); opacity: 0.4; } 100% { transform: translate(60px, -80px) scale(1.2); opacity: 1; } }
+        
+        /* 落花飞舞 */
+        .falling-petal { position: absolute; top: -50px; width: 18px; height: 18px; background: linear-gradient(135deg, #ffb7b2 0%, #ffdac1 100%); border-radius: 50% 0 50% 0; opacity: 0.7; animation: fallPetal linear infinite; box-shadow: 0 0 5px rgba(255,183,178,0.5); }
+        @keyframes fallPetal { 0% { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; } }
+        
+        /* 破晓晨雾流转 */
+        .magic-mist { position: absolute; bottom: 0; left: -50%; width: 200%; height: 40vh; background: radial-gradient(ellipse at bottom, rgba(255,180,150,0.12) 0%, transparent 70%); animation: mistFlow 25s ease-in-out infinite alternate; }
+        .magic-mist.layer2 { bottom: -5vh; left: -20%; width: 150%; height: 45vh; background: radial-gradient(ellipse at bottom left, rgba(200,150,255,0.08) 0%, transparent 70%); animation: mistFlow 30s ease-in-out infinite alternate-reverse; }
+        @keyframes mistFlow { 0% { transform: translateX(0) scaleY(1); } 100% { transform: translateX(5%) scaleY(1.1); } }
+
+        /* 精灵藤蔓 (SVG) */
+        .garden-vine { position: absolute; bottom: -20px; width: 450px; height: auto; opacity: 0.25; color: #ffd6cc; z-index: 1; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4)); }
+        .garden-vine.left { left: -80px; }
+        .garden-vine.right { right: -80px; transform: scaleX(-1); }
+
+        .garden-progress { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.8rem; flex-wrap: wrap; max-width: 1000px; margin-left: auto; margin-right: auto; position: relative; z-index: 2; }
+        .progress-flower { font-size: 1.9rem; transition: all 0.5s ease; filter: grayscale(90%) opacity(0.35) drop-shadow(0 0 0 transparent); display: inline-block; }
+        .progress-flower.lit { filter: none; animation: flowerBob 2.8s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(255,160,100,0.6)); }
+        @keyframes flowerBob { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
+
+        .achievement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; padding: 0.5rem 1rem 2rem; position: relative; z-index: 2; }
+        
+        /* 优化成就卡片使其在暗色背景下更加惊艳 */
+        .achievement-card { position: relative; border-radius: 26px; overflow: hidden; background: rgba(255,253,248,0.95); backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.6); border: 1px solid rgba(210,168,128,0.2); transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; cursor: default; display: flex; flex-direction: column; min-height: 380px; z-index: 2;}
+        .achievement-card:hover { transform: translateY(-11px) scale(1.02); box-shadow: 0 25px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.8); }
+        .achievement-card.completed { border-color: rgba(210,168,128,0.6); }
+        
+        .card-flower-zone { height: 182px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+        .card-flower-zone::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 30px; background: rgba(255,253,248,1); clip-path: ellipse(56% 100% at 50% 100%); z-index: 3; }
+        .card-flower-num { position: absolute; top: 1rem; left: 1.2rem; font-family: var(--font-playfair); font-style: italic; font-size: 0.85rem; color: rgba(255,255,255,0.8); letter-spacing: 0.08em; z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+        
+        .flower-icon { font-size: 4.5rem; z-index: 2; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); line-height: 1; }
+        .achievement-card.locked .flower-icon { font-size: 3rem; filter: grayscale(1) opacity(0.6); transform: scale(0.9); }
+        .achievement-card.completed .flower-icon { animation: iconBloom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+        .achievement-card:hover .flower-icon { transform: scale(1.15) rotate(6deg); }
+        .achievement-card.locked:hover .flower-icon { transform: scale(1.05) rotate(0deg); }
+        
+        @keyframes iconBloom { 0% { transform: scale(0) rotate(-45deg); opacity: 0; } 60% { transform: scale(1.2) rotate(10deg); opacity: 1; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
+
+        .petal-burst-anchor { position: absolute; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
+        .burst-petal { position: absolute; border-radius: 50% 0 50% 0; top: 50%; left: 50%; opacity: 0; animation: burstOut 1.5s ease forwards; }
+        @keyframes burstOut { 0% { opacity: 1; transform: translate(-50%,-50%) scale(0.4) rotate(0deg); } 70% { opacity: 0.8; } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy,0px))) scale(0.1) rotate(240deg); } }
+
+        .card-body { flex: 1; padding: 1.3rem 1.6rem 1.6rem; display: flex; flex-direction: column; }
+        .achievement-title { font-family: var(--font-playfair); font-size: 1.15rem; font-weight: 700; color: #3c2a18; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+        .achievement-hint { font-size: 0.9rem; color: #7a5c3a; line-height: 1.7; flex: 1; }
+        .achievement-detail { margin-top: 0.75rem; padding: 0.72rem 1rem; border-radius: 14px; background: rgba(230,140,80,0.1); border-left: 3px solid var(--card-accent, #d97b5a); font-size: 0.87rem; color: #5a3d22; line-height: 1.65; font-style: italic; font-family: var(--font-handwriting); }
+        
+        .achievement-date { font-family: var(--font-playfair); font-size: 0.85rem; color: #b8511f; margin-top: 1rem; text-align: right; font-style: italic; opacity: 0.85; letter-spacing: 0.05em; border-top: 1px dashed rgba(210,168,128,0.4); padding-top: 0.5rem; }
+
+        .achievement-action { display: inline-flex; align-items: center; justify-content: center; margin-top: 1.2rem; padding: 0.82rem 1rem; border-radius: 50px; border: 2px solid var(--card-accent, #d97b5a); background: transparent; color: var(--card-accent, #d97b5a); cursor: pointer; font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; width: 100%; font-family: var(--font-main); letter-spacing: 0.03em; }
+        .achievement-action:hover { background: var(--card-accent, #d97b5a); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217,123,90,0.3); }
+        .achievement-card.completed .achievement-action { background: var(--card-accent, #d97b5a); color: #fff; border-color: var(--card-accent, #d97b5a); }
+
+        .ach-sidebar-btn { position: fixed; right: 25px; top: 50%; transform: translateY(-50%); width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #d97b5a 0%, #e8935a 100%); color: #fff; border: none; font-size: 0.95rem; font-weight: bold; box-shadow: 0 6px 20px rgba(217,123,90,0.4); cursor: pointer; z-index: 900; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.3; transition: var(--transition-smooth); }
+        .ach-sidebar-btn:hover { transform: translateY(-50%) scale(1.12); box-shadow: 0 8px 25px rgba(217,123,90,0.6); }
+
+        .achievement-sidebar { position: fixed; right: -380px; top: 0; width: 360px; height: 100vh; background: rgba(255, 253, 245, 0.96); backdrop-filter: blur(15px); box-shadow: -8px 0 35px rgba(155,95,45,0.15); z-index: 1000; padding: 60px 25px 30px; transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; gap: 12px; border-left: 2px solid rgba(217,123,90,0.3); }
+        .achievement-sidebar.open { right: 0; }
+        .achievement-sidebar h3 { font-family: var(--font-playfair); color: #b8511f; margin-bottom: 0px; font-size: 1.4rem; }
+        .achievement-sidebar input, .achievement-sidebar textarea { width: 100%; padding: 12px; border: 1px solid rgba(210,168,128,0.4); border-radius: 12px; background: rgba(255,255,255,0.8); font-family: var(--font-main); font-size: 0.95rem; color: #4a3222; outline: none; transition: 0.3s; flex-shrink: 0; }
+        .achievement-sidebar input:focus, .achievement-sidebar textarea:focus { border-color: #d97b5a; background: #fff; }
+        .achievement-sidebar textarea { resize: vertical; min-height: 60px; }
+        
+        .icon-selector-title { font-size: 0.9rem; color: #8b7355; margin-bottom: -5px; font-weight: bold; flex-shrink: 0;}
+        .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 8px; background: rgba(255,255,255,0.6); padding: 12px; border-radius: 12px; border: 1px solid rgba(210,168,128,0.3); max-height: 200px; overflow-y: auto; flex-shrink: 0; }
+        .icon-item { font-size: 1.4rem; cursor: pointer; padding: 4px; border-radius: 8px; transition: 0.2s; filter: grayscale(1) opacity(0.4); user-select: none; display: flex; align-items: center; justify-content: center; }
+        .icon-item:hover { filter: grayscale(0) opacity(1); transform: scale(1.2); }
+        .icon-item.selected { filter: grayscale(0) opacity(1); background: rgba(217,123,90,0.2); transform: scale(1.15); border: 1px solid rgba(217,123,90,0.4); }
+
+        .achievement-sidebar button.save-btn { background: #d97b5a; color: white; border: none; padding: 12px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; margin-top: 5px; flex-shrink: 0;}
+        .achievement-sidebar button.save-btn:hover { background: #b8511f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(217,123,90,0.3); }
+        .achievement-sidebar button.close-btn { background: transparent; border: 1px solid #d97b5a; color: #d97b5a; padding: 10px; border-radius: 20px; cursor: pointer; transition: 0.3s; flex-shrink: 0;}
+        .achievement-sidebar button.close-btn:hover { background: rgba(217,123,90,0.1); }
+
+        /* ================= 5. 便签墙 ================= */
         .board-container { max-width: 1200px; margin: 0 auto; }
         .message-input-container { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-bottom: 5rem; }
         .message-input { width: 100%; max-width: 600px; padding: 1.8rem; background: rgba(255,255,255,0.8); border: none; border-radius: 15px; font-family: var(--font-handwriting); font-size: 1.4rem; color: #333; resize: none; min-height: 140px; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05), 0 5px 15px rgba(0,0,0,0.05); }
+        .message-remark-input { width: 100%; max-width: 600px; padding: 1rem 1.2rem; border-radius: 18px; border: 1px solid rgba(161,140,209,0.3); outline: none; background: rgba(255,255,255,0.9); font-family: var(--font-main); font-size: 1rem; color: #3a3a3a; transition: border 0.3s ease; }
+        .message-remark-input:focus { border-color: var(--accent); }
         .message-cards { display: flex; flex-wrap: wrap; gap: 3rem; justify-content: center; }
         .message-card { position: relative; width: 260px; min-height: 260px; padding: 2.5rem 1.8rem; background: #ffeb3b; box-shadow: 3px 5px 15px rgba(0,0,0,0.1); color: #333; font-family: var(--font-handwriting); font-size: 1.4rem; line-height: 1.6; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; }
         .message-card::after { content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #ff8a80, #d50000); box-shadow: inset -2px -2px 4px rgba(0,0,0,0.3), 2px 5px 5px rgba(0,0,0,0.2); }
         .message-card:hover { transform: scale(1.08) rotate(0deg) !important; z-index: 10; box-shadow: 5px 12px 25px rgba(0,0,0,0.2); }
         .message-time { font-size: 0.9rem; color: rgba(0,0,0,0.5); text-align: right; font-family: sans-serif; }
+        .message-label { display: inline-block; margin-top: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: rgba(255,255,255,0.75); color: #5b3d8a; font-size: 0.9rem; }
 
-        /* ================= 精致的删除按钮 ================= */
-        .delete-btn {
-            position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%;
-            background: rgba(255, 71, 87, 0.8); color: white; border: none; font-size: 1.2rem;
-            display: flex; align-items: center; justify-content: center; cursor: pointer;
-            opacity: 0; transition: all 0.3s ease; z-index: 20; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        /* 愿望的删除按钮位置 */
-        .wish-item .delete-btn { top: 50%; transform: translateY(-50%); right: 20px; background: rgba(255, 255, 255, 0.2); }
+        .together-counter { position: fixed; top: 5rem; left: 1.5rem; z-index: 1100; padding: 0.9rem 1.5rem 0.85rem; border-radius: 22px; background: rgba(7, 4, 20, 0.80); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 10px 40px rgba(0,0,0,0.32), 0 0 0 1px rgba(200,170,255,0.06); text-align: center; min-width: 118px; pointer-events: none; }
+        .counter-days-num { font-family: 'Playfair Display', serif; font-size: 2.7rem; font-style: italic; font-weight: 700; color: #ede0ff; line-height: 1; display: block; text-shadow: 0 0 30px rgba(190,155,255,0.65); }
+        .counter-label { font-family: var(--font-dancing); font-size: 0.86rem; color: rgba(210,188,255,0.68); display: block; margin-top: 0.22rem; }
         
-        .photo-card:hover .delete-btn, .message-card:hover .delete-btn, .wish-item:hover .delete-btn { opacity: 1; }
-        .delete-btn:hover { background: #ff4757; transform: scale(1.1) !important; }
-        .wish-item .delete-btn:hover { background: rgba(255, 71, 87, 0.9); }
+        /* ================= 隐藏互动彩蛋：跨页面躲猫猫四芒星 ================= */
+        .companion-trigger { 
+            position: fixed; bottom: 2rem; right: 2rem; width: 55px; height: 55px; border-radius: 50%; 
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); border: 1px solid var(--accent); 
+            color: var(--accent); font-size: 1.6rem; cursor: pointer; z-index: 2500; display: flex; 
+            align-items: center; justify-content: center; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); 
+            box-shadow: 0 0 15px rgba(0,0,0,0.1); 
+        }
+        .companion-trigger:hover { transform: scale(1.15); background: var(--accent); color: #fff; box-shadow: 0 0 25px var(--accent-glow); }
+        
+        /* 跨页面显示的逻辑控制 */
+        .companion-trigger[data-target-page] { display: none; }
+        body[data-active-page="home"] .companion-trigger[data-target-page="home"],
+        body[data-active-page="photos"] .companion-trigger[data-target-page="photos"],
+        body[data-active-page="wishes"] .companion-trigger[data-target-page="wishes"],
+        body[data-active-page="achievements"] .companion-trigger[data-target-page="achievements"],
+        body[data-active-page="messages"] .companion-trigger[data-target-page="messages"] {
+            display: flex;
+        }
 
-        /* 灯箱和其他 */
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.5s; }
-        .lightbox.show { display: flex; opacity: 1; }
-        .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 5px; border: 10px solid #fff; }
-        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: #fff; font-size: 2.5rem; cursor: pointer; background: none; border: none; }
-        .companion-trigger { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,0.1); backdrop-filter: blur(5px); border: 1px solid var(--accent); color: var(--accent); font-size: 1.8rem; cursor: pointer; z-index: 100; display: flex; align-items: center; justify-content: center; transition: 0.5s; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        .companion-trigger:hover { transform: scale(1.1); background: var(--accent); color: #fff; box-shadow: 0 0 25px var(--accent-glow); }
-        .companion-effect { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; opacity: 0; transition: opacity 1.5s ease; background: radial-gradient(circle at center, var(--accent-glow) 0%, transparent 60%); }
-        .companion-effect.show { opacity: 0.5; animation: breathe 4s ease-in-out; }
-        @keyframes breathe { 0%, 100% { opacity: 0; } 50% { opacity: 0.6; transform: scale(1.1); } }
+        .easter-egg-modal { position: fixed; inset: 0; background: rgba(26,26,62,0.85); backdrop-filter: blur(8px); z-index: 3000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.5s; }
+        .easter-egg-modal.show { display: flex; opacity: 1; }
+        .ee-content { background: linear-gradient(135deg, #fffcf8 0%, #fff0e6 100%); padding: 3.5rem 2.5rem; border-radius: 30px; text-align: center; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 3px solid #d97b5a; transform: scale(0.8); transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .easter-egg-modal.show .ee-content { transform: scale(1); }
+        .ee-content h2 { color: #d97b5a; font-family: var(--font-playfair); margin-bottom: 1.5rem; font-size: 2rem;}
+        .ee-content p { color: #5a3d22; font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem; }
+        .ee-signature { font-family: var(--font-handwriting); font-size: 1.4rem !important; color: #b8511f !important; text-align: right; margin-top: 2rem; }
+        .ee-btn { margin-top: 2rem; padding: 0.8rem 2rem; border-radius: 50px; background: #d97b5a; color: white; border: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: var(--font-main); }
+        .ee-btn:hover { background: #b8511f; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(217,123,90,0.4); }
+
     </style>
 </head>
+
 <body data-active-page="home">
 
     <nav class="nav-container">
@@ -205,9 +343,12 @@
             <button class="nav-item active" data-page="home">情绪星空</button>
             <button class="nav-item" data-page="photos">光影相册</button>
             <button class="nav-item" data-page="wishes">星空许愿</button>
+            <button class="nav-item" data-page="achievements">成就花园</button>
             <button class="nav-item" data-page="messages">便签角落</button>
         </div>
     </nav>
+
+    <div class="together-counter" id="togetherCounter" title="每一天都是我们的礼物"></div>
 
     <!-- 1. 首页 -->
     <section class="page active visible" id="page-home">
@@ -219,34 +360,113 @@
         </div>
     </section>
 
-    <!-- 2. 相册 -->
+    <!-- 2. 光影相册 (晨曦画廊重构) -->
     <section class="page" id="page-photos">
+        
+        <!-- 核心视觉层：复古水彩画廊背景 -->
+        <div class="photo-decorations">
+            <!-- 柔和晕染光轮 -->
+            <div class="memory-orb orb-1"></div>
+            <div class="memory-orb orb-2"></div>
+            <div class="memory-orb orb-3"></div>
+            
+            <!-- 巨大手写浮水印 -->
+            <div class="bg-watermark">Beautiful Memories</div>
+            
+            <!-- 烫金双层拱门 -->
+            <div class="vintage-arch"></div>
+
+            <!-- 精灵藤蔓 (SVG) -->
+            <svg class="memory-branch left" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,0 Q30,50 20,150" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M10,20 Q25,25 20,40 Q5,35 10,20 Z" fill="currentColor"/>
+                <path d="M15,60 Q30,65 25,80 Q10,75 15,60 Z" fill="currentColor"/>
+                <path d="M22,100 Q37,105 32,120 Q17,115 22,100 Z" fill="currentColor"/>
+                <circle cx="35" cy="45" r="2.5" fill="currentColor"/>
+                <circle cx="40" cy="90" r="1.5" fill="currentColor"/>
+            </svg>
+            <svg class="memory-branch right" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100,0 Q70,50 80,150" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M90,20 Q75,25 80,40 Q95,35 90,20 Z" fill="currentColor"/>
+                <path d="M85,60 Q70,65 75,80 Q90,75 85,60 Z" fill="currentColor"/>
+                <path d="M78,100 Q63,105 68,120 Q83,115 78,100 Z" fill="currentColor"/>
+                <circle cx="65" cy="45" r="2.5" fill="currentColor"/>
+                <circle cx="60" cy="90" r="1.5" fill="currentColor"/>
+            </svg>
+
+            <!-- 漂浮星星注入 -->
+            <script>
+                for(let i=0; i<8; i++) {
+                    document.write(`<div class="memory-star" style="left:${Math.random()*90+5}%; top:${Math.random()*90+5}%; animation-delay:${Math.random()*5}s; animation-duration:${Math.random()*3+3}s;">✧</div>`);
+                }
+            </script>
+        </div>
+
         <h1 class="page-title">散落的记忆</h1>
         <p class="page-subtitle">每个定格，都是一首安静的诗</p>
         <div class="photo-gallery" id="photoGallery">
             <div class="photo-card photo-add" onclick="addPhoto()">
-                <span style="font-size: 4rem; color: #bbb;">+</span>
-                <span style="color: #888; font-size: 1.1rem; margin-top: 10px;">存入新的光影</span>
+                <span style="font-size: 4rem; color: rgba(210,180,150,0.8);">+</span>
+                <span style="color: rgba(210,180,150,0.8); font-size: 1.1rem; margin-top: 10px; font-weight:bold;">存入新的光影</span>
             </div>
         </div>
     </section>
+
+    <!-- 独立纯净相册画框 Modal -->
+    <div class="photo-modal" id="photoModal">
+        <div class="pm-content">
+            <span class="pm-close" onclick="closePhotoModal()">×</span>
+            <div class="pm-left"><img id="pmImg" src=""></div>
+            
+            <div class="pm-right">
+                <div id="pmViewMode">
+                    <h2 class="pm-title" id="pmTitle">照片标题</h2>
+                    <div class="pm-section">
+                        <div class="pm-label">When</div>
+                        <div class="pm-value" id="pmDate">时间...</div>
+                    </div>
+                    <div class="pm-section">
+                        <div class="pm-label">Where</div>
+                        <div class="pm-value" id="pmLocation">地点...</div>
+                    </div>
+                    <div class="pm-section">
+                        <div class="pm-label">Memory</div>
+                        <div class="pm-value memory-text" id="pmNote">短评...</div>
+                    </div>
+                    
+                    <div class="pm-hidden-edit-trigger" onclick="togglePmEdit(true)" title="修改或移除此段记忆">✎</div>
+                </div>
+
+                <div id="pmEditMode" class="pm-edit-view">
+                    <h2 class="pm-title" style="color:#d97b5a; border-color:#d97b5a; margin-bottom: 1rem;">修缮记忆</h2>
+                    <label style="font-size: 0.8rem; color:#8b7355;">标题 Title</label>
+                    <input type="text" class="pm-input" id="pmEditTitle" placeholder="给这张照片起个名字...">
+                    
+                    <label style="font-size: 0.8rem; color:#8b7355; margin-top: 8px; display:block;">When</label>
+                    <input type="text" class="pm-input" id="pmEditDate" placeholder="例如：2026-04-28">
+                    
+                    <label style="font-size: 0.8rem; color:#8b7355; margin-top: 8px; display:block;">Where</label>
+                    <input type="text" class="pm-input" id="pmEditLocation" placeholder="拍照的地点...">
+                    
+                    <label style="font-size: 0.8rem; color:#8b7355; margin-top: 8px; display:block;">Memory</label>
+                    <textarea class="pm-input" id="pmEditNote" placeholder="写下那一刻的心情与回忆..."></textarea>
+                    
+                    <div class="pm-actions">
+                        <button class="pm-btn btn-save" onclick="savePhotoDetails()">保存</button>
+                        <button class="pm-btn btn-delete" onclick="deleteCurrentPhoto()">删除</button>
+                        <button class="pm-btn btn-cancel" onclick="togglePmEdit(false)">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 3. 许愿池 -->
     <section class="page" id="page-wishes">
         <h1 class="page-title">星夜祈愿</h1>
         <p class="page-subtitle">在月光下，所有柔软的愿望都会被听见</p>
         <div class="wish-scene">
-            <div class="scene-bg">
-                <div class="scene-moon"></div>
-                <div class="scene-hill"></div>
-                <div class="scene-girl">
-                    <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M50 40 C42 40 38 28 48 25 C58 22 60 38 50 40 Z"/>
-                        <path d="M48 42 C40 45 35 60 38 80 C40 90 45 100 35 120 L65 120 C55 100 60 90 62 80 C65 60 58 45 48 42 Z"/>
-                        <path d="M50 45 C60 55 65 65 55 70 C48 75 45 60 50 45 Z"/>
-                    </svg>
-                </div>
-            </div>
+            <div class="scene-bg"><div class="scene-moon"></div><div class="scene-hill"></div><div class="scene-girl"> <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg"><path d="M60 14 C52 14 46 20 46 28 C46 36 52 42 60 42 C68 42 74 36 74 28 C74 20 68 14 60 14 Z"/><path d="M38 38 C32 56 34 76 44 92 C46 96 46 102 48 108 C50 116 54 120 64 120 C74 120 78 116 80 108 C82 102 82 96 84 92 C94 76 96 56 90 38 C88 32 82 28 76 28 C72 28 70 34 68 38 C66 42 62 46 60 46 C58 46 54 42 52 38 C50 34 48 28 44 28 C38 28 34 32 32 38 Z"/><path d="M30 90 C34 106 40 126 47 146 C48 150 51 154 55 154 H65 C69 154 72 150 73 146 C80 126 86 106 90 90 C92 84 92 78 90 74 C88 70 84 68 80 68 H40 C36 68 32 70 30 74 C28 78 28 84 30 90 Z"/><path d="M42 98 C40 108 40 118 45 122 C50 126 56 126 60 122 C64 118 64 108 62 98 C60 92 58 88 55 86 C52 88 50 92 48 98 Z" fill="#0b0c10"/></svg> </div></div>
             <div class="wish-input-container">
                 <input type="text" class="wish-input" id="wishInput" placeholder="写下一个愿望..." maxlength="50">
                 <button class="wish-submit" onclick="addWish()">托付给星星</button>
@@ -255,61 +475,141 @@
         </div>
     </section>
 
-    <!-- 4. 便签墙 -->
+    <!-- 4. 成就花园 (魔法暮光温室重构) -->
+    <section class="page" id="page-achievements">
+        
+        <!-- 核心视觉层：魔法星空与花园温室 -->
+        <div class="garden-decorations">
+            <!-- 魔法大月亮 -->
+            <div class="magic-moon"></div>
+            
+            <!-- 漫天星辰与萤火虫注入 -->
+            <script>
+                for(let i=0; i<35; i++) {
+                    document.write(`<div class="garden-star" style="width:${Math.random()*2+1}px; height:${Math.random()*2+1}px; left:${Math.random()*100}%; top:${Math.random()*60}%; animation-delay:${Math.random()*3}s;"></div>`);
+                }
+                for(let i=0; i<10; i++) {
+                    document.write(`<div class="garden-firefly" style="left:${Math.random()*100}%; bottom:${Math.random()*30}%; animation-delay:${Math.random()*5}s; animation-duration:${Math.random()*5+8}s;"></div>`);
+                }
+                for(let i=0; i<15; i++) {
+                    document.write(`<div class="falling-petal" style="left:${Math.random()*100}%; animation-delay:${Math.random()*15}s; animation-duration:${Math.random()*5+10}s; transform: scale(${Math.random()*0.5+0.5});"></div>`);
+                }
+            </script>
+            
+            <!-- 破晓迷雾 -->
+            <div class="magic-mist"></div>
+            <div class="magic-mist layer2"></div>
+            
+            <!-- 魔法藤蔓 (SVG) -->
+            <svg class="garden-vine left" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+                <path d="M -20,400 Q 50,300 20,200 T 100,50" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <path d="M 15,310 Q 40,290 50,305 Q 35,325 15,310 Z" fill="currentColor"/>
+                <path d="M 30,230 Q 60,210 65,225 Q 45,245 30,230 Z" fill="currentColor"/>
+                <path d="M 50,140 Q 80,120 85,135 Q 65,155 50,140 Z" fill="currentColor"/>
+                <circle cx="85" cy="80" r="5" fill="#ffb7b2"/>
+                <circle cx="110" cy="50" r="4" fill="#ffb7b2"/>
+            </svg>
+            <svg class="garden-vine right" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+                <path d="M -20,400 Q 50,300 20,200 T 100,50" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <path d="M 15,310 Q 40,290 50,305 Q 35,325 15,310 Z" fill="currentColor"/>
+                <path d="M 30,230 Q 60,210 65,225 Q 45,245 30,230 Z" fill="currentColor"/>
+                <path d="M 50,140 Q 80,120 85,135 Q 65,155 50,140 Z" fill="currentColor"/>
+                <circle cx="85" cy="80" r="5" fill="#ffb7b2"/>
+                <circle cx="110" cy="50" r="4" fill="#ffb7b2"/>
+            </svg>
+        </div>
+
+        <h1 class="page-title">成就花园</h1>
+        <p class="page-subtitle">每一朵花，都是你们一起种下的时光</p>
+        
+        <div class="garden-progress" id="gardenProgress"></div>
+        <div class="achievement-grid" id="achievementGrid"></div>
+
+        <button class="ach-sidebar-btn" onclick="toggleAchSidebar()" title="添加新成就">➕<br>播种</button>
+
+        <div class="achievement-sidebar" id="achSidebar">
+            <h3>播种新成就</h3>
+            <p style="font-size: 0.85rem; color: #8b7355; margin-bottom: 5px;">为你们的日记添上一棵全新的植物。</p>
+            
+            <input type="text" id="achTitle" placeholder="成就名称 (例如: 暮光图书馆)">
+            <textarea id="achHint" placeholder="未点亮时的提示文字..."></textarea>
+            <textarea id="achDetail" placeholder="点亮后显示的专属纪念语..."></textarea>
+            
+            <div class="icon-selector-title">选择一枚专属印记 (可滚动浏览)：</div>
+            <div class="icon-grid" id="iconPickerGrid"></div>
+            <input type="hidden" id="selectedAchIcon" value="🌸">
+
+            <button class="save-btn" onclick="addNewAchievement()">种下种子</button>
+            <button class="close-btn" onclick="toggleAchSidebar()">收起面板</button>
+        </div>
+    </section>
+
+    <!-- 5. 便签墙 -->
     <section class="page" id="page-messages">
         <h1 class="page-title">治愈便签墙</h1>
         <p class="page-subtitle">随手写下的絮语，贴在这里</p>
         <div class="board-container">
             <div class="message-input-container">
                 <textarea class="message-input" id="messageInput" placeholder="今天遇到了一朵形状很像小狗的云..." maxlength="200"></textarea>
+                <input type="text" class="message-remark-input" id="messageRemarkInput" placeholder="给这张便签写一个小标题或备注（可选）" maxlength="50">
                 <button class="wish-submit" style="background: #a18cd1;" onclick="addMessage()">贴上便签</button>
             </div>
             <div class="message-cards" id="messageCards"></div>
         </div>
     </section>
 
-    <button class="companion-trigger" onclick="triggerCompanion()" title="我在">✧</button>
-    <div class="companion-effect" id="companionEffect"></div>
-
-    <div class="lightbox" id="lightbox">
-        <button class="lightbox-close" onclick="closeLightbox()">×</button>
-        <img id="lightboxImg" src="" alt="">
+    <!-- 隐藏彩蛋触发器：躲猫猫四芒星 -->
+    <button class="companion-trigger" onclick="triggerCompanionEgg()" title="我是谁，我在哪？">✧</button>
+    
+    <div class="easter-egg-modal" id="easterEggModal">
+        <div class="ee-content">
+            <h2>🌟 捉到星星啦！</h2>
+            <p>恭喜你触发了属于我们的隐藏彩蛋！</p>
+            <p>其实这颗调皮的星星就像我对你的心意，不管你在这本日记的哪个角落，只要你需要，我一直都在。</p>
+            <p class="ee-signature">—— 永远爱你的羊羊金/狗狗雅</p>
+            <button class="ee-btn" onclick="closeEasterEgg()">收下这份爱意 💖</button>
+        </div>
     </div>
 
     <script>
-        const STORAGE_KEYS = {
-            stars: 'fairy_diary_stars', photos: 'fairy_diary_photos',
-            wishes: 'fairy_diary_wishes', messages: 'fairy_diary_messages'
-        };
+        const STORAGE_KEYS = { stars: 'fairy_diary_stars', photos: 'fairy_diary_photos', wishes: 'fairy_diary_wishes', messages: 'fairy_diary_messages', achievements: 'fairy_diary_achievements' };
+        const RELATIONSHIP_START = '2025-10-11';
+        let currentPhotoIndex = -1; 
 
-        // 升级版长文案：充满治愈感与温度
-        const longTexts =[
-"想让你当……", "梦里好像见过", "距离好像变近了", "猫猫不是一个人哦", "很安静", "可能是我在想你", "小崔大人我们一起玩……", "想和你说好多话", "想和你一起看星星", "抱抱", "最喜欢小崔猫猫啦","我来见你啦小猫"
+        const ACHIEVEMENTS_DATA =[
+            { title: '暮光图书馆', hint: '在一场静谧的午后找到属于我们的共读秘密。', detail: '完成一次一起挑选、分享并读完同一本音乐剧剧本或小说。', completed: false, icon: '📖', date: '' },
+            { title: '星迹拼图', hint: '当我们把碎片拼成一幅生活的闪亮图案。', detail: '一起看完一部音乐剧，记录台词中最心动的那一句。', completed: false, icon: '🧩', date: '' },
+            { title: '月光早餐', hint: '用一顿早晨的小眷恋，把平凡日子染成粉紫色。', detail: '一起准备一顿双人早餐，并留下各自最喜欢的一道小食。', completed: false, icon: '🥐', date: '' },
+            { title: '风中信笺', hint: '把想说的话藏在纸语里，让彼此无声也懂。', detail: '彼此写一封短信，交换后在同一天读给对方听。', completed: false, icon: '💌', date: '' },
+            { title: '树屋秘密', hint: '在一个只属于我们的角落种下一个约定。', detail: '一起去一个从未去过的安静地方散步，留下一个共同的照片。', completed: false, icon: '🏕️', date: '' }
         ];
 
+        const CARD_COLORS =[
+            { bg: 'linear-gradient(145deg,#ffc9d8 0%,#ff8fab 100%)', glowRgb: '255,143,171', accent: '#d97b5a' },
+            { bg: 'linear-gradient(145deg,#d9b8f9 0%,#a966e0 100%)', glowRgb: '180,122,234', accent: '#a966e0' },
+            { bg: 'linear-gradient(145deg,#ffd67a 0%,#f09026 100%)', glowRgb: '244,165,65',  accent: '#d97b5a' },
+            { bg: 'linear-gradient(145deg,#b7e4c7 0%,#40916c 100%)', glowRgb: '82,183,136',  accent: '#40916c' },
+            { bg: 'linear-gradient(145deg,#f2cc8f 0%,#da6247 100%)', glowRgb: '224,122,95',  accent: '#da6247' },
+            { bg: 'linear-gradient(145deg,#90e0ef 0%,#4cc9f0 100%)', glowRgb: '76,201,240',  accent: '#4cc9f0' }
+        ];
+
+        const ALL_ICONS =[
+            '🌸','🌺','🌻','🌷','🌹','🏵️','🪷','🍄','🍁','🍀','🌿','🌵','🌴','🌲','🌳','🌱','🪴','🎋','🍃','🍂',
+            '🕊️','🦋','🐝','🐞','🦢','🐇','🐈','🐈‍⬛','🐩','🦌','🦦','🦔','🐿️','🐾',
+            '🌙','⭐','🌟','✨','💫','☄️','☀️','⛅','☁️','❄️','⛄','🫧','☔',
+            '🐚','🐳','🐬','🐠','🌊','🔮','🎀','🧸','🎨','🎟️','🎭','🎪','🎠','🎡','🎢','🚀','🛸',
+            '💌','💝','💖','💗','💓','💞','💕','💟',
+            '🍎','🍓','🍒','🍑','🍋','🍉','🍇','🍯','🍰','🧁','🍬','🍭','☕','🍵','🥂','🍷'
+        ];
+
+        const longTexts =["想让你当……", "梦里好像见过", "距离好像变近了", "猫猫不是一个人哦", "很安静", "可能是我在想你", "小崔大人我们一起玩……", "想和你说好多话", "想和你一起看星星", "抱抱", "最喜欢小崔猫猫啦","我来见你啦小猫"];
         const noteColors =['#ffeb3b', '#ffcdd2', '#c8e6c9', '#bbdefb', '#e1bee7', '#ffe0b2'];
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            initNavigation(); initStarCanvas();
-            // ── 自动从 data.json 同步共享数据 ──────────────────────────────
-            // 新用户(localStorage为空)直接加载远程数据，否则比较版本号
-            try {
-                const res = await fetch('./data.json?_=' + Date.now());
-                if (res.ok) {
-                    const remote = await res.json();
-                    const localVer  = Number(localStorage.getItem('love_diary_version') || '0');
-                    const remoteVer = Number(remote['love_diary_version'] || '0');
-                    
-                    // 新用户或者远程版本更新时，加载远程数据
-                    if (localVer === 0 || remoteVer > localVer) {
-                        Object.keys(remote).forEach(k => {
-                            if (remote[k] != null) localStorage.setItem(k, remote[k]);
-                        });
-                    }
-                }
-            } catch (e) { console.log('同步数据失败:', e); }
-            // ─────────────────────────────────────────────────────────────
-            loadStars(); loadPhotos(); loadWishes(); loadMessages();
+        function escapeHtml(str) { return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation(); initStarCanvas(); initIconPicker();
+            loadStars(); loadPhotos(); loadWishes(); loadAchievements(); loadMessages(); updateTogetherDays();
         });
 
         function initNavigation() {
@@ -317,114 +617,125 @@
                 item.addEventListener('click', () => showPage(item.dataset.page));
             });
         }
-
         function showPage(pageName) {
             document.querySelectorAll('.page').forEach(p => { p.classList.remove('visible'); setTimeout(() => p.classList.remove('active'), 500); });
             setTimeout(() => { const target = document.getElementById(`page-${pageName}`); if (target) { target.classList.add('active'); setTimeout(() => target.classList.add('visible'), 50); } }, 550);
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
             document.querySelector(`.nav-item[data-page="${pageName}"]`).classList.add('active');
-            document.body.setAttribute('data-active-page', pageName);
-            window.scrollTo(0, 0);
+            document.body.setAttribute('data-active-page', pageName); window.scrollTo(0, 0);
         }
+
+        /* ---------------- 捉迷藏四芒星 ---------------- */
+        let starClickCount = 0;
+        function triggerCompanionEgg() {
+            const star = document.querySelector('.companion-trigger');
+            starClickCount++;
+
+            if (starClickCount >= 7) {
+                document.getElementById('easterEggModal').classList.add('show');
+                starClickCount = 0;
+                
+                // 复原四芒星
+                star.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                star.style.bottom = '2rem';
+                star.style.right = '2rem';
+                star.style.top = 'auto';
+                star.style.left = 'auto';
+                star.removeAttribute('data-target-page');
+                return;
+            }
+
+            // 躲避到随机其他页面
+            const currentActive = document.body.getAttribute('data-active-page');
+            const PAGES =['home', 'photos', 'wishes', 'achievements', 'messages'];
+            const otherPages = PAGES.filter(p => p !== currentActive);
+            const nextTarget = otherPages[Math.floor(Math.random() * otherPages.length)];
+
+            // 随机坐标计算（避开边缘）
+            const vw = window.innerWidth - 80;
+            const vh = window.innerHeight - 80;
+            const randomX = Math.max(20, Math.floor(Math.random() * vw));
+            const randomY = Math.max(20, Math.floor(Math.random() * vh));
+
+            // 关闭动画瞬间传送，利用CSS控制在当前页面立刻消失
+            star.style.transition = 'none';
+            star.style.bottom = 'auto';
+            star.style.right = 'auto';
+            star.style.left = randomX + 'px';
+            star.style.top = randomY + 'px';
+
+            star.setAttribute('data-target-page', nextTarget);
+        }
+        function closeEasterEgg() { document.getElementById('easterEggModal').classList.remove('show'); }
 
         // ================= 星空 =================
-        function initStarCanvas() {
-            const container = document.getElementById('starContainer');
-            container.addEventListener('click', (e) => {
-                if (e.target.classList.contains('star')) return;
-                const rect = container.getBoundingClientRect();
-                createStar(e.clientX - rect.left, e.clientY - rect.top, true);
-            });
-        }
-        function createStar(x, y, save = false) {
-            const container = document.getElementById('starContainer');
-            const star = document.createElement('div'); star.className = 'star';
-            star.style.left = x + 'px'; star.style.top = y + 'px';
-            const size = Math.random() * 3 + 2; star.style.width = size + 'px'; star.style.height = size + 'px';
-            star.style.animationDelay = Math.random() * 2 + 's';
-            container.appendChild(star);
+        function initStarCanvas() { const container = document.getElementById('starContainer'); container.addEventListener('click', (e) => { if (e.target.classList.contains('star')) return; const rect = container.getBoundingClientRect(); createStar(e.clientX - rect.left, e.clientY - rect.top, true); }); }
+        function createStar(x, y, save = false) { const container = document.getElementById('starContainer'); const star = document.createElement('div'); star.className = 'star'; star.style.left = x + 'px'; star.style.top = y + 'px'; const size = Math.random() * 3 + 2; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.animationDelay = Math.random() * 2 + 's'; container.appendChild(star); if (save) { showStarMessage(); const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]'); stars.push({x, y}); localStorage.setItem(STORAGE_KEYS.stars, JSON.stringify(stars)); } }
+        function showStarMessage() { const msg = document.getElementById('starMessage'); msg.textContent = longTexts[Math.floor(Math.random() * longTexts.length)]; msg.classList.remove('show'); void msg.offsetWidth; msg.classList.add('show'); }
+        function loadStars() { const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]'); stars.forEach(s => createStar(s.x, s.y, false)); }
 
-            if (save) {
-                showStarMessage();
-                const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]');
-                stars.push({x, y}); localStorage.setItem(STORAGE_KEYS.stars, JSON.stringify(stars));
-            }
-        }
-        function showStarMessage() {
-            const msg = document.getElementById('starMessage');
-            msg.textContent = longTexts[Math.floor(Math.random() * longTexts.length)];
-            // 重新触发动画
-            msg.classList.remove('show');
-            void msg.offsetWidth;
-            msg.classList.add('show');
-        }
-        function loadStars() {
-            const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]');
-            stars.forEach(s => createStar(s.x, s.y, false));
-        }
-
-        // ================= 照片相册 (带前端无损压缩) =================
+        // ================= 纯净光影相册 =================
         function loadPhotos() {
             const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
             const gallery = document.getElementById('photoGallery');
             const addBtn = gallery.querySelector('.photo-add');
             gallery.innerHTML = '';
-            
             photos.forEach((photo, index) => {
-                const card = document.createElement('div'); card.className = 'photo-card';
-                const rot = Math.random() * 20 - 10; card.style.transform = `rotate(${rot}deg)`;
-                
-                card.innerHTML = `
-                    <button class="delete-btn" onclick="deletePhoto(${index}, event)" title="删除这张照片">×</button>
-                    <img src="${photo.src}" onclick="openLightbox(${index})">
-                    <p class="photo-caption">${photo.caption}</p>
-                `;
+                const card = document.createElement('div'); card.className = 'photo-card'; card.style.transform = `rotate(${Math.random() * 20 - 10}deg)`; card.onclick = () => openPhotoModal(index);
+                card.innerHTML = `<div class="photo-img-wrap"><img src="${photo.src}" alt="photo"></div><p class="photo-caption">${escapeHtml(photo.caption || '温柔的记忆')}</p>`;
                 gallery.appendChild(card);
             });
             gallery.appendChild(addBtn);
         }
 
+        function openPhotoModal(index, autoEdit = false) {
+            currentPhotoIndex = index;
+            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
+            const photo = photos[index]; if(!photo) return;
+            document.getElementById('pmImg').src = photo.src;
+            
+            document.getElementById('pmTitle').innerText = photo.caption || '无标题记忆';
+            document.getElementById('pmDate').innerText = photo.date || 'Somewhere in time...';
+            document.getElementById('pmLocation').innerText = photo.location || 'Unknown beautiful place...';
+            document.getElementById('pmNote').innerText = photo.note || 'No words needed.';
+
+            document.getElementById('pmEditTitle').value = photo.caption || '';
+            document.getElementById('pmEditDate').value = photo.date || '';
+            document.getElementById('pmEditLocation').value = photo.location || '';
+            document.getElementById('pmEditNote').value = photo.note || '';
+
+            togglePmEdit(autoEdit); document.getElementById('photoModal').classList.add('show');
+        }
+        function closePhotoModal() { document.getElementById('photoModal').classList.remove('show'); currentPhotoIndex = -1; }
+        function togglePmEdit(isEdit) { document.getElementById('pmViewMode').style.display = isEdit ? 'none' : 'block'; document.getElementById('pmEditMode').style.display = isEdit ? 'block' : 'none'; }
+
+        function savePhotoDetails() {
+            if (currentPhotoIndex < 0) return;
+            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
+            photos[currentPhotoIndex] = { ...photos[currentPhotoIndex], caption: document.getElementById('pmEditTitle').value.trim(), date: document.getElementById('pmEditDate').value.trim(), location: document.getElementById('pmEditLocation').value.trim(), note: document.getElementById('pmEditNote').value.trim() };
+            localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos)); loadPhotos(); openPhotoModal(currentPhotoIndex, false); 
+        }
+        function deleteCurrentPhoto() {
+            if (currentPhotoIndex < 0) return;
+            if(confirm('确定要彻底移除这段回忆吗？')) {
+                const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]'); photos.splice(currentPhotoIndex, 1);
+                localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos)); closePhotoModal(); loadPhotos();
+            }
+        }
         function addPhoto() {
-            const input = document.createElement('input');
-            input.type = 'file'; input.accept = 'image/*';
+            const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*';
             input.onchange = (e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                
-                const reader = new FileReader();
+                const file = e.target.files[0]; if (!file) return; const reader = new FileReader();
                 reader.onload = (event) => {
-                    const img = new Image();
-                    img.src = event.target.result;
+                    const img = new Image(); img.src = event.target.result;
                     img.onload = () => {
-                        // 核心：利用 Canvas 进行图片压缩，突破 localStorage 容量限制
-                        const canvas = document.createElement('canvas');
-                        const MAX_WIDTH = 1000; // 限制最大宽度
-                        const MAX_HEIGHT = 1000;
-                        let width = img.width; let height = img.height;
-
-                        if (width > height) {
-                            if (width > MAX_WIDTH) { height *= MAX_WIDTH / width; width = MAX_WIDTH; }
-                        } else {
-                            if (height > MAX_HEIGHT) { width *= MAX_HEIGHT / height; height = MAX_HEIGHT; }
-                        }
-
-                        canvas.width = width; canvas.height = height;
-                        const ctx = canvas.getContext('2d');
-                        ctx.drawImage(img, 0, 0, width, height);
-                        
-                        // 导出为体积极小的 JPEG (质量 0.7 足够网页清晰度)
-                        const compressedBase64 = canvas.toDataURL('image/jpeg', 0.7);
-
-                        const caption = prompt('为这段光影写一句简短的批注吧:') || '';
-                        const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
-                        photos.push({ src: compressedBase64, caption });
-                        
-                        try {
-                            localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos));
-                            loadPhotos();
-                        } catch (err) {
-                            alert("哎呀，虽然已经尽力压缩了，但空间还是满了！请先删除几张旧照片吧~");
-                        }
+                        const canvas = document.createElement('canvas'); const MAX_W = 1000, MAX_H = 1000;
+                        let w = img.width, h = img.height; if (w > h) { if (w > MAX_W) { h *= MAX_W / w; w = MAX_W; } } else { if (h > MAX_H) { w *= MAX_H / h; h = MAX_H; } }
+                        canvas.width = w; canvas.height = h; canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        const src = canvas.toDataURL('image/jpeg', 0.7); const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
+                        photos.push({ src, caption: '新的记忆碎片', date: '', location: '', note: '' });
+                        try { localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos)); loadPhotos(); openPhotoModal(photos.length - 1, true); } 
+                        catch(err) { alert('空间不足，请先删除旧照片~'); }
                     };
                 };
                 reader.readAsDataURL(file);
@@ -432,124 +743,129 @@
             input.click();
         }
 
-        function deletePhoto(index, event) {
-            event.stopPropagation(); // 防止触发放大灯箱
-            if(confirm("确定要删除这张照片吗？")) {
-                const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
-                photos.splice(index, 1);
-                localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos));
-                loadPhotos();
+        // ================= 许愿池/便签 =================
+        function loadWishes() { const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); document.getElementById('wishList').innerHTML = wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="toggleWish(${i})"></div><span style="flex:1;">${wish.text}</span><button class="delete-btn" onclick="deleteWish(${i})" title="删除愿望">×</button></div>`).join(''); }
+        function addWish() { const input = document.getElementById('wishInput'); if(!input.value.trim()) return; const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); wishes.unshift({ text: input.value.trim(), completed: false }); localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); input.value = ''; loadWishes(); }
+        function toggleWish(i) { const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); wishes[i].completed = !wishes[i].completed; localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); loadWishes(); }
+        function deleteWish(index) { if(confirm('确定要删除这个愿望吗？')) { const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); wishes.splice(index, 1); localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); loadWishes(); } }
+        function loadMessages() { const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'); document.getElementById('messageCards').innerHTML = msgs.map((msg, index) => { const rot = Math.random() * 10 - 5; return `<div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);"><button class="delete-btn" onclick="deleteMessage(${index}, event)" title="撕下便签">×</button><div>${msg.text}</div>${msg.remark ? `<div class="message-label">${msg.remark}</div>` : ''}<div class="message-time">${msg.date}</div></div>`; }).join(''); }
+        function addMessage() { const input = document.getElementById('messageInput'); const remarkInput = document.getElementById('messageRemarkInput'); if(!input.value.trim()) return; const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'); msgs.unshift({ text: input.value.trim(), remark: remarkInput.value.trim() || '', color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() }); localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs)); input.value = ''; remarkInput.value = ''; loadMessages(); }
+        function deleteMessage(index, event) { event.stopPropagation(); if(confirm('确定要撕下这张便签吗？')) { const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'); msgs.splice(index, 1); localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs)); loadMessages(); } }
+
+        // ================= 成就花园 =================
+        function initIconPicker() { const grid = document.getElementById('iconPickerGrid'); grid.innerHTML = ALL_ICONS.map((icon, idx) => `<div class="icon-item ${idx===0 ? 'selected':''}" onclick="selectIcon(this, '${icon}')">${icon}</div>`).join(''); }
+        function selectIcon(el, icon) { document.querySelectorAll('.icon-item').forEach(i => i.classList.remove('selected')); el.classList.add('selected'); document.getElementById('selectedAchIcon').value = icon; }
+        
+        function createPetalBurst(anchorEl) {
+            const numPetals = 12;
+            for (let i = 0; i < numPetals; i++) {
+                const angle = (i / numPetals) * 360 + (Math.random() - 0.5) * 20; const dist  = 60 + Math.random() * 40;
+                const dx = Math.cos(angle * Math.PI / 180) * dist; const dy = Math.sin(angle * Math.PI / 180) * dist - 20;
+                const petal = document.createElement('div'); petal.className = 'burst-petal';
+                petal.style.cssText = `width:10px; height:10px; background:#fff; opacity:0; box-shadow: 0 0 10px #fff; animation-delay:${Math.random() * 0.2}s; --dx:${dx}px; --dy:${dy}px;`;
+                anchorEl.appendChild(petal);
             }
+            setTimeout(() => { if (anchorEl) anchorEl.innerHTML = ''; }, 1600);
         }
 
-        function openLightbox(idx) {
-            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
-            document.getElementById('lightboxImg').src = photos[idx].src;
-            document.getElementById('lightbox').classList.add('show');
-        }
-        function closeLightbox() { document.getElementById('lightbox').classList.remove('show'); }
+        function loadAchievements() {
+            const storedRaw = localStorage.getItem(STORAGE_KEYS.achievements);
+            let items = storedRaw !== null ? JSON.parse(storedRaw) : ACHIEVEMENTS_DATA;
+            if (storedRaw === null) localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(items));
 
-        // ================= 许愿池 =================
-        function loadWishes() {
-            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
-            document.getElementById('wishList').innerHTML = wishes.map((wish, i) => `
-                <div class="wish-item ${wish.completed ? 'completed' : ''}">
-                    <div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="toggleWish(${i})"></div>
-                    <span style="flex:1;">${wish.text}</span>
-                    <button class="delete-btn" onclick="deleteWish(${i})" title="删除愿望">×</button>
-                </div>
-            `).join('');
-        }
-        function addWish() {
-            const input = document.getElementById('wishInput');
-            if(!input.value.trim()) return;
-            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
-            wishes.unshift({ text: input.value.trim(), completed: false });
-            localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes));
-            input.value = ''; loadWishes();
-        }
-        function toggleWish(i) {
-            const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
-            wishes[i].completed = !wishes[i].completed;
-            localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); loadWishes();
-        }
-        function deleteWish(index) {
-            if(confirm("确定要删除这个愿望吗？")) {
-                const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]');
-                wishes.splice(index, 1);
-                localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes));
-                loadWishes();
+            const progressEl = document.getElementById('gardenProgress');
+            if (progressEl) {
+                progressEl.innerHTML = items.map((a, i) => {
+                    const displayIcon = a.icon || ALL_ICONS[i % ALL_ICONS.length];
+                    return `<span class="progress-flower ${a.completed ? 'lit' : ''}">${displayIcon}</span>`;
+                }).join('');
             }
-        }
 
-        // ================= 便签墙 =================
-        function loadMessages() {
-            const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]');
-            document.getElementById('messageCards').innerHTML = msgs.map((msg, index) => {
-                const rot = Math.random() * 10 - 5;
+            const container = document.getElementById('achievementGrid');
+            container.innerHTML = items.map((ach, index) => {
+                const fc = CARD_COLORS[index % CARD_COLORS.length];
+                const displayIcon = ach.icon || ALL_ICONS[index % ALL_ICONS.length];
+                
+                const iconHtml = ach.completed 
+                    ? `<div class="flower-icon bloomed" style="text-shadow: 0 0 25px rgba(${fc.glowRgb}, 0.8)">${displayIcon}</div>`
+                    : `<div class="flower-icon bud">🌱</div>`;
+                
+                const dateHtml = (ach.completed && ach.date) 
+                    ? `<div class="achievement-date">Unlock: ${ach.date}</div>` 
+                    : '';
+
                 return `
-                <div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);">
-                    <button class="delete-btn" onclick="deleteMessage(${index}, event)" title="撕下便签">×</button>
-                    <div>${msg.text}</div>
-                    <div class="message-time">${msg.date}</div>
-                </div>
-            `}).join('');
+                <div class="achievement-card ${ach.completed ? 'completed' : 'locked'}" style="--card-accent:${fc.accent};">
+                    <button class="delete-btn" onclick="deleteAchievement(${index}, event)" title="删除该成就">×</button>
+                    <div class="card-flower-zone" style="background:${fc.bg}">
+                        <span class="card-flower-num">No.${index + 1}</span>
+                        ${iconHtml}
+                        <div class="petal-burst-anchor" id="burst-anchor-${index}"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="achievement-title">${escapeHtml(ach.title)}</div>
+                        <div class="achievement-hint">${escapeHtml(ach.hint)}</div>
+                        ${ach.completed ? `<div class="achievement-detail">${escapeHtml(ach.detail)}</div>` : ''}
+                        ${dateHtml}
+                        <button class="achievement-action" onclick="toggleAchievement(${index})">
+                            ${ach.completed ? '✨ 已点亮 · 点击收起' : '🌱 点亮此刻'}
+                        </button>
+                    </div>
+                </div>`;
+            }).join('');
         }
-        function addMessage() {
-            const input = document.getElementById('messageInput');
-            if(!input.value.trim()) return;
-            const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]');
-            msgs.unshift({ text: input.value.trim(), color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() });
-            localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs));
-            input.value = ''; loadMessages();
-        }function deleteMessage(index, event) {
+
+        function toggleAchievement(index) {
+            const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || '[]');
+            if (!achievements[index]) return;
+            const wasLocked = !achievements[index].completed;
+            achievements[index].completed = !achievements[index].completed;
+
+            if (wasLocked) {
+                const d = new Date();
+                achievements[index].date = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+            } else {
+                achievements[index].date = '';
+            }
+
+            localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(achievements));
+
+            if (wasLocked) {
+                const anchor = document.getElementById(`burst-anchor-${index}`);
+                if (anchor) createPetalBurst(anchor);
+                setTimeout(loadAchievements, 50);
+            } else {
+                loadAchievements();
+            }
+        }
+
+        function toggleAchSidebar() { document.getElementById('achSidebar').classList.toggle('open'); }
+        function addNewAchievement() {
+            const title = document.getElementById('achTitle').value.trim();
+            const hint = document.getElementById('achHint').value.trim();
+            const detail = document.getElementById('achDetail').value.trim();
+            const icon = document.getElementById('selectedAchIcon').value || '🌸';
+            
+            if (!title) { alert('给新成就起个名字吧~'); return; }
+
+            const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || JSON.stringify(ACHIEVEMENTS_DATA));
+            achievements.push({
+                title: title, hint: hint || '一颗未知的种子，等待时间的浇灌。', detail: detail || '时光见证了它的绽放。', completed: false, icon: icon, date: ''
+            });
+            localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(achievements));
+
+            document.getElementById('achTitle').value = ''; document.getElementById('achHint').value = ''; document.getElementById('achDetail').value = '';
+            toggleAchSidebar(); loadAchievements();
+        }
+        function deleteAchievement(index, event) {
             event.stopPropagation();
-            if(confirm("确定要撕下这张便签吗？")) {
-                const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]');
-                msgs.splice(index, 1);
-                localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs));
-                loadMessages();
+            if(confirm('确定要拔除这棵美好的植物吗？(永久删除该成就)')) {
+                const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || JSON.stringify(ACHIEVEMENTS_DATA));
+                achievements.splice(index, 1); localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(achievements)); loadAchievements();
             }
         }
 
-        // ================= 陪伴触发 =================
-        function triggerCompanion() {
-            const effect = document.getElementById('companionEffect');
-            effect.classList.remove('show');
-            void effect.offsetWidth; // 触发重绘
-            effect.classList.add('show');
-        }
-
-        // ================= 数据管理 =================
-        function exportData() {
-            // 写入一个版本号（毫秒时间戳），让其他访客的页面知道该更新了
-            const version = Date.now().toString();
-            localStorage.setItem('love_diary_version', version);
-
-            const data = { love_diary_version: version };
-            Object.values(STORAGE_KEYS).forEach(k => data[k] = localStorage.getItem(k));
-            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = 'data.json'; a.click();
-        }
-        
-        function importData(input) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const data = JSON.parse(e.target.result);
-                Object.keys(data).forEach(k => localStorage.setItem(k, data[k]));
-                alert('记忆已恢复'); location.reload();
-            };
-            reader.readAsText(input.files[0]);
-        }
-        
-        function clearAllData() {
-            if(confirm('清空后就像下了一场大雪，什么都不会留下。确定吗？')) {
-                Object.values(STORAGE_KEYS).forEach(k => localStorage.removeItem(k));
-                location.reload();
-            }
-        }
+        function updateTogetherDays() { const target = document.getElementById('togetherCounter'); const now = new Date(); const start = new Date(RELATIONSHIP_START + 'T00:00:00'); const diff  = Math.max(0, Math.floor((now - start) / 86400000)); target.innerHTML = `<span class="counter-days-num">${diff}</span><span class="counter-label">days of us</span><div class="counter-gems">✦ ✦ ✦</div>`; }
     </script>
 </body>
 </html>
