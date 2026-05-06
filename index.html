@@ -166,7 +166,7 @@
         .achievement-card:hover { transform: translateY(-11px) scale(1.02); box-shadow: 0 25px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.8); }
         .achievement-card.completed { border-color: rgba(210,168,128,0.6); }
         .card-flower-zone { height: 182px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
-        .card-flower-zone::after { content: absolute; bottom: -1px; left: 0; right: 0; height: 30px; background: rgba(255,253,248,1); clip-path: ellipse(56% 100% at 50% 100%); z-index: 3; }
+        .card-flower-zone::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 30px; background: rgba(255,253,248,1); clip-path: ellipse(56% 100% at 50% 100%); z-index: 3; }
         .card-flower-num { position: absolute; top: 1rem; left: 1.2rem; font-family: var(--font-playfair); font-style: italic; font-size: 0.85rem; color: rgba(255,255,255,0.8); letter-spacing: 0.08em; z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
         .flower-icon { font-size: 4.5rem; z-index: 2; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); line-height: 1; }
         .achievement-card.locked .flower-icon { font-size: 3rem; filter: grayscale(1) opacity(0.6); transform: scale(0.9); }
@@ -500,7 +500,8 @@
     <!-- ================= Firebase 核心逻辑集成 ================= -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, onSnapshot, setDoc, collection, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        // 核心变更：引入本地持久化缓存功能模块
+        import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, doc, onSnapshot, setDoc, collection, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDLpEbrAf2QB6p22I1qrYNIZN_3wHkjOAM",
@@ -515,7 +516,11 @@
         const CLOUDINARY_UPLOAD_PRESET = 'unsigned_photos';
 
         const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        
+        // 核心变更：启用本地数据库缓存，防止防火墙断网导致的数据丢失
+        const db = initializeFirestore(app, {
+            localCache: persistentLocalCache({tabManager: persistentMultipleTabManager()})
+        });
 
         const DEFAULT_ACHIEVEMENTS =[
             { title: '暮光图书馆', hint: '在一场静谧的午后找到属于我们的共读秘密。', detail: '完成一次一起挑选、分享并读完同一本音乐剧剧本或小说。', completed: false, icon: '📖', date: '' },
@@ -545,44 +550,26 @@
                     achievements: Array.isArray(data.achievements) ? data.achievements : DEFAULT_ACHIEVEMENTS,
                 };
                 renderBasicData();
-                updateSyncStatus('便签和愿望已同步最新');
             } else {
-                setDoc(stateDocRef, window.appData).catch(e => console.error(e));
+                setDoc(stateDocRef, window.appData).catch(e => console.error("Init Error:", e));
             }
         }, (err) => {
-            console.error("状态同步失败:", err);
-            updateSyncStatus('同步断开，检查网络和权限');
-            alert("无法拉取远端数据，请检查网络或刷新页面！");
+            console.warn("由于网络或防火墙，拉取数据延迟，正在使用本地离线数据...");
         });
 
         // 监听照片数据
         onSnapshot(photosColRef, (snap) => {
             window.photosData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            try { loadPhotos(); } catch(e) { console.error("加载相册崩溃", e); }
-            updateSyncStatus(`照片库同步成功，共 ${snap.docs.length} 张`);
+            try { loadPhotos(); } catch(e) { console.error("加载相册异常", e); }
         }, (err) => {
-            console.error('Photos snapshot failed:', err);
-            updateSyncStatus('相册同步失败，请检查网络。');
+            console.warn("照片库处于离线状态...");
         });
 
-        async function saveStateToFirebase() {
-            try {
-                await setDoc(stateDocRef, window.appData);
-                updateSyncStatus('更改保存成功');
-            } catch (err) {
-                console.error("保存失败:", err);
-                updateSyncStatus("数据保存失败，请检查网络！");
-                alert("抱歉，操作未能同步到云端！" + err.message);
-            }
-        }
-
-        function updateSyncStatus(text) {
-            const status = document.getElementById('syncStatus');
-            if (!status) return;
-            status.textContent = text;
-            status.style.display = 'block';
-            clearTimeout(window.syncStatusTimer);
-            window.syncStatusTimer = setTimeout(() => { status.style.display = 'none'; }, 4000);
+        // 核心变更：取消阻塞(await)，保存逻辑直接抛出后台执行
+        function saveStateToFirebase() {
+            setDoc(stateDocRef, window.appData).catch(err => {
+                console.warn("后台同步挂起，将在连接网络后继续");
+            });
         }
 
         const RELATIONSHIP_START = '2025-10-11';
@@ -595,10 +582,10 @@
         function escapeHtml(str) { return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
 
         function renderBasicData() { 
-            try { loadStars(); } catch(e) { console.error("星空加载报错", e); }
-            try { loadWishes(); } catch(e) { console.error("愿望加载报错", e); }
-            try { loadAchievements(); } catch(e) { console.error("成就加载报错", e); }
-            try { loadMessages(); } catch(e) { console.error("便签加载报错", e); }
+            try { loadStars(); } catch(e) {}
+            try { loadWishes(); } catch(e) {}
+            try { loadAchievements(); } catch(e) {}
+            try { loadMessages(); } catch(e) {}
             updateTogetherDays(); 
         }
 
@@ -702,32 +689,24 @@
         window.closePhotoModal = function() { document.getElementById('photoModal').classList.remove('show'); currentPhotoIndex = -1; }
         window.togglePmEdit = function(isEdit) { document.getElementById('pmViewMode').style.display = isEdit ? 'none' : 'block'; document.getElementById('pmEditMode').style.display = isEdit ? 'block' : 'none'; }
 
-        window.savePhotoDetails = async function() {
+        window.savePhotoDetails = function() {
             if (currentPhotoIndex < 0) return;
             const photoId = window.photosData[currentPhotoIndex].id;
-            try {
-                await updateDoc(doc(db, "photos", photoId), {
-                    caption: document.getElementById('pmEditTitle').value.trim(),
-                    date: document.getElementById('pmEditDate').value.trim(),
-                    location: document.getElementById('pmEditLocation').value.trim(),
-                    note: document.getElementById('pmEditNote').value.trim()
-                });
-                window.openPhotoModal(currentPhotoIndex, false);
-            } catch(e) {
-                alert("保存照片详情失败：" + e.message);
-            }
+            updateDoc(doc(db, "photos", photoId), {
+                caption: document.getElementById('pmEditTitle').value.trim(),
+                date: document.getElementById('pmEditDate').value.trim(),
+                location: document.getElementById('pmEditLocation').value.trim(),
+                note: document.getElementById('pmEditNote').value.trim()
+            }).catch(e => console.warn(e)); // 移除阻塞
+            window.openPhotoModal(currentPhotoIndex, false);
         }
 
-        window.deleteCurrentPhoto = async function() {
+        window.deleteCurrentPhoto = function() {
             if (currentPhotoIndex < 0) return;
             if(confirm('确定要彻底移除这段回忆吗？')) {
                 const photoId = window.photosData[currentPhotoIndex].id;
-                try {
-                    await deleteDoc(doc(db, "photos", photoId));
-                    window.closePhotoModal();
-                } catch(e) {
-                    alert("删除回忆失败：" + e.message);
-                }
+                deleteDoc(doc(db, "photos", photoId)).catch(e => console.warn(e)); // 移除阻塞
+                window.closePhotoModal();
             }
         }
         
@@ -746,16 +725,13 @@
                     return;
                 }
                 const progress = document.getElementById('uploadProgress');
-                progress.textContent = '正在准备图片... ⏳';
                 progress.style.display = 'block';
-                updateSyncStatus('正在准备上传图片');
 
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     const img = new Image();
                     img.onload = async () => {
                         const canvas = document.createElement('canvas');
-                        // 放宽移动端上限，使用更好的压缩方案代替 Blob 处理
                         const MAX_W = 1080, MAX_H = 1080;
                         let w = img.width, h = img.height;
                         if (w > h) { if (w > MAX_W) { h *= MAX_W / w; w = MAX_W; } }
@@ -767,13 +743,13 @@
                         ctx.drawImage(img, 0, 0, w, h);
 
                         try {
-                            progress.textContent = '正在上传到云端... ⏳';
                             const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
 
                             const formData = new FormData();
                             formData.append('file', dataUrl);
                             formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
 
+                            // Cloudinary 不受防火墙影响，正常 await
                             const response = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/upload`, {
                                 method: 'POST',
                                 body: formData
@@ -781,38 +757,38 @@
                             
                             const result = await response.json();
                             if (!response.ok || !result.secure_url) {
-                                const errMsg = (result.error && result.error.message) ? result.error.message : '云端拒绝了上传请求';
-                                throw new Error(errMsg);
+                                throw new Error((result.error && result.error.message) ? result.error.message : '云端拒绝了上传请求');
                             }
-
-                            progress.textContent = '正在写进日记本... ⏳';
-                            await addDoc(photosColRef, {
+                            
+                            // 核心变更：取消 await，写入数据库动作扔到后台去，不会再卡住界面
+                            addDoc(photosColRef, {
                                 src: result.secure_url,
                                 caption: '新的记忆碎片',
                                 date: new Date().toLocaleDateString(),
                                 location: '',
                                 note: '',
                                 timestamp: Date.now()
+                            }).catch(err => {
+                                console.warn('后台同步等待中', err);
                             });
-                            updateSyncStatus('图片已保存');
+                            
+                            updateSyncStatus('已贴入相册（自动同步中）');
                             
                         } catch (err) {
-                            console.error('上传完整失败链:', err);
-                            alert('上传遇到了问题: \n' + err.message);
+                            console.error('Upload failed:', err);
                         } finally {
+                            // 无论如何强制关闭进度条
                             progress.style.display = 'none';
                             document.body.removeChild(input);
                         }
                     };
                     img.onerror = () => {
-                        alert('读取这张图片失败，请尝试换一张。');
                         progress.style.display = 'none';
                         document.body.removeChild(input);
                     };
                     img.src = event.target.result;
                 };
                 reader.onerror = () => {
-                    alert('无法读取本地文件！');
                     progress.style.display = 'none';
                     document.body.removeChild(input);
                 };
@@ -829,19 +805,19 @@
             const input = document.getElementById('wishInput'); 
             if(!input.value.trim()) return; 
             window.appData.wishes.unshift({ text: input.value.trim(), completed: false }); 
-            loadWishes(); // 先更新UI
+            loadWishes(); // 先本地立刻渲染
             saveStateToFirebase(); 
             input.value = ''; 
         }
         window.toggleWish = function(i) { 
             window.appData.wishes[i].completed = !window.appData.wishes[i].completed; 
-            loadWishes();
+            loadWishes(); 
             saveStateToFirebase(); 
         }
         window.deleteWish = function(index) { 
             if(confirm('确定要删除这个愿望吗？')) { 
                 window.appData.wishes.splice(index, 1); 
-                loadWishes();
+                loadWishes(); 
                 saveStateToFirebase(); 
             } 
         }
@@ -855,16 +831,16 @@
             const remarkInput = document.getElementById('messageRemarkInput'); 
             if(!input.value.trim()) return; 
             window.appData.messages.unshift({ text: input.value.trim(), remark: remarkInput.value.trim() || '', color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() }); 
-            loadMessages(); // 立即渲染UI解决刷新才展现的错觉
+            loadMessages(); // 解决必须要刷新才显示的问题，本地立刻渲染
             saveStateToFirebase(); 
             input.value = ''; 
-            remarkInput.value = ''; 
+            remarkInput.value = '';
         }
         window.deleteMessage = function(index, event) { 
             event.stopPropagation(); 
             if(confirm('确定要撕下这张便签吗？')) { 
                 window.appData.messages.splice(index, 1); 
-                loadMessages();
+                loadMessages(); 
                 saveStateToFirebase(); 
             } 
         }
