@@ -310,7 +310,7 @@
 
             /* 9. 猫咪与弹窗：缩小体型并隐藏对话气泡防止遮挡 */
             .companion-trigger { width: 50px; height: 50px; font-size: 1.5rem; bottom: 1.5rem; right: 1.5rem; }
-            .cat-bubble { right: 60px; font-size: 1rem; padding: 8px 12px; display: none; }
+            .cat-bubble { right: 60px; bottom: 5px; font-size: 0.95rem; padding: 8px 12px; display: block; }
             .ee-content { padding: 2rem 1.5rem; max-width: 90%; }
             .ee-content h2 { font-size: 1.5rem; }
         }
@@ -654,9 +654,8 @@
                 document.getElementById('easterEggModal').classList.add('show');
                 catClickCount = 0;
                 
-                cat.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                cat.style.bottom = '2rem'; cat.style.right = '2rem';
-                cat.style.top = 'auto'; cat.style.left = 'auto';
+                // 清除内联样式，自动恢复为 CSS 中配置的默认固定位置
+                cat.style.cssText = ''; 
                 cat.removeAttribute('data-target-page');
                 
                 triggerPawPrints();
@@ -673,19 +672,10 @@
 
             setTimeout(() => {
                 bubble.classList.remove('show');
-                
-                const vw = window.innerWidth - 100; const vh = window.innerHeight - 100;
-                const randomX = Math.max(30, Math.floor(Math.random() * vw)); 
-                const randomY = Math.max(30, Math.floor(Math.random() * vh));
-
-                cat.style.transition = 'none'; 
-                cat.style.bottom = 'auto'; cat.style.right = 'auto'; 
-                cat.style.left = randomX + 'px'; cat.style.top = randomY + 'px';
-
+                cat.style.cssText = ''; 
                 cat.setAttribute('data-target-page', nextTarget);
             }, 1500);
         }
-
         window.closeEasterEgg = function() { document.getElementById('easterEggModal').classList.remove('show'); }
 
         function triggerPawPrints() {
