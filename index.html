@@ -22,27 +22,10 @@
         }
 
         body[data-active-page="home"] { --bg-primary: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%); --text-primary: #e8e4f0; --accent: #b28dff; --nav-bg: rgba(15, 12, 41, 0.7); }
-        
-        /* 相册：晨曦回忆画廊 */
-        body[data-active-page="photos"] { 
-            --bg-primary: #fdfaf6; 
-            --text-primary: #5a4b3c; 
-            --text-secondary: #8c7b6d; 
-            --accent: #d97b5a; 
-            --nav-bg: rgba(253, 250, 246, 0.85); 
-        }
-        
+        body[data-active-page="photos"] { --bg-primary: #fdfaf6; --text-primary: #5a4b3c; --text-secondary: #8c7b6d; --accent: #d97b5a; --nav-bg: rgba(253, 250, 246, 0.85); }
         body[data-active-page="wishes"] { --bg-primary: linear-gradient(to bottom, #0b0c10 0%, #1f2833 60%, #45a29e 100%); --text-primary: #fcfcfc; --text-secondary: #66fcf1; --accent: #66fcf1; --nav-bg: rgba(11, 12, 16, 0.8); }
         body[data-active-page="messages"] { --bg-primary: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%); --text-primary: #4a4a4a; --text-secondary: #7a7a7a; --accent: #a18cd1; --nav-bg: rgba(243, 231, 233, 0.8); }
-        
-        /* 成就花园：暮光魔法温室 */
-        body[data-active-page="achievements"] { 
-            --bg-primary: linear-gradient(180deg, #110f24 0%, #2a1b38 40%, #5c3546 80%, #a86255 100%); 
-            --text-primary: #fff8f0; 
-            --text-secondary: #f0d5c9; 
-            --accent: #ffb7b2; 
-            --nav-bg: rgba(17, 15, 36, 0.85); 
-        }
+        body[data-active-page="achievements"] { --bg-primary: linear-gradient(180deg, #110f24 0%, #2a1b38 40%, #5c3546 80%, #a86255 100%); --text-primary: #fff8f0; --text-secondary: #f0d5c9; --accent: #ffb7b2; --nav-bg: rgba(17, 15, 36, 0.85); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -60,50 +43,37 @@
         .page-title { font-family: var(--font-display); font-size: 2.8rem; text-align: center; margin-bottom: 0.5rem; color: var(--text-primary); text-shadow: 0 2px 10px rgba(0,0,0,0.1); position: relative; z-index: 2; }
         .page-subtitle { text-align: center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 3rem; opacity: 0.8; position: relative; z-index: 2; }
 
-        /* ================= 1. 情绪星空 ================= */
+        /* ================= 1. 情绪星空 & 流星特效 ================= */
         .star-container { position: relative; width: 100%; height: 60vh; min-height: 400px; max-width: 1200px; margin: 0 auto; cursor: crosshair; overflow: hidden; border-radius: 30px; background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%); box-shadow: 0 0 40px rgba(178, 141, 255, 0.2), inset 0 0 80px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 2rem; }
         .star-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .star { position: absolute; width: 4px; height: 4px; border-radius: 50%; background: #fff; cursor: pointer; transition: all 0.5s ease; animation: twinkle 3s infinite ease-in-out; box-shadow: 0 0 10px #fff, 0 0 20px var(--accent); }
         .star:hover { transform: scale(2.5); box-shadow: 0 0 20px #fff; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+        
+        /* 流星动画 */
+        .shooting-star { position: absolute; width: 150px; height: 2px; background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent); border-radius: 50%; animation: meteorShower 6s linear infinite; opacity: 0; z-index: 0; pointer-events: none; }
+        @keyframes meteorShower { 0% { transform: translateX(200px) translateY(-200px) rotate(-45deg); opacity: 1; } 20% { transform: translateX(-800px) translateY(800px) rotate(-45deg); opacity: 0; } 100% { opacity: 0; } }
+
         .star-message { position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); padding: 1.5rem 3rem; background: rgba(255, 255, 255, 0.1); border-radius: 20px; color: #fff; font-size: 1.15rem; opacity: 0; pointer-events: none; letter-spacing: 2px; max-width: 85%; text-align: center; line-height: 1.8; box-shadow: 0 0 30px rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); }
         .star-message.show { animation: mysticReveal 6s ease-in-out forwards; }
         @keyframes mysticReveal { 0% { opacity: 0; transform: translate(-50%, 20px) scale(0.95); filter: blur(8px); } 15% { opacity: 1; transform: translate(-50%, 0) scale(1); filter: blur(0px); } 85% { opacity: 1; transform: translate(-50%, -10px) scale(1); filter: blur(0px); } 100% { opacity: 0; transform: translate(-50%, -30px) scale(1.05); filter: blur(8px); } }
 
-        /* ================= 2. 光影相册 (晨曦画廊) ================= */
+        /* ================= 2. 光影相册 & 精灵星尘 ================= */
         .photo-decorations { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-        
-        /* 柔和水彩晕染光轮 */
         .memory-orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.5; z-index: 0; }
         .orb-1 { width: 55vw; height: 55vw; top: -15vw; left: -15vw; background: #ffe4e1; }
         .orb-2 { width: 45vw; height: 45vw; bottom: -10vw; right: -10vw; background: #e6e6fa; }
         .orb-3 { width: 40vw; height: 40vw; top: 35vh; left: 35vw; background: #fff0f5; }
-
-        /* 巨大的手写体浮水印 */
-        .bg-watermark {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg);
-            font-family: var(--font-dancing); font-size: 15vw; color: rgba(210, 180, 150, 0.08);
-            white-space: nowrap; font-weight: bold; user-select: none;
-        }
-
-        /* 复古烫金双层拱门 */
-        .vintage-arch {
-            position: absolute; top: 3vh; bottom: 3vh; left: 3vw; right: 3vw;
-            border: 2px solid rgba(210, 180, 150, 0.35); border-radius: 45vw 45vw 12px 12px; z-index: 1;
-        }
-        .vintage-arch::after {
-            content: ''; position: absolute; inset: 16px;
-            border: 1px dashed rgba(210, 180, 150, 0.45); border-radius: calc(45vw - 16px) calc(45vw - 16px) 6px 6px;
-        }
-
-        /* 垂坠精灵花藤 */
+        .bg-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-12deg); font-family: var(--font-dancing); font-size: 15vw; color: rgba(210, 180, 150, 0.08); white-space: nowrap; font-weight: bold; user-select: none; }
+        .vintage-arch { position: absolute; top: 3vh; bottom: 3vh; left: 3vw; right: 3vw; border: 2px solid rgba(210, 180, 150, 0.35); border-radius: 45vw 45vw 12px 12px; z-index: 1; }
+        .vintage-arch::after { content: ''; position: absolute; inset: 16px; border: 1px dashed rgba(210, 180, 150, 0.45); border-radius: calc(45vw - 16px) calc(45vw - 16px) 6px 6px; }
         .memory-branch { position: absolute; top: 0; width: 140px; height: 280px; color: rgba(210, 180, 150, 0.5); z-index: 1; }
         .memory-branch.left { left: 4vw; }
         .memory-branch.right { right: 4vw; transform: scaleX(-1); }
-
-        /* 漂浮的小星星 */
-        .memory-star { position: absolute; font-size: 1.5rem; color: rgba(210, 180, 150, 0.6); animation: twinkleStar linear infinite alternate; }
-        @keyframes twinkleStar { 0% { opacity: 0.2; transform: scale(0.8) rotate(0deg); } 100% { opacity: 0.9; transform: scale(1.2) rotate(20deg); text-shadow: 0 0 12px rgba(210, 180, 150, 0.6); } }
+        
+        /* 漂浮的精灵星尘 */
+        .fairy-dust { position: absolute; width: 4px; height: 4px; background: radial-gradient(circle, #fff, rgba(255,220,180,0)); border-radius: 50%; animation: floatDust 10s infinite linear; opacity: 0; }
+        @keyframes floatDust { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.6; } 100% { transform: translateY(-20vh) scale(1.5); opacity: 0; } }
 
         .photo-gallery { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 3.5rem; padding: 2rem; perspective: 1000px; }
         .photo-card { position: relative; width: 280px; background: #fff; padding: 15px 15px 50px 15px; box-shadow: 0 15px 35px rgba(100,80,60,0.12); transition: var(--transition-smooth); z-index: 1; cursor: pointer; border-radius: 2px; }
@@ -112,11 +82,9 @@
         .photo-img-wrap { position: relative; overflow: hidden; border-radius: 2px; }
         .photo-img-wrap img { width: 100%; height: 260px; object-fit: cover; filter: sepia(8%) contrast(0.95); display: block; }
         .photo-caption { text-align: center; color: #5a4b3c; font-family: var(--font-handwriting); font-size: 1.3rem; margin-top: 0.8rem; line-height: 1.35; font-weight: bold; }
-        
         .photo-add { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 350px; background: rgba(255,255,255,0.4); border: 2px dashed rgba(210,180,150,0.6); border-radius: 10px; cursor: pointer; transition: 0.3s; box-shadow: none; backdrop-filter: blur(5px); }
         .photo-add:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.8); }
-
-        /* 相册画框弹窗 */
+        
         .photo-modal { position: fixed; inset: 0; background: rgba(40, 35, 30, 0.85); backdrop-filter: blur(12px); z-index: 2000; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.4s ease; padding: 2rem; }
         .photo-modal.show { display: flex; opacity: 1; }
         .pm-content { background: #fffdfa; width: 100%; max-width: 1000px; max-height: 85vh; border-radius: 20px; display: flex; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); position: relative; transform: scale(0.95) translateY(20px); transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
@@ -126,22 +94,18 @@
         .pm-right { width: 380px; padding: 2.5rem 2rem; overflow-y: auto; display: flex; flex-direction: column; background: #fffcf8; position: relative; }
         .pm-close { position: absolute; top: 15px; right: 20px; font-size: 2.5rem; color: #a09ab8; cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10; font-family: sans-serif; }
         .pm-close:hover { color: #ff4757; transform: rotate(90deg); }
-
         .pm-title { font-family: var(--font-main); font-size: 1.4rem; font-weight: 600; color: #3c2a18; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px dashed #d2a880; }
         .pm-section { margin-bottom: 1.5rem; }
         .pm-label { font-family: var(--font-dancing); font-size: 1.8rem; color: #d97b5a; margin-bottom: 0.2rem; line-height: 1; font-weight: 700; letter-spacing: 0.05em; }
         .pm-value { font-family: var(--font-handwriting); font-size: 1.15rem; color: #5a3d22; line-height: 1.6; min-height: 1.5rem; }
         .pm-value.memory-text { font-style: italic; }
-
         .pm-hidden-edit-trigger { position: absolute; bottom: 20px; right: 20px; width: 38px; height: 38px; border-radius: 50%; background: rgba(217,123,90,0.1); color: #d97b5a; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; cursor: pointer; opacity: 0; transition: all 0.3s ease; z-index: 5; }
         .pm-right:hover .pm-hidden-edit-trigger { opacity: 1; }
         .pm-hidden-edit-trigger:hover { background: #d97b5a; color: #fff; transform: scale(1.1); box-shadow: 0 4px 12px rgba(217,123,90,0.4); }
-
         .pm-edit-view { display: none; }
         .pm-input { width: 100%; padding: 8px 12px; font-family: var(--font-main); font-size: 0.95rem; border: 1px solid rgba(210,168,128,0.6); border-radius: 8px; background: rgba(255,255,255,0.8); color: #3c2a18; outline: none; margin-top: 4px; transition: 0.3s; }
         .pm-input:focus { border-color: #d97b5a; background: #fff; box-shadow: 0 0 0 3px rgba(217,123,90,0.1); }
         textarea.pm-input { resize: vertical; min-height: 90px; }
-        
         .pm-actions { margin-top: 1.5rem; padding-top: 1.5rem; display: flex; gap: 8px; border-top: 1px dashed #d2a880; }
         .pm-btn { flex: 1; padding: 0.7rem; border-radius: 12px; font-family: var(--font-main); font-weight: bold; font-size: 0.95rem; cursor: pointer; transition: all 0.3s ease; border: none; }
         .btn-save { background: #d97b5a; color: #fff; box-shadow: 0 5px 15px rgba(217,123,90,0.3); }
@@ -150,143 +114,105 @@
         .btn-delete:hover { background: #ff4757; color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3); }
         .btn-cancel { background: rgba(160,154,184,0.15); color: #7a6080; flex: 0.7; }
         .btn-cancel:hover { background: rgba(160,154,184,0.3); }
+        @media(max-width: 768px) { .pm-content { flex-direction: column; overflow-y: auto; max-height: 90vh; } .pm-left { height: 45vh; flex: none; } .pm-left img { height: 100%; object-fit: cover; } .pm-right { width: 100%; padding: 1.5rem; } }
 
-        @media(max-width: 768px) {
-            .pm-content { flex-direction: column; overflow-y: auto; max-height: 90vh; }
-            .pm-left { height: 45vh; flex: none; }
-            .pm-left img { height: 100%; object-fit: cover; }
-            .pm-right { width: 100%; padding: 1.5rem; }
-        }
-
-        /* ================= 3. 许愿池 ================= */
-        .wish-scene { position: relative; width: 100%; max-width: 900px; margin: 0 auto; min-height: 75vh; padding: 3rem 2rem 250px 2rem; display: flex; flex-direction: column; align-items: center; }
+        /* ================= 3. 许愿池 & 极光特效 ================= */
+        .wish-scene { position: relative; width: 100%; max-width: 900px; margin: 0 auto; min-height: 75vh; padding: 3rem 2rem 250px 2rem; display: flex; flex-direction: column; align-items: center; z-index: 2;}
         .scene-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; border-radius: 30px; overflow: hidden; background: rgba(255, 255, 255, 0.02); box-shadow: inset 0 0 50px rgba(0,0,0,0.2); }
+        
+        /* 极光光晕 */
+        .aurora { position: absolute; top: -20%; left: -10%; width: 120%; height: 60%; background: radial-gradient(ellipse at top, rgba(102, 252, 241, 0.15) 0%, transparent 60%); filter: blur(40px); animation: auroraShift 10s infinite alternate linear; }
+        @keyframes auroraShift { 0% { transform: translateX(-5%) scale(1); } 100% { transform: translateX(5%) scale(1.1); } }
+
         .scene-moon { position: absolute; top: 10%; left: 50%; transform: translateX(-50%); width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, #fffbdb 0%, #f4e38e 100%); box-shadow: 0 0 60px #f4e38e, 0 0 120px rgba(244, 227, 142, 0.4); }
         .scene-hill { position: absolute; bottom: -150px; left: -25%; width: 150%; height: 350px; border-radius: 50%; background: #0b0c10; }
         .scene-girl { position: absolute; bottom: 150px; left: 50%; transform: translateX(-50%); width: 100px; height: 150px; }
         .scene-girl svg { width: 100%; height: 100%; fill: #0b0c10; }
-
         .wish-input-container { display: flex; gap: 1.2rem; margin-bottom: 3.5rem; width: 100%; max-width: 650px; background: rgba(255,255,255,0.1); padding: 12px; border-radius: 40px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2); z-index: 2; }
         .wish-input { flex: 1; padding: 1rem 1.5rem; border: none; background: transparent; color: #fff; font-size: 1.1rem; outline: none; }
         .wish-input::placeholder { color: rgba(255,255,255,0.6); }
         .wish-submit { padding: 1rem 2.5rem; border: none; border-radius: 30px; background: var(--accent); color: #000; font-weight: bold; font-size: 1rem; cursor: pointer; transition: 0.3s; }
         .wish-submit:hover { transform: scale(1.05); box-shadow: 0 0 20px var(--accent-glow); }
-
         .wish-list { display: flex; flex-direction: column; gap: 1.5rem; width: 100%; max-width: 650px; z-index: 2; }
         .wish-item { position: relative; display: flex; align-items: center; gap: 1.2rem; padding: 1.5rem 2rem; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; backdrop-filter: blur(12px); color: #fff; font-size: 1.1rem; transition: var(--transition-smooth); }
         .wish-item:hover { background: rgba(255,255,255,0.15); transform: translateY(-3px); }
         .wish-item.completed span { opacity: 0.5; text-decoration: line-through; }
         .wish-checkbox { width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 50%; cursor: pointer; transition: 0.3s; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .wish-checkbox.checked { background: var(--accent); }
-
         .delete-btn { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 50%; background: rgba(255, 71, 87, 0.8); color: white; border: none; font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; transition: all 0.3s ease; z-index: 20; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
         .wish-item .delete-btn { top: 50%; transform: translateY(-50%); right: 20px; background: rgba(255, 255, 255, 0.2); }
         .message-card:hover .delete-btn, .wish-item:hover .delete-btn, .achievement-card:hover .delete-btn { opacity: 1; }
         .delete-btn:hover { background: #ff4757; transform: scale(1.1) !important; }
 
-        /* ================= 4. 成就花园 (魔法暮光温室) ================= */
+        /* ================= 4. 成就花园 ================= */
         #page-achievements { position: relative; overflow-x: hidden; z-index: 1; }
-        
-        #page-achievements .page-title { 
-            background: linear-gradient(125deg, #ffd7b5 0%, #ffb7b2 48%, #ffd7b5 100%); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; 
-        }
-
-        /* 浪漫童话背景层 */
+        #page-achievements .page-title { background: linear-gradient(125deg, #ffd7b5 0%, #ffb7b2 48%, #ffd7b5 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: none; }
         .garden-decorations { position: fixed; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-        
-        /* 巨大魔法月亮 */
-        .magic-moon { 
-            position: absolute; top: 12vh; right: 12vw; width: 180px; height: 180px; border-radius: 50%; 
-            background: radial-gradient(circle at 30% 30%, #fffde6 0%, #f7dca1 100%); 
-            box-shadow: 0 0 60px rgba(247, 220, 161, 0.4), 0 0 120px rgba(247, 220, 161, 0.2); opacity: 0.95; 
-        }
-        
-        /* 繁星与萤火虫 */
+        .magic-moon { position: absolute; top: 12vh; right: 12vw; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #fffde6 0%, #f7dca1 100%); box-shadow: 0 0 60px rgba(247, 220, 161, 0.4), 0 0 120px rgba(247, 220, 161, 0.2); opacity: 0.95; }
         .garden-star { position: absolute; background: #fff; border-radius: 50%; animation: twinkle 3s infinite ease-in-out; }
-        .garden-firefly { 
-            position: absolute; width: 5px; height: 5px; background: #ffe180; border-radius: 50%; 
-            box-shadow: 0 0 12px 3px rgba(255, 225, 128, 0.8); 
-            animation: fireflyFloat 12s infinite cubic-bezier(0.4, 0, 0.2, 1) alternate; 
-        }
+        .garden-firefly { position: absolute; width: 5px; height: 5px; background: #ffe180; border-radius: 50%; box-shadow: 0 0 12px 3px rgba(255, 225, 128, 0.8); animation: fireflyFloat 12s infinite cubic-bezier(0.4, 0, 0.2, 1) alternate; }
         @keyframes fireflyFloat { 0% { transform: translate(0, 0) scale(0.8); opacity: 0.4; } 100% { transform: translate(60px, -80px) scale(1.2); opacity: 1; } }
-        
-        /* 落花飞舞 */
         .falling-petal { position: absolute; top: -50px; width: 18px; height: 18px; background: linear-gradient(135deg, #ffb7b2 0%, #ffdac1 100%); border-radius: 50% 0 50% 0; opacity: 0.7; animation: fallPetal linear infinite; box-shadow: 0 0 5px rgba(255,183,178,0.5); }
         @keyframes fallPetal { 0% { transform: translateY(-50px) rotate(0deg) translateX(0); opacity: 0; } 10% { opacity: 0.8; } 90% { opacity: 0.8; } 100% { transform: translateY(110vh) rotate(720deg) translateX(100px); opacity: 0; } }
-        
-        /* 破晓晨雾流转 */
         .magic-mist { position: absolute; bottom: 0; left: -50%; width: 200%; height: 40vh; background: radial-gradient(ellipse at bottom, rgba(255,180,150,0.12) 0%, transparent 70%); animation: mistFlow 25s ease-in-out infinite alternate; }
         .magic-mist.layer2 { bottom: -5vh; left: -20%; width: 150%; height: 45vh; background: radial-gradient(ellipse at bottom left, rgba(200,150,255,0.08) 0%, transparent 70%); animation: mistFlow 30s ease-in-out infinite alternate-reverse; }
         @keyframes mistFlow { 0% { transform: translateX(0) scaleY(1); } 100% { transform: translateX(5%) scaleY(1.1); } }
-
-        /* 精灵藤蔓 (SVG) */
         .garden-vine { position: absolute; bottom: -20px; width: 450px; height: auto; opacity: 0.25; color: #ffd6cc; z-index: 1; filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4)); }
         .garden-vine.left { left: -80px; }
         .garden-vine.right { right: -80px; transform: scaleX(-1); }
-
         .garden-progress { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.8rem; flex-wrap: wrap; max-width: 1000px; margin-left: auto; margin-right: auto; position: relative; z-index: 2; }
         .progress-flower { font-size: 1.9rem; transition: all 0.5s ease; filter: grayscale(90%) opacity(0.35) drop-shadow(0 0 0 transparent); display: inline-block; }
         .progress-flower.lit { filter: none; animation: flowerBob 2.8s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(255,160,100,0.6)); }
         @keyframes flowerBob { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-8px) rotate(4deg); } }
-
         .achievement-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2.5rem; max-width: 1200px; margin: 0 auto; padding: 0.5rem 1rem 2rem; position: relative; z-index: 2; }
-        
-        /* 优化成就卡片使其在暗色背景下更加惊艳 */
         .achievement-card { position: relative; border-radius: 26px; overflow: hidden; background: rgba(255,253,248,0.95); backdrop-filter: blur(8px); box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.6); border: 1px solid rgba(210,168,128,0.2); transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease; cursor: default; display: flex; flex-direction: column; min-height: 380px; z-index: 2;}
         .achievement-card:hover { transform: translateY(-11px) scale(1.02); box-shadow: 0 25px 60px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.8); }
         .achievement-card.completed { border-color: rgba(210,168,128,0.6); }
-        
         .card-flower-zone { height: 182px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
         .card-flower-zone::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 30px; background: rgba(255,253,248,1); clip-path: ellipse(56% 100% at 50% 100%); z-index: 3; }
         .card-flower-num { position: absolute; top: 1rem; left: 1.2rem; font-family: var(--font-playfair); font-style: italic; font-size: 0.85rem; color: rgba(255,255,255,0.8); letter-spacing: 0.08em; z-index: 2; text-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-        
         .flower-icon { font-size: 4.5rem; z-index: 2; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); line-height: 1; }
         .achievement-card.locked .flower-icon { font-size: 3rem; filter: grayscale(1) opacity(0.6); transform: scale(0.9); }
         .achievement-card.completed .flower-icon { animation: iconBloom 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
         .achievement-card:hover .flower-icon { transform: scale(1.15) rotate(6deg); }
         .achievement-card.locked:hover .flower-icon { transform: scale(1.05) rotate(0deg); }
-        
         @keyframes iconBloom { 0% { transform: scale(0) rotate(-45deg); opacity: 0; } 60% { transform: scale(1.2) rotate(10deg); opacity: 1; } 100% { transform: scale(1) rotate(0deg); opacity: 1; } }
-
         .petal-burst-anchor { position: absolute; inset: 0; pointer-events: none; z-index: 10; overflow: hidden; }
         .burst-petal { position: absolute; border-radius: 50% 0 50% 0; top: 50%; left: 50%; opacity: 0; animation: burstOut 1.5s ease forwards; }
         @keyframes burstOut { 0% { opacity: 1; transform: translate(-50%,-50%) scale(0.4) rotate(0deg); } 70% { opacity: 0.8; } 100% { opacity: 0; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy,0px))) scale(0.1) rotate(240deg); } }
-
         .card-body { flex: 1; padding: 1.3rem 1.6rem 1.6rem; display: flex; flex-direction: column; }
         .achievement-title { font-family: var(--font-playfair); font-size: 1.15rem; font-weight: 700; color: #3c2a18; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
         .achievement-hint { font-size: 0.9rem; color: #7a5c3a; line-height: 1.7; flex: 1; }
         .achievement-detail { margin-top: 0.75rem; padding: 0.72rem 1rem; border-radius: 14px; background: rgba(230,140,80,0.1); border-left: 3px solid var(--card-accent, #d97b5a); font-size: 0.87rem; color: #5a3d22; line-height: 1.65; font-style: italic; font-family: var(--font-handwriting); }
-        
         .achievement-date { font-family: var(--font-playfair); font-size: 0.85rem; color: #b8511f; margin-top: 1rem; text-align: right; font-style: italic; opacity: 0.85; letter-spacing: 0.05em; border-top: 1px dashed rgba(210,168,128,0.4); padding-top: 0.5rem; }
-
         .achievement-action { display: inline-flex; align-items: center; justify-content: center; margin-top: 1.2rem; padding: 0.82rem 1rem; border-radius: 50px; border: 2px solid var(--card-accent, #d97b5a); background: transparent; color: var(--card-accent, #d97b5a); cursor: pointer; font-size: 0.9rem; font-weight: 700; transition: all 0.3s ease; width: 100%; font-family: var(--font-main); letter-spacing: 0.03em; }
         .achievement-action:hover { background: var(--card-accent, #d97b5a); color: #fff; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217,123,90,0.3); }
         .achievement-card.completed .achievement-action { background: var(--card-accent, #d97b5a); color: #fff; border-color: var(--card-accent, #d97b5a); }
-
         .ach-sidebar-btn { position: fixed; right: 25px; top: 50%; transform: translateY(-50%); width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #d97b5a 0%, #e8935a 100%); color: #fff; border: none; font-size: 0.95rem; font-weight: bold; box-shadow: 0 6px 20px rgba(217,123,90,0.4); cursor: pointer; z-index: 900; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.3; transition: var(--transition-smooth); }
         .ach-sidebar-btn:hover { transform: translateY(-50%) scale(1.12); box-shadow: 0 8px 25px rgba(217,123,90,0.6); }
-
         .achievement-sidebar { position: fixed; right: -380px; top: 0; width: 360px; height: 100vh; background: rgba(255, 253, 245, 0.96); backdrop-filter: blur(15px); box-shadow: -8px 0 35px rgba(155,95,45,0.15); z-index: 1000; padding: 60px 25px 30px; transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; gap: 12px; border-left: 2px solid rgba(217,123,90,0.3); }
         .achievement-sidebar.open { right: 0; }
         .achievement-sidebar h3 { font-family: var(--font-playfair); color: #b8511f; margin-bottom: 0px; font-size: 1.4rem; }
         .achievement-sidebar input, .achievement-sidebar textarea { width: 100%; padding: 12px; border: 1px solid rgba(210,168,128,0.4); border-radius: 12px; background: rgba(255,255,255,0.8); font-family: var(--font-main); font-size: 0.95rem; color: #4a3222; outline: none; transition: 0.3s; flex-shrink: 0; }
         .achievement-sidebar input:focus, .achievement-sidebar textarea:focus { border-color: #d97b5a; background: #fff; }
         .achievement-sidebar textarea { resize: vertical; min-height: 60px; }
-        
         .icon-selector-title { font-size: 0.9rem; color: #8b7355; margin-bottom: -5px; font-weight: bold; flex-shrink: 0;}
         .icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 8px; background: rgba(255,255,255,0.6); padding: 12px; border-radius: 12px; border: 1px solid rgba(210,168,128,0.3); max-height: 200px; overflow-y: auto; flex-shrink: 0; }
         .icon-item { font-size: 1.4rem; cursor: pointer; padding: 4px; border-radius: 8px; transition: 0.2s; filter: grayscale(1) opacity(0.4); user-select: none; display: flex; align-items: center; justify-content: center; }
         .icon-item:hover { filter: grayscale(0) opacity(1); transform: scale(1.2); }
         .icon-item.selected { filter: grayscale(0) opacity(1); background: rgba(217,123,90,0.2); transform: scale(1.15); border: 1px solid rgba(217,123,90,0.4); }
-
         .achievement-sidebar button.save-btn { background: #d97b5a; color: white; border: none; padding: 12px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 1rem; transition: 0.3s; margin-top: 5px; flex-shrink: 0;}
         .achievement-sidebar button.save-btn:hover { background: #b8511f; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(217,123,90,0.3); }
         .achievement-sidebar button.close-btn { background: transparent; border: 1px solid #d97b5a; color: #d97b5a; padding: 10px; border-radius: 20px; cursor: pointer; transition: 0.3s; flex-shrink: 0;}
         .achievement-sidebar button.close-btn:hover { background: rgba(217,123,90,0.1); }
 
-        /* ================= 5. 便签墙 ================= */
-        .board-container { max-width: 1200px; margin: 0 auto; }
+        /* ================= 5. 便签墙 & 纸飞机羽毛特效 ================= */
+        .board-container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
+        
+        /* 纸飞机/羽毛 */
+        .drifting-item { position: absolute; opacity: 0.6; animation: drift 15s linear infinite; pointer-events: none; z-index: 0; font-size: 2rem;}
+        @keyframes drift { 0% { transform: translate(-10vw, 10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.7; } 100% { transform: translate(110vw, 80vh) rotate(360deg); opacity: 0; } }
+
         .message-input-container { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; margin-bottom: 5rem; }
         .message-input { width: 100%; max-width: 600px; padding: 1.8rem; background: rgba(255,255,255,0.8); border: none; border-radius: 15px; font-family: var(--font-handwriting); font-size: 1.4rem; color: #333; resize: none; min-height: 140px; outline: none; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05), 0 5px 15px rgba(0,0,0,0.05); }
         .message-remark-input { width: 100%; max-width: 600px; padding: 1rem 1.2rem; border-radius: 18px; border: 1px solid rgba(161,140,209,0.3); outline: none; background: rgba(255,255,255,0.9); font-family: var(--font-main); font-size: 1rem; color: #3a3a3a; transition: border 0.3s ease; }
@@ -302,25 +228,36 @@
         .counter-days-num { font-family: 'Playfair Display', serif; font-size: 2.7rem; font-style: italic; font-weight: 700; color: #ede0ff; line-height: 1; display: block; text-shadow: 0 0 30px rgba(190,155,255,0.65); }
         .counter-label { font-family: var(--font-dancing); font-size: 0.86rem; color: rgba(210,188,255,0.68); display: block; margin-top: 0.22rem; }
         
-        /* ================= 隐藏互动彩蛋：跨页面躲猫猫四芒星 ================= */
+        /* ================= 躲猫猫精灵系统 (全新猫咪) ================= */
         .companion-trigger { 
-            position: fixed; bottom: 2rem; right: 2rem; width: 55px; height: 55px; border-radius: 50%; 
-            background: rgba(255,255,255,0.15); backdrop-filter: blur(5px); border: 1px solid var(--accent); 
-            color: var(--accent); font-size: 1.6rem; cursor: pointer; z-index: 2500; display: flex; 
-            align-items: center; justify-content: center; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); 
-            box-shadow: 0 0 15px rgba(0,0,0,0.1); 
+            position: fixed; bottom: 2rem; right: 2rem; width: 65px; height: 65px; border-radius: 50%; 
+            background: #fff; border: 3px solid var(--accent); color: var(--accent); font-size: 2rem; 
+            cursor: pointer; z-index: 2500; display: flex; align-items: center; justify-content: center; 
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 0 20px rgba(255,255,255,0.6); 
         }
-        .companion-trigger:hover { transform: scale(1.15); background: var(--accent); color: #fff; box-shadow: 0 0 25px var(--accent-glow); }
-        
-        /* 跨页面显示的逻辑控制 */
+        .companion-trigger:hover { transform: scale(1.15) rotate(10deg); box-shadow: 0 0 30px var(--accent-glow); }
         .companion-trigger[data-target-page] { display: none; }
-        body[data-active-page="home"] .companion-trigger[data-target-page="home"],
-        body[data-active-page="photos"] .companion-trigger[data-target-page="photos"],
-        body[data-active-page="wishes"] .companion-trigger[data-target-page="wishes"],
-        body[data-active-page="achievements"] .companion-trigger[data-target-page="achievements"],
-        body[data-active-page="messages"] .companion-trigger[data-target-page="messages"] {
-            display: flex;
+        
+        body[data-active-page="home"] .companion-trigger[data-target-page="home"], 
+        body[data-active-page="photos"] .companion-trigger[data-target-page="photos"], 
+        body[data-active-page="wishes"] .companion-trigger[data-target-page="wishes"], 
+        body[data-active-page="achievements"] .companion-trigger[data-target-page="achievements"], 
+        body[data-active-page="messages"] .companion-trigger[data-target-page="messages"] { display: flex; }
+
+        /* 猫咪气泡 */
+        .cat-bubble {
+            position: absolute; right: 75px; bottom: 15px; background: rgba(255,255,255,0.95);
+            color: #d97b5a; padding: 12px 20px; border-radius: 20px 20px 0 20px; font-weight: bold;
+            font-family: var(--font-handwriting); font-size: 1.3rem; white-space: nowrap; pointer-events: none;
+            opacity: 0; transform: scale(0.8) translateY(10px); transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15); border: 2px solid rgba(217,123,90,0.3);
         }
+        .cat-bubble.show { opacity: 1; transform: scale(1) translateY(0); }
+        .cat-bubble::after { content: ''; position: absolute; right: -10px; bottom: 0; border-width: 10px 0 0 10px; border-style: solid; border-color: transparent transparent transparent rgba(255,255,255,0.95); }
+
+        /* 猫爪爆裂特效 */
+        .paw-print { position: fixed; font-size: 3rem; color: rgba(255,183,178,0.8); pointer-events: none; z-index: 4000; opacity: 0; animation: pawAppear 2.5s ease-out forwards; text-shadow: 0 0 15px rgba(255,255,255,0.5); }
+        @keyframes pawAppear { 0% { opacity: 0; transform: scale(0.5) rotate(0deg); } 20% { opacity: 1; transform: scale(1.2) rotate(15deg); } 80% { opacity: 1; transform: scale(1) rotate(15deg); } 100% { opacity: 0; transform: scale(1.5) rotate(15deg); } }
 
         .easter-egg-modal { position: fixed; inset: 0; background: rgba(26,26,62,0.85); backdrop-filter: blur(8px); z-index: 3000; display: none; align-items: center; justify-content: center; opacity: 0; transition: 0.5s; }
         .easter-egg-modal.show { display: flex; opacity: 1; }
@@ -332,13 +269,15 @@
         .ee-btn { margin-top: 2rem; padding: 0.8rem 2rem; border-radius: 50px; background: #d97b5a; color: white; border: none; font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: 0.3s; font-family: var(--font-main); }
         .ee-btn:hover { background: #b8511f; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(217,123,90,0.4); }
 
+        #uploadProgress { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #d97b5a; color: white; padding: 10px 20px; border-radius: 20px; z-index: 9999; display: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     </style>
 </head>
-
 <body data-active-page="home">
 
+    <div id="uploadProgress">正在把照片存入日记本... ⏳</div>
+
     <nav class="nav-container">
-        <a href="#" class="nav-logo" onclick="showPage('home')">Love Diary</a>
+        <a href="#" class="nav-logo" onclick="window.showPage('home')">Love Diary</a>
         <div class="nav-menu">
             <button class="nav-item active" data-page="home">情绪星空</button>
             <button class="nav-item" data-page="photos">光影相册</button>
@@ -352,6 +291,13 @@
 
     <!-- 1. 首页 -->
     <section class="page active visible" id="page-home">
+        <!-- 流星特效注入 -->
+        <script>
+            for(let i=0; i<5; i++) {
+                document.write(`<div class="shooting-star" style="top:${Math.random()*30}vh; left:${Math.random()*50 + 50}vw; animation-delay:${Math.random()*8}s;"></div>`);
+            }
+        </script>
+        
         <h1 class="page-title">情绪星空</h1>
         <p class="page-subtitle">轻轻点击星空，留下一颗属于此刻的星星</p>
         <div class="star-container" id="starContainer">
@@ -360,23 +306,23 @@
         </div>
     </section>
 
-    <!-- 2. 光影相册 (晨曦画廊重构) -->
+    <!-- 2. 光影相册 -->
     <section class="page" id="page-photos">
         
-        <!-- 核心视觉层：复古水彩画廊背景 -->
         <div class="photo-decorations">
-            <!-- 柔和晕染光轮 -->
             <div class="memory-orb orb-1"></div>
             <div class="memory-orb orb-2"></div>
             <div class="memory-orb orb-3"></div>
-            
-            <!-- 巨大手写浮水印 -->
             <div class="bg-watermark">Beautiful Memories</div>
-            
-            <!-- 烫金双层拱门 -->
             <div class="vintage-arch"></div>
+            
+            <!-- 精灵星尘注入 -->
+            <script>
+                for(let i=0; i<25; i++) {
+                    document.write(`<div class="fairy-dust" style="left:${Math.random()*100}%; animation-delay:${Math.random()*10}s; animation-duration:${8 + Math.random()*7}s;"></div>`);
+                }
+            </script>
 
-            <!-- 精灵藤蔓 (SVG) -->
             <svg class="memory-branch left" viewBox="0 0 100 200" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0,0 Q30,50 20,150" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                 <path d="M10,20 Q25,25 20,40 Q5,35 10,20 Z" fill="currentColor"/>
@@ -393,19 +339,12 @@
                 <circle cx="65" cy="45" r="2.5" fill="currentColor"/>
                 <circle cx="60" cy="90" r="1.5" fill="currentColor"/>
             </svg>
-
-            <!-- 漂浮星星注入 -->
-            <script>
-                for(let i=0; i<8; i++) {
-                    document.write(`<div class="memory-star" style="left:${Math.random()*90+5}%; top:${Math.random()*90+5}%; animation-delay:${Math.random()*5}s; animation-duration:${Math.random()*3+3}s;">✧</div>`);
-                }
-            </script>
         </div>
 
         <h1 class="page-title">散落的记忆</h1>
         <p class="page-subtitle">每个定格，都是一首安静的诗</p>
         <div class="photo-gallery" id="photoGallery">
-            <div class="photo-card photo-add" onclick="addPhoto()">
+            <div class="photo-card photo-add" onclick="window.addPhoto()">
                 <span style="font-size: 4rem; color: rgba(210,180,150,0.8);">+</span>
                 <span style="color: rgba(210,180,150,0.8); font-size: 1.1rem; margin-top: 10px; font-weight:bold;">存入新的光影</span>
             </div>
@@ -415,7 +354,7 @@
     <!-- 独立纯净相册画框 Modal -->
     <div class="photo-modal" id="photoModal">
         <div class="pm-content">
-            <span class="pm-close" onclick="closePhotoModal()">×</span>
+            <span class="pm-close" onclick="window.closePhotoModal()">×</span>
             <div class="pm-left"><img id="pmImg" src=""></div>
             
             <div class="pm-right">
@@ -433,8 +372,7 @@
                         <div class="pm-label">Memory</div>
                         <div class="pm-value memory-text" id="pmNote">短评...</div>
                     </div>
-                    
-                    <div class="pm-hidden-edit-trigger" onclick="togglePmEdit(true)" title="修改或移除此段记忆">✎</div>
+                    <div class="pm-hidden-edit-trigger" onclick="window.togglePmEdit(true)" title="修改或移除此段记忆">✎</div>
                 </div>
 
                 <div id="pmEditMode" class="pm-edit-view">
@@ -452,9 +390,9 @@
                     <textarea class="pm-input" id="pmEditNote" placeholder="写下那一刻的心情与回忆..."></textarea>
                     
                     <div class="pm-actions">
-                        <button class="pm-btn btn-save" onclick="savePhotoDetails()">保存</button>
-                        <button class="pm-btn btn-delete" onclick="deleteCurrentPhoto()">删除</button>
-                        <button class="pm-btn btn-cancel" onclick="togglePmEdit(false)">取消</button>
+                        <button class="pm-btn btn-save" onclick="window.savePhotoDetails()">保存</button>
+                        <button class="pm-btn btn-delete" onclick="window.deleteCurrentPhoto()">删除</button>
+                        <button class="pm-btn btn-cancel" onclick="window.togglePmEdit(false)">取消</button>
                     </div>
                 </div>
             </div>
@@ -466,24 +404,37 @@
         <h1 class="page-title">星夜祈愿</h1>
         <p class="page-subtitle">在月光下，所有柔软的愿望都会被听见</p>
         <div class="wish-scene">
-            <div class="scene-bg"><div class="scene-moon"></div><div class="scene-hill"></div><div class="scene-girl"> <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg"><path d="M60 14 C52 14 46 20 46 28 C46 36 52 42 60 42 C68 42 74 36 74 28 C74 20 68 14 60 14 Z"/><path d="M38 38 C32 56 34 76 44 92 C46 96 46 102 48 108 C50 116 54 120 64 120 C74 120 78 116 80 108 C82 102 82 96 84 92 C94 76 96 56 90 38 C88 32 82 28 76 28 C72 28 70 34 68 38 C66 42 62 46 60 46 C58 46 54 42 52 38 C50 34 48 28 44 28 C38 28 34 32 32 38 Z"/><path d="M30 90 C34 106 40 126 47 146 C48 150 51 154 55 154 H65 C69 154 72 150 73 146 C80 126 86 106 90 90 C92 84 92 78 90 74 C88 70 84 68 80 68 H40 C36 68 32 70 30 74 C28 78 28 84 30 90 Z"/><path d="M42 98 C40 108 40 118 45 122 C50 126 56 126 60 122 C64 118 64 108 62 98 C60 92 58 88 55 86 C52 88 50 92 48 98 Z" fill="#0b0c10"/></svg> </div></div>
+            <div class="scene-bg">
+                <div class="aurora"></div>
+                <div class="scene-moon"></div>
+                <div class="scene-hill"></div>
+                <!-- 许愿池专属流星 -->
+                <script>
+                    for(let i=0; i<4; i++) document.write(`<div class="shooting-star" style="top:${Math.random()*40}vh; left:${Math.random()*60 + 40}vw; animation-delay:${Math.random()*6}s; animation-duration: 4s;"></div>`);
+                </script>
+                <div class="scene-girl"> 
+                    <svg viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M60 14 C52 14 46 20 46 28 C46 36 52 42 60 42 C68 42 74 36 74 28 C74 20 68 14 60 14 Z"/>
+                        <path d="M38 38 C32 56 34 76 44 92 C46 96 46 102 48 108 C50 116 54 120 64 120 C74 120 78 116 80 108 C82 102 82 96 84 92 C94 76 96 56 90 38 C88 32 82 28 76 28 C72 28 70 34 68 38 C66 42 62 46 60 46 C58 46 54 42 52 38 C50 34 48 28 44 28 C38 28 34 32 32 38 Z"/>
+                        <path d="M30 90 C34 106 40 126 47 146 C48 150 51 154 55 154 H65 C69 154 72 150 73 146 C80 126 86 106 90 90 C92 84 92 78 90 74 C88 70 84 68 80 68 H40 C36 68 32 70 30 74 C28 78 28 84 30 90 Z"/>
+                        <path d="M42 98 C40 108 40 118 45 122 C50 126 56 126 60 122 C64 118 64 108 62 98 C60 92 58 88 55 86 C52 88 50 92 48 98 Z" fill="#0b0c10"/>
+                    </svg> 
+                </div>
+            </div>
             <div class="wish-input-container">
                 <input type="text" class="wish-input" id="wishInput" placeholder="写下一个愿望..." maxlength="50">
-                <button class="wish-submit" onclick="addWish()">托付给星星</button>
+                <button class="wish-submit" onclick="window.addWish()">托付给星星</button>
             </div>
             <div class="wish-list" id="wishList"></div>
         </div>
     </section>
 
-    <!-- 4. 成就花园 (魔法暮光温室重构) -->
+    <!-- 4. 成就花园 -->
     <section class="page" id="page-achievements">
         
-        <!-- 核心视觉层：魔法星空与花园温室 -->
         <div class="garden-decorations">
-            <!-- 魔法大月亮 -->
             <div class="magic-moon"></div>
             
-            <!-- 漫天星辰与萤火虫注入 -->
             <script>
                 for(let i=0; i<35; i++) {
                     document.write(`<div class="garden-star" style="width:${Math.random()*2+1}px; height:${Math.random()*2+1}px; left:${Math.random()*100}%; top:${Math.random()*60}%; animation-delay:${Math.random()*3}s;"></div>`);
@@ -496,11 +447,9 @@
                 }
             </script>
             
-            <!-- 破晓迷雾 -->
             <div class="magic-mist"></div>
             <div class="magic-mist layer2"></div>
             
-            <!-- 魔法藤蔓 (SVG) -->
             <svg class="garden-vine left" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
                 <path d="M -20,400 Q 50,300 20,200 T 100,50" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
                 <path d="M 15,310 Q 40,290 50,305 Q 35,325 15,310 Z" fill="currentColor"/>
@@ -525,7 +474,7 @@
         <div class="garden-progress" id="gardenProgress"></div>
         <div class="achievement-grid" id="achievementGrid"></div>
 
-        <button class="ach-sidebar-btn" onclick="toggleAchSidebar()" title="添加新成就">➕<br>播种</button>
+        <button class="ach-sidebar-btn" onclick="window.toggleAchSidebar()" title="添加新成就">➕<br>播种</button>
 
         <div class="achievement-sidebar" id="achSidebar">
             <h3>播种新成就</h3>
@@ -539,44 +488,68 @@
             <div class="icon-grid" id="iconPickerGrid"></div>
             <input type="hidden" id="selectedAchIcon" value="🌸">
 
-            <button class="save-btn" onclick="addNewAchievement()">种下种子</button>
-            <button class="close-btn" onclick="toggleAchSidebar()">收起面板</button>
+            <button class="save-btn" onclick="window.addNewAchievement()">种下种子</button>
+            <button class="close-btn" onclick="window.toggleAchSidebar()">收起面板</button>
         </div>
     </section>
 
     <!-- 5. 便签墙 -->
     <section class="page" id="page-messages">
+        <!-- 纸飞机与羽毛特效 -->
+        <script>
+            const decors = ['✈️', '🍃', '🕊️'];
+            for(let i=0; i<6; i++) {
+                document.write(`<div class="drifting-item" style="left:${Math.random()*100}vw; top:${Math.random()*100}vh; animation-delay:${Math.random()*15}s;">${decors[i%3]}</div>`);
+            }
+        </script>
         <h1 class="page-title">治愈便签墙</h1>
         <p class="page-subtitle">随手写下的絮语，贴在这里</p>
         <div class="board-container">
             <div class="message-input-container">
                 <textarea class="message-input" id="messageInput" placeholder="今天遇到了一朵形状很像小狗的云..." maxlength="200"></textarea>
                 <input type="text" class="message-remark-input" id="messageRemarkInput" placeholder="给这张便签写一个小标题或备注（可选）" maxlength="50">
-                <button class="wish-submit" style="background: #a18cd1;" onclick="addMessage()">贴上便签</button>
+                <button class="wish-submit" style="background: #a18cd1;" onclick="window.addMessage()">贴上便签</button>
             </div>
             <div class="message-cards" id="messageCards"></div>
         </div>
     </section>
 
-    <!-- 隐藏彩蛋触发器：躲猫猫四芒星 -->
-    <button class="companion-trigger" onclick="triggerCompanionEgg()" title="我是谁，我在哪？">✧</button>
+    <!-- 隐藏彩蛋触发器：躲猫猫小猫 -->
+    <button class="companion-trigger" onclick="window.triggerCompanionEgg()" title="抓住我呀！">🐈
+        <div class="cat-bubble" id="catBubble">喵~</div>
+    </button>
     
     <div class="easter-egg-modal" id="easterEggModal">
         <div class="ee-content">
-            <h2>🌟 捉到星星啦！</h2>
-            <p>恭喜你触发了属于我们的隐藏彩蛋！</p>
-            <p>其实这颗调皮的星星就像我对你的心意，不管你在这本日记的哪个角落，只要你需要，我一直都在。</p>
+            <h2>🐾 捉到猫猫啦！</h2>
+            <p>恭喜你触发了属于我们的终极彩蛋！</p>
+            <p>就像这只调皮又黏人的小猫，不管你在这本日记的哪个角落，我都会陪着你、引导你。</p>
             <p class="ee-signature">—— 永远爱你的羊羊金/狗狗雅</p>
-            <button class="ee-btn" onclick="closeEasterEgg()">收下这份爱意 💖</button>
+            <button class="ee-btn" onclick="window.closeEasterEgg()">摸摸猫头，收下爱意 💖</button>
         </div>
     </div>
 
-    <script>
-        const STORAGE_KEYS = { stars: 'fairy_diary_stars', photos: 'fairy_diary_photos', wishes: 'fairy_diary_wishes', messages: 'fairy_diary_messages', achievements: 'fairy_diary_achievements' };
-        const RELATIONSHIP_START = '2025-10-11';
-        let currentPhotoIndex = -1; 
 
-        const ACHIEVEMENTS_DATA =[
+    <!-- ================= Firebase 核心逻辑集成 (纯 Firestore 版) ================= -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, onSnapshot, setDoc, collection, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // 你的 Firebase 配置
+        const firebaseConfig = {
+            apiKey: "AIzaSyDLpEbrAf2QB6p22I1qrYNIZN_3wHkjOAM",
+            authDomain: "our2-debb0.firebaseapp.com",
+            projectId: "our2-debb0",
+            storageBucket: "our2-debb0.firebasestorage.app",
+            messagingSenderId: "7584883881",
+            appId: "1:7584883881:web:65b67b32eb82fde2d575b8"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 初始默认数据
+        const DEFAULT_ACHIEVEMENTS =[
             { title: '暮光图书馆', hint: '在一场静谧的午后找到属于我们的共读秘密。', detail: '完成一次一起挑选、分享并读完同一本音乐剧剧本或小说。', completed: false, icon: '📖', date: '' },
             { title: '星迹拼图', hint: '当我们把碎片拼成一幅生活的闪亮图案。', detail: '一起看完一部音乐剧，记录台词中最心动的那一句。', completed: false, icon: '🧩', date: '' },
             { title: '月光早餐', hint: '用一顿早晨的小眷恋，把平凡日子染成粉紫色。', detail: '一起准备一顿双人早餐，并留下各自最喜欢的一道小食。', completed: false, icon: '🥐', date: '' },
@@ -584,73 +557,54 @@
             { title: '树屋秘密', hint: '在一个只属于我们的角落种下一个约定。', detail: '一起去一个从未去过的安静地方散步，留下一个共同的照片。', completed: false, icon: '🏕️', date: '' }
         ];
 
-        const CARD_COLORS =[
-            { bg: 'linear-gradient(145deg,#ffc9d8 0%,#ff8fab 100%)', glowRgb: '255,143,171', accent: '#d97b5a' },
-            { bg: 'linear-gradient(145deg,#d9b8f9 0%,#a966e0 100%)', glowRgb: '180,122,234', accent: '#a966e0' },
-            { bg: 'linear-gradient(145deg,#ffd67a 0%,#f09026 100%)', glowRgb: '244,165,65',  accent: '#d97b5a' },
-            { bg: 'linear-gradient(145deg,#b7e4c7 0%,#40916c 100%)', glowRgb: '82,183,136',  accent: '#40916c' },
-            { bg: 'linear-gradient(145deg,#f2cc8f 0%,#da6247 100%)', glowRgb: '224,122,95',  accent: '#da6247' },
-            { bg: 'linear-gradient(145deg,#90e0ef 0%,#4cc9f0 100%)', glowRgb: '76,201,240',  accent: '#4cc9f0' }
-        ];
+        window.appData = { stars: [], wishes: [], messages: [], achievements: DEFAULT_ACHIEVEMENTS };
+        window.photosData = []; 
 
-        const ALL_ICONS =[
-            '🌸','🌺','🌻','🌷','🌹','🏵️','🪷','🍄','🍁','🍀','🌿','🌵','🌴','🌲','🌳','🌱','🪴','🎋','🍃','🍂',
-            '🕊️','🦋','🐝','🐞','🦢','🐇','🐈','🐈‍⬛','🐩','🦌','🦦','🦔','🐿️','🐾',
-            '🌙','⭐','🌟','✨','💫','☄️','☀️','⛅','☁️','❄️','⛄','🫧','☔',
-            '🐚','🐳','🐬','🐠','🌊','🔮','🎀','🧸','🎨','🎟️','🎭','🎪','🎠','🎡','🎢','🚀','🛸',
-            '💌','💝','💖','💗','💓','💞','💕','💟',
-            '🍎','🍓','🍒','🍑','🍋','🍉','🍇','🍯','🍰','🧁','🍬','🍭','☕','🍵','🥂','🍷'
-        ];
+        const stateDocRef = doc(db, "diary", "shared_state");
+        const photosColRef = collection(db, "photos"); 
 
-        const longTexts =["想让你当……", "梦里好像见过", "距离好像变近了", "猫猫不是一个人哦", "很安静", "可能是我在想你", "小崔大人我们一起玩……", "想和你说好多话", "想和你一起看星星", "抱抱", "最喜欢小崔猫猫啦","我来见你啦小猫"];
-        const noteColors =['#ffeb3b', '#ffcdd2', '#c8e6c9', '#bbdefb', '#e1bee7', '#ffe0b2'];
+        // 监听基础数据
+        onSnapshot(stateDocRef, (docSnap) => {
+            if (docSnap.exists()) {
+                window.appData = docSnap.data();
+                renderBasicData();
+            } else {
+                setDoc(stateDocRef, window.appData);
+            }
+        });
+
+        // 监听照片数据
+        onSnapshot(photosColRef, (snap) => {
+            window.photosData = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.timestamp - b.timestamp);
+            loadPhotos();
+        });
+
+        function saveStateToFirebase() {
+            setDoc(stateDocRef, window.appData).catch(err => console.error("保存失败:", err));
+        }
+
+        const RELATIONSHIP_START = '2025-10-11';
+        let currentPhotoIndex = -1;
+        const CARD_COLORS = [ { bg: 'linear-gradient(145deg,#ffc9d8 0%,#ff8fab 100%)', glowRgb: '255,143,171', accent: '#d97b5a' }, { bg: 'linear-gradient(145deg,#d9b8f9 0%,#a966e0 100%)', glowRgb: '180,122,234', accent: '#a966e0' }, { bg: 'linear-gradient(145deg,#ffd67a 0%,#f09026 100%)', glowRgb: '244,165,65', accent: '#d97b5a' }, { bg: 'linear-gradient(145deg,#b7e4c7 0%,#40916c 100%)', glowRgb: '82,183,136', accent: '#40916c' }, { bg: 'linear-gradient(145deg,#f2cc8f 0%,#da6247 100%)', glowRgb: '224,122,95',  accent: '#da6247' }, { bg: 'linear-gradient(145deg,#90e0ef 0%,#4cc9f0 100%)', glowRgb: '76,201,240',  accent: '#4cc9f0' } ];
+        const ALL_ICONS = ['🌸','🌺','🌻','🌷','🌹','🏵️','🪷','🍄','🍁','🍀','🌿','🌵','🌴','🌲','🌳','🌱','🪴','🎋','🍃','🍂','🕊️','🦋','🐝','🐞','🦢','🐇','🐈','🐈‍⬛','🐩','🦌','🦦','🦔','🐿️','🐾','🌙','⭐','🌟','✨','💫','☄️','☀️','⛅','☁️','❄️','⛄','🫧','☔','🐚','🐳','🐬','🐠','🌊','🔮','🎀','🧸','🎨','🎟️','🎭','🎪','🎠','🎡','🎢','🚀','🛸','💌','💝','💖','💗','💓','💞','💕','💟','🍎','🍓','🍒','🍑','🍋','🍉','🍇','🍯','🍰','🧁','🍬','🍭','☕','🍵','🥂','🍷'];
+        const longTexts = ["想让你当……", "梦里好像见过", "距离好像变近了", "猫猫不是一个人哦", "很安静", "可能是我在想你", "小崔大人我们一起玩……", "想和你说好多话", "想和你一起看星星", "抱抱", "最喜欢小崔猫猫啦", "我来见你啦小猫"];
+        const noteColors = ['#ffeb3b', '#ffcdd2', '#c8e6c9', '#bbdefb', '#e1bee7', '#ffe0b2'];
 
         function escapeHtml(str) { return String(str || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]); }
 
-        // 从data.json加载初始数据
-        async function loadInitialData() {
-            try {
-                const response = await fetch('./data.json');
-                if (!response.ok) throw new Error('Failed to load data.json');
-                const data = await response.json();
-                
-                // 如果localStorage为空，则使用data.json中的数据初始化
-                if (!localStorage.getItem(STORAGE_KEYS.stars)) {
-                    localStorage.setItem(STORAGE_KEYS.stars, JSON.stringify(data.stars || []));
-                }
-                if (!localStorage.getItem(STORAGE_KEYS.photos)) {
-                    localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(data.photos || []));
-                }
-                if (!localStorage.getItem(STORAGE_KEYS.wishes)) {
-                    localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(data.wishes || []));
-                }
-                if (!localStorage.getItem(STORAGE_KEYS.messages)) {
-                    localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(data.messages || []));
-                }
-                if (!localStorage.getItem(STORAGE_KEYS.achievements)) {
-                    localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(data.achievements || ACHIEVEMENTS_DATA));
-                }
-            } catch (error) {
-                console.log('使用本地数据初始化:', error.message);
-                // 如果无法加载data.json，使用默认数据
-                if (!localStorage.getItem(STORAGE_KEYS.achievements)) {
-                    localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(ACHIEVEMENTS_DATA));
-                }
-            }
-        }
+        function renderBasicData() { loadStars(); loadWishes(); loadAchievements(); loadMessages(); updateTogetherDays(); }
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            await loadInitialData(); // 先加载初始数据
-            initNavigation(); initStarCanvas(); initIconPicker();
-            loadStars(); loadPhotos(); loadWishes(); loadAchievements(); loadMessages(); updateTogetherDays();
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation(); initStarCanvas(); initIconPicker(); updateTogetherDays();
         });
 
+        // ================= 导航 =================
         function initNavigation() {
             document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', () => showPage(item.dataset.page));
+                item.addEventListener('click', () => window.showPage(item.dataset.page));
             });
         }
-        function showPage(pageName) {
+        window.showPage = function(pageName) {
             document.querySelectorAll('.page').forEach(p => { p.classList.remove('visible'); setTimeout(() => p.classList.remove('active'), 500); });
             setTimeout(() => { const target = document.getElementById(`page-${pageName}`); if (target) { target.classList.add('active'); setTimeout(() => target.classList.add('visible'), 50); } }, 550);
             document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -658,117 +612,169 @@
             document.body.setAttribute('data-active-page', pageName); window.scrollTo(0, 0);
         }
 
-        /* ---------------- 捉迷藏四芒星 ---------------- */
-        let starClickCount = 0;
-        function triggerCompanionEgg() {
-            const star = document.querySelector('.companion-trigger');
-            starClickCount++;
+        // ================= 全新躲猫猫彩蛋逻辑 =================
+        let catClickCount = 0;
+        const catPrompts = {
+            'home': '喵~ 陪我去【情绪星空】点亮星星吧？',
+            'photos': '喵~ 去【光影相册】重温回忆好不好？',
+            'wishes': '喵~ 有个愿望想在【星空许愿】告诉你...',
+            'achievements': '喵~ 【成就花园】里的花好像又开了！',
+            'messages': '喵~ 去【便签角落】给我留个言嘛~'
+        };
 
-            if (starClickCount >= 7) {
+        window.triggerCompanionEgg = function() {
+            const cat = document.querySelector('.companion-trigger');
+            const bubble = document.getElementById('catBubble');
+            catClickCount++;
+
+            if (catClickCount >= 5) {
+                // 触发终极彩蛋
                 document.getElementById('easterEggModal').classList.add('show');
-                starClickCount = 0;
+                catClickCount = 0;
                 
-                // 复原四芒星
-                star.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-                star.style.bottom = '2rem';
-                star.style.right = '2rem';
-                star.style.top = 'auto';
-                star.style.left = 'auto';
-                star.removeAttribute('data-target-page');
+                // 还原猫咪状态
+                cat.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                cat.style.bottom = '2rem'; cat.style.right = '2rem';
+                cat.style.top = 'auto'; cat.style.left = 'auto';
+                cat.removeAttribute('data-target-page');
+                
+                // 触发满屏猫爪特效
+                triggerPawPrints();
                 return;
             }
 
-            // 躲避到随机其他页面
+            // 躲避到随机其他页面，并提示对话框
             const currentActive = document.body.getAttribute('data-active-page');
-            const PAGES =['home', 'photos', 'wishes', 'achievements', 'messages'];
+            const PAGES = ['home', 'photos', 'wishes', 'achievements', 'messages'];
             const otherPages = PAGES.filter(p => p !== currentActive);
             const nextTarget = otherPages[Math.floor(Math.random() * otherPages.length)];
 
-            // 随机坐标计算（避开边缘）
-            const vw = window.innerWidth - 80;
-            const vh = window.innerHeight - 80;
-            const randomX = Math.max(20, Math.floor(Math.random() * vw));
-            const randomY = Math.max(20, Math.floor(Math.random() * vh));
+            // 显示对话气泡
+            bubble.textContent = catPrompts[nextTarget];
+            bubble.classList.add('show');
 
-            // 关闭动画瞬间传送，利用CSS控制在当前页面立刻消失
-            star.style.transition = 'none';
-            star.style.bottom = 'auto';
-            star.style.right = 'auto';
-            star.style.left = randomX + 'px';
-            star.style.top = randomY + 'px';
+            // 1.5秒后，猫咪消失并转移到新页面
+            setTimeout(() => {
+                bubble.classList.remove('show');
+                
+                // 随机坐标计算
+                const vw = window.innerWidth - 100; const vh = window.innerHeight - 100;
+                const randomX = Math.max(30, Math.floor(Math.random() * vw)); 
+                const randomY = Math.max(30, Math.floor(Math.random() * vh));
 
-            star.setAttribute('data-target-page', nextTarget);
+                cat.style.transition = 'none'; 
+                cat.style.bottom = 'auto'; cat.style.right = 'auto'; 
+                cat.style.left = randomX + 'px'; cat.style.top = randomY + 'px';
+
+                cat.setAttribute('data-target-page', nextTarget);
+            }, 1500);
         }
-        function closeEasterEgg() { document.getElementById('easterEggModal').classList.remove('show'); }
+
+        window.closeEasterEgg = function() { document.getElementById('easterEggModal').classList.remove('show'); }
+
+        // 猫爪印满屏特效
+        function triggerPawPrints() {
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    let paw = document.createElement('div');
+                    paw.className = 'paw-print';
+                    paw.innerHTML = '🐾';
+                    paw.style.left = (Math.random() * 90) + 'vw';
+                    paw.style.top = (Math.random() * 90) + 'vh';
+                    // 随机角度，让爪印显得错落有致
+                    paw.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
+                    document.body.appendChild(paw);
+                    
+                    // 动画结束后移除 DOM
+                    setTimeout(() => paw.remove(), 2500);
+                }, i * 150); // 每 150ms 出现一个
+            }
+        }
 
         // ================= 星空 =================
         function initStarCanvas() { const container = document.getElementById('starContainer'); container.addEventListener('click', (e) => { if (e.target.classList.contains('star')) return; const rect = container.getBoundingClientRect(); createStar(e.clientX - rect.left, e.clientY - rect.top, true); }); }
-        function createStar(x, y, save = false) { const container = document.getElementById('starContainer'); const star = document.createElement('div'); star.className = 'star'; star.style.left = x + 'px'; star.style.top = y + 'px'; const size = Math.random() * 3 + 2; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.animationDelay = Math.random() * 2 + 's'; container.appendChild(star); if (save) { showStarMessage(); const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]'); stars.push({x, y}); localStorage.setItem(STORAGE_KEYS.stars, JSON.stringify(stars)); } }
+        function createStar(x, y, save = false) { 
+            const container = document.getElementById('starContainer'); const star = document.createElement('div'); star.className = 'star'; star.style.left = x + 'px'; star.style.top = y + 'px'; const size = Math.random() * 3 + 2; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.animationDelay = Math.random() * 2 + 's'; container.appendChild(star); 
+            if (save) { 
+                showStarMessage();
+                window.appData.stars.push({x, y}); saveStateToFirebase(); 
+            } 
+        }
         function showStarMessage() { const msg = document.getElementById('starMessage'); msg.textContent = longTexts[Math.floor(Math.random() * longTexts.length)]; msg.classList.remove('show'); void msg.offsetWidth; msg.classList.add('show'); }
-        function loadStars() { const stars = JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]'); stars.forEach(s => createStar(s.x, s.y, false)); }
+        function loadStars() { 
+            const container = document.getElementById('starContainer'); Array.from(container.children).forEach(child => { if(child.classList.contains('star')) child.remove(); });
+            window.appData.stars.forEach(s => createStar(s.x, s.y, false)); 
+        }
 
-        // ================= 纯净光影相册 =================
+        // ================= 相册 =================
         function loadPhotos() {
-            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
             const gallery = document.getElementById('photoGallery');
             const addBtn = gallery.querySelector('.photo-add');
             gallery.innerHTML = '';
-            photos.forEach((photo, index) => {
-                const card = document.createElement('div'); card.className = 'photo-card'; card.style.transform = `rotate(${Math.random() * 20 - 10}deg)`; card.onclick = () => openPhotoModal(index);
+            window.photosData.forEach((photo, index) => {
+                const card = document.createElement('div'); card.className = 'photo-card'; card.style.transform = `rotate(${Math.random() * 20 - 10}deg)`; card.onclick = () => window.openPhotoModal(index);
                 card.innerHTML = `<div class="photo-img-wrap"><img src="${photo.src}" alt="photo"></div><p class="photo-caption">${escapeHtml(photo.caption || '温柔的记忆')}</p>`;
                 gallery.appendChild(card);
             });
             gallery.appendChild(addBtn);
         }
 
-        function openPhotoModal(index, autoEdit = false) {
-            currentPhotoIndex = index;
-            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
-            const photo = photos[index]; if(!photo) return;
+        window.openPhotoModal = function(index, autoEdit = false) {
+            currentPhotoIndex = index; const photo = window.photosData[index]; if(!photo) return;
             document.getElementById('pmImg').src = photo.src;
-            
-            document.getElementById('pmTitle').innerText = photo.caption || '无标题记忆';
-            document.getElementById('pmDate').innerText = photo.date || 'Somewhere in time...';
-            document.getElementById('pmLocation').innerText = photo.location || 'Unknown beautiful place...';
-            document.getElementById('pmNote').innerText = photo.note || 'No words needed.';
-
-            document.getElementById('pmEditTitle').value = photo.caption || '';
-            document.getElementById('pmEditDate').value = photo.date || '';
-            document.getElementById('pmEditLocation').value = photo.location || '';
-            document.getElementById('pmEditNote').value = photo.note || '';
-
-            togglePmEdit(autoEdit); document.getElementById('photoModal').classList.add('show');
+            document.getElementById('pmTitle').innerText = photo.caption || '无标题记忆'; document.getElementById('pmDate').innerText = photo.date || 'Somewhere in time...'; document.getElementById('pmLocation').innerText = photo.location || 'Unknown beautiful place...'; document.getElementById('pmNote').innerText = photo.note || 'No words needed.';
+            document.getElementById('pmEditTitle').value = photo.caption || ''; document.getElementById('pmEditDate').value = photo.date || ''; document.getElementById('pmEditLocation').value = photo.location || ''; document.getElementById('pmEditNote').value = photo.note || '';
+            window.togglePmEdit(autoEdit); document.getElementById('photoModal').classList.add('show');
         }
-        function closePhotoModal() { document.getElementById('photoModal').classList.remove('show'); currentPhotoIndex = -1; }
-        function togglePmEdit(isEdit) { document.getElementById('pmViewMode').style.display = isEdit ? 'none' : 'block'; document.getElementById('pmEditMode').style.display = isEdit ? 'block' : 'none'; }
+        window.closePhotoModal = function() { document.getElementById('photoModal').classList.remove('show'); currentPhotoIndex = -1; }
+        window.togglePmEdit = function(isEdit) { document.getElementById('pmViewMode').style.display = isEdit ? 'none' : 'block'; document.getElementById('pmEditMode').style.display = isEdit ? 'block' : 'none'; }
 
-        function savePhotoDetails() {
+        window.savePhotoDetails = function() {
             if (currentPhotoIndex < 0) return;
-            const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
-            photos[currentPhotoIndex] = { ...photos[currentPhotoIndex], caption: document.getElementById('pmEditTitle').value.trim(), date: document.getElementById('pmEditDate').value.trim(), location: document.getElementById('pmEditLocation').value.trim(), note: document.getElementById('pmEditNote').value.trim() };
-            localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos)); loadPhotos(); openPhotoModal(currentPhotoIndex, false); 
+            const photoId = window.photosData[currentPhotoIndex].id;
+            updateDoc(doc(db, "photos", photoId), {
+                caption: document.getElementById('pmEditTitle').value.trim(),
+                date: document.getElementById('pmEditDate').value.trim(),
+                location: document.getElementById('pmEditLocation').value.trim(),
+                note: document.getElementById('pmEditNote').value.trim()
+            }).then(() => { window.openPhotoModal(currentPhotoIndex, false); });
         }
-        function deleteCurrentPhoto() {
+
+        window.deleteCurrentPhoto = function() {
             if (currentPhotoIndex < 0) return;
             if(confirm('确定要彻底移除这段回忆吗？')) {
-                const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]'); photos.splice(currentPhotoIndex, 1);
-                localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos)); closePhotoModal(); loadPhotos();
+                const photoId = window.photosData[currentPhotoIndex].id;
+                deleteDoc(doc(db, "photos", photoId)).then(() => { window.closePhotoModal(); });
             }
         }
-        function addPhoto() {
+        
+        window.addPhoto = function() {
             const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*';
             input.onchange = (e) => {
-                const file = e.target.files[0]; if (!file) return; const reader = new FileReader();
+                const file = e.target.files[0]; if (!file) return; 
+                document.getElementById('uploadProgress').style.display = 'block';
+                const reader = new FileReader();
                 reader.onload = (event) => {
                     const img = new Image(); img.src = event.target.result;
                     img.onload = () => {
-                        const canvas = document.createElement('canvas'); const MAX_W = 1000, MAX_H = 1000;
-                        let w = img.width, h = img.height; if (w > h) { if (w > MAX_W) { h *= MAX_W / w; w = MAX_W; } } else { if (h > MAX_H) { w *= MAX_H / h; h = MAX_H; } }
-                        canvas.width = w; canvas.height = h; canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                        const src = canvas.toDataURL('image/jpeg', 0.7); const photos = JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]');
-                        photos.push({ src, caption: '新的记忆碎片', date: '', location: '', note: '' });
-                        try { localStorage.setItem(STORAGE_KEYS.photos, JSON.stringify(photos)); loadPhotos(); openPhotoModal(photos.length - 1, true); } 
-                        catch(err) { alert('空间不足，请先删除旧照片~'); }
+                        const canvas = document.createElement('canvas'); 
+                        const MAX_W = 800, MAX_H = 800;
+                        let w = img.width, h = img.height; 
+                        if (w > h) { if (w > MAX_W) { h *= MAX_W / w; w = MAX_W; } } 
+                        else { if (h > MAX_H) { w *= MAX_H / h; h = MAX_H; } }
+                        canvas.width = w; canvas.height = h; 
+                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+                        
+                        const base64Str = canvas.toDataURL('image/jpeg', 0.6); 
+                        
+                        addDoc(photosColRef, { 
+                            src: base64Str, caption: '新的记忆碎片', date: '', location: '', note: '', timestamp: Date.now() 
+                        }).then(() => {
+                            document.getElementById('uploadProgress').style.display = 'none';
+                        }).catch(err => {
+                            alert("图片上传失败了，请检查网络！");
+                            document.getElementById('uploadProgress').style.display = 'none';
+                        });
                     };
                 };
                 reader.readAsDataURL(file);
@@ -776,18 +782,20 @@
             input.click();
         }
 
-        // ================= 许愿池/便签 =================
-        function loadWishes() { const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); document.getElementById('wishList').innerHTML = wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="toggleWish(${i})"></div><span style="flex:1;">${wish.text}</span><button class="delete-btn" onclick="deleteWish(${i})" title="删除愿望">×</button></div>`).join(''); }
-        function addWish() { const input = document.getElementById('wishInput'); if(!input.value.trim()) return; const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); wishes.unshift({ text: input.value.trim(), completed: false }); localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); input.value = ''; loadWishes(); }
-        function toggleWish(i) { const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); wishes[i].completed = !wishes[i].completed; localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); loadWishes(); }
-        function deleteWish(index) { if(confirm('确定要删除这个愿望吗？')) { const wishes = JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'); wishes.splice(index, 1); localStorage.setItem(STORAGE_KEYS.wishes, JSON.stringify(wishes)); loadWishes(); } }
-        function loadMessages() { const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'); document.getElementById('messageCards').innerHTML = msgs.map((msg, index) => { const rot = Math.random() * 10 - 5; return `<div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);"><button class="delete-btn" onclick="deleteMessage(${index}, event)" title="撕下便签">×</button><div>${msg.text}</div>${msg.remark ? `<div class="message-label">${msg.remark}</div>` : ''}<div class="message-time">${msg.date}</div></div>`; }).join(''); }
-        function addMessage() { const input = document.getElementById('messageInput'); const remarkInput = document.getElementById('messageRemarkInput'); if(!input.value.trim()) return; const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'); msgs.unshift({ text: input.value.trim(), remark: remarkInput.value.trim() || '', color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() }); localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs)); input.value = ''; remarkInput.value = ''; loadMessages(); }
-        function deleteMessage(index, event) { event.stopPropagation(); if(confirm('确定要撕下这张便签吗？')) { const msgs = JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'); msgs.splice(index, 1); localStorage.setItem(STORAGE_KEYS.messages, JSON.stringify(msgs)); loadMessages(); } }
+        // ================= 许愿池 =================
+        function loadWishes() { document.getElementById('wishList').innerHTML = window.appData.wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="window.toggleWish(${i})"></div><span style="flex:1;">${escapeHtml(wish.text)}</span><button class="delete-btn" onclick="window.deleteWish(${i})" title="删除愿望">×</button></div>`).join(''); }
+        window.addWish = function() { const input = document.getElementById('wishInput'); if(!input.value.trim()) return; window.appData.wishes.unshift({ text: input.value.trim(), completed: false }); saveStateToFirebase(); input.value = ''; }
+        window.toggleWish = function(i) { window.appData.wishes[i].completed = !window.appData.wishes[i].completed; saveStateToFirebase(); }
+        window.deleteWish = function(index) { if(confirm('确定要删除这个愿望吗？')) { window.appData.wishes.splice(index, 1); saveStateToFirebase(); } }
+        
+        // ================= 便签墙 =================
+        function loadMessages() { document.getElementById('messageCards').innerHTML = window.appData.messages.map((msg, index) => { const rot = Math.random() * 10 - 5; return `<div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);"><button class="delete-btn" onclick="window.deleteMessage(${index}, event)" title="撕下便签">×</button><div>${escapeHtml(msg.text)}</div>${msg.remark ? `<div class="message-label">${escapeHtml(msg.remark)}</div>` : ''}<div class="message-time">${msg.date}</div></div>`; }).join(''); }
+        window.addMessage = function() { const input = document.getElementById('messageInput'); const remarkInput = document.getElementById('messageRemarkInput'); if(!input.value.trim()) return; window.appData.messages.unshift({ text: input.value.trim(), remark: remarkInput.value.trim() || '', color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() }); saveStateToFirebase(); input.value = ''; remarkInput.value = ''; }
+        window.deleteMessage = function(index, event) { event.stopPropagation(); if(confirm('确定要撕下这张便签吗？')) { window.appData.messages.splice(index, 1); saveStateToFirebase(); } }
 
         // ================= 成就花园 =================
-        function initIconPicker() { const grid = document.getElementById('iconPickerGrid'); grid.innerHTML = ALL_ICONS.map((icon, idx) => `<div class="icon-item ${idx===0 ? 'selected':''}" onclick="selectIcon(this, '${icon}')">${icon}</div>`).join(''); }
-        function selectIcon(el, icon) { document.querySelectorAll('.icon-item').forEach(i => i.classList.remove('selected')); el.classList.add('selected'); document.getElementById('selectedAchIcon').value = icon; }
+        function initIconPicker() { const grid = document.getElementById('iconPickerGrid'); grid.innerHTML = ALL_ICONS.map((icon, idx) => `<div class="icon-item ${idx===0 ? 'selected':''}" onclick="window.selectIcon(this, '${icon}')">${icon}</div>`).join(''); }
+        window.selectIcon = function(el, icon) { document.querySelectorAll('.icon-item').forEach(i => i.classList.remove('selected')); el.classList.add('selected'); document.getElementById('selectedAchIcon').value = icon; }
         
         function createPetalBurst(anchorEl) {
             const numPetals = 12;
@@ -802,37 +810,20 @@
         }
 
         function loadAchievements() {
-            const storedRaw = localStorage.getItem(STORAGE_KEYS.achievements);
-            let items = storedRaw !== null ? JSON.parse(storedRaw) : ACHIEVEMENTS_DATA;
-            if (storedRaw === null) localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(items));
-
+            const items = window.appData.achievements;
             const progressEl = document.getElementById('gardenProgress');
-            if (progressEl) {
-                progressEl.innerHTML = items.map((a, i) => {
-                    const displayIcon = a.icon || ALL_ICONS[i % ALL_ICONS.length];
-                    return `<span class="progress-flower ${a.completed ? 'lit' : ''}">${displayIcon}</span>`;
-                }).join('');
-            }
+            if (progressEl) { progressEl.innerHTML = items.map((a, i) => { const displayIcon = a.icon || ALL_ICONS[i % ALL_ICONS.length]; return `<span class="progress-flower ${a.completed ? 'lit' : ''}">${displayIcon}</span>`; }).join(''); }
 
             const container = document.getElementById('achievementGrid');
             container.innerHTML = items.map((ach, index) => {
-                const fc = CARD_COLORS[index % CARD_COLORS.length];
-                const displayIcon = ach.icon || ALL_ICONS[index % ALL_ICONS.length];
-                
-                const iconHtml = ach.completed 
-                    ? `<div class="flower-icon bloomed" style="text-shadow: 0 0 25px rgba(${fc.glowRgb}, 0.8)">${displayIcon}</div>`
-                    : `<div class="flower-icon bud">🌱</div>`;
-                
-                const dateHtml = (ach.completed && ach.date) 
-                    ? `<div class="achievement-date">Unlock: ${ach.date}</div>` 
-                    : '';
-
+                const fc = CARD_COLORS[index % CARD_COLORS.length]; const displayIcon = ach.icon || ALL_ICONS[index % ALL_ICONS.length];
+                const iconHtml = ach.completed ? `<div class="flower-icon bloomed" style="text-shadow: 0 0 25px rgba(${fc.glowRgb}, 0.8)">${displayIcon}</div>` : `<div class="flower-icon bud">🌱</div>`;
+                const dateHtml = (ach.completed && ach.date) ? `<div class="achievement-date">Unlock: ${ach.date}</div>` : '';
                 return `
                 <div class="achievement-card ${ach.completed ? 'completed' : 'locked'}" style="--card-accent:${fc.accent};">
-                    <button class="delete-btn" onclick="deleteAchievement(${index}, event)" title="删除该成就">×</button>
+                    <button class="delete-btn" onclick="window.deleteAchievement(${index}, event)" title="删除该成就">×</button>
                     <div class="card-flower-zone" style="background:${fc.bg}">
-                        <span class="card-flower-num">No.${index + 1}</span>
-                        ${iconHtml}
+                        <span class="card-flower-num">No.${index + 1}</span>${iconHtml}
                         <div class="petal-burst-anchor" id="burst-anchor-${index}"></div>
                     </div>
                     <div class="card-body">
@@ -840,92 +831,46 @@
                         <div class="achievement-hint">${escapeHtml(ach.hint)}</div>
                         ${ach.completed ? `<div class="achievement-detail">${escapeHtml(ach.detail)}</div>` : ''}
                         ${dateHtml}
-                        <button class="achievement-action" onclick="toggleAchievement(${index})">
-                            ${ach.completed ? '✨ 已点亮 · 点击收起' : '🌱 点亮此刻'}
-                        </button>
+                        <button class="achievement-action" onclick="window.toggleAchievement(${index})">${ach.completed ? '✨ 已点亮 · 点击收起' : '🌱 点亮此刻'}</button>
                     </div>
                 </div>`;
             }).join('');
         }
 
-        function toggleAchievement(index) {
-            const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || '[]');
-            if (!achievements[index]) return;
-            const wasLocked = !achievements[index].completed;
-            achievements[index].completed = !achievements[index].completed;
+        window.toggleAchievement = function(index) {
+            if (!window.appData.achievements[index]) return;
+            const wasLocked = !window.appData.achievements[index].completed;
+            window.appData.achievements[index].completed = !window.appData.achievements[index].completed;
 
             if (wasLocked) {
-                const d = new Date();
-                achievements[index].date = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-            } else {
-                achievements[index].date = '';
-            }
+                const d = new Date(); window.appData.achievements[index].date = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+            } else { window.appData.achievements[index].date = ''; }
 
-            localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(achievements));
+            saveStateToFirebase();
 
             if (wasLocked) {
                 const anchor = document.getElementById(`burst-anchor-${index}`);
                 if (anchor) createPetalBurst(anchor);
-                setTimeout(loadAchievements, 50);
-            } else {
-                loadAchievements();
             }
         }
 
-        function toggleAchSidebar() { document.getElementById('achSidebar').classList.toggle('open'); }
-        function addNewAchievement() {
-            const title = document.getElementById('achTitle').value.trim();
-            const hint = document.getElementById('achHint').value.trim();
-            const detail = document.getElementById('achDetail').value.trim();
-            const icon = document.getElementById('selectedAchIcon').value || '🌸';
-            
+        window.toggleAchSidebar = function() { document.getElementById('achSidebar').classList.toggle('open'); }
+        window.addNewAchievement = function() {
+            const title = document.getElementById('achTitle').value.trim(); const hint = document.getElementById('achHint').value.trim(); const detail = document.getElementById('achDetail').value.trim(); const icon = document.getElementById('selectedAchIcon').value || '🌸';
             if (!title) { alert('给新成就起个名字吧~'); return; }
-
-            const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || JSON.stringify(ACHIEVEMENTS_DATA));
-            achievements.push({
-                title: title, hint: hint || '一颗未知的种子，等待时间的浇灌。', detail: detail || '时光见证了它的绽放。', completed: false, icon: icon, date: ''
-            });
-            localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(achievements));
-
+            window.appData.achievements.push({ title: title, hint: hint || '一颗未知的种子，等待时间的浇灌。', detail: detail || '时光见证了它的绽放。', completed: false, icon: icon, date: '' });
+            saveStateToFirebase();
             document.getElementById('achTitle').value = ''; document.getElementById('achHint').value = ''; document.getElementById('achDetail').value = '';
-            toggleAchSidebar(); loadAchievements();
+            window.toggleAchSidebar();
         }
-        function deleteAchievement(index, event) {
+        window.deleteAchievement = function(index, event) {
             event.stopPropagation();
             if(confirm('确定要拔除这棵美好的植物吗？(永久删除该成就)')) {
-                const achievements = JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || JSON.stringify(ACHIEVEMENTS_DATA));
-                achievements.splice(index, 1); localStorage.setItem(STORAGE_KEYS.achievements, JSON.stringify(achievements)); loadAchievements();
+                window.appData.achievements.splice(index, 1); saveStateToFirebase();
             }
         }
 
         function updateTogetherDays() { const target = document.getElementById('togetherCounter'); const now = new Date(); const start = new Date(RELATIONSHIP_START + 'T00:00:00'); const diff  = Math.max(0, Math.floor((now - start) / 86400000)); target.innerHTML = `<span class="counter-days-num">${diff}</span><span class="counter-label">days of us</span><div class="counter-gems">✦ ✦ ✦</div>`; }
-
-        // 导出数据函数
-        function exportData() {
-            const data = {
-                version: "1",
-                stars: JSON.parse(localStorage.getItem(STORAGE_KEYS.stars) || '[]'),
-                photos: JSON.parse(localStorage.getItem(STORAGE_KEYS.photos) || '[]'),
-                wishes: JSON.parse(localStorage.getItem(STORAGE_KEYS.wishes) || '[]'),
-                messages: JSON.parse(localStorage.getItem(STORAGE_KEYS.messages) || '[]'),
-                achievements: JSON.parse(localStorage.getItem(STORAGE_KEYS.achievements) || JSON.stringify(ACHIEVEMENTS_DATA))
-            };
-            
-            const dataStr = JSON.stringify(data, null, 2);
-            const blob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'data.json';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-            
-            console.log('数据已导出为 data.json 文件');
-            console.log('请将此文件上传到 GitHub 替换原有的 data.json');
-        }
     </script>
 </body>
 </html>
