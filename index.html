@@ -50,7 +50,6 @@
         .star:hover { transform: scale(2.5); box-shadow: 0 0 20px #fff; }
         @keyframes twinkle { 0%, 100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
         
-        /* 流星动画 */
         .shooting-star { position: absolute; width: 150px; height: 2px; background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent); border-radius: 50%; animation: meteorShower 6s linear infinite; opacity: 0; z-index: 0; pointer-events: none; }
         @keyframes meteorShower { 0% { transform: translateX(200px) translateY(-200px) rotate(-45deg); opacity: 1; } 20% { transform: translateX(-800px) translateY(800px) rotate(-45deg); opacity: 0; } 100% { opacity: 0; } }
 
@@ -71,7 +70,6 @@
         .memory-branch.left { left: 4vw; }
         .memory-branch.right { right: 4vw; transform: scaleX(-1); }
         
-        /* 漂浮的精灵星尘 */
         .fairy-dust { position: absolute; width: 4px; height: 4px; background: radial-gradient(circle, #fff, rgba(255,220,180,0)); border-radius: 50%; animation: floatDust 10s infinite linear; opacity: 0; }
         @keyframes floatDust { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 20% { opacity: 0.8; } 80% { opacity: 0.6; } 100% { transform: translateY(-20vh) scale(1.5); opacity: 0; } }
 
@@ -114,13 +112,11 @@
         .btn-delete:hover { background: #ff4757; color: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3); }
         .btn-cancel { background: rgba(160,154,184,0.15); color: #7a6080; flex: 0.7; }
         .btn-cancel:hover { background: rgba(160,154,184,0.3); }
-        @media(max-width: 768px) { .pm-content { flex-direction: column; overflow-y: auto; max-height: 90vh; } .pm-left { height: 45vh; flex: none; } .pm-left img { height: 100%; object-fit: cover; } .pm-right { width: 100%; padding: 1.5rem; } }
 
         /* ================= 3. 许愿池 & 极光特效 ================= */
         .wish-scene { position: relative; width: 100%; max-width: 900px; margin: 0 auto; min-height: 75vh; padding: 3rem 2rem 250px 2rem; display: flex; flex-direction: column; align-items: center; z-index: 2;}
         .scene-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: -1; border-radius: 30px; overflow: hidden; background: rgba(255, 255, 255, 0.02); box-shadow: inset 0 0 50px rgba(0,0,0,0.2); }
         
-        /* 极光光晕 */
         .aurora { position: absolute; top: -20%; left: -10%; width: 120%; height: 60%; background: radial-gradient(ellipse at top, rgba(102, 252, 241, 0.15) 0%, transparent 60%); filter: blur(40px); animation: auroraShift 10s infinite alternate linear; }
         @keyframes auroraShift { 0% { transform: translateX(-5%) scale(1); } 100% { transform: translateX(5%) scale(1.1); } }
 
@@ -209,7 +205,6 @@
         /* ================= 5. 便签墙 & 纸飞机羽毛特效 ================= */
         .board-container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
         
-        /* 纸飞机/羽毛 */
         .drifting-item { position: absolute; opacity: 0.6; animation: drift 15s linear infinite; pointer-events: none; z-index: 0; font-size: 2rem;}
         @keyframes drift { 0% { transform: translate(-10vw, 10vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.7; } 100% { transform: translate(110vw, 80vh) rotate(360deg); opacity: 0; } }
 
@@ -228,7 +223,7 @@
         .counter-days-num { font-family: 'Playfair Display', serif; font-size: 2.7rem; font-style: italic; font-weight: 700; color: #ede0ff; line-height: 1; display: block; text-shadow: 0 0 30px rgba(190,155,255,0.65); }
         .counter-label { font-family: var(--font-dancing); font-size: 0.86rem; color: rgba(210,188,255,0.68); display: block; margin-top: 0.22rem; }
         
-        /* ================= 躲猫猫精灵系统 (全新猫咪) ================= */
+        /* ================= 躲猫猫精灵系统 ================= */
         .companion-trigger { 
             position: fixed; bottom: 2rem; right: 2rem; width: 65px; height: 65px; border-radius: 50%; 
             background: #fff; border: 3px solid var(--accent); color: var(--accent); font-size: 2rem; 
@@ -244,7 +239,6 @@
         body[data-active-page="achievements"] .companion-trigger[data-target-page="achievements"], 
         body[data-active-page="messages"] .companion-trigger[data-target-page="messages"] { display: flex; }
 
-        /* 猫咪气泡 */
         .cat-bubble {
             position: absolute; right: 75px; bottom: 15px; background: rgba(255,255,255,0.95);
             color: #d97b5a; padding: 12px 20px; border-radius: 20px 20px 0 20px; font-weight: bold;
@@ -255,7 +249,6 @@
         .cat-bubble.show { opacity: 1; transform: scale(1) translateY(0); }
         .cat-bubble::after { content: ''; position: absolute; right: -10px; bottom: 0; border-width: 10px 0 0 10px; border-style: solid; border-color: transparent transparent transparent rgba(255,255,255,0.95); }
 
-        /* 猫爪爆裂特效 */
         .paw-print { position: fixed; font-size: 3rem; color: rgba(255,183,178,0.8); pointer-events: none; z-index: 4000; opacity: 0; animation: pawAppear 2.5s ease-out forwards; text-shadow: 0 0 15px rgba(255,255,255,0.5); }
         @keyframes pawAppear { 0% { opacity: 0; transform: scale(0.5) rotate(0deg); } 20% { opacity: 1; transform: scale(1.2) rotate(15deg); } 80% { opacity: 1; transform: scale(1) rotate(15deg); } 100% { opacity: 0; transform: scale(1.5) rotate(15deg); } }
 
@@ -270,6 +263,57 @@
         .ee-btn:hover { background: #b8511f; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(217,123,90,0.4); }
 
         #uploadProgress { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #d97b5a; color: white; padding: 10px 20px; border-radius: 20px; z-index: 9999; display: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+        /* ================= 移动端深度适配 (核心修改部分) ================= */
+        @media (max-width: 768px) {
+            /* 1. 导航栏紧凑化排版：变成横向可滑动条，不会换行遮挡内容 */
+            .nav-container { padding: 0.8rem 1rem; flex-direction: column; gap: 0.8rem; }
+            .nav-logo { font-size: 1.3rem; }
+            .nav-menu { width: 100%; overflow-x: auto; flex-wrap: nowrap; justify-content: flex-start; padding-bottom: 5px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+            .nav-menu::-webkit-scrollbar { display: none; }
+            .nav-item { white-space: nowrap; font-size: 0.85rem; padding: 0.4rem 0.8rem; }
+
+            /* 2. 全局间距与字体缩小 */
+            .page { padding: 8rem 1rem 5rem; }
+            .page-title { font-size: 2rem; }
+            .page-subtitle { font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+            /* 3. 恋爱天数计数器：缩小并移到底部左侧，避免挡住顶部标题 */
+            .together-counter { top: auto; bottom: 1.5rem; left: 1rem; padding: 0.6rem 1rem; transform: scale(0.85); transform-origin: bottom left; }
+            
+            /* 4. 解决移动端无 Hover 动作的问题，常驻显示操作按钮 */
+            .delete-btn, .pm-hidden-edit-trigger { opacity: 1 !important; background: rgba(255, 71, 87, 0.8); color: white; }
+            .pm-hidden-edit-trigger { background: #d97b5a; color: #fff; }
+
+            /* 5. 相册与弹窗布局重组 */
+            .photo-gallery { gap: 1.5rem; }
+            .photo-card { width: 100%; max-width: 320px; }
+            .pm-content { flex-direction: column; overflow-y: auto; max-height: 90vh; }
+            .pm-left { height: 35vh; flex: none; }
+            .pm-left img { height: 100%; object-fit: cover; }
+            .pm-right { width: 100%; padding: 1.5rem; }
+
+            /* 6. 许愿池排版：输入框和按钮上下堆叠 */
+            .wish-scene { padding: 1rem 1rem 200px 1rem; min-height: 60vh; }
+            .wish-input-container { flex-direction: column; border-radius: 20px; padding: 1rem; gap: 0.8rem; }
+            .wish-input { padding: 0.5rem; text-align: center; }
+            .wish-submit { width: 100%; padding: 0.8rem; }
+            .wish-item { padding: 1rem; }
+            
+            /* 7. 成就侧边栏撑满屏幕 */
+            .achievement-sidebar { width: 100vw; right: -100vw; padding: 20px 15px; }
+            
+            /* 8. 便签墙排版：放大卡片适配小屏 */
+            .message-input { min-height: 100px; padding: 1.2rem; font-size: 1.1rem; }
+            .message-remark-input { padding: 0.8rem; }
+            .message-card { width: 100%; max-width: 100%; min-height: auto; padding: 1.8rem 1.5rem; }
+
+            /* 9. 猫咪与弹窗：缩小体型并隐藏对话气泡防止遮挡 */
+            .companion-trigger { width: 50px; height: 50px; font-size: 1.5rem; bottom: 1.5rem; right: 1.5rem; }
+            .cat-bubble { right: 60px; font-size: 1rem; padding: 8px 12px; display: none; }
+            .ee-content { padding: 2rem 1.5rem; max-width: 90%; }
+            .ee-content h2 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body data-active-page="home">
@@ -289,9 +333,7 @@
 
     <div class="together-counter" id="togetherCounter" title="每一天都是我们的礼物"></div>
 
-    <!-- 1. 首页 -->
     <section class="page active visible" id="page-home">
-        <!-- 流星特效注入 -->
         <script>
             for(let i=0; i<5; i++) {
                 document.write(`<div class="shooting-star" style="top:${Math.random()*30}vh; left:${Math.random()*50 + 50}vw; animation-delay:${Math.random()*8}s;"></div>`);
@@ -306,9 +348,7 @@
         </div>
     </section>
 
-    <!-- 2. 光影相册 -->
     <section class="page" id="page-photos">
-        
         <div class="photo-decorations">
             <div class="memory-orb orb-1"></div>
             <div class="memory-orb orb-2"></div>
@@ -316,7 +356,6 @@
             <div class="bg-watermark">Beautiful Memories</div>
             <div class="vintage-arch"></div>
             
-            <!-- 精灵星尘注入 -->
             <script>
                 for(let i=0; i<25; i++) {
                     document.write(`<div class="fairy-dust" style="left:${Math.random()*100}%; animation-delay:${Math.random()*10}s; animation-duration:${8 + Math.random()*7}s;"></div>`);
@@ -351,7 +390,6 @@
         </div>
     </section>
 
-    <!-- 独立纯净相册画框 Modal -->
     <div class="photo-modal" id="photoModal">
         <div class="pm-content">
             <span class="pm-close" onclick="window.closePhotoModal()">×</span>
@@ -399,7 +437,6 @@
         </div>
     </div>
 
-    <!-- 3. 许愿池 -->
     <section class="page" id="page-wishes">
         <h1 class="page-title">星夜祈愿</h1>
         <p class="page-subtitle">在月光下，所有柔软的愿望都会被听见</p>
@@ -408,7 +445,6 @@
                 <div class="aurora"></div>
                 <div class="scene-moon"></div>
                 <div class="scene-hill"></div>
-                <!-- 许愿池专属流星 -->
                 <script>
                     for(let i=0; i<4; i++) document.write(`<div class="shooting-star" style="top:${Math.random()*40}vh; left:${Math.random()*60 + 40}vw; animation-delay:${Math.random()*6}s; animation-duration: 4s;"></div>`);
                 </script>
@@ -429,12 +465,10 @@
         </div>
     </section>
 
-    <!-- 4. 成就花园 -->
     <section class="page" id="page-achievements">
         
         <div class="garden-decorations">
             <div class="magic-moon"></div>
-            
             <script>
                 for(let i=0; i<35; i++) {
                     document.write(`<div class="garden-star" style="width:${Math.random()*2+1}px; height:${Math.random()*2+1}px; left:${Math.random()*100}%; top:${Math.random()*60}%; animation-delay:${Math.random()*3}s;"></div>`);
@@ -446,10 +480,8 @@
                     document.write(`<div class="falling-petal" style="left:${Math.random()*100}%; animation-delay:${Math.random()*15}s; animation-duration:${Math.random()*5+10}s; transform: scale(${Math.random()*0.5+0.5});"></div>`);
                 }
             </script>
-            
             <div class="magic-mist"></div>
             <div class="magic-mist layer2"></div>
-            
             <svg class="garden-vine left" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
                 <path d="M -20,400 Q 50,300 20,200 T 100,50" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
                 <path d="M 15,310 Q 40,290 50,305 Q 35,325 15,310 Z" fill="currentColor"/>
@@ -493,9 +525,7 @@
         </div>
     </section>
 
-    <!-- 5. 便签墙 -->
     <section class="page" id="page-messages">
-        <!-- 纸飞机与羽毛特效 -->
         <script>
             const decors = ['✈️', '🍃', '🕊️'];
             for(let i=0; i<6; i++) {
@@ -514,7 +544,6 @@
         </div>
     </section>
 
-    <!-- 隐藏彩蛋触发器：躲猫猫小猫 -->
     <button class="companion-trigger" onclick="window.triggerCompanionEgg()" title="抓住我呀！">🐈
         <div class="cat-bubble" id="catBubble">喵~</div>
     </button>
@@ -530,12 +559,11 @@
     </div>
 
 
-    <!-- ================= Firebase 核心逻辑集成 (纯 Firestore 版) ================= -->
+    <!-- ================= Firebase 核心逻辑集成 ================= -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, doc, onSnapshot, setDoc, collection, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // 你的 Firebase 配置
         const firebaseConfig = {
             apiKey: "AIzaSyDLpEbrAf2QB6p22I1qrYNIZN_3wHkjOAM",
             authDomain: "our2-debb0.firebaseapp.com",
@@ -548,7 +576,6 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // 初始默认数据
         const DEFAULT_ACHIEVEMENTS =[
             { title: '暮光图书馆', hint: '在一场静谧的午后找到属于我们的共读秘密。', detail: '完成一次一起挑选、分享并读完同一本音乐剧剧本或小说。', completed: false, icon: '📖', date: '' },
             { title: '星迹拼图', hint: '当我们把碎片拼成一幅生活的闪亮图案。', detail: '一起看完一部音乐剧，记录台词中最心动的那一句。', completed: false, icon: '🧩', date: '' },
@@ -563,7 +590,6 @@
         const stateDocRef = doc(db, "diary", "shared_state");
         const photosColRef = collection(db, "photos"); 
 
-        // 监听基础数据
         onSnapshot(stateDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 window.appData = docSnap.data();
@@ -573,7 +599,6 @@
             }
         });
 
-        // 监听照片数据
         onSnapshot(photosColRef, (snap) => {
             window.photosData = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.timestamp - b.timestamp);
             loadPhotos();
@@ -598,7 +623,6 @@
             initNavigation(); initStarCanvas(); initIconPicker(); updateTogetherDays();
         });
 
-        // ================= 导航 =================
         function initNavigation() {
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', () => window.showPage(item.dataset.page));
@@ -612,7 +636,6 @@
             document.body.setAttribute('data-active-page', pageName); window.scrollTo(0, 0);
         }
 
-        // ================= 全新躲猫猫彩蛋逻辑 =================
         let catClickCount = 0;
         const catPrompts = {
             'home': '喵~ 陪我去【情绪星空】点亮星星吧？',
@@ -628,36 +651,29 @@
             catClickCount++;
 
             if (catClickCount >= 5) {
-                // 触发终极彩蛋
                 document.getElementById('easterEggModal').classList.add('show');
                 catClickCount = 0;
                 
-                // 还原猫咪状态
                 cat.style.transition = 'all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
                 cat.style.bottom = '2rem'; cat.style.right = '2rem';
                 cat.style.top = 'auto'; cat.style.left = 'auto';
                 cat.removeAttribute('data-target-page');
                 
-                // 触发满屏猫爪特效
                 triggerPawPrints();
                 return;
             }
 
-            // 躲避到随机其他页面，并提示对话框
             const currentActive = document.body.getAttribute('data-active-page');
             const PAGES = ['home', 'photos', 'wishes', 'achievements', 'messages'];
             const otherPages = PAGES.filter(p => p !== currentActive);
             const nextTarget = otherPages[Math.floor(Math.random() * otherPages.length)];
 
-            // 显示对话气泡
             bubble.textContent = catPrompts[nextTarget];
             bubble.classList.add('show');
 
-            // 1.5秒后，猫咪消失并转移到新页面
             setTimeout(() => {
                 bubble.classList.remove('show');
                 
-                // 随机坐标计算
                 const vw = window.innerWidth - 100; const vh = window.innerHeight - 100;
                 const randomX = Math.max(30, Math.floor(Math.random() * vw)); 
                 const randomY = Math.max(30, Math.floor(Math.random() * vh));
@@ -672,7 +688,6 @@
 
         window.closeEasterEgg = function() { document.getElementById('easterEggModal').classList.remove('show'); }
 
-        // 猫爪印满屏特效
         function triggerPawPrints() {
             for(let i = 0; i < 20; i++) {
                 setTimeout(() => {
@@ -681,17 +696,13 @@
                     paw.innerHTML = '🐾';
                     paw.style.left = (Math.random() * 90) + 'vw';
                     paw.style.top = (Math.random() * 90) + 'vh';
-                    // 随机角度，让爪印显得错落有致
                     paw.style.transform = `rotate(${Math.random() * 60 - 30}deg)`;
                     document.body.appendChild(paw);
-                    
-                    // 动画结束后移除 DOM
                     setTimeout(() => paw.remove(), 2500);
-                }, i * 150); // 每 150ms 出现一个
+                }, i * 150); 
             }
         }
 
-        // ================= 星空 =================
         function initStarCanvas() { const container = document.getElementById('starContainer'); container.addEventListener('click', (e) => { if (e.target.classList.contains('star')) return; const rect = container.getBoundingClientRect(); createStar(e.clientX - rect.left, e.clientY - rect.top, true); }); }
         function createStar(x, y, save = false) { 
             const container = document.getElementById('starContainer'); const star = document.createElement('div'); star.className = 'star'; star.style.left = x + 'px'; star.style.top = y + 'px'; const size = Math.random() * 3 + 2; star.style.width = size + 'px'; star.style.height = size + 'px'; star.style.animationDelay = Math.random() * 2 + 's'; container.appendChild(star); 
@@ -706,7 +717,6 @@
             window.appData.stars.forEach(s => createStar(s.x, s.y, false)); 
         }
 
-        // ================= 相册 =================
         function loadPhotos() {
             const gallery = document.getElementById('photoGallery');
             const addBtn = gallery.querySelector('.photo-add');
@@ -782,18 +792,15 @@
             input.click();
         }
 
-        // ================= 许愿池 =================
         function loadWishes() { document.getElementById('wishList').innerHTML = window.appData.wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="window.toggleWish(${i})"></div><span style="flex:1;">${escapeHtml(wish.text)}</span><button class="delete-btn" onclick="window.deleteWish(${i})" title="删除愿望">×</button></div>`).join(''); }
         window.addWish = function() { const input = document.getElementById('wishInput'); if(!input.value.trim()) return; window.appData.wishes.unshift({ text: input.value.trim(), completed: false }); saveStateToFirebase(); input.value = ''; }
         window.toggleWish = function(i) { window.appData.wishes[i].completed = !window.appData.wishes[i].completed; saveStateToFirebase(); }
         window.deleteWish = function(index) { if(confirm('确定要删除这个愿望吗？')) { window.appData.wishes.splice(index, 1); saveStateToFirebase(); } }
         
-        // ================= 便签墙 =================
         function loadMessages() { document.getElementById('messageCards').innerHTML = window.appData.messages.map((msg, index) => { const rot = Math.random() * 10 - 5; return `<div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);"><button class="delete-btn" onclick="window.deleteMessage(${index}, event)" title="撕下便签">×</button><div>${escapeHtml(msg.text)}</div>${msg.remark ? `<div class="message-label">${escapeHtml(msg.remark)}</div>` : ''}<div class="message-time">${msg.date}</div></div>`; }).join(''); }
         window.addMessage = function() { const input = document.getElementById('messageInput'); const remarkInput = document.getElementById('messageRemarkInput'); if(!input.value.trim()) return; window.appData.messages.unshift({ text: input.value.trim(), remark: remarkInput.value.trim() || '', color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() }); saveStateToFirebase(); input.value = ''; remarkInput.value = ''; }
         window.deleteMessage = function(index, event) { event.stopPropagation(); if(confirm('确定要撕下这张便签吗？')) { window.appData.messages.splice(index, 1); saveStateToFirebase(); } }
 
-        // ================= 成就花园 =================
         function initIconPicker() { const grid = document.getElementById('iconPickerGrid'); grid.innerHTML = ALL_ICONS.map((icon, idx) => `<div class="icon-item ${idx===0 ? 'selected':''}" onclick="window.selectIcon(this, '${icon}')">${icon}</div>`).join(''); }
         window.selectIcon = function(el, icon) { document.querySelectorAll('.icon-item').forEach(i => i.classList.remove('selected')); el.classList.add('selected'); document.getElementById('selectedAchIcon').value = icon; }
         
