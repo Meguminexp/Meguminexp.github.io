@@ -584,19 +584,30 @@
             { title: '树屋秘密', hint: '在一个只属于我们的角落种下一个约定。', detail: '一起去一个从未去过的安静地方散步，留下一个共同的照片。', completed: false, icon: '🏕️', date: '' }
         ];
 
-        window.appData = { stars: [], wishes: [], messages: [], achievements: DEFAULT_ACHIEVEMENTS };
-        window.photosData = []; 
+        const DEFAULT_APP_DATA = { stars: [], wishes: [], messages: [], achievements: DEFAULT_ACHIEVEMENTS };
+        window.appData = { ...DEFAULT_APP_DATA };
+        window.photosData = [];
 
         const stateDocRef = doc(db, "diary", "shared_state");
-        const photosColRef = collection(db, "photos"); 
+        const photosColRef = collection(db, "photos");
 
         onSnapshot(stateDocRef, (docSnap) => {
             if (docSnap.exists()) {
-                window.appData = docSnap.data();
+                const data = docSnap.data();
+                window.appData = {
+                    ...DEFAULT_APP_DATA,
+                    ...data,
+                    stars: Array.isArray(data.stars) ? data.stars : [],
+                    wishes: Array.isArray(data.wishes) ? data.wishes : [],
+                    messages: Array.isArray(data.messages) ? data.messages : [],
+                    achievements: Array.isArray(data.achievements) ? data.achievements : DEFAULT_ACHIEVEMENTS,
+                };
                 renderBasicData();
             } else {
                 setDoc(stateDocRef, window.appData);
             }
+        }, (err) => {
+            console.error("状态同步失败:", err);
         });
 
         onSnapshot(photosColRef, (snap) => {
@@ -712,9 +723,10 @@
             } 
         }
         function showStarMessage() { const msg = document.getElementById('starMessage'); msg.textContent = longTexts[Math.floor(Math.random() * longTexts.length)]; msg.classList.remove('show'); void msg.offsetWidth; msg.classList.add('show'); }
-        function loadStars() { 
+        function loadStars() {
             const container = document.getElementById('starContainer'); Array.from(container.children).forEach(child => { if(child.classList.contains('star')) child.remove(); });
-            window.appData.stars.forEach(s => createStar(s.x, s.y, false)); 
+            const stars = Array.isArray(window.appData.stars) ? window.appData.stars : [];
+            stars.forEach(s => createStar(s.x, s.y, false));
         }
 
         function loadPhotos() {
@@ -768,14 +780,14 @@
                     const img = new Image(); img.src = event.target.result;
                     img.onload = () => {
                         const canvas = document.createElement('canvas'); 
-                        const MAX_W = 800, MAX_H = 800;
+                        const MAX_W = 640, MAX_H = 640;
                         let w = img.width, h = img.height; 
                         if (w > h) { if (w > MAX_W) { h *= MAX_W / w; w = MAX_W; } } 
                         else { if (h > MAX_H) { w *= MAX_H / h; h = MAX_H; } }
                         canvas.width = w; canvas.height = h; 
                         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
                         
-                        const base64Str = canvas.toDataURL('image/jpeg', 0.6); 
+                        const base64Str = canvas.toDataURL('image/jpeg', 0.5); 
                         
                         addDoc(photosColRef, { 
                             src: base64Str, caption: '新的记忆碎片', date: '', location: '', note: '', timestamp: Date.now() 
@@ -792,12 +804,18 @@
             input.click();
         }
 
-        function loadWishes() { document.getElementById('wishList').innerHTML = window.appData.wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="window.toggleWish(${i})"></div><span style="flex:1;">${escapeHtml(wish.text)}</span><button class="delete-btn" onclick="window.deleteWish(${i})" title="删除愿望">×</button></div>`).join(''); }
+        function loadWishes() { 
+            const wishes = Array.isArray(window.appData.wishes) ? window.appData.wishes : [];
+            document.getElementById('wishList').innerHTML = wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="window.toggleWish(${i})"></div><span style="flex:1;">${escapeHtml(wish.text)}</span><button class="delete-btn" onclick="window.deleteWish(${i})" title="删除愿望">×</button></div>`).join('');
+        }
         window.addWish = function() { const input = document.getElementById('wishInput'); if(!input.value.trim()) return; window.appData.wishes.unshift({ text: input.value.trim(), completed: false }); saveStateToFirebase(); input.value = ''; }
         window.toggleWish = function(i) { window.appData.wishes[i].completed = !window.appData.wishes[i].completed; saveStateToFirebase(); }
         window.deleteWish = function(index) { if(confirm('确定要删除这个愿望吗？')) { window.appData.wishes.splice(index, 1); saveStateToFirebase(); } }
         
-        function loadMessages() { document.getElementById('messageCards').innerHTML = window.appData.messages.map((msg, index) => { const rot = Math.random() * 10 - 5; return `<div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);"><button class="delete-btn" onclick="window.deleteMessage(${index}, event)" title="撕下便签">×</button><div>${escapeHtml(msg.text)}</div>${msg.remark ? `<div class="message-label">${escapeHtml(msg.remark)}</div>` : ''}<div class="message-time">${msg.date}</div></div>`; }).join(''); }
+        function loadMessages() { 
+            const messages = Array.isArray(window.appData.messages) ? window.appData.messages : [];
+            document.getElementById('messageCards').innerHTML = messages.map((msg, index) => { const rot = Math.random() * 10 - 5; return `<div class="message-card" style="background: ${msg.color}; transform: rotate(${rot}deg);"><button class="delete-btn" onclick="window.deleteMessage(${index}, event)" title="撕下便签">×</button><div>${escapeHtml(msg.text)}</div>${msg.remark ? `<div class="message-label">${escapeHtml(msg.remark)}</div>` : ''}<div class="message-time">${msg.date}</div></div>`; }).join('');
+        }
         window.addMessage = function() { const input = document.getElementById('messageInput'); const remarkInput = document.getElementById('messageRemarkInput'); if(!input.value.trim()) return; window.appData.messages.unshift({ text: input.value.trim(), remark: remarkInput.value.trim() || '', color: noteColors[Math.floor(Math.random() * noteColors.length)], date: new Date().toLocaleDateString() }); saveStateToFirebase(); input.value = ''; remarkInput.value = ''; }
         window.deleteMessage = function(index, event) { event.stopPropagation(); if(confirm('确定要撕下这张便签吗？')) { window.appData.messages.splice(index, 1); saveStateToFirebase(); } }
 
