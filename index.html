@@ -469,7 +469,7 @@
         
         <div class="garden-decorations">
             <div class="magic-moon"></div>
-            <!-- <script>
+            <script>
                 for(let i=0; i<35; i++) {
                     document.write(`<div class="garden-star" style="width:${Math.random()*2+1}px; height:${Math.random()*2+1}px; left:${Math.random()*100}%; top:${Math.random()*60}%; animation-delay:${Math.random()*3}s;"></div>`);
                 }
@@ -479,7 +479,7 @@
                 for(let i=0; i<15; i++) {
                     document.write(`<div class="falling-petal" style="left:${Math.random()*100}%; animation-delay:${Math.random()*15}s; animation-duration:${Math.random()*5+10}s; transform: scale(${Math.random()*0.5+0.5});"></div>`);
                 }
-            </script> -->
+            </script>
             <div class="magic-mist"></div>
             <div class="magic-mist layer2"></div>
             <svg class="garden-vine left" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
@@ -526,12 +526,12 @@
     </section>
 
     <section class="page" id="page-messages">
-        <!-- <script>
+        <script>
             const decors = ['✈️', '🍃', '🕊️'];
             for(let i=0; i<6; i++) {
                 document.write(`<div class="drifting-item" style="left:${Math.random()*100}vw; top:${Math.random()*100}vh; animation-delay:${Math.random()*15}s;">${decors[i%3]}</div>`);
             }
-        </script> -->
+        </script>
         <h1 class="page-title">治愈便签墙</h1>
         <p class="page-subtitle">随手写下的絮语，贴在这里</p>
         <div class="board-container">
@@ -879,100 +879,5 @@
 
         function updateTogetherDays() { const target = document.getElementById('togetherCounter'); const now = new Date(); const start = new Date(RELATIONSHIP_START + 'T00:00:00'); const diff  = Math.max(0, Math.floor((now - start) / 86400000)); target.innerHTML = `<span class="counter-days-num">${diff}</span><span class="counter-label">days of us</span><div class="counter-gems">✦ ✦ ✦</div>`; }
     </script>
-<!-- ================= 背景特效初始化（替代 document.write）================= -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    /* ---- 1. 成就花园：星星 + 萤火虫 + 花瓣 ---- */
-    var gardenDec = document.querySelector('#page-achievements .garden-decorations');
-    if (gardenDec) {
-        var gh = '';
-        for (var i = 0; i < 35; i++) {
-            gh += '<div class="garden-star" style="'
-                + 'width:'  + (Math.random() * 2 + 1) + 'px;'
-                + 'height:' + (Math.random() * 2 + 1) + 'px;'
-                + 'left:'   + (Math.random() * 100)   + '%;'
-                + 'top:'    + (Math.random() * 60)    + '%;'
-                + 'animation-delay:' + (Math.random() * 3) + 's;'
-                + '"></div>';
-        }
-        for (var i = 0; i < 10; i++) {
-            gh += '<div class="garden-firefly" style="'
-                + 'left:'   + (Math.random() * 100) + '%;'
-                + 'bottom:' + (Math.random() * 30)  + '%;'
-                + 'animation-delay:'    + (Math.random() * 5)     + 's;'
-                + 'animation-duration:' + (Math.random() * 5 + 8) + 's;'
-                + '"></div>';
-        }
-        for (var i = 0; i < 15; i++) {
-            gh += '<div class="falling-petal" style="'
-                + 'left:'   + (Math.random() * 100) + '%;'
-                + 'animation-delay:'    + (Math.random() * 15)    + 's;'
-                + 'animation-duration:' + (Math.random() * 5 + 10) + 's;'
-                + 'transform:scale('   + (Math.random() * 0.5 + 0.5) + ');'
-                + '"></div>';
-        }
-        gardenDec.insertAdjacentHTML('afterbegin', gh);
-    }
-
-    /* ---- 2. 便签墙：漂浮装饰（纸飞机 / 叶子 / 鸽子）---- */
-    var msgPage = document.getElementById('page-messages');
-    if (msgPage) {
-        var decors = ['✈️', '🍃', '🕊️'];
-        var mh = '';
-        for (var i = 0; i < 6; i++) {
-            mh += '<div class="drifting-item" style="'
-                + 'left:'  + (Math.random() * 100) + 'vw;'
-                + 'top:'   + (Math.random() * 100) + 'vh;'
-                + 'animation-delay:' + (Math.random() * 15) + 's;'
-                + '">' + decors[i % 3] + '</div>';
-        }
-        msgPage.insertAdjacentHTML('afterbegin', mh);
-    }
-
-    /* ---- 3. 情绪星空：流星（顺带统一写法）---- */
-    var homePage = document.getElementById('page-home');
-    if (homePage && !homePage.querySelector('.shooting-star')) {
-        var sh = '';
-        for (var i = 0; i < 5; i++) {
-            sh += '<div class="shooting-star" style="'
-                + 'top:'  + (Math.random() * 30)      + 'vh;'
-                + 'left:' + (Math.random() * 50 + 50) + 'vw;'
-                + 'animation-delay:' + (Math.random() * 8) + 's;'
-                + '"></div>';
-        }
-        homePage.insertAdjacentHTML('afterbegin', sh);
-    }
-
-    /* ---- 4. 光影相册：精灵星尘 ---- */
-    var photoDec = document.querySelector('#page-photos .photo-decorations');
-    if (photoDec && !photoDec.querySelector('.fairy-dust')) {
-        var fh = '';
-        for (var i = 0; i < 25; i++) {
-            fh += '<div class="fairy-dust" style="'
-                + 'left:' + (Math.random() * 100) + '%;'
-                + 'animation-delay:'    + (Math.random() * 10)     + 's;'
-                + 'animation-duration:' + (8 + Math.random() * 7)  + 's;'
-                + '"></div>';
-        }
-        photoDec.insertAdjacentHTML('beforeend', fh);
-    }
-
-    /* ---- 5. 星空许愿：流星 ---- */
-    var wishBg = document.querySelector('#page-wishes .scene-bg');
-    if (wishBg && !wishBg.querySelector('.shooting-star')) {
-        var wh = '';
-        for (var i = 0; i < 4; i++) {
-            wh += '<div class="shooting-star" style="'
-                + 'top:'  + (Math.random() * 40)      + 'vh;'
-                + 'left:' + (Math.random() * 60 + 40) + 'vw;'
-                + 'animation-delay:'    + (Math.random() * 6) + 's;'
-                + 'animation-duration:4s;'
-                + '"></div>';
-        }
-        wishBg.insertAdjacentHTML('beforeend', wh);
-    }
-});
-</script>
 </body>
 </html>
