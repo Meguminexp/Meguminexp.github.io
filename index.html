@@ -2,6 +2,9 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>羊羊金和狗狗雅的小角落 | Love Diary</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Dancing+Script:wght@600;700&family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&family=Caveat:wght@500&display=swap" rel="stylesheet">
@@ -319,6 +322,7 @@
 <body data-active-page="home">
 
     <div id="uploadProgress">正在把照片存入日记本... ⏳</div>
+    <div id="syncStatus" style="position: fixed; top: 5rem; right: 1.5rem; z-index: 1100; background: rgba(255,255,255,0.92); color:#4a4a4a; padding: 0.65rem 1rem; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.12); font-size:0.9rem; display:none; max-width: 220px; text-align: center;">同步状态</div>
 
     <nav class="nav-container">
         <a href="#" class="nav-logo" onclick="window.showPage('home')">Love Diary</a>
@@ -562,7 +566,7 @@
     <!-- ================= Firebase 核心逻辑集成 ================= -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, doc, onSnapshot, setDoc, collection, addDoc, deleteDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getFirestore, doc, onSnapshot, setDoc, collection, addDoc, deleteDoc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDLpEbrAf2QB6p22I1qrYNIZN_3wHkjOAM",
@@ -594,8 +598,10 @@
 
         const stateDocRef = doc(db, "diary", "shared_state");
         const photosColRef = collection(db, "photos");
+        const photosQuery = query(photosColRef, orderBy('timestamp', 'asc'));
 
         onSnapshot(stateDocRef, (docSnap) => {
+            console.log('Firestore state snapshot', docSnap.exists(), docSnap.id, docSnap.data());
             if (docSnap.exists()) {
                 const data = docSnap.data();
                 window.appData = {
@@ -614,13 +620,27 @@
             console.error("状态同步失败:", err);
         });
 
-        onSnapshot(photosColRef, (snap) => {
-            window.photosData = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.timestamp - b.timestamp);
+        onSnapshot(photosQuery, (snap) => {
+            console.log('Firestore photos snapshot', snap.docs.length, snap.docs.map(d => d.id));
+            window.photosData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
             loadPhotos();
+            updateSyncStatus(`照片同步：${snap.docs.length} 张，更新时间 ${new Date().toLocaleTimeString()}`);
+        }, (err) => {
+            console.error('Photos snapshot failed:', err);
+            updateSyncStatus('照片同步失败，请检查网络。');
         });
 
         function saveStateToFirebase() {
             setDoc(stateDocRef, window.appData).catch(err => console.error("保存失败:", err));
+        }
+
+        function updateSyncStatus(text) {
+            const status = document.getElementById('syncStatus');
+            if (!status) return;
+            status.textContent = text;
+            status.style.display = 'block';
+            clearTimeout(window.syncStatusTimer);
+            window.syncStatusTimer = setTimeout(() => { status.style.display = 'none'; }, 4000);
         }
 
         const RELATIONSHIP_START = '2025-10-11';
@@ -717,6 +737,7 @@
             const gallery = document.getElementById('photoGallery');
             const addBtn = gallery.querySelector('.photo-add');
             gallery.innerHTML = '';
+            console.log('loadPhotos', window.photosData.length, window.photosData.map(p => p.src));
             window.photosData.forEach((photo, index) => {
                 const card = document.createElement('div'); card.className = 'photo-card'; card.style.transform = `rotate(${Math.random() * 20 - 10}deg)`; card.onclick = () => window.openPhotoModal(index);
                 card.innerHTML = `<div class="photo-img-wrap"><img src="${photo.src}" alt="photo"></div><p class="photo-caption">${escapeHtml(photo.caption || '温柔的记忆')}</p>`;
