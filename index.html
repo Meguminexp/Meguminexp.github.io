@@ -437,6 +437,37 @@
         </div>
     </div>
 
+    <!-- ================= 添加照片弹窗（粘贴 Cloudinary 链接）================= -->
+    <div id="addPhotoDialog" style="display:none; position:fixed; inset:0; background:rgba(40,35,30,0.75); backdrop-filter:blur(10px); z-index:3000; align-items:center; justify-content:center; padding:2rem;">
+        <div style="background:#fffcf8; border-radius:24px; padding:2.5rem 2rem; width:100%; max-width:500px; box-shadow:0 25px 60px rgba(0,0,0,0.45); position:relative;">
+            <button onclick="document.getElementById('addPhotoDialog').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:2rem;color:#a09ab8;cursor:pointer;line-height:1;transition:0.3s;" onmouseover="this.style.color='#ff4757'" onmouseout="this.style.color='#a09ab8'">×</button>
+            <h3 style="font-family:var(--font-display);color:#5a4b3c;margin-bottom:0.4rem;font-size:1.5rem;">📷 存入新的光影</h3>
+            <p style="font-size:0.85rem;color:#a09ab8;margin-bottom:1.5rem;">将 Cloudinary 图片链接粘贴到下方</p>
+
+            <label style="font-size:0.85rem;color:#8b7355;display:block;margin-bottom:4px;">图片链接（Cloudinary URL）</label>
+            <input type="url" id="newPhotoUrl" placeholder="https://res.cloudinary.com/…"
+                style="width:100%;padding:12px 14px;margin-bottom:14px;border:1px solid rgba(210,168,128,0.6);border-radius:12px;font-size:0.95rem;color:#3c2a18;outline:none;background:#fff;transition:0.3s;box-sizing:border-box;"
+                onfocus="this.style.borderColor='#d97b5a'" onblur="this.style.borderColor='rgba(210,168,128,0.6)'">
+
+            <label style="font-size:0.85rem;color:#8b7355;display:block;margin-bottom:4px;">照片标题</label>
+            <input type="text" id="newPhotoCaption" placeholder="温柔的记忆…"
+                style="width:100%;padding:12px 14px;margin-bottom:22px;border:1px solid rgba(210,168,128,0.6);border-radius:12px;font-size:0.95rem;color:#3c2a18;outline:none;background:#fff;transition:0.3s;box-sizing:border-box;"
+                onfocus="this.style.borderColor='#d97b5a'" onblur="this.style.borderColor='rgba(210,168,128,0.6)'"
+                onkeydown="if(event.key==='Enter') window.confirmAddPhoto()">
+
+            <div style="display:flex;gap:10px;">
+                <button onclick="window.confirmAddPhoto()"
+                    style="flex:1;padding:0.85rem;background:#d97b5a;color:#fff;border:none;border-radius:14px;font-size:1rem;font-weight:bold;cursor:pointer;transition:0.3s;font-family:var(--font-main);"
+                    onmouseover="this.style.background='#b8511f';this.style.transform='translateY(-2px)'"
+                    onmouseout="this.style.background='#d97b5a';this.style.transform='translateY(0)'">保存记忆</button>
+                <button onclick="document.getElementById('addPhotoDialog').style.display='none'"
+                    style="flex:0.6;padding:0.85rem;background:rgba(160,154,184,0.15);color:#7a6080;border:none;border-radius:14px;font-size:1rem;cursor:pointer;transition:0.3s;font-family:var(--font-main);"
+                    onmouseover="this.style.background='rgba(160,154,184,0.3)'"
+                    onmouseout="this.style.background='rgba(160,154,184,0.15)'">取消</button>
+            </div>
+        </div>
+    </div>
+
     <section class="page" id="page-wishes">
         <h1 class="page-title">星夜祈愿</h1>
         <p class="page-subtitle">在月光下，所有柔软的愿望都会被听见</p>
@@ -588,20 +619,48 @@
         window.photosData = []; 
 
         const stateDocRef = doc(db, "diary", "shared_state");
-        const photosColRef = collection(db, "photos"); 
+        const photosColRef = collection(db, "photos");
+
+        // 标志位：防止首次初始化被重复触发
+        let _stateInitialized = false;
 
         onSnapshot(stateDocRef, (docSnap) => {
             if (docSnap.exists()) {
-                window.appData = docSnap.data();
+                _stateInitialized = true;
+                const data = docSnap.data();
+                // 补全可能缺失的字段，保证结构完整
+                window.appData = {
+                    stars:        data.stars        || [],
+                    wishes:       data.wishes       || [],
+                    messages:     data.messages     || [],
+                    achievements: data.achievements || DEFAULT_ACHIEVEMENTS,
+                };
                 renderBasicData();
             } else {
-                setDoc(stateDocRef, window.appData);
+                // 只有确认是全新数据库时才写入默认值，避免错误时覆盖数据
+                if (!_stateInitialized) {
+                    _stateInitialized = true;
+                    console.log("首次初始化数据库...");
+                    setDoc(stateDocRef, window.appData);
+                }
+            }
+        }, (error) => {
+            // 捕获读取错误（权限拒绝、网络异常等），绝不在此时覆盖数据
+            console.error("Firebase 读取失败:", error.code, error.message);
+            if (error.code === 'permission-denied') {
+                const tip = document.createElement('div');
+                tip.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#ff4757;color:#fff;padding:12px 24px;border-radius:20px;z-index:9999;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.3);';
+                tip.textContent = '⚠️ Firebase 权限不足，请检查 Firestore 安全规则是否已过期！';
+                document.body.appendChild(tip);
+                setTimeout(() => tip.remove(), 8000);
             }
         });
 
         onSnapshot(photosColRef, (snap) => {
             window.photosData = snap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => a.timestamp - b.timestamp);
             loadPhotos();
+        }, (error) => {
+            console.error("相册读取失败:", error.code, error.message);
         });
 
         function saveStateToFirebase() {
@@ -749,37 +808,29 @@
         }
         
         window.addPhoto = function() {
-            const input = document.createElement('input'); input.type = 'file'; input.accept = 'image/*';
-            input.onchange = (e) => {
-                const file = e.target.files[0]; if (!file) return; 
-                document.getElementById('uploadProgress').style.display = 'block';
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    const img = new Image(); img.src = event.target.result;
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas'); 
-                        const MAX_W = 800, MAX_H = 800;
-                        let w = img.width, h = img.height; 
-                        if (w > h) { if (w > MAX_W) { h *= MAX_W / w; w = MAX_W; } } 
-                        else { if (h > MAX_H) { w *= MAX_H / h; h = MAX_H; } }
-                        canvas.width = w; canvas.height = h; 
-                        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-                        
-                        const base64Str = canvas.toDataURL('image/jpeg', 0.6); 
-                        
-                        addDoc(photosColRef, { 
-                            src: base64Str, caption: '新的记忆碎片', date: '', location: '', note: '', timestamp: Date.now() 
-                        }).then(() => {
-                            document.getElementById('uploadProgress').style.display = 'none';
-                        }).catch(err => {
-                            alert("图片上传失败了，请检查网络！");
-                            document.getElementById('uploadProgress').style.display = 'none';
-                        });
-                    };
-                };
-                reader.readAsDataURL(file);
-            };
-            input.click();
+            document.getElementById('newPhotoUrl').value = '';
+            document.getElementById('newPhotoCaption').value = '';
+            document.getElementById('addPhotoDialog').style.display = 'flex';
+        }
+
+        window.confirmAddPhoto = function() {
+            const url     = document.getElementById('newPhotoUrl').value.trim();
+            const caption = document.getElementById('newPhotoCaption').value.trim();
+            if (!url) { alert('请粘贴一个 Cloudinary 图片链接！'); return; }
+            document.getElementById('uploadProgress').style.display = 'block';
+            addDoc(photosColRef, {
+                src: url,
+                caption: caption || '新的记忆碎片',
+                date: '', location: '', note: '',
+                timestamp: Date.now()
+            }).then(() => {
+                document.getElementById('uploadProgress').style.display = 'none';
+                document.getElementById('addPhotoDialog').style.display = 'none';
+            }).catch(err => {
+                alert("保存失败，请检查网络或 Firebase 规则！");
+                console.error(err);
+                document.getElementById('uploadProgress').style.display = 'none';
+            });
         }
 
         function loadWishes() { document.getElementById('wishList').innerHTML = window.appData.wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="window.toggleWish(${i})"></div><span style="flex:1;">${escapeHtml(wish.text)}</span><button class="delete-btn" onclick="window.deleteWish(${i})" title="删除愿望">×</button></div>`).join(''); }
