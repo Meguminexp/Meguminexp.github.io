@@ -622,13 +622,81 @@
         const stateDocRef = doc(db, "diary", "shared_state");
         const photosColRef = collection(db, "photos");
 
+        // =====================================================================
+        // ★ 修复：localStorage 双重备份层 —— 防止 Firebase 写入失败导致数据丢失
+        //    常见原因：Firebase 免费测试规则30天到期后写入静默失败，
+        //             但本地内存显示正常，次日刷新从 Firestore 读回旧数据，
+        //             用户误以为数据消失。
+        // =====================================================================
+        const LS_KEY = 'love_diary_backup';
+        const LS_TS_KEY = 'love_diary_backup_ts';
+
+        function saveToLocalStorage(data) {
+            try {
+                localStorage.setItem(LS_KEY, JSON.stringify(data));
+                localStorage.setItem(LS_TS_KEY, Date.now().toString());
+            } catch(e) { /* 存储空间不足时忽略 */ }
+        }
+
+        function loadFromLocalStorage() {
+            try {
+                const raw = localStorage.getItem(LS_KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch(e) { return null; }
+        }
+
+        function showPersistentTip(msg, color = '#ff4757', duration = 10000) {
+            const tip = document.createElement('div');
+            tip.style.cssText = `position:fixed;top:70px;left:50%;transform:translateX(-50%);
+                background:${color};color:#fff;padding:14px 28px;border-radius:20px;
+                z-index:9999;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.3);
+                max-width:90vw;text-align:center;line-height:1.6;`;
+            tip.innerHTML = msg;
+            document.body.appendChild(tip);
+            if (duration > 0) setTimeout(() => tip.remove(), duration);
+            return tip;
+        }
+
         // 标志位：防止首次初始化被重复触发
         let _stateInitialized = false;
+        // Firebase 快照带来的数据时间戳（用于与本地备份比较新旧）
+        let _firebaseDataTs = 0;
 
         onSnapshot(stateDocRef, (docSnap) => {
             if (docSnap.exists()) {
                 _stateInitialized = true;
                 const data = docSnap.data();
+
+                // ★ 关键保护：比较 Firebase 数据与本地备份的时间戳
+                //   若本地备份更新，说明上次写入 Firebase 很可能失败了，提示用户
+                const localTs = parseInt(localStorage.getItem(LS_TS_KEY) || '0');
+                const firebaseTs = data._savedAt || 0;
+                _firebaseDataTs = firebaseTs;
+
+                if (localTs > firebaseTs + 5000) {
+                    // 本地备份比 Firebase 更新超过5秒，可能有写入失败
+                    const localBackup = loadFromLocalStorage();
+                    const fbHasLess = (data.messages || []).length < (localBackup?.messages || []).length ||
+                                      (data.wishes   || []).length < (localBackup?.wishes   || []).length;
+                    if (localBackup && fbHasLess) {
+                        showPersistentTip(
+                            '⚠️ 检测到本地有更新的数据，但 Firebase 里的版本较旧（可能上次保存失败）。<br>' +
+                            '正在尝试从本地备份恢复...',
+                            '#e67e22', 6000
+                        );
+                        window.appData = {
+                            stars:        localBackup.stars        || [],
+                            wishes:       localBackup.wishes       || [],
+                            messages:     localBackup.messages     || [],
+                            achievements: localBackup.achievements || DEFAULT_ACHIEVEMENTS,
+                        };
+                        renderBasicData();
+                        // 立即将本地备份重新同步到 Firebase
+                        saveStateToFirebase();
+                        return;
+                    }
+                }
+
                 // 补全可能缺失的字段，保证结构完整
                 window.appData = {
                     stars:        data.stars        || [],
@@ -636,24 +704,52 @@
                     messages:     data.messages     || [],
                     achievements: data.achievements || DEFAULT_ACHIEVEMENTS,
                 };
+                // ★ 每次成功读取也同步一份到 localStorage
+                saveToLocalStorage(window.appData);
                 renderBasicData();
             } else {
-                // 只有确认是全新数据库时才写入默认值，避免错误时覆盖数据
+                // ★ 修复：文档不存在时，先检查本地备份，避免用默认空数据覆盖有价值的内容
                 if (!_stateInitialized) {
                     _stateInitialized = true;
-                    console.log("首次初始化数据库...");
-                    setDoc(stateDocRef, window.appData);
+                    const localBackup = loadFromLocalStorage();
+                    if (localBackup && (
+                        localBackup.messages?.length > 0 ||
+                        localBackup.wishes?.length > 0 ||
+                        localBackup.stars?.length > 0
+                    )) {
+                        console.log("Firebase 无记录，从本地备份恢复数据...");
+                        window.appData = {
+                            stars:        localBackup.stars        || [],
+                            wishes:       localBackup.wishes       || [],
+                            messages:     localBackup.messages     || [],
+                            achievements: localBackup.achievements || DEFAULT_ACHIEVEMENTS,
+                        };
+                        renderBasicData();
+                        saveStateToFirebase(); // 将本地备份写回 Firebase
+                    } else {
+                        console.log("首次初始化数据库...");
+                        setDoc(stateDocRef, { ...window.appData, _savedAt: Date.now() });
+                    }
                 }
             }
         }, (error) => {
             // 捕获读取错误（权限拒绝、网络异常等），绝不在此时覆盖数据
             console.error("Firebase 读取失败:", error.code, error.message);
+            let msg = '⚠️ Firebase 读取失败！数据将从本地备份临时恢复。';
             if (error.code === 'permission-denied') {
-                const tip = document.createElement('div');
-                tip.style.cssText = 'position:fixed;top:70px;left:50%;transform:translateX(-50%);background:#ff4757;color:#fff;padding:12px 24px;border-radius:20px;z-index:9999;font-weight:bold;box-shadow:0 4px 15px rgba(0,0,0,0.3);';
-                tip.textContent = '⚠️ Firebase 权限不足，请检查 Firestore 安全规则是否已过期！';
-                document.body.appendChild(tip);
-                setTimeout(() => tip.remove(), 8000);
+                msg = '⚠️ Firebase 权限不足！<br>请前往 Firebase 控制台 → Firestore → 规则，检查测试模式是否到期（常见：30天免费规则已过期）。<br>建议将规则改为：<code style="background:rgba(0,0,0,0.3);padding:2px 6px;border-radius:4px;">allow read, write: if true;</code>（仅私人使用）';
+            }
+            showPersistentTip(msg, '#ff4757', 0); // duration=0 不自动消失
+            // 用本地备份临时渲染
+            const localBackup = loadFromLocalStorage();
+            if (localBackup) {
+                window.appData = {
+                    stars:        localBackup.stars        || [],
+                    wishes:       localBackup.wishes       || [],
+                    messages:     localBackup.messages     || [],
+                    achievements: localBackup.achievements || DEFAULT_ACHIEVEMENTS,
+                };
+                renderBasicData();
             }
         });
 
@@ -665,14 +761,27 @@
         });
 
         function saveStateToFirebase() {
-                    // 拦截机制：防止本地空数据在未加载完时覆盖云端数据，导致第二天清空！
-                    if (!_stateInitialized) {
-                        console.warn("数据尚未同步完毕，拦截写入保护数据！");
-                        return;
-                    }
-                    // 加上 { merge: true }，安全合并数据
-                    setDoc(stateDocRef, window.appData, { merge: true }).catch(err => console.error("保存失败:", err));
-                }
+            // 拦截机制：防止本地空数据在未加载完时覆盖云端数据
+            if (!_stateInitialized) {
+                console.warn("数据尚未同步完毕，拦截写入保护数据！");
+                return;
+            }
+            // ★ 每次写入都附带时间戳，用于检测写入成功与否
+            const payload = { ...window.appData, _savedAt: Date.now() };
+            // ★ 先保存到 localStorage（无论 Firebase 是否成功，本地先有备份）
+            saveToLocalStorage(window.appData);
+
+            setDoc(stateDocRef, payload, { merge: true }).catch(err => {
+                console.error("Firebase 保存失败:", err);
+                // ★ 写入失败时弹出醒目警告，不再静默失败！
+                showPersistentTip(
+                    `⚠️ 数据保存到 Firebase 失败！(${err.code || err.message})<br>` +
+                    '内容已备份到本地，但换设备后无法同步。<br>' +
+                    '请检查 Firebase 安全规则是否到期！',
+                    '#ff4757', 15000
+                );
+            });
+        }
 
         const RELATIONSHIP_START = '2025-10-11';
         let currentPhotoIndex = -1;
@@ -815,7 +924,9 @@
         }
         
         window.addPhoto = function() {
-            document.getElementById('newPhotoUrl').value = '';
+            // ★ 修复：原来引用了不存在的 newPhotoUrl，导致弹窗永远无法打开
+            const fi = document.getElementById('newPhotoFile');
+            if (fi) fi.value = '';
             document.getElementById('newPhotoCaption').value = '';
             document.getElementById('addPhotoDialog').style.display = 'flex';
         }
