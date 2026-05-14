@@ -437,23 +437,21 @@
         </div>
     </div>
 
-    <!-- ================= 添加照片弹窗（粘贴 Cloudinary 链接）================= -->
+<!-- ================= 添加照片弹窗（本地选择自动上传 Cloudinary）================= -->
     <div id="addPhotoDialog" style="display:none; position:fixed; inset:0; background:rgba(40,35,30,0.75); backdrop-filter:blur(10px); z-index:3000; align-items:center; justify-content:center; padding:2rem;">
         <div style="background:#fffcf8; border-radius:24px; padding:2.5rem 2rem; width:100%; max-width:500px; box-shadow:0 25px 60px rgba(0,0,0,0.45); position:relative;">
             <button onclick="document.getElementById('addPhotoDialog').style.display='none'" style="position:absolute;top:16px;right:20px;background:none;border:none;font-size:2rem;color:#a09ab8;cursor:pointer;line-height:1;transition:0.3s;" onmouseover="this.style.color='#ff4757'" onmouseout="this.style.color='#a09ab8'">×</button>
             <h3 style="font-family:var(--font-display);color:#5a4b3c;margin-bottom:0.4rem;font-size:1.5rem;">📷 存入新的光影</h3>
-            <p style="font-size:0.85rem;color:#a09ab8;margin-bottom:1.5rem;">将 Cloudinary 图片链接粘贴到下方</p>
+            <p style="font-size:0.85rem;color:#a09ab8;margin-bottom:1.5rem;">选择本地照片，将自动存入云端相册</p>
 
-            <label style="font-size:0.85rem;color:#8b7355;display:block;margin-bottom:4px;">图片链接（Cloudinary URL）</label>
-            <input type="url" id="newPhotoUrl" placeholder="https://res.cloudinary.com/…"
-                style="width:100%;padding:12px 14px;margin-bottom:14px;border:1px solid rgba(210,168,128,0.6);border-radius:12px;font-size:0.95rem;color:#3c2a18;outline:none;background:#fff;transition:0.3s;box-sizing:border-box;"
-                onfocus="this.style.borderColor='#d97b5a'" onblur="this.style.borderColor='rgba(210,168,128,0.6)'">
+            <label style="font-size:0.85rem;color:#8b7355;display:block;margin-bottom:4px;">选择照片 (直接点击选择文件)</label>
+            <input type="file" id="newPhotoFile" accept="image/*"
+                style="width:100%;padding:10px;margin-bottom:14px;border:1px dashed #d97b5a;border-radius:12px;font-size:0.95rem;background:rgba(217,123,90,0.05);cursor:pointer;box-sizing:border-box;">
 
             <label style="font-size:0.85rem;color:#8b7355;display:block;margin-bottom:4px;">照片标题</label>
             <input type="text" id="newPhotoCaption" placeholder="温柔的记忆…"
                 style="width:100%;padding:12px 14px;margin-bottom:22px;border:1px solid rgba(210,168,128,0.6);border-radius:12px;font-size:0.95rem;color:#3c2a18;outline:none;background:#fff;transition:0.3s;box-sizing:border-box;"
-                onfocus="this.style.borderColor='#d97b5a'" onblur="this.style.borderColor='rgba(210,168,128,0.6)'"
-                onkeydown="if(event.key==='Enter') window.confirmAddPhoto()">
+                onfocus="this.style.borderColor='#d97b5a'" onblur="this.style.borderColor='rgba(210,168,128,0.6)'">
 
             <div style="display:flex;gap:10px;">
                 <button onclick="window.confirmAddPhoto()"
@@ -606,7 +604,10 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
+// ================= Cloudinary 上传配置 =================
+        const CLOUDINARY_UPLOAD_URL = "https://api.cloudinary.com/v1_1/dr3eavuuu/image/upload";
+        const CLOUDINARY_UPLOAD_PRESET = "unsigned_photos";
+        // ========================================================
         const DEFAULT_ACHIEVEMENTS =[
             { title: '暮光图书馆', hint: '在一场静谧的午后找到属于我们的共读秘密。', detail: '完成一次一起挑选、分享并读完同一本音乐剧剧本或小说。', completed: false, icon: '📖', date: '' },
             { title: '星迹拼图', hint: '当我们把碎片拼成一幅生活的闪亮图案。', detail: '一起看完一部音乐剧，记录台词中最心动的那一句。', completed: false, icon: '🧩', date: '' },
@@ -664,8 +665,14 @@
         });
 
         function saveStateToFirebase() {
-            setDoc(stateDocRef, window.appData).catch(err => console.error("保存失败:", err));
-        }
+                    // 拦截机制：防止本地空数据在未加载完时覆盖云端数据，导致第二天清空！
+                    if (!_stateInitialized) {
+                        console.warn("数据尚未同步完毕，拦截写入保护数据！");
+                        return;
+                    }
+                    // 加上 { merge: true }，安全合并数据
+                    setDoc(stateDocRef, window.appData, { merge: true }).catch(err => console.error("保存失败:", err));
+                }
 
         const RELATIONSHIP_START = '2025-10-11';
         let currentPhotoIndex = -1;
@@ -813,25 +820,56 @@
             document.getElementById('addPhotoDialog').style.display = 'flex';
         }
 
-        window.confirmAddPhoto = function() {
-            const url     = document.getElementById('newPhotoUrl').value.trim();
-            const caption = document.getElementById('newPhotoCaption').value.trim();
-            if (!url) { alert('请粘贴一个 Cloudinary 图片链接！'); return; }
-            document.getElementById('uploadProgress').style.display = 'block';
-            addDoc(photosColRef, {
-                src: url,
-                caption: caption || '新的记忆碎片',
-                date: '', location: '', note: '',
-                timestamp: Date.now()
-            }).then(() => {
-                document.getElementById('uploadProgress').style.display = 'none';
-                document.getElementById('addPhotoDialog').style.display = 'none';
-            }).catch(err => {
-                alert("保存失败，请检查网络或 Firebase 规则！");
-                console.error(err);
-                document.getElementById('uploadProgress').style.display = 'none';
-            });
-        }
+        window.confirmAddPhoto = async function() {
+                    const fileInput = document.getElementById('newPhotoFile');
+                    const caption = document.getElementById('newPhotoCaption').value.trim();
+
+                    if (!fileInput.files || fileInput.files.length === 0) { 
+                        alert('请先点击选择一张本地照片！'); 
+                        return; 
+                    }
+
+                    const file = fileInput.files[0];
+                    const progressEl = document.getElementById('uploadProgress');
+                    progressEl.innerText = '正在上传照片到云端... ⏳';
+                    progressEl.style.display = 'block';
+
+                    // 构造上传数据
+                    const formData = new FormData();
+                    formData.append('file', file);
+                    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+
+                    try {
+                        // 1. 直传图片到 Cloudinary
+                        const response = await fetch(CLOUDINARY_UPLOAD_URL, {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const data = await response.json();
+
+                        if (!data.secure_url) {
+                            throw new Error(data.error ? data.error.message : "未知的上传错误");
+                        }
+
+                        // 2. 拿到安全链接后，存入 Firebase 数据库
+                        progressEl.innerText = '正在把记忆写入日记本... ⏳';
+                        await addDoc(photosColRef, {
+                            src: data.secure_url,
+                            caption: caption || '新的记忆碎片',
+                            date: '', location: '', note: '',
+                            timestamp: Date.now()
+                        });
+
+                        progressEl.style.display = 'none';
+                        document.getElementById('addPhotoDialog').style.display = 'none';
+                        fileInput.value = ''; // 清空选择器
+                        document.getElementById('newPhotoCaption').value = ''; 
+                    } catch (err) {
+                        alert("保存失败，请检查网络或配置：" + err.message);
+                        console.error(err);
+                        progressEl.style.display = 'none';
+                    }
+                }
 
         function loadWishes() { document.getElementById('wishList').innerHTML = window.appData.wishes.map((wish, i) => `<div class="wish-item ${wish.completed ? 'completed' : ''}"><div class="wish-checkbox ${wish.completed ? 'checked' : ''}" onclick="window.toggleWish(${i})"></div><span style="flex:1;">${escapeHtml(wish.text)}</span><button class="delete-btn" onclick="window.deleteWish(${i})" title="删除愿望">×</button></div>`).join(''); }
         window.addWish = function() { const input = document.getElementById('wishInput'); if(!input.value.trim()) return; window.appData.wishes.unshift({ text: input.value.trim(), completed: false }); saveStateToFirebase(); input.value = ''; }
