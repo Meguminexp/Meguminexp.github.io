@@ -25,7 +25,7 @@
         body[data-active-page="photos"] { --bg-primary: #fdfaf6; --text-primary: #5a4b3c; --text-secondary: #8c7b6d; --accent: #d97b5a; --nav-bg: rgba(253, 250, 246, 0.85); }
         body[data-active-page="wishes"] { --bg-primary: linear-gradient(to bottom, #0b0c10 0%, #1f2833 60%, #45a29e 100%); --text-primary: #fcfcfc; --text-secondary: #66fcf1; --accent: #66fcf1; --nav-bg: rgba(11, 12, 16, 0.8); }
         body[data-active-page="messages"] { --bg-primary: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%); --text-primary: #4a4a4a; --text-secondary: #7a7a7a; --accent: #a18cd1; --nav-bg: rgba(243, 231, 233, 0.8); }
-        body[data-active-page="achievements"] { --bg-primary: linear-gradient(180deg, #110f24 0%, #2a1b38 40%, #5c3546 80%, #a86255 100%); --text-primary: #fff8f0; --text-secondary: #f0d5c9; --accent: #ffb7b2; --nav-bg: rgba(17, 15, 36, 0.85); }
+        body[data-active-page="milktea"] { --bg-primary: linear-gradient(160deg, #2d1b3d 0%, #4a2060 30%, #7b3f5e 60%, #c97b8a 100%); --text-primary: #ffe8f5; --text-secondary: #e8b4d0; --accent: #f0a0c0; --accent-glow: rgba(240, 160, 192, 0.5); --nav-bg: rgba(45, 27, 61, 0.85); }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -265,6 +265,320 @@
         #uploadProgress { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #d97b5a; color: white; padding: 10px 20px; border-radius: 20px; z-index: 9999; display: none; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
 
         /* ================= 移动端深度适配 (核心修改部分) ================= */
+        /* ================= 6. 奶茶日志页 ================= */
+        #page-milktea { position: relative; overflow-x: hidden; }
+
+        /* 奶茶背景装饰：浮动气泡 */
+        .mt-bubble {
+            position: absolute; border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, rgba(255,220,240,0.25), rgba(200,120,180,0.08));
+            border: 1px solid rgba(255,200,230,0.2);
+            animation: mtBubbleFloat linear infinite;
+            pointer-events: none; z-index: 0;
+        }
+        @keyframes mtBubbleFloat {
+            0%   { transform: translateY(0) scale(1);   opacity: 0; }
+            10%  { opacity: 1; }
+            90%  { opacity: 0.6; }
+            100% { transform: translateY(-110vh) scale(1.3); opacity: 0; }
+        }
+        .mt-pearl {
+            position: absolute; border-radius: 50%;
+            background: radial-gradient(circle at 35% 30%, #7b3060, #3d0a2a);
+            box-shadow: inset -3px -3px 6px rgba(255,255,255,0.12), 0 4px 12px rgba(0,0,0,0.4);
+            animation: mtPearlFloat ease-in-out infinite alternate;
+            pointer-events: none; z-index: 0;
+        }
+        @keyframes mtPearlFloat { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-15px) rotate(8deg); } }
+
+        /* 进度仪表盘 */
+        .mt-dashboard {
+            max-width: 1000px; margin: 0 auto 3rem; position: relative; z-index: 2;
+            display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; justify-content: center;
+        }
+        .mt-ring-wrap {
+            flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 1rem;
+        }
+        .mt-ring {
+            width: 200px; height: 200px; position: relative;
+            filter: drop-shadow(0 0 30px rgba(240,160,192,0.4));
+        }
+        .mt-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .mt-ring-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 14; }
+        .mt-ring-fill {
+            fill: none; stroke: url(#mtRingGrad); stroke-width: 14;
+            stroke-linecap: round;
+            stroke-dasharray: 502.65;
+            stroke-dashoffset: 502.65;
+            transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);
+        }
+        .mt-ring-center {
+            position: absolute; inset: 0; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+        }
+        .mt-ring-num {
+            font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
+            color: #ffe8f5; line-height: 1; text-shadow: 0 0 30px rgba(240,160,192,0.8);
+        }
+        .mt-ring-denom {
+            font-family: var(--font-dancing); font-size: 1.1rem; color: rgba(255,220,240,0.7);
+        }
+        /* .mt-ring-label removed */
+
+        .mt-stats-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; flex: 1; min-width: 240px;
+        }
+        .mt-stat-card {
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,200,230,0.2);
+            border-radius: 18px; padding: 1.2rem 1.5rem; backdrop-filter: blur(10px);
+            transition: 0.3s;
+        }
+        .mt-stat-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-3px); }
+        .mt-stat-icon { font-size: 1.8rem; margin-bottom: 0.4rem; }
+        .mt-stat-num {
+            font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700;
+            color: #ffe8f5; line-height: 1;
+        }
+        .mt-stat-lbl { font-size: 0.82rem; color: rgba(255,200,230,0.7); margin-top: 0.2rem; }
+
+        /* 添加按钮区 */
+        .mt-add-bar {
+            max-width: 1000px; margin: 0 auto 2.5rem; position: relative; z-index: 2;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+        }
+        .mt-section-title {
+            font-family: var(--font-playfair); font-size: 1.4rem; color: #ffe8f5;
+            font-style: italic;
+        }
+        .mt-add-btn {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.8rem 1.8rem; border-radius: 50px;
+            background: linear-gradient(135deg, #c97b8a, #9b4f80);
+            color: #fff; border: none; font-size: 0.95rem; font-weight: bold;
+            cursor: pointer; transition: 0.3s; font-family: var(--font-main);
+            box-shadow: 0 6px 20px rgba(200,100,140,0.35);
+        }
+        .mt-add-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(200,100,140,0.5); }
+
+        /* 奶茶列表 */
+        .mt-list {
+            max-width: 1000px; margin: 0 auto; position: relative; z-index: 2;
+            display: flex; flex-direction: column; gap: 0;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,200,230,0.15);
+            border-radius: 18px; overflow: hidden;
+        }
+        .mt-row {
+            display: grid;
+            grid-template-columns: 3rem 1fr auto auto 5.5rem 2rem;
+            align-items: center; gap: 0.6rem;
+            padding: 0.75rem 1.2rem;
+            border-bottom: 1px solid rgba(255,200,230,0.08);
+            cursor: pointer; transition: background 0.2s ease;
+        }
+        .mt-row:last-child { border-bottom: none; }
+        .mt-row:hover { background: rgba(255,255,255,0.07); }
+        .mt-row-num {
+            font-family: 'Playfair Display', serif; font-style: italic;
+            font-size: 0.72rem; color: rgba(240,160,192,0.55); text-align: right;
+        }
+        .mt-row-name {
+            font-family: var(--font-display); font-size: 0.95rem; color: #ffe8f5;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .mt-row-tags { display: flex; gap: 0.3rem; flex-wrap: nowrap; overflow: hidden; }
+        .mt-row-stars { font-size: 0.72rem; white-space: nowrap; color: #f0c040; }
+        .mt-row-date {
+            font-size: 0.72rem; color: rgba(255,200,230,0.45);
+            font-family: var(--font-playfair); font-style: italic;
+            text-align: right; white-space: nowrap;
+        }
+        .mt-row-del {
+            width: 22px; height: 22px; border-radius: 50%;
+            background: transparent; color: rgba(255,100,120,0.4);
+            border: none; font-size: 0.9rem; cursor: pointer; transition: 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; flex-shrink: 0;
+        }
+        .mt-row:hover .mt-row-del { opacity: 1; }
+        .mt-row-del:hover { background: rgba(255,71,87,0.75); color: #fff; opacity: 1; }
+        /* list header */
+        .mt-list-header {
+            display: grid;
+            grid-template-columns: 3rem 1fr auto auto 5.5rem 2rem;
+            align-items: center; gap: 0.6rem;
+            padding: 0.5rem 1.2rem 0.5rem;
+            border-bottom: 1px solid rgba(255,200,230,0.18);
+            background: rgba(255,255,255,0.04);
+        }
+        .mt-list-header span {
+            font-size: 0.68rem; color: rgba(255,200,230,0.45);
+            text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-playfair);
+        }
+        .mt-list-header .h-right { text-align: right; }
+        /* keep tag style small */
+        .mt-tag {
+            padding: 0.1rem 0.5rem; border-radius: 999px; font-size: 0.68rem;
+            background: rgba(255,255,255,0.08); color: rgba(255,220,240,0.8);
+            border: 1px solid rgba(255,200,230,0.18); white-space: nowrap;
+        }
+        .mt-tag.sweet { background: rgba(255,180,120,0.13); border-color: rgba(255,180,120,0.28); }
+        .mt-tag.ice   { background: rgba(120,200,255,0.1);  border-color: rgba(120,200,255,0.28); }
+        .mt-tag.taste { background: rgba(200,150,255,0.1);  border-color: rgba(200,150,255,0.28); }
+
+        /* 奶茶详情弹窗 */
+        .mt-modal {
+            position: fixed; inset: 0; z-index: 2000;
+            background: rgba(30,10,45,0.88); backdrop-filter: blur(16px);
+            display: none; align-items: center; justify-content: center; padding: 2rem;
+            opacity: 0; transition: opacity 0.35s ease;
+        }
+        .mt-modal.show { display: flex; opacity: 1; }
+        .mt-modal-box {
+            background: linear-gradient(160deg, #2a1040 0%, #4a1d60 40%, #7a3560 100%);
+            border: 1px solid rgba(240,160,192,0.3);
+            border-radius: 28px; width: 100%; max-width: 520px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            transform: scale(0.92) translateY(20px);
+            transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            overflow: hidden; position: relative;
+        }
+        .mt-modal.show .mt-modal-box { transform: scale(1) translateY(0); }
+        .mt-modal-top {
+            padding: 2rem 2rem 1.5rem;
+            background: linear-gradient(135deg, rgba(255,160,200,0.12), rgba(180,80,160,0.08));
+            border-bottom: 1px solid rgba(240,160,192,0.2);
+            position: relative;
+        }
+        .mt-modal-num {
+            font-family: 'Playfair Display', serif; font-style: italic;
+            font-size: 0.9rem; color: rgba(240,160,192,0.65); margin-bottom: 0.4rem;
+        }
+        .mt-modal-name {
+            font-family: var(--font-display); font-size: 1.8rem; color: #ffe8f5;
+            line-height: 1.2; margin-bottom: 0.8rem; padding-right: 2rem;
+        }
+        .mt-modal-stars { display: flex; gap: 3px; }
+        .mt-modal-stars span { font-size: 1.2rem; }
+        .mt-modal-close {
+            position: absolute; top: 1.2rem; right: 1.4rem;
+            background: none; border: none; font-size: 2rem; color: rgba(240,160,192,0.6);
+            cursor: pointer; line-height: 1; transition: 0.3s;
+        }
+        .mt-modal-close:hover { color: #fff; transform: rotate(90deg); }
+        .mt-modal-body { padding: 1.8rem 2rem 2rem; }
+        .mt-modal-row {
+            display: flex; align-items: baseline; gap: 1rem;
+            margin-bottom: 1.2rem; padding-bottom: 1.2rem;
+            border-bottom: 1px solid rgba(255,200,230,0.1);
+        }
+        .mt-modal-row:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+        .mt-modal-lbl {
+            font-family: var(--font-dancing); font-size: 1.3rem; color: #f0a0c0;
+            width: 4rem; flex-shrink: 0; line-height: 1;
+        }
+        .mt-modal-val {
+            font-family: var(--font-main); font-size: 0.98rem; color: #ffe8f5;
+            line-height: 1.7; flex: 1;
+        }
+        .mt-modal-val.empty { color: rgba(255,220,240,0.35); font-style: italic; }
+
+        /* 奶茶新增弹窗 */
+        .mt-form-modal {
+            position: fixed; inset: 0; z-index: 2500;
+            background: rgba(30,10,45,0.9); backdrop-filter: blur(16px);
+            display: none; align-items: center; justify-content: center; padding: 2rem;
+            opacity: 0; transition: opacity 0.35s ease;
+        }
+        .mt-form-modal.show { display: flex; opacity: 1; }
+        .mt-form-box {
+            background: linear-gradient(160deg, #2d1445 0%, #4a1d65 100%);
+            border: 1px solid rgba(240,160,192,0.3);
+            border-radius: 28px; width: 100%; max-width: 480px;
+            padding: 2.2rem 2rem; max-height: 88vh; overflow-y: auto;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+            transform: scale(0.9); transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+            position: relative;
+        }
+        .mt-form-modal.show .mt-form-box { transform: scale(1); }
+        .mt-form-title {
+            font-family: var(--font-display); font-size: 1.6rem; color: #ffe8f5;
+            margin-bottom: 1.8rem; text-align: center;
+        }
+        .mt-form-close {
+            position: absolute; top: 1.2rem; right: 1.4rem;
+            background: none; border: none; font-size: 2rem; color: rgba(240,160,192,0.6);
+            cursor: pointer; line-height: 1; transition: 0.3s;
+        }
+        .mt-form-close:hover { color: #fff; transform: rotate(90deg); }
+        .mt-form-group { margin-bottom: 1.3rem; }
+        .mt-form-lbl {
+            display: block; font-size: 0.82rem; color: rgba(255,200,230,0.8);
+            margin-bottom: 0.4rem; letter-spacing: 0.04em;
+        }
+        .mt-form-input, .mt-form-textarea {
+            width: 100%; padding: 0.75rem 1rem;
+            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,200,230,0.25);
+            border-radius: 12px; color: #ffe8f5; font-family: var(--font-main); font-size: 0.95rem;
+            outline: none; transition: 0.3s;
+        }
+        .mt-form-input::placeholder, .mt-form-textarea::placeholder { color: rgba(255,200,230,0.35); }
+        .mt-form-input:focus, .mt-form-textarea:focus {
+            border-color: #f0a0c0; background: rgba(255,255,255,0.12);
+            box-shadow: 0 0 0 3px rgba(240,160,192,0.15);
+        }
+        .mt-form-textarea { min-height: 75px; resize: vertical; }
+
+        .mt-chip-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .mt-chip {
+            padding: 0.4rem 1rem; border-radius: 999px; font-size: 0.85rem;
+            border: 1px solid rgba(255,200,230,0.3); color: rgba(255,220,240,0.7);
+            background: rgba(255,255,255,0.06); cursor: pointer; transition: 0.2s;
+            user-select: none;
+        }
+        .mt-chip.active {
+            background: linear-gradient(135deg, rgba(200,100,160,0.45), rgba(160,60,140,0.35));
+            border-color: rgba(240,160,192,0.7); color: #ffe8f5;
+            box-shadow: 0 0 10px rgba(240,160,192,0.2);
+        }
+        .mt-chip:hover:not(.active) { background: rgba(255,255,255,0.1); color: #ffe8f5; }
+
+        .mt-star-picker { display: flex; gap: 6px; }
+        .mt-star-picker span {
+            font-size: 1.6rem; cursor: pointer; opacity: 0.3; transition: 0.2s;
+            filter: grayscale(1);
+        }
+        .mt-star-picker span.lit { opacity: 1; filter: none; }
+        .mt-star-picker span:hover { transform: scale(1.2); }
+
+        .mt-form-save {
+            width: 100%; padding: 1rem; border-radius: 16px; border: none;
+            background: linear-gradient(135deg, #c97b8a, #9b4f80);
+            color: #fff; font-size: 1rem; font-weight: bold; font-family: var(--font-main);
+            cursor: pointer; margin-top: 0.5rem; transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(180,80,140,0.35);
+        }
+        .mt-form-save:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(180,80,140,0.5); }
+
+        /* 空状态 */
+        .mt-empty {
+            grid-column: 1 / -1; text-align: center; padding: 4rem 2rem;
+            color: rgba(255,200,230,0.45); font-family: var(--font-handwriting); font-size: 1.2rem;
+        }
+        .mt-empty .mt-empty-icon { font-size: 4rem; display: block; margin-bottom: 1rem; opacity: 0.5; }
+
+        @media (max-width: 768px) {
+            .mt-dashboard { flex-direction: column; gap: 1.5rem; }
+            .mt-stats-grid { width: 100%; }
+            .mt-row { grid-template-columns: 2.5rem 1fr auto 4rem 1.8rem; gap: 0.4rem; padding: 0.65rem 0.9rem; }
+            .mt-row-tags { display: none; } /* hide tags on mobile, visible in detail modal */
+            .mt-list-header { grid-template-columns: 2.5rem 1fr auto 4rem 1.8rem; gap: 0.4rem; padding: 0.4rem 0.9rem; }
+            .mt-list-header .h-tags { display: none; }
+            .mt-modal-box, .mt-form-box { max-width: 100%; border-radius: 20px; }
+            .mt-ring { width: 160px; height: 160px; }
+            .mt-ring-num { font-size: 2.5rem; }
+        }
+
         @media (max-width: 768px) {
             /* 1. 导航栏紧凑化排版：变成横向可滑动条，不会换行遮挡内容 */
             .nav-container { padding: 0.8rem 1rem; flex-direction: column; gap: 0.8rem; }
@@ -328,6 +642,7 @@
             <button class="nav-item" data-page="wishes">星空许愿</button>
             <button class="nav-item" data-page="achievements">成就花园</button>
             <button class="nav-item" data-page="messages">便签角落</button>
+            <button class="nav-item" data-page="milktea">🧋 奶茶日志</button>
         </div>
     </nav>
 
@@ -573,6 +888,196 @@
         </div>
     </section>
 
+    <!-- ================= 奶茶日志页面 ================= -->
+    <section class="page" id="page-milktea">
+        <!-- 背景气泡 -->
+        <div id="mtBgDecorations" style="position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;"></div>
+        <script>
+            (function() {
+                var c = document.getElementById('mtBgDecorations');
+                for(var i=0;i<18;i++){
+                    var b=document.createElement('div');
+                    b.className='mt-bubble';
+                    var s=Math.random()*80+30;
+                    b.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(Math.random()*100)+'%;bottom:-'+(s+20)+'px;animation-delay:'+(Math.random()*20)+'s;animation-duration:'+(Math.random()*15+18)+'s;';
+                    c.appendChild(b);
+                }
+                for(var j=0;j<8;j++){
+                    var p=document.createElement('div');
+                    p.className='mt-pearl';
+                    var ps=Math.random()*22+14;
+                    p.style.cssText='width:'+ps+'px;height:'+ps+'px;left:'+(Math.random()*90+5)+'%;top:'+(Math.random()*70+15)+'%;animation-delay:'+(Math.random()*3)+'s;animation-duration:'+(Math.random()*3+4)+'s;';
+                    c.appendChild(p);
+                }
+            })();
+        </script>
+
+        <h1 class="page-title" style="background:linear-gradient(125deg,#ffdae8 0%,#f0a0c0 48%,#ffdae8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:none;">🧋 奶茶日志</h1>
+        <p class="page-subtitle">一共要喝 600 杯</p>
+
+        <!-- 进度仪表 -->
+        <div class="mt-dashboard">
+            <div class="mt-ring-wrap">
+                <div class="mt-ring" id="mtRing">
+                    <svg viewBox="0 0 190 190">
+                        <defs>
+                            <linearGradient id="mtRingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f0a0c0;stop-opacity:1"/>
+                                <stop offset="50%" style="stop-color:#c97b8a;stop-opacity:1"/>
+                                <stop offset="100%" style="stop-color:#9b4f80;stop-opacity:1"/>
+                            </linearGradient>
+                        </defs>
+                        <circle class="mt-ring-bg" cx="95" cy="95" r="80"/>
+                        <circle class="mt-ring-fill" id="mtRingFill" cx="95" cy="95" r="80"/>
+                    </svg>
+                    <div class="mt-ring-center">
+                        <span class="mt-ring-num" id="mtCountNum">0</span>
+                        <span class="mt-ring-denom">/ 600 杯</span>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-stats-grid" style="grid-template-columns:1fr 1fr;max-width:280px;">
+                <div class="mt-stat-card">
+                    <div class="mt-stat-icon">🧋</div>
+                    <div class="mt-stat-num" id="mtStatTotal">0</div>
+                    <div class="mt-stat-lbl">已记录</div>
+                </div>
+                <div class="mt-stat-card">
+                    <div class="mt-stat-icon">⭐</div>
+                    <div class="mt-stat-num" id="mtStatAvgStar">—</div>
+                    <div class="mt-stat-lbl">平均星级</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 操作栏 -->
+        <div class="mt-add-bar">
+            <div class="mt-section-title">✦ 我们喝过的每一杯</div>
+            <button class="mt-add-btn" onclick="window.openMtForm()">
+                <span>＋</span> 记录新的一杯
+            </button>
+        </div>
+
+        <!-- 奶茶列表 -->
+        <div class="mt-list" id="mtList">
+            <div class="mt-list-header">
+                <span style="text-align:right">#</span>
+                <span>名称</span>
+                <span class="h-tags">甜度 / 冰度 / 口感</span>
+                <span>评分</span>
+                <span class="h-right">日期</span>
+                <span></span>
+            </div>
+            <div class="mt-empty">
+                <span class="mt-empty-icon">🧋</span>
+                第一杯还没开始记录，快去喝第一杯吧！
+            </div>
+        </div>
+    </section>
+
+    <!-- 奶茶详情弹窗 -->
+    <div class="mt-modal" id="mtModal">
+        <div class="mt-modal-box">
+            <button class="mt-modal-close" onclick="window.closeMtModal()">×</button>
+            <div class="mt-modal-top">
+                <div class="mt-modal-num" id="mmNum">No.1</div>
+                <div class="mt-modal-name" id="mmName">奶茶名称</div>
+                <div class="mt-modal-stars" id="mmStars"></div>
+            </div>
+            <div class="mt-modal-body">
+                <div class="mt-modal-row">
+                    <div class="mt-modal-lbl">甜度</div>
+                    <div class="mt-modal-val" id="mmSweet">—</div>
+                </div>
+                <div class="mt-modal-row">
+                    <div class="mt-modal-lbl">冰度</div>
+                    <div class="mt-modal-val" id="mmIce">—</div>
+                </div>
+                <div class="mt-modal-row">
+                    <div class="mt-modal-lbl">口感</div>
+                    <div class="mt-modal-val" id="mmTaste">—</div>
+                </div>
+                <div class="mt-modal-row">
+                    <div class="mt-modal-lbl">备注</div>
+                    <div class="mt-modal-val" id="mmNote">—</div>
+                </div>
+                <div class="mt-modal-row">
+                    <div class="mt-modal-lbl">日期</div>
+                    <div class="mt-modal-val" id="mmDate">—</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 奶茶添加弹窗 -->
+    <div class="mt-form-modal" id="mtFormModal">
+        <div class="mt-form-box">
+            <button class="mt-form-close" onclick="window.closeMtForm()">×</button>
+            <div class="mt-form-title">🧋 记录这一杯</div>
+
+            <div class="mt-form-group">
+                <label class="mt-form-lbl">奶茶名字 *</label>
+                <input type="text" class="mt-form-input" id="mtfName" placeholder="例如：芋泥波波奶茶" maxlength="40">
+            </div>
+
+            <div class="mt-form-group">
+                <label class="mt-form-lbl">甜度</label>
+                <div class="mt-chip-group" id="mtfSweetGroup">
+                    <span class="mt-chip" data-val="无糖">无糖</span>
+                    <span class="mt-chip" data-val="少糖">少糖</span>
+                    <span class="mt-chip" data-val="半糖">半糖</span>
+                    <span class="mt-chip" data-val="七分糖">七分糖</span>
+                    <span class="mt-chip" data-val="正常甜">正常甜</span>
+                    <span class="mt-chip" data-val="多糖">多糖</span>
+                </div>
+            </div>
+
+            <div class="mt-form-group">
+                <label class="mt-form-lbl">冰度</label>
+                <div class="mt-chip-group" id="mtfIceGroup">
+                    <span class="mt-chip" data-val="热饮">热饮</span>
+                    <span class="mt-chip" data-val="温饮">温饮</span>
+                    <span class="mt-chip" data-val="去冰">去冰</span>
+                    <span class="mt-chip" data-val="少冰">少冰</span>
+                    <span class="mt-chip" data-val="正常冰">正常冰</span>
+                    <span class="mt-chip" data-val="多冰">多冰</span>
+                </div>
+            </div>
+
+            <div class="mt-form-group">
+                <label class="mt-form-lbl">口感描述</label>
+                <div class="mt-chip-group" id="mtfTasteGroup">
+                    <span class="mt-chip" data-val="绵密">绵密</span>
+                    <span class="mt-chip" data-val="清爽">清爽</span>
+                    <span class="mt-chip" data-val="香浓">香浓</span>
+                    <span class="mt-chip" data-val="Q弹">Q弹</span>
+                    <span class="mt-chip" data-val="顺滑">顺滑</span>
+                    <span class="mt-chip" data-val="清甜">清甜</span>
+                    <span class="mt-chip" data-val="微苦">微苦</span>
+                    <span class="mt-chip" data-val="偏甜">偏甜</span>
+                </div>
+            </div>
+
+            <div class="mt-form-group">
+                <label class="mt-form-lbl">备注</label>
+                <textarea class="mt-form-textarea" id="mtfNote" placeholder="喝的时候在哪里？有什么特别的事吗？"></textarea>
+            </div>
+
+            <div class="mt-form-group">
+                <label class="mt-form-lbl">星级评分</label>
+                <div class="mt-star-picker" id="mtfStars">
+                    <span data-star="1">⭐</span>
+                    <span data-star="2">⭐</span>
+                    <span data-star="3">⭐</span>
+                    <span data-star="4">⭐</span>
+                    <span data-star="5">⭐</span>
+                </div>
+            </div>
+
+            <button class="mt-form-save" onclick="window.saveMilkTea()">记录这一杯 🧋</button>
+        </div>
+    </div>
+
     <button class="companion-trigger" onclick="window.triggerCompanionEgg()" title="抓住我呀！">🐈
         <div class="cat-bubble" id="catBubble">喵~</div>
     </button>
@@ -623,8 +1128,10 @@
         const photosColRef = collection(db, "photos");
         const wishesColRef = collection(db, "wishes");
         const messagesColRef = collection(db, "messages");
+        const milkteaColRef = collection(db, "milktea");
         const wishesQuery = query(wishesColRef, orderBy("createdAt", "desc"));
         const messagesQuery = query(messagesColRef, orderBy("createdAt", "desc"));
+        const milkteaQuery = query(milkteaColRef, orderBy("createdAt", "asc"));
 
         // =====================================================================
         // ★ 修复：localStorage 双重备份层 —— 防止 Firebase 写入失败导致数据丢失
@@ -769,6 +1276,14 @@
             console.error("便签读取失败:", error.code, error.message);
         });
 
+        window.milkteaData = [];
+        onSnapshot(milkteaQuery, (snap) => {
+            window.milkteaData = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+            loadMilkTea();
+        }, (error) => {
+            console.error("奶茶读取失败:", error.code, error.message);
+        });
+
         function saveStateToFirebase() {
             // 拦截机制：防止本地空数据在未加载完时覆盖云端数据
             if (!_stateInitialized) {
@@ -807,10 +1322,6 @@
 
         function renderBasicData() { loadStars(); loadWishes(); loadAchievements(); loadMessages(); updateTogetherDays(); }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            initNavigation(); initStarCanvas(); initIconPicker(); updateTogetherDays();
-        });
-
         function initNavigation() {
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.addEventListener('click', () => window.showPage(item.dataset.page));
@@ -830,7 +1341,8 @@
             'photos': '喵~ 去【光影相册】重温回忆好不好？',
             'wishes': '喵~ 有个愿望想在【星空许愿】告诉你...',
             'achievements': '喵~ 【成就花园】里的花好像又开了！',
-            'messages': '喵~ 去【便签角落】给我留个言嘛~'
+            'messages': '喵~ 去【便签角落】给我留个言嘛~',
+            'milktea': '喵~ 去【奶茶日志】记录今天的那杯吧！'
         };
 
         window.triggerCompanionEgg = function() {
@@ -851,7 +1363,7 @@
             }
 
             const currentActive = document.body.getAttribute('data-active-page');
-            const PAGES = ['home', 'photos', 'wishes', 'achievements', 'messages'];
+            const PAGES = ['home', 'photos', 'wishes', 'achievements', 'messages', 'milktea'];
             const otherPages = PAGES.filter(p => p !== currentActive);
             const nextTarget = otherPages[Math.floor(Math.random() * otherPages.length)];
 
@@ -1145,6 +1657,210 @@
         }
 
         function updateTogetherDays() { const target = document.getElementById('togetherCounter'); const now = new Date(); const start = new Date(RELATIONSHIP_START + 'T00:00:00'); const diff  = Math.max(0, Math.floor((now - start) / 86400000)); target.innerHTML = `<span class="counter-days-num">${diff}</span><span class="counter-label">days of us</span><div class="counter-gems">✦ ✦ ✦</div>`; }
+
+        // ==================== 奶茶日志功能 ====================
+
+        // 当前选择状态
+        let mtfSweetSel = ''; let mtfIceSel = ''; let mtfTasteSel = []; let mtfStarSel = 0;
+        let mtCurrentIdx = -1;
+
+        function initMilkTeaForm() {
+            // 甜度/冰度：单选 chip
+            ['mtfSweetGroup', 'mtfIceGroup'].forEach(groupId => {
+                document.getElementById(groupId).querySelectorAll('.mt-chip').forEach(chip => {
+                    chip.addEventListener('click', function() {
+                        const group = this.closest('.mt-chip-group');
+                        group.querySelectorAll('.mt-chip').forEach(c => c.classList.remove('active'));
+                        this.classList.add('active');
+                        if (groupId === 'mtfSweetGroup') mtfSweetSel = this.dataset.val;
+                        else mtfIceSel = this.dataset.val;
+                    });
+                });
+            });
+            // 口感：多选 chip
+            document.getElementById('mtfTasteGroup').querySelectorAll('.mt-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    const val = this.dataset.val;
+                    const idx = mtfTasteSel.indexOf(val);
+                    if (idx === -1) mtfTasteSel.push(val); else mtfTasteSel.splice(idx, 1);
+                });
+            });
+            // 星级
+            const stars = document.getElementById('mtfStars').querySelectorAll('span');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    mtfStarSel = parseInt(this.dataset.star);
+                    stars.forEach((s, i) => { s.classList.toggle('lit', i < mtfStarSel); });
+                });
+                star.addEventListener('mouseenter', function() {
+                    const hov = parseInt(this.dataset.star);
+                    stars.forEach((s, i) => { s.style.opacity = i < hov ? '1' : '0.3'; });
+                });
+            });
+            document.getElementById('mtfStars').addEventListener('mouseleave', function() {
+                stars.forEach((s, i) => { s.style.opacity = i < mtfStarSel ? '1' : '0.3'; });
+            });
+        }
+
+        window.openMtForm = function() {
+            // 重置所有
+            document.getElementById('mtfName').value = '';
+            document.getElementById('mtfNote').value = '';
+            mtfSweetSel = ''; mtfIceSel = ''; mtfTasteSel = []; mtfStarSel = 0;
+            document.querySelectorAll('.mt-chip').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.mt-star-picker span').forEach(s => { s.classList.remove('lit'); s.style.opacity = '0.3'; });
+            const modal = document.getElementById('mtFormModal');
+            modal.style.display = 'flex';
+            requestAnimationFrame(() => modal.classList.add('show'));
+        };
+
+        window.closeMtForm = function() {
+            const modal = document.getElementById('mtFormModal');
+            modal.classList.remove('show');
+            setTimeout(() => { modal.style.display = 'none'; }, 400);
+        };
+
+        window.saveMilkTea = async function() {
+            const name = document.getElementById('mtfName').value.trim();
+            if (!name) { alert('给这杯奶茶起个名字吧 🧋'); return; }
+            const now = new Date();
+            const dateStr = `${now.getFullYear()}.${String(now.getMonth()+1).padStart(2,'0')}.${String(now.getDate()).padStart(2,'0')}`;
+            try {
+                await addDoc(milkteaColRef, {
+                    name: name,
+                    sweet: mtfSweetSel,
+                    ice: mtfIceSel,
+                    taste: mtfTasteSel.join('、'),
+                    note: document.getElementById('mtfNote').value.trim(),
+                    star: mtfStarSel,
+                    date: dateStr,
+                    createdAt: Date.now()
+                });
+                window.closeMtForm();
+            } catch(err) {
+                console.error('奶茶保存失败:', err);
+                alert('保存失败，请检查网络：' + err.message);
+            }
+        };
+
+        function loadMilkTea() {
+            const list = document.getElementById('mtList');
+            const total = window.milkteaData.length;
+            const TARGET = 600;
+
+            // 更新进度环
+            document.getElementById('mtCountNum').textContent = total;
+            document.getElementById('mtStatTotal').textContent = total;
+            const pct = Math.min(total / TARGET, 1);
+            const circumference = 502.65; // 2*PI*80
+            const fill = document.getElementById('mtRingFill'); // ← fix: declare fill here
+            if (fill) fill.style.strokeDashoffset = circumference * (1 - pct);
+
+            // 统计：只保留平均星级
+            if (total > 0) {
+                const starSum = window.milkteaData.reduce((s, t) => s + (t.star || 0), 0);
+                const avg = (starSum / total).toFixed(1);
+                document.getElementById('mtStatAvgStar').textContent = avg + '★';
+            } else {
+                document.getElementById('mtStatAvgStar').textContent = '—';
+            }
+
+            // 固定表头
+            const header = `<div class="mt-list-header">
+                <span style="text-align:right">#</span>
+                <span>名称</span>
+                <span class="h-tags">甜度 / 冰度 / 口感</span>
+                <span>评分</span>
+                <span class="h-right">日期</span>
+                <span></span>
+            </div>`;
+
+            // 空状态
+            if (total === 0) {
+                list.innerHTML = header + '<div class="mt-empty"><span class="mt-empty-icon">🧋</span>第一杯还没开始记录，快去喝第一杯吧！</div>';
+                return;
+            }
+
+            // 渲染行列表（从新到旧倒序显示，最新在顶）
+            const rows = [...window.milkteaData].reverse().map((t, revIdx) => {
+                const origIdx = total - 1 - revIdx; // 原始索引，用于详情和删除
+                const num = origIdx + 1;
+                const starStr = t.star ? '★'.repeat(t.star) + '☆'.repeat(5 - t.star) : '—';
+                const tags = [
+                    t.sweet ? `<span class="mt-tag sweet">${escapeHtml(t.sweet)}</span>` : '',
+                    t.ice   ? `<span class="mt-tag ice">${escapeHtml(t.ice)}</span>` : '',
+                    t.taste ? t.taste.split('、').map(tx => `<span class="mt-tag taste">${escapeHtml(tx)}</span>`).join('') : '',
+                ].join('');
+                return `<div class="mt-row" onclick="window.openMtDetail(${origIdx})">
+                    <span class="mt-row-num">${num}</span>
+                    <span class="mt-row-name">${escapeHtml(t.name)}</span>
+                    <div class="mt-row-tags">${tags}</div>
+                    <span class="mt-row-stars">${starStr}</span>
+                    <span class="mt-row-date">${escapeHtml(t.date || '')}</span>
+                    <button class="mt-row-del" onclick="window.deleteMilkTea(${origIdx}, event)" title="删除">×</button>
+                </div>`;
+            }).join('');
+
+            list.innerHTML = header + rows;
+        }
+
+        window.openMtDetail = function(index) {
+            const t = window.milkteaData[index];
+            if (!t) return;
+            mtCurrentIdx = index;
+            document.getElementById('mmNum').textContent = `No.${index + 1}`;
+            document.getElementById('mmName').textContent = t.name;
+            document.getElementById('mmStars').innerHTML = t.star
+                ? Array.from({length: t.star}, () => '<span>⭐</span>').join('')
+                : '<span style="opacity:0.35;font-size:0.9rem;">暂无评分</span>';
+            const setVal = (id, val, empty) => {
+                const el = document.getElementById(id);
+                if (val) { el.textContent = val; el.className = 'mt-modal-val'; }
+                else { el.textContent = empty; el.className = 'mt-modal-val empty'; }
+            };
+            setVal('mmSweet', t.sweet, '未填写');
+            setVal('mmIce',   t.ice,   '未填写');
+            setVal('mmTaste', t.taste, '未填写');
+            setVal('mmNote',  t.note,  '暂无备注');
+            setVal('mmDate',  t.date,  '未记录日期');
+            const modal = document.getElementById('mtModal');
+            modal.style.display = 'flex';
+            requestAnimationFrame(() => modal.classList.add('show'));
+        };
+
+        window.closeMtModal = function() {
+            const modal = document.getElementById('mtModal');
+            modal.classList.remove('show');
+            setTimeout(() => { modal.style.display = 'none'; }, 400);
+        };
+
+        window.deleteMilkTea = async function(index, event) {
+            event.stopPropagation();
+            const t = window.milkteaData[index];
+            if (!t || !t.id) return;
+            if (confirm(`确定要删除「${t.name}」这条记录吗？`)) {
+                try {
+                    await deleteDoc(doc(db, "milktea", t.id));
+                } catch(err) {
+                    console.error('奶茶删除失败:', err);
+                    alert('删除失败：' + err.message);
+                }
+            }
+        };
+
+        // 点击弹窗外关闭
+        document.getElementById('mtModal').addEventListener('click', function(e) {
+            if (e.target === this) window.closeMtModal();
+        });
+        document.getElementById('mtFormModal').addEventListener('click', function(e) {
+            if (e.target === this) window.closeMtForm();
+        });
+
+        // 初始化表单交互
+        document.addEventListener('DOMContentLoaded', () => {
+            initNavigation(); initStarCanvas(); initIconPicker(); updateTogetherDays(); initMilkTeaForm();
+        });
     </script>
 </body>
 </html>
