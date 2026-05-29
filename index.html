@@ -415,6 +415,7 @@
             font-size: 0.68rem; color: rgba(255,200,230,0.45);
             text-transform: uppercase; letter-spacing: 0.08em; font-family: var(--font-playfair);
         }
+        .mt-list-header .h-tags { /* tags col */ }
         .mt-list-header .h-right { text-align: right; }
         /* keep tag style small */
         .mt-tag {
@@ -463,9 +464,18 @@
         .mt-modal-close {
             position: absolute; top: 1.2rem; right: 1.4rem;
             background: none; border: none; font-size: 2rem; color: rgba(240,160,192,0.6);
-            cursor: pointer; line-height: 1; transition: 0.3s;
+            cursor: pointer; line-height: 1; transition: 0.3s; z-index: 10;
         }
         .mt-modal-close:hover { color: #fff; transform: rotate(90deg); }
+        .mt-modal-footer {
+            padding: 0 2rem 1.8rem;
+        }
+        .mt-modal-del-btn {
+            width: 100%; padding: 0.75rem; border-radius: 12px; border: 1px solid rgba(255,80,100,0.35);
+            background: rgba(255,71,87,0.08); color: rgba(255,110,130,0.9);
+            font-family: var(--font-main); font-size: 0.9rem; cursor: pointer; transition: 0.25s;
+        }
+        .mt-modal-del-btn:hover { background: rgba(255,71,87,0.75); color: #fff; border-color: transparent; }
         .mt-modal-body { padding: 1.8rem 2rem 2rem; }
         .mt-modal-row {
             display: flex; align-items: baseline; gap: 1rem;
@@ -978,8 +988,8 @@
     <!-- 奶茶详情弹窗 -->
     <div class="mt-modal" id="mtModal">
         <div class="mt-modal-box">
-            <button class="mt-modal-close" onclick="window.closeMtModal()">×</button>
             <div class="mt-modal-top">
+                <button class="mt-modal-close" onclick="window.closeMtModal()">×</button>
                 <div class="mt-modal-num" id="mmNum">No.1</div>
                 <div class="mt-modal-name" id="mmName">奶茶名称</div>
                 <div class="mt-modal-stars" id="mmStars"></div>
@@ -1001,10 +1011,13 @@
                     <div class="mt-modal-lbl">备注</div>
                     <div class="mt-modal-val" id="mmNote">—</div>
                 </div>
-                <div class="mt-modal-row">
+                <div class="mt-modal-row" style="border-bottom:none;margin-bottom:0;padding-bottom:0;">
                     <div class="mt-modal-lbl">日期</div>
                     <div class="mt-modal-val" id="mmDate">—</div>
                 </div>
+            </div>
+            <div class="mt-modal-footer">
+                <button class="mt-modal-del-btn" onclick="window.deleteMilkTeaFromModal()">删除这条记录</button>
             </div>
         </div>
     </div>
@@ -1833,6 +1846,20 @@
             const modal = document.getElementById('mtModal');
             modal.classList.remove('show');
             setTimeout(() => { modal.style.display = 'none'; }, 400);
+        };
+
+        window.deleteMilkTeaFromModal = async function() {
+            const t = window.milkteaData[mtCurrentIdx];
+            if (!t || !t.id) return;
+            if (confirm(`确定要删除「${t.name}」这条记录吗？`)) {
+                try {
+                    await deleteDoc(doc(db, "milktea", t.id));
+                    window.closeMtModal();
+                } catch(err) {
+                    console.error('奶茶删除失败:', err);
+                    alert('删除失败：' + err.message);
+                }
+            }
         };
 
         window.deleteMilkTea = async function(index, event) {
