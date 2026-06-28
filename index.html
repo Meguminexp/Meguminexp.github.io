@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>羊羊金和狗狗雅的小角落 | Love Diary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Dancing+Script:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+XiaoWei&family=Caveat:wght@500&display=swap" rel="stylesheet">
     <style>
         /* ========================================
            童话风格主题系统
@@ -12,10 +11,10 @@
         :root {
             --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             --font-main: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
-            --font-display: 'ZCOOL XiaoWei', 'PingFang SC', serif;
-            --font-handwriting: 'Caveat', 'ZCOOL XiaoWei', cursive;
-            --font-playfair: 'Playfair Display', 'PingFang SC', serif;
-            --font-dancing: 'Dancing Script', 'ZCOOL XiaoWei', cursive;
+            --font-display: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+            --font-handwriting: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+            --font-playfair: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+            --font-dancing: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
 
             --bg-primary: #1a1a3e; --text-primary: #e8e4f0; --text-secondary: #a09ab8;
             --accent: #9d7cd8; --accent-glow: rgba(157, 124, 216, 0.5); --nav-bg: rgba(26, 26, 62, 0.8);
@@ -513,7 +512,7 @@
         .message-label { display: inline-block; margin-top: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 999px; background: rgba(255,255,255,0.75); color: #5b3d8a; font-size: 0.9rem; }
 
         .together-counter { position: fixed; top: 5rem; left: 1.5rem; z-index: 1100; padding: 0.9rem 1.5rem 0.85rem; border-radius: 22px; background: rgba(7, 4, 20, 0.80); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 10px 40px rgba(0,0,0,0.32), 0 0 0 1px rgba(200,170,255,0.06); text-align: center; min-width: 118px; pointer-events: none; }
-        .counter-days-num { font-family: 'Playfair Display', serif; font-size: 2.7rem; font-style: italic; font-weight: 700; color: #ede0ff; line-height: 1; display: block; text-shadow: 0 0 30px rgba(190,155,255,0.65); }
+        .counter-days-num { font-family: var(--font-playfair); font-size: 2.7rem; font-style: italic; font-weight: 700; color: #ede0ff; line-height: 1; display: block; text-shadow: 0 0 30px rgba(190,155,255,0.65); }
         .counter-label { font-family: var(--font-dancing); font-size: 0.86rem; color: rgba(210,188,255,0.68); display: block; margin-top: 0.22rem; }
         
         /* ================= 躲猫猫精灵系统 ================= */
@@ -717,7 +716,7 @@
             align-items: center; justify-content: center;
         }
         .mt-ring-num {
-            font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700;
+            font-family: var(--font-playfair); font-size: 3rem; font-weight: 700;
             color: #ffe8f5; line-height: 1; text-shadow: 0 0 30px rgba(240,160,192,0.8);
         }
         .mt-ring-denom {
@@ -737,7 +736,7 @@
         .mt-stat-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-4px); border-color: rgba(255,200,230,0.4); box-shadow: 0 8px 25px rgba(200,120,160,0.15); }
         .mt-stat-icon { font-size: 2rem; margin-bottom: 0.4rem; display: block; }
         .mt-stat-num {
-            font-family: 'Playfair Display', serif; font-size: 1.9rem; font-weight: 700;
+            font-family: var(--font-playfair); font-size: 1.9rem; font-weight: 700;
             color: #ffe8f5; line-height: 1;
         }
         .mt-stat-lbl { font-size: 0.82rem; color: rgba(255,200,230,0.7); margin-top: 0.2rem; }
@@ -780,7 +779,7 @@
         .mt-row:last-child { border-bottom: none; }
         .mt-row:hover { background: rgba(255,255,255,0.07); }
         .mt-row-num {
-            font-family: 'Playfair Display', serif; font-style: italic;
+            font-family: var(--font-playfair); font-style: italic;
             font-size: 0.72rem; color: rgba(240,160,192,0.55); text-align: right;
         }
         .mt-row-name {
@@ -852,7 +851,7 @@
             position: relative;
         }
         .mt-modal-num {
-            font-family: 'Playfair Display', serif; font-style: italic;
+            font-family: var(--font-playfair); font-style: italic;
             font-size: 0.9rem; color: rgba(240,160,192,0.65); margin-bottom: 0.4rem;
         }
         .mt-modal-name {
