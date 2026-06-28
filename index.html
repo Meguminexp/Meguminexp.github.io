@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>羊羊金和狗狗雅的小角落 | Love Diary</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Dancing+Script:wght@600;700&family=Noto+Serif+SC:wght@400;600&family=ZCOOL+XiaoWei&family=Caveat:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=Dancing+Script:wght@600;700&family=Noto+Sans+SC:wght@300;400;500;700&family=ZCOOL+XiaoWei&family=Caveat:wght@500&display=swap" rel="stylesheet">
     <style>
         /* ========================================
            童话风格主题系统
            ======================================== */
         :root {
             --transition-smooth: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            --font-main: 'Noto Serif SC', serif;
-            --font-display: 'ZCOOL XiaoWei', serif;
+            --font-main: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+            --font-display: 'ZCOOL XiaoWei', 'PingFang SC', serif;
             --font-handwriting: 'Caveat', 'ZCOOL XiaoWei', cursive;
-            --font-playfair: 'Playfair Display', serif;
-            --font-dancing: 'Dancing Script', cursive;
+            --font-playfair: 'Playfair Display', 'PingFang SC', serif;
+            --font-dancing: 'Dancing Script', 'ZCOOL XiaoWei', cursive;
 
             --bg-primary: #1a1a3e; --text-primary: #e8e4f0; --text-secondary: #a09ab8;
             --accent: #9d7cd8; --accent-glow: rgba(157, 124, 216, 0.5); --nav-bg: rgba(26, 26, 62, 0.8);
@@ -29,7 +29,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { font-family: var(--font-main); background: var(--bg-primary); background-attachment: fixed; color: var(--text-primary); min-height: 100vh; overflow-x: hidden; transition: background 1.5s ease, color 1.5s ease; line-height: 1.8; }
+        body { font-family: var(--font-main); font-size: 16px; font-weight: 400; background: var(--bg-primary); background-attachment: fixed; color: var(--text-primary); min-height: 100vh; overflow-x: hidden; transition: background 1.5s ease, color 1.5s ease; line-height: 1.85; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
 
         /* 全局童话暗角 */
         body::after {
@@ -538,9 +538,9 @@
             animation: none;
         }
         .cat-svg { width: 52px; height: 52px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
-        .cat-svg .cat-eye-group { transform-origin: 32px 28px; animation: catBlink 5s ease-in-out infinite; }
+        .cat-svg .cat-eye-group { transform-origin: 32px 25px; animation: catBlink 5s ease-in-out infinite; }
         .cat-svg .cat-eye-shine { animation: catShineHide 5s ease-in-out infinite; }
-        .cat-svg .cat-tail { transform-origin: 44px 50px; animation: tailWag 3s ease-in-out infinite; }
+        .cat-svg .cat-tail { transform-origin: 46px 46px; animation: tailWag 3s ease-in-out infinite; }
         @keyframes catBlink {
             0%,38%,42%,100% { transform: scaleY(1); }
             39%,41% { transform: scaleY(0.08); }
@@ -1738,28 +1738,52 @@
 
     <button class="companion-trigger" onclick="window.triggerCompanionEgg()" title="抓住我呀！">
         <svg class="cat-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="32" cy="51" rx="17" ry="13" fill="#f2dcc9"/>
-            <circle cx="32" cy="28" r="15.5" fill="#f5e3d4"/>
-            <polygon points="18,20 13,3 27,15" fill="#f5e3d4"/>
-            <polygon points="46,20 51,3 37,15" fill="#f5e3d4"/>
-            <polygon points="19,18 16,7 25,15" fill="#f2a8b8"/>
-            <polygon points="45,18 48,7 39,15" fill="#f2a8b8"/>
+            <!-- 尾巴 -->
+            <path class="cat-tail" d="M46,46 Q56,38 52,28 Q50,22 54,16" fill="none" stroke="#fae4d0" stroke-width="5.5" stroke-linecap="round"/>
+            <!-- 身体 -->
+            <ellipse cx="32" cy="47" rx="14" ry="12" fill="#fae4d0"/>
+            <!-- 小脚丫 -->
+            <ellipse cx="20" cy="56" rx="5.5" ry="4.5" fill="#fae4d0"/>
+            <ellipse cx="44" cy="56" rx="5.5" ry="4.5" fill="#fae4d0"/>
+            <ellipse cx="22" cy="56.5" rx="2.8" ry="2.2" fill="#f0d4c0"/>
+            <ellipse cx="46" cy="56.5" rx="2.8" ry="2.2" fill="#f0d4c0"/>
+            <!-- 脑袋 -->
+            <circle cx="32" cy="25" r="15.5" fill="#fae4d0"/>
+            <!-- 耳朵 -->
+            <polygon points="19,14 25,2 31,12" fill="#fae4d0"/>
+            <polygon points="45,14 39,2 33,12" fill="#fae4d0"/>
+            <polygon points="21,13.5 25,5.5 29,13.5" fill="#f8c0c8"/>
+            <polygon points="43,13.5 39,5.5 35,13.5" fill="#f8c0c8"/>
+            <!-- 眼睛组 -->
             <g class="cat-eye-group">
-                <ellipse cx="26" cy="28" rx="5.5" ry="6.5" fill="#3a2a1a"/>
-                <ellipse cx="38" cy="28" rx="5" ry="6" fill="#3a2a1a"/>
+                <ellipse cx="25.5" cy="25" rx="4.8" ry="5.8" fill="#4a3020"/>
+                <ellipse cx="38.5" cy="25" rx="4.8" ry="5.8" fill="#4a3020"/>
             </g>
-            <circle cx="23.5" cy="25.5" r="2.2" fill="#fff" class="cat-eye-shine"/>
-            <circle cx="35.5" cy="25.5" r="2" fill="#fff" class="cat-eye-shine"/>
-            <circle cx="27.5" cy="29.5" r="1" fill="#fff" opacity="0.6" class="cat-eye-shine"/>
-            <circle cx="39.5" cy="29.5" r="0.9" fill="#fff" opacity="0.6" class="cat-eye-shine"/>
-            <ellipse cx="32" cy="35" rx="3.2" ry="2.2" fill="#e08898"/>
-            <path d="M28,37.5 Q32,42 32,37.5 Q32,42 36,37.5" fill="none" stroke="#c07888" stroke-width="1" stroke-linecap="round"/>
-            <line x1="11" y1="33" x2="23" y2="35" stroke="#d0b8a8" stroke-width="0.8" stroke-linecap="round"/>
-            <line x1="11" y1="37" x2="23" y2="37" stroke="#d0b8a8" stroke-width="0.8" stroke-linecap="round"/>
-            <line x1="41" y1="35" x2="53" y2="33" stroke="#d0b8a8" stroke-width="0.8" stroke-linecap="round"/>
-            <line x1="41" y1="37" x2="53" y2="37" stroke="#d0b8a8" stroke-width="0.8" stroke-linecap="round"/>
-            <path class="cat-tail" d="M45,54 Q58,46 52,35 Q48,27 51,23" fill="none" stroke="#f5e3d4" stroke-width="5.5" stroke-linecap="round"/>
-            <ellipse cx="32" cy="53" rx="10" ry="6" fill="#f0d8c4"/>
+            <!-- 眼睛高光 -->
+            <circle cx="23" cy="22" r="2.5" fill="#fff" class="cat-eye-shine"/>
+            <circle cx="36" cy="22" r="2.5" fill="#fff" class="cat-eye-shine"/>
+            <circle cx="27.5" cy="27.5" r="1.2" fill="#fff" opacity="0.7" class="cat-eye-shine"/>
+            <circle cx="40.5" cy="27.5" r="1.2" fill="#fff" opacity="0.7" class="cat-eye-shine"/>
+            <!-- 腮红 -->
+            <ellipse cx="19" cy="31" rx="3.8" ry="2.2" fill="#f8c0d0" opacity="0.55"/>
+            <ellipse cx="45" cy="31" rx="3.8" ry="2.2" fill="#f8c0d0" opacity="0.55"/>
+            <!-- 鼻子 -->
+            <ellipse cx="32" cy="30" rx="1.8" ry="1.3" fill="#e8a0b0"/>
+            <!-- 嘴巴 (ω型) -->
+            <path d="M29,31.5 Q32,34.5 35,31.5" fill="none" stroke="#c88898" stroke-width="1.1" stroke-linecap="round"/>
+            <path d="M30.5,32.5 L32,33.5 L33.5,32.5" fill="none" stroke="#c88898" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- 胡须 -->
+            <line x1="8" y1="27" x2="20" y2="29" stroke="#d8c0b0" stroke-width="0.7" stroke-linecap="round"/>
+            <line x1="8" y1="31" x2="20" y2="31" stroke="#d8c0b0" stroke-width="0.7" stroke-linecap="round"/>
+            <line x1="44" y1="29" x2="56" y2="27" stroke="#d8c0b0" stroke-width="0.7" stroke-linecap="round"/>
+            <line x1="44" y1="31" x2="56" y2="31" stroke="#d8c0b0" stroke-width="0.7" stroke-linecap="round"/>
+            <!-- 项圈 -->
+            <path d="M21,38 Q32,41.5 43,38" fill="none" stroke="#e87080" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- 铃铛 -->
+            <circle cx="32" cy="41" r="3.2" fill="#f8d848"/>
+            <circle cx="32" cy="42.3" r="1.2" fill="#e0c030"/>
+            <line x1="32" y1="42.8" x2="32" y2="44.5" stroke="#d0a020" stroke-width="1"/>
+            <circle cx="32" cy="44.8" r="0.8" fill="#d0a020"/>
         </svg>
         <div class="cat-bubble" id="catBubble">喵~</div>
     </button>
@@ -1857,17 +1881,13 @@
             { id: 'adventure',name: '✈️ 冒险地图', icon: '✈️', accent: '#80a8c8' },
         ];
         const DEFAULT_ACHIEVEMENTS = [
-            // === 一起完成 (30) ===
+            // === 一起完成 (20) ===
             { title:'一起看一场日出', hint:'找一个清晨，两个人裹着毯子等太阳升起', detail:'看到了吗？那个瞬间只属于我们。', category:'together', icon:'🌅' },
-            { title:'一起看一场日落', hint:'在黄昏时分找一个安静的地方坐着', detail:'太阳落下去了，但我们的手还牵着。', category:'together', icon:'🌇' },
             { title:'在雨中一起撑伞散步', hint:'下雨天不要躲，一起出去走走', detail:'雨声是最好的背景音，你的笑声是最美的旋律。', category:'together', icon:'☔' },
             { title:'一起做一顿完整的晚餐', hint:'从买菜到洗碗，两个人一起完成', detail:'厨艺不重要，重要的是你在旁边帮我尝味道。', category:'together', icon:'🍳' },
             { title:'一起种一盆植物', hint:'选一盆小花或者多肉，一起照顾它', detail:'看着它长大，就像看着我们的感情一样。', category:'together', icon:'🪴' },
-            { title:'一起拼完一幅拼图', hint:'选一幅好看的拼图，花几个晚上一起拼', detail:'你说找边角，我来拼中间，完美配合。', category:'together', icon:'🧩' },
             { title:'一起去游乐园', hint:'坐一次过山车或者旋转木马', detail:'在最高点尖叫，在最低点大笑。', category:'together', icon:'🎢' },
             { title:'一起看一部催泪电影', hint:'准备好纸巾，窝在一起看', detail:'哭也没关系，我的肩膀借你。', category:'together', icon:'🎬' },
-            { title:'一起去水族馆', hint:'看水母慢慢漂，看鱼群游来游去', detail:'在水蓝色的光影里，你比任何鱼都好看。', category:'together', icon:'🐠' },
-            { title:'一起学一首双人舞', hint:'找一首简单的舞曲，在家里学着跳', detail:'踩到脚也没关系，重要的是抱着你摇来摇去。', category:'together', icon:'💃' },
             { title:'一起读同一本书', hint:'选一本都想看的书，读完了一起聊', detail:'你的理解总是让我看到不一样的世界。', category:'together', icon:'📚' },
             { title:'一起做一次烘焙', hint:'烤饼干或者做蛋糕，面粉大战也可以', detail:'做出来的形状丑丑的，但味道是甜甜的。', category:'together', icon:'🧁' },
             { title:'一起去动物园', hint:'看熊猫吃竹子，看长颈鹿伸脖子', detail:'你学动物叫的样子比真的动物还可爱。', category:'together', icon:'🦒' },
@@ -1875,20 +1895,14 @@
             { title:'一起去海边踩浪花', hint:'脱掉鞋子，让海浪冲过脚踝', detail:'你在沙滩上写的字，海浪带走了，但我的心记住了。', category:'together', icon:'🌊' },
             { title:'一起在星空下聊天到深夜', hint:'找一个能看到星星的地方，躺着聊天', detail:'星星很多，但我只看你。', category:'together', icon:'🌟' },
             { title:'一起搭帐篷露营', hint:'不管是在野外还是在客厅，一起睡帐篷', detail:'小小的帐篷里，只有你和我的呼吸声。', category:'together', icon:'🏕️' },
-            { title:'一起去美术馆看展', hint:'在一幅画前站很久，猜画家在想什么', detail:'你比我更懂艺术，因为你懂美。', category:'together', icon:'🎨' },
             { title:'一起唱一次KTV', hint:'两个人包一个小包厢，唱到尽兴', detail:'你唱跑调的时候最可爱了。', category:'together', icon:'🎤' },
             { title:'一起去陌生的城市走走停停', hint:'不做什么攻略，走到哪算哪', detail:'陌生的街道因为有你在变得亲切。', category:'together', icon:'🗺️' },
-            { title:'一起泡一次温泉', hint:'找一个温泉旅馆，好好放松', detail:'热气腾腾中看着你的脸，比温泉还暖。', category:'together', icon:'♨️' },
             { title:'一起坐一次长途火车', hint:'靠窗的位置，耳机分你一半', detail:'窗外的风景一直在变，不变的是你靠在我肩膀上的重量。', category:'together', icon:'🚂' },
             { title:'一起放一次烟花', hint:'过年或者节日，一起点燃引线跑开', detail:'烟花升空的瞬间，我许的愿望是你。', category:'together', icon:'🎆' },
-            { title:'一起看一次话剧', hint:'选一部喜欢的话剧或音乐剧', detail:'灯光暗下来的时候，我偷偷看了你一眼。', category:'together', icon:'🎭' },
-            { title:'一起划一次船', hint:'公园里的脚踏船或者手划船都可以', detail:'你负责掌握方向，我负责给你加油。', category:'together', icon:'🚣' },
             { title:'一起堆一个雪人', hint:'冬天第一场雪，一定要一起玩', detail:'雪人化了，但拍的照片还在。', category:'together', icon:'⛄' },
             { title:'一起拍一套情侣照', hint:'认真找摄影师或者自己用三脚架拍', detail:'镜头里的我们，是我见过最配的画面。', category:'together', icon:'📸' },
             { title:'一起给未来的我们写信', hint:'各自写一封给一年后的对方的信', detail:'一年后打开的时候，希望我们比现在更爱彼此。', category:'together', icon:'✉️' },
-            { title:'一起做一次手工', hint:'陶艺、编织、木工，做什么都行', detail:'你做的歪歪扭扭的杯子，我会用一辈子。', category:'together', icon:'🪡' },
-            { title:'一起去一次游乐园夜场', hint:'晚上的游乐园有不一样的魔法', detail:'灯光亮起来的那一刻，你的眼睛也在发光。', category:'together', icon:'🎡' },
-            // === 羊羊金的心意 (25) ===
+            // === 羊羊金的心意 (24) ===
             { title:'羊羊金为狗狗雅写一首诗', hint:'不用很长，真心就好', detail:'每一行都是关于你。', category:'his', icon:'📝' },
             { title:'羊羊金为狗狗雅画一幅画', hint:'画得不好也没关系', detail:'在你眼里，我画的火柴人都是艺术品。', category:'his', icon:'🖼️' },
             { title:'羊羊金为狗狗雅按摩肩膀', hint:'她累了一天，帮她放松一下', detail:'你说"再按一会儿"的时候，我最开心。', category:'his', icon:'💆' },
@@ -1910,7 +1924,6 @@
             { title:'羊羊金在冬天给狗狗雅暖手', hint:'把她的手握在手心里', detail:'你的手好凉，我的手刚好很暖。', category:'his', icon:'🔥' },
             { title:'羊羊金穿裙子给狗狗雅看', hint:'为她穿上一条好看的裙子', detail:'你说好看的时候，我觉得自己比花还美。', category:'his', icon:'👗' },
             { title:'羊羊金给狗狗雅涂指甲油', hint:'笨手笨脚但很认真地涂', detail:'涂出去的地方也是爱你的形状。', category:'his', icon:'💅' },
-            { title:'羊羊金学会狗狗雅爱唱的歌', hint:'偷偷练习然后唱给她听', detail:'你愣了一下然后笑了，那个表情我永远不会忘。', category:'his', icon:'🎶' },
             { title:'羊羊金为狗狗雅拍一支vlog', hint:'记录一整天在一起的样子', detail:'剪的时候笑了好多次，因为每一帧都是甜的。', category:'his', icon:'🎥' },
             { title:'羊羊金给狗狗雅一个惊喜拥抱', hint:'从背后抱住正在做事的她', detail:'你吓了一跳然后又靠过来，这个瞬间太好了。', category:'his', icon:'🤗' },
             { title:'羊羊金在狗狗雅生病时照顾她', hint:'买药煮粥陪在床边', detail:'你的难受我都想替你分担。', category:'his', icon:'🏥' },
@@ -1920,7 +1933,7 @@
             { title:'狗狗雅为羊羊金画小漫画', hint:'画两个人的日常小故事', detail:'你的画笔下，我们的故事比童话还可爱。', category:'her', icon:'✏️' },
             { title:'狗狗雅给羊羊金超长的拥抱', hint:'超过30秒的那种', detail:'不用说话，抱着就很好。', category:'her', icon:'🫂' },
             { title:'狗狗雅为羊羊金准备便当', hint:'中午打开的时候有惊喜', detail:'同事们都在羡慕，而我心里在偷笑。', category:'her', icon:'🍱' },
-            { title:'狗狗雅给羊羊金织围巾', hint:'一针一线都是心意', detail:'围巾的纹路歪歪的，但围在脖子上暖暖的。', category:'her', icon:'🧣' },
+            { title:'狗狗雅给羊羊金分享搞笑视频', hint:'刷到好玩的立刻转发给他', detail:'你发来的每个视频我都看了，笑点一样的人才能在一起。', category:'her', icon:'😂' },
             { title:'狗狗雅在羊羊金累时安静陪着', hint:'什么都不说，就在旁边', detail:'你的存在本身就是一种安慰。', category:'her', icon:'🌙' },
             { title:'狗狗雅为羊羊金写小卡片', hint:'塞在他的包里或者枕头下', detail:'突然发现的小惊喜，让一整天都亮了。', category:'her', icon:'💝' },
             { title:'狗狗雅给羊羊金早安吻', hint:'醒来第一件事', detail:'比咖啡更管用，比闹钟更温柔。', category:'her', icon:'💋' },
@@ -1932,37 +1945,33 @@
             { title:'狗狗雅在朋友圈发羊羊金', hint:'大大方方地秀恩爱', detail:'看到你发的动态，嘴角不自觉地上扬。', category:'her', icon:'📱' },
             { title:'狗狗雅给羊羊金折千纸鹤', hint:'一只一只，都是祝福', detail:'每一只都藏着"我喜欢你"。', category:'her', icon:'🕊️' },
             { title:'狗狗雅给羊羊金做手冲咖啡', hint:'认真磨豆子控制水温', detail:'你做的咖啡和别人做的味道不一样。', category:'her', icon:'☕' },
-            { title:'狗狗雅穿羊羊金喜欢的衣服', hint:'他说过好看的那件', detail:'你穿上的时候我眼睛都直了。', category:'her', icon:'👗' },
-            { title:'狗狗雅陪羊羊金做美甲', hint:'一起选颜色，一起美美的', detail:'你做完美甲在我面前晃手指的样子，可爱到犯规。', category:'her', icon:'💅' },
+            { title:'狗狗雅给羊羊金涂护手霜', hint:'冬天手干，帮他细细涂好', detail:'你的手在我手心里慢慢变软，真好。', category:'her', icon:'🧴' },
             { title:'狗狗雅温柔地叫羊羊金起床', hint:'比闹钟温柔一百万倍', detail:'被你的声音叫醒，一天都是好心情。', category:'her', icon:'🌞' },
             { title:'狗狗雅在羊羊金生病时照顾他', hint:'比他自己还紧张', detail:'你的着急写在脸上，暖在我心里。', category:'her', icon:'🩹' },
-            { title:'狗狗雅给羊羊金惊喜拥抱', hint:'突然扑过来的那种', detail:'你小跑着扑进我怀里，世界上最好的感觉。', category:'her', icon:'💕' },
+            { title:'狗狗雅给羊羊金发一段走心语音', hint:'录一段想说的话发过去，不要太短', detail:'文字不够的时候，声音刚好。听到你的声音心就软了。', category:'her', icon:'🎙️' },
             { title:'狗狗雅陪羊羊金打游戏', hint:'即使她平时不怎么玩', detail:'你在旁边加油，我比平时打得好。', category:'her', icon:'🎮' },
-            { title:'狗狗雅给羊羊金理发或修眉', hint:'小心翼翼地动手', detail:'虽然有点紧张，但结果还不错。', category:'her', icon:'✂️' },
+            { title:'狗狗雅和羊羊金约定专属暗号', hint:'一个只属于两个人之间的小动作或词', detail:'在人群中一个眼神就知道你想说什么，这是我们的小秘密。', category:'her', icon:'🤞' },
             { title:'狗狗雅给羊羊金取可爱外号', hint:'某个瞬间灵光一闪的名字', detail:'只有你能叫，别人叫我会尴尬。', category:'her', icon:'🏷️' },
             { title:'狗狗雅给羊羊金准备生日惊喜', hint:'提前很久就开始计划的那种', detail:'你认真的样子，比礼物本身还要珍贵。', category:'her', icon:'🎂' },
-            // === 小挑战 (25) ===
+            // === 小挑战 (22) ===
             { title:'连续一周每天说一句情话', hint:'不能重复，要真心实意', detail:'第一天很简单，第七天发现还有好多话想说。', category:'challenge', icon:'💬' },
             { title:'一天之内不说任何抱怨', hint:'不管遇到什么都保持好心情', detail:'原来没有抱怨的一天可以这么开心。', category:'challenge', icon:'😊' },
             { title:'同时说出一样的话', hint:'测试默契的时刻', detail:'"吃啥？""火锅！"——这就是默契。', category:'challenge', icon:'🪞' },
-            { title:'用三个词猜对方在想什么', hint:'看一眼就知道', detail:'你还没开口我就知道了，因为我也在想同一件事。', category:'challenge', icon:'🔮' },
             { title:'蒙眼喂对方吃东西', hint:'准备好纸巾，可能会弄到脸上', detail:'你喂到我鼻子上了，但我还是吃得很开心。', category:'challenge', icon:'🙈' },
             { title:'互换手机壁纸一周', hint:'用对方的照片当壁纸', detail:'每次打开手机都像在看你。', category:'challenge', icon:'📲' },
             { title:'一起学对方的习惯动作', hint:'模仿对方的小动作', detail:'你学我托腮的样子，我学你歪头的角度。', category:'challenge', icon:'🎭' },
-            { title:'异口同声说出对方喜欢的颜色', hint:'不用想，直接说', detail:'你说蓝色，我说粉色，我们都没错。', category:'challenge', icon:'🎨' },
-            { title:'一分钟对视不笑挑战', hint:'看谁先绷不住', detail:'你眼睛里有星星，我怎么可能不笑。', category:'challenge', icon:'👀' },
-            { title:'给对方挑衣服穿上出门', hint:'完全信任对方的品味', detail:'你挑的这件，我本来不会选，但穿上后觉得还不错。', category:'challenge', icon:'👗' },
+            { title:'五分钟内给对方写一首打油诗', hint:'不用押韵想到什么写什么，不许多想', detail:'你的诗里全是我爱吃的东西，我的诗里全是你爱去的地方。', category:'challenge', icon:'✍️' },
+            { title:'给对方挑衣服穿上出门', hint:'完全信任对方的品味', detail:'你挑的这件，我本来不会选，但穿上后觉得还不错。', category:'challenge', icon:'👘' },
             { title:'一起背一首诗', hint:'你背上一句我接下一句', detail:'以后吵架了可以用诗句和好。', category:'challenge', icon:'📜' },
             { title:'用emoji让对方猜心情', hint:'发一串emoji不说话', detail:'🐱💕☕🌧️→"你想和我窝在家里喝奶茶看雨"——你全猜对了。', category:'challenge', icon:'😸' },
-            { title:'互换角色一天', hint:'你做我的事，我做你的事', detail:'才知道你平时做的事情比我想的多多了。', category:'challenge', icon:'🔄' },
-            { title:'不讲话用眼神交流十分钟', hint:'全靠表情和手势', detail:'你眨眨眼我就懂了，默契根本不需要语言。', category:'challenge', icon:'👁️' },
+            { title:'一分钟对视不笑挑战', hint:'看谁先绷不住', detail:'你眼睛里有星星，我怎么可能不笑。', category:'challenge', icon:'👀' },
+            { title:'一起学一段热门舞蹈', hint:'找个简单的短视频舞蹈跟着跳', detail:'动作全对不上，但笑到肚子疼。跳完发现已经过了一个小时。', category:'challenge', icon:'🕺' },
             { title:'一起做一次对方的爱好', hint:'你陪他打游戏，他陪你追剧', detail:'原来你的世界也很有趣。', category:'challenge', icon:'🎯' },
             { title:'24小时内不说"随便"', hint:'每件事都要认真选', detail:'不随便的一天，每个选择都是因为真的想要。', category:'challenge', icon:'🚫' },
             { title:'用便利贴在家里贴满情话', hint:'每个角落都有一张', detail:'冰箱上、镜子上、键盘上——到处都是爱。', category:'challenge', icon:'📋' },
             { title:'各自列出对方的十个优点', hint:'认真地写下来交换', detail:'原来在你眼里我有这么多闪光点。', category:'challenge', icon:'✨' },
             { title:'用各自擅长的东西做礼物', hint:'画画换唱歌，写诗换手工', detail:'不是买的，但比买的珍贵一万倍。', category:'challenge', icon:'🎁' },
-            { title:'一起完成一次双人瑜伽', hint:'找简单的双人动作来试', detail:'身体平衡不好，但和你在一起心就很稳。', category:'challenge', icon:'🧘' },
-            { title:'同时说出想去的地方', hint:'倒数321一起说', detail:'嘴巴说的不一样，但目的地其实都是对方的心里。', category:'challenge', icon:'🌍' },
+            { title:'用对方手机各拍一组照片', hint:'换成对方的手机拍照，看看不同视角', detail:'你的手机里全是我，我的手机里全是你。不同的角度，一样的甜。', category:'challenge', icon:'🤳' },
             { title:'面对面写对方最爱吃的食物', hint:'写完了交换看', detail:'你写了我爱的，我写了你爱的，都对了。', category:'challenge', icon:'🍲' },
             { title:'闭眼摸手认出对方', hint:'在一堆人里摸出彼此的手', detail:'你的手我闭着眼睛也能认出来。', category:'challenge', icon:'🤚' },
             { title:'一口气说出对方的生日星座', hint:'不用思考不卡壳', detail:'比自己的都熟。', category:'challenge', icon:'♊' },
@@ -1979,10 +1988,10 @@
             { title:'晚上一起刷牙', hint:'站在镜子前各刷各的', detail:'镜子里两个人满嘴泡沫还傻笑。', category:'daily', icon:'🪥' },
             { title:'一起晾衣服', hint:'从洗衣机里拿出来一件件挂上', detail:'你够不到的地方我来挂。', category:'daily', icon:'👚' },
             { title:'一起叠被子', hint:'一人拎两个角同时抖开', detail:'默契配合，几秒搞定，比一个人快多了。', category:'daily', icon:'🛌' },
-            { title:'一起去取快递或外卖', hint:'手牵手走一小段路', detail:'顺便散个步，回来的时候多了一个包裹和一份开心。', category:'daily', icon:'🚶' },
+            { title:'分享今天做的梦', hint:'早上醒来第一件事就是告诉对方', detail:'梦里的你也在对我笑，醒来后发现不是梦——你真的在身边。', category:'daily', icon:'💤' },
             { title:'一起吐槽今天的烦心事', hint:'把不开心的都说出来', detail:'吐槽完了，好像也没那么烦了。', category:'daily', icon:'😤' },
             { title:'睡前互相说晚安', hint:'认真的那种，不敷衍', detail:'你的晚安是我的安眠药。', category:'daily', icon:'🌜' },
-            { title:'一起计划明天的穿搭', hint:'看看天气预报，想想穿什么', detail:'你说我穿那件好看，我明天就穿那件。', category:'daily', icon:'👕' },
+            { title:'上班/上课时偷偷给对方发消息', hint:'忙里偷闲发一句"想你了"', detail:'手机震了一下，是你。工作突然不累了，因为知道有人在想我。', category:'daily', icon:'💘' },
             // === 冒险地图 (15) ===
             { title:'去两个人都没去过的地方', hint:'随便在地图上点一个方向', detail:'陌生的地方因为有你在旁边，变成回忆的地标。', category:'adventure', icon:'📍' },
             { title:'坐摩天轮到最高点接吻', hint:'在最接近天空的地方', detail:'传说在最高点接吻的情侣不会分开。', category:'adventure', icon:'🎡' },
@@ -2370,7 +2379,6 @@
             if (navItem) navItem.classList.add('active');
             document.body.setAttribute('data-active-page', pageName); window.scrollTo(0, 0);
             trackPageVisit(pageName);
-            checkAchievementTriggers();
             // 猫猫换页回应（不在首次加载时触发）
             if (window._pageSwitchCount) {
                 window.showCatBubble('page', 1800);
@@ -2944,11 +2952,13 @@
         // 合并逻辑：将 Firebase 数据的 completion 状态合并到新的默认成就列表
         function mergeAchievements(firebaseAchs, defaultAchs) {
             const merged = [];
+            const seenTitles = new Set();
             const fbMap = new Map();
             // 以 title 作为 key 建立 Firebase 数据索引
             (firebaseAchs || []).forEach(a => { if (a.title) fbMap.set(a.title, a); });
 
             defaultAchs.forEach(def => {
+                seenTitles.add(def.title);
                 const fb = fbMap.get(def.title);
                 if (fb && fb.completed) {
                     // 保留 Firebase 中的完成状态，同时更新可能变动的 hint/detail/icon/category
@@ -2959,8 +2969,14 @@
                 }
             });
 
-            // Firebase 中用户自定义的成就（不在默认列表里的）也保留
-            fbMap.forEach(a => merged.push(a));
+            // 只保留用户自己通过"播种"创建的自定义成就（有 author 字段的）
+            // 旧版代码遗留的默认列表条目不再保留，防止累积重复
+            fbMap.forEach(a => {
+                if (a.author && !seenTitles.has(a.title)) {
+                    merged.push(a);
+                    seenTitles.add(a.title);
+                }
+            });
 
             return merged;
         }
@@ -3016,8 +3032,14 @@
             }
         }
 
-        // 触发条件定义
+        // 触发条件定义（每天最多运行一次）
         function checkAchievementTriggers() {
+            // 每天只检查一次，避免切换页面时重复弹窗
+            const today = new Date().toISOString().slice(0, 10);
+            const lastCheck = localStorage.getItem('ach_trigger_date');
+            if (lastCheck === today) return;
+            localStorage.setItem('ach_trigger_date', today);
+
             const now = new Date();
             const hour = now.getHours();
 
@@ -3036,24 +3058,22 @@
                 triggerAchievementByCondition('一口气说出对方的生日星座');
             }
 
-            // 连续7天访问 → 连续一周每天说一句情话
+            // 连续7天访问 → 连续一周每天说一句情话（完成即止，不会重复触发）
             const stored = window._visitState || JSON.parse(localStorage.getItem('love_diary_visits') || '{}');
             if (stored.streak >= 7) {
                 triggerAchievementByCondition('连续一周每天说一句情话');
             }
 
-            // 访问3个以上页面 → 24小时内不说随便
+            // 访问3个以上页面 → 24小时内不说随便（累计3个不同页面后触发一次）
             if (stored.pagesVisited && stored.pagesVisited.length >= 3) {
                 triggerAchievementByCondition('24小时内不说"随便"');
             }
 
-            // 稀有随机触发 → 用三个词猜对方在想什么 (3%)
-            if (Math.random() < 0.03) {
-                triggerAchievementByCondition('用三个词猜对方在想什么');
-            }
-
-            // 稀有随机触发 → 在雨中一起撑伞散步 (2%)
-            if (Math.random() < 0.02) {
+            // 稀有随机触发（每天最多触发其中一个，避免弹窗轰炸）
+            const rand = Math.random();
+            if (rand < 0.03) {
+                triggerAchievementByCondition('蒙眼喂对方吃东西');
+            } else if (rand < 0.05) {
                 triggerAchievementByCondition('在雨中一起撑伞散步');
             }
         }
@@ -3407,7 +3427,7 @@
             // 有新悄悄话时显示小圆点提示（仅面板关闭时）
             const dot = document.getElementById('whisperDot');
             if (!_whisperPanelOpen && data.length > 0) {
-                const lastSeen = parseInt(sessionStorage.getItem('whisper_seen_ts') || '0');
+                const lastSeen = parseInt(localStorage.getItem('whisper_seen_ts') || '0');
                 const newest = Math.max(...data.map(d => d.createdAt || 0));
                 if (newest > lastSeen) { dot.style.display = 'block'; }
             }
@@ -3423,7 +3443,7 @@
                     panel.classList.remove('open');
                     // 记录已读时间戳
                     const ts = Math.max(...window.whisperData.map(d => d.createdAt || 0), 0);
-                    if (ts > 0) sessionStorage.setItem('whisper_seen_ts', ts.toString());
+                    if (ts > 0) localStorage.setItem('whisper_seen_ts', ts.toString());
                     document.getElementById('whisperDot').style.display = 'none';
                 }
             }
