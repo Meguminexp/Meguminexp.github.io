@@ -539,7 +539,6 @@
         .cat-svg { width: 52px; height: 52px; filter: drop-shadow(0 0 8px rgba(0,255,204,0.5)); }
         .cat-svg .cat-eye-group { transform-origin: 24px 28px; animation: catBlink 5s ease-in-out infinite; }
         .cat-svg .cat-eye-shine { animation: catShineHide 5s ease-in-out infinite; }
-        .cat-svg .cat-tail { transform-origin: 52px 48px; animation: tailWag 3s ease-in-out infinite; }
         @keyframes catBlink {
             0%,38%,42%,100% { transform: scaleY(1); }
             39%,41% { transform: scaleY(0.08); }
@@ -548,11 +547,6 @@
         @keyframes catShineHide {
             0%,37%,43%,100% { opacity: 1; }
             38.5%,41.5% { opacity: 0; }
-        }
-        @keyframes tailWag {
-            0%,100% { transform: rotate(0deg); }
-            25% { transform: rotate(-12deg); }
-            75% { transform: rotate(10deg); }
         }
         .companion-trigger[data-target-page] { display: none; }
 
@@ -1744,12 +1738,6 @@
                     <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
             </defs>
-            <!-- ═══ 尾巴 (藏在圆头后面) ═══ -->
-            <g class="cat-tail">
-                <rect x="52" y="44" width="4" height="4" fill="#1a1a2e"/>
-                <rect x="56" y="40" width="4" height="8" fill="#1a1a2e"/>
-                <rect x="56" y="48" width="4" height="8" fill="#1a1a2e"/>
-            </g>
             <!-- ═══ 耳朵 ═══ -->
             <rect x="14" y="0" width="8"  height="4" fill="#1a1a2e"/>
             <rect x="38" y="0" width="8"  height="4" fill="#1a1a2e"/>
