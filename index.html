@@ -537,14 +537,9 @@
             animation: none;
         }
         .cat-svg { width: 52px; height: 52px; filter: drop-shadow(0 0 8px rgba(0,255,204,0.5)); }
-        .cat-svg .cat-eye-group { transform-origin: 28px 26px; animation: catBlink 5s ease-in-out infinite; }
+        .cat-svg .cat-eye-group { transform-origin: 24px 28px; animation: catBlink 5s ease-in-out infinite; }
         .cat-svg .cat-eye-shine { animation: catShineHide 5s ease-in-out infinite; }
-        .cat-svg .cat-tail { transform-origin: 44px 44px; animation: tailWag 3s ease-in-out infinite; }
-        .cat-svg .cat-heart { animation: heartPulse 1.5s ease-in-out infinite; }
-        @keyframes heartPulse {
-            0%,100% { opacity: 1; }
-            50% { opacity: 0.35; }
-        }
+        .cat-svg .cat-tail { transform-origin: 52px 48px; animation: tailWag 3s ease-in-out infinite; }
         @keyframes catBlink {
             0%,38%,42%,100% { transform: scaleY(1); }
             39%,41% { transform: scaleY(0.08); }
@@ -1749,85 +1744,71 @@
                     <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                 </filter>
             </defs>
-            <!-- ═══ 尾巴 ═══ -->
+            <!-- ═══ 尾巴 (藏在圆头后面) ═══ -->
             <g class="cat-tail">
-                <rect x="44" y="44" width="4" height="4" fill="#1a1a2e"/>
-                <rect x="48" y="40" width="4" height="8" fill="#1a1a2e"/>
-                <rect x="52" y="36" width="4" height="8" fill="#1a1a2e"/>
-                <rect x="56" y="36" width="4" height="4" fill="#1a1a2e"/>
+                <rect x="52" y="44" width="4" height="4" fill="#1a1a2e"/>
+                <rect x="56" y="40" width="4" height="8" fill="#1a1a2e"/>
+                <rect x="56" y="48" width="4" height="8" fill="#1a1a2e"/>
             </g>
             <!-- ═══ 耳朵 ═══ -->
-            <rect x="8"  y="0" width="4" height="4" fill="#1a1a2e"/>
-            <rect x="40" y="0" width="4" height="4" fill="#1a1a2e"/>
-            <rect x="4"  y="4" width="12" height="4" fill="#1a1a2e"/>
-            <rect x="36" y="4" width="12" height="4" fill="#1a1a2e"/>
-            <rect x="8"  y="4" width="4" height="4" fill="#3d1a3d"/>
-            <rect x="40" y="4" width="4" height="4" fill="#3d1a3d"/>
-            <!-- ═══ 大头 (圆润chibi风) ═══ -->
-            <rect x="4"  y="8"  width="48" height="4" fill="#1a1a2e"/>
-            <rect x="4"  y="12" width="48" height="4" fill="#1a1a2e"/>
+            <rect x="14" y="0" width="8"  height="4" fill="#1a1a2e"/>
+            <rect x="38" y="0" width="8"  height="4" fill="#1a1a2e"/>
+            <rect x="10" y="4" width="12" height="4" fill="#1a1a2e"/>
+            <rect x="38" y="4" width="12" height="4" fill="#1a1a2e"/>
+            <rect x="14" y="4" width="4"  height="4" fill="#3d1a3d"/>
+            <rect x="42" y="4" width="4"  height="4" fill="#3d1a3d"/>
+            <!-- ═══ 大头 (占满画面, 萌萌圆脸) ═══ -->
+            <rect x="8"  y="8"  width="44" height="4" fill="#1a1a2e"/>
+            <rect x="4"  y="12" width="52" height="4" fill="#1a1a2e"/>
             <rect x="0"  y="16" width="56" height="4" fill="#1a1a2e"/>
-            <!-- eye row upper -->
+            <!-- 眼睛行 y=20..32 (4行) -->
             <rect x="0"  y="20" width="8"  height="4" fill="#1a1a2e"/>
             <rect x="24" y="20" width="8"  height="4" fill="#1a1a2e"/>
             <rect x="48" y="20" width="8"  height="4" fill="#1a1a2e"/>
-            <!-- eye row mid -->
             <rect x="0"  y="24" width="8"  height="4" fill="#1a1a2e"/>
             <rect x="24" y="24" width="8"  height="4" fill="#1a1a2e"/>
             <rect x="48" y="24" width="8"  height="4" fill="#1a1a2e"/>
-            <!-- eye row lower -->
             <rect x="0"  y="28" width="8"  height="4" fill="#1a1a2e"/>
             <rect x="24" y="28" width="8"  height="4" fill="#1a1a2e"/>
             <rect x="48" y="28" width="8"  height="4" fill="#1a1a2e"/>
-            <rect x="0"  y="32" width="56" height="4" fill="#1a1a2e"/>
-            <rect x="8"  y="36" width="44" height="4" fill="#1a1a2e"/>
-            <rect x="12" y="40" width="36" height="4" fill="#1a1a2e"/>
-            <rect x="16" y="44" width="28" height="4" fill="#1a1a2e"/>
-            <!-- ═══ 身体 (短小chibi) ═══ -->
-            <rect x="16" y="48" width="24" height="4" fill="#1a1a2e"/>
-            <rect x="12" y="52" width="32" height="4" fill="#1a1a2e"/>
-            <rect x="16" y="56" width="24" height="4" fill="#1a1a2e"/>
-            <!-- ═══ 小脚 ═══ -->
-            <rect x="16" y="60" width="8"  height="4" fill="#1a1a2e"/>
-            <rect x="36" y="60" width="8"  height="4" fill="#1a1a2e"/>
-            <!-- ═══ 大眼睛 (4x3 像素, 霓虹青) ═══ -->
+            <rect x="0"  y="32" width="8"  height="4" fill="#1a1a2e"/>
+            <rect x="24" y="32" width="8"  height="4" fill="#1a1a2e"/>
+            <rect x="48" y="32" width="8"  height="4" fill="#1a1a2e"/>
+            <rect x="0"  y="36" width="56" height="4" fill="#1a1a2e"/>
+            <rect x="4"  y="40" width="52" height="4" fill="#1a1a2e"/>
+            <rect x="8"  y="44" width="44" height="4" fill="#1a1a2e"/>
+            <rect x="12" y="48" width="36" height="4" fill="#1a1a2e"/>
+            <rect x="16" y="52" width="28" height="4" fill="#1a1a2e"/>
+            <rect x="20" y="56" width="20" height="4" fill="#1a1a2e"/>
+            <!-- ═══ 大眼睛 (4×4 像素, 霓虹青, 占脸1/3) ═══ -->
             <g class="cat-eye-group">
-                <rect x="8"  y="20" width="16" height="12" fill="#00ffcc" filter="url(#cyberGlow)"/>
-                <rect x="32" y="20" width="16" height="12" fill="#00ffcc" filter="url(#cyberGlow)"/>
+                <rect x="8"  y="20" width="16" height="16" fill="#00ffcc" filter="url(#cyberGlow)"/>
+                <rect x="32" y="20" width="16" height="16" fill="#00ffcc" filter="url(#cyberGlow)"/>
             </g>
-            <!-- 眼睛高光 -->
+            <!-- 眼睛高光 (主+次两点) -->
             <rect x="8"  y="20" width="4" height="4" fill="#fff" class="cat-eye-shine" opacity="0.95"/>
-            <rect x="16" y="24" width="4" height="4" fill="#fff" class="cat-eye-shine" opacity="0.5"/>
+            <rect x="16" y="24" width="4" height="4" fill="#fff" class="cat-eye-shine" opacity="0.4"/>
             <rect x="32" y="20" width="4" height="4" fill="#fff" class="cat-eye-shine" opacity="0.95"/>
-            <rect x="40" y="24" width="4" height="4" fill="#fff" class="cat-eye-shine" opacity="0.5"/>
+            <rect x="40" y="24" width="4" height="4" fill="#fff" class="cat-eye-shine" opacity="0.4"/>
             <!-- 腮红 -->
-            <rect x="0"  y="32" width="4" height="4" fill="#6d2d5d" opacity="0.65"/>
-            <rect x="52" y="32" width="4" height="4" fill="#6d2d5d" opacity="0.65"/>
-            <!-- ═══ 天线 (赛博猫耳天线) ═══ -->
-            <rect x="9" y="0" width="2" height="6" fill="#00ffcc" opacity="0.7"/>
-            <circle cx="10" cy="0" r="2.5" fill="#00ffcc" filter="url(#cyberGlow)">
+            <rect x="0"  y="28" width="4" height="8" fill="#6d2d5d" opacity="0.5"/>
+            <rect x="52" y="28" width="4" height="8" fill="#6d2d5d" opacity="0.5"/>
+            <!-- ═══ 天线 ═══ -->
+            <rect x="17" y="0" width="2" height="7" fill="#00ffcc" opacity="0.6"/>
+            <circle cx="18" cy="0" r="2.5" fill="#00ffcc" filter="url(#cyberGlow)">
                 <animate attributeName="opacity" values="1;0.15;1" dur="2s" repeatCount="indefinite"/>
             </circle>
             <!-- ═══ 鼻子 ═══ -->
-            <rect x="26" y="36" width="8" height="4" fill="#ff66aa"/>
-            <!-- 嘴巴 (像素w型) -->
-            <rect x="22" y="40" width="4" height="2" fill="#4a3050"/>
-            <rect x="26" y="40" width="8" height="2" fill="#4a3050"/>
-            <rect x="34" y="40" width="4" height="2" fill="#4a3050"/>
-            <!-- ═══ 电路板胡须 (脸颊两侧) ═══ -->
-            <line x1="2"  y1="33" x2="16" y2="32" stroke="#00ffcc" stroke-width="1.2" opacity="0.65"/>
-            <line x1="2"  y1="35" x2="14" y2="35" stroke="#00ffcc" stroke-width="1.2" opacity="0.65"/>
-            <line x1="48" y1="32" x2="60" y2="33" stroke="#00ffcc" stroke-width="1.2" opacity="0.65"/>
-            <line x1="50" y1="35" x2="60" y2="35" stroke="#00ffcc" stroke-width="1.2" opacity="0.65"/>
-            <!-- ═══ 霓虹项圈 ═══ -->
-            <rect x="16" y="46" width="28" height="2.5" fill="none" stroke="#00ffcc" stroke-width="1.5" opacity="0.65"/>
-            <!-- ═══ 像素爱心 (胸口) ═══ -->
-            <g class="cat-heart">
-                <rect x="20" y="52" width="4"  height="4" fill="#ff4488"/>
-                <rect x="32" y="52" width="4"  height="4" fill="#ff4488"/>
-                <rect x="20" y="56" width="16" height="4" fill="#ff4488"/>
-                <rect x="24" y="60" width="8"  height="4" fill="#ff4488"/>
-            </g>
+            <rect x="26" y="38" width="8" height="4" fill="#ff66aa"/>
+            <!-- 嘴巴 (像素ω型) -->
+            <rect x="22" y="42" width="4" height="2" fill="#4a3050"/>
+            <rect x="26" y="42" width="8" height="2" fill="#4a3050"/>
+            <rect x="34" y="42" width="4" height="2" fill="#4a3050"/>
+            <!-- ═══ 电路胡须 ═══ -->
+            <line x1="4"  y1="37" x2="18" y2="36" stroke="#00ffcc" stroke-width="1.2" opacity="0.55"/>
+            <line x1="4"  y1="39" x2="16" y2="39" stroke="#00ffcc" stroke-width="1.2" opacity="0.55"/>
+            <line x1="48" y1="36" x2="60" y2="37" stroke="#00ffcc" stroke-width="1.2" opacity="0.55"/>
+            <line x1="48" y1="39" x2="60" y2="39" stroke="#00ffcc" stroke-width="1.2" opacity="0.55"/>
         </svg>
         <div class="cat-bubble" id="catBubble">喵~</div>
     </button>
