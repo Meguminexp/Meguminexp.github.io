@@ -519,9 +519,9 @@
         .companion-trigger {
             position: fixed; bottom: 1.5rem; right: 1.5rem; width: 72px; height: 72px;
             border-radius: 50%; z-index: 2500; cursor: pointer;
-            background: radial-gradient(circle at 40% 35%, rgba(0,255,204,0.18), rgba(0,20,30,0.15));
-            backdrop-filter: blur(8px); border: 2px solid rgba(0,255,204,0.3);
-            box-shadow: 0 0 30px rgba(0,255,204,0.2), 0 0 60px rgba(0,200,255,0.08), inset 0 0 30px rgba(0,255,204,0.08);
+            background: radial-gradient(circle at 40% 35%, rgba(255,200,180,0.25), rgba(180,140,120,0.1));
+            backdrop-filter: blur(8px); border: 2px solid rgba(255,180,160,0.25);
+            box-shadow: 0 0 30px rgba(255,160,120,0.2), 0 0 60px rgba(200,130,100,0.08), inset 0 0 30px rgba(255,180,140,0.08);
             transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             display: flex; align-items: center; justify-content: center;
             animation: catFloat 3s ease-in-out infinite;
@@ -532,18 +532,13 @@
         }
         .companion-trigger:hover {
             transform: translateY(-8px) scale(1.12);
-            box-shadow: 0 0 40px rgba(0,255,204,0.55), 0 0 80px rgba(0,200,255,0.25), inset 0 0 40px rgba(0,255,204,0.2);
-            border-color: rgba(0,255,204,0.6);
+            box-shadow: 0 0 40px rgba(255,150,100,0.45), 0 0 80px rgba(200,120,80,0.2), inset 0 0 40px rgba(255,160,120,0.18);
+            border-color: rgba(255,150,100,0.55);
             animation: none;
         }
-        .cat-svg { width: 52px; height: 52px; filter: drop-shadow(0 0 8px rgba(0,255,204,0.5)); }
-        .cat-svg .cat-eye-group { transform-origin: 32px 37px; animation: catBlink 5s ease-in-out infinite; }
+        .cat-svg { width: 52px; height: 52px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+        .cat-svg .cat-eye-group { transform-origin: 32px 35px; animation: catBlink 5s ease-in-out infinite; }
         .cat-svg .cat-eye-shine { animation: catShineHide 5s ease-in-out infinite; }
-        .cat-svg .cat-antenna-dot { animation: antennaBlink 2s ease-in-out infinite; }
-        @keyframes antennaBlink {
-            0%,100% { opacity: 1; }
-            50% { opacity: 0.15; }
-        }
         @keyframes catBlink {
             0%,38%,42%,100% { transform: scaleY(1); }
             39%,41% { transform: scaleY(0.08); }
@@ -564,17 +559,16 @@
 
         .cat-bubble {
             position: absolute; right: 78px; bottom: 8px;
-            background: rgba(10,15,25,0.95); color: #00ffcc;
+            background: rgba(255,252,248,0.95); color: #5a3d2a;
             padding: 10px 18px; border-radius: 18px 18px 4px 18px;
             font-family: var(--font-handwriting); font-size: 1.15rem;
             white-space: nowrap; pointer-events: none;
             opacity: 0; transform: scale(0.8) translateY(8px);
             transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.4), 0 0 15px rgba(0,255,204,0.15);
-            border: 1.5px solid rgba(0,255,204,0.3);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1); border: 1.5px solid rgba(200,150,100,0.25);
         }
         .cat-bubble.show { opacity: 1; transform: scale(1) translateY(0); }
-        .cat-bubble::after { content: ''; position: absolute; right: -9px; bottom: 10px; width: 0; height: 0; border-width: 9px 0 9px 12px; border-style: solid; border-color: transparent transparent transparent rgba(10,15,25,0.95); }
+        .cat-bubble::after { content: ''; position: absolute; right: -9px; bottom: 10px; width: 0; height: 0; border-width: 9px 0 9px 12px; border-style: solid; border-color: transparent transparent transparent rgba(255,252,248,0.95); }
 
         .paw-print { position: fixed; font-size: 3rem; color: rgba(255,183,178,0.8); pointer-events: none; z-index: 4000; opacity: 0; animation: pawAppear 2.5s ease-out forwards; text-shadow: 0 0 15px rgba(255,255,255,0.5); }
         @keyframes pawAppear { 0% { opacity: 0; transform: scale(0.5) rotate(0deg); } 20% { opacity: 1; transform: scale(1.2) rotate(15deg); } 80% { opacity: 1; transform: scale(1) rotate(15deg); } 100% { opacity: 0; transform: scale(1.5) rotate(15deg); } }
@@ -1737,48 +1731,48 @@
 
     <button class="companion-trigger" onclick="window.triggerCompanionEgg()" title="抓住我呀！">
         <svg class="cat-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <filter id="cyberGlow">
-                    <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-            </defs>
-            <!-- 左耳 (圆润椭圆旋转) -->
-            <ellipse cx="18" cy="16" rx="7" ry="10" fill="#1a1a2e" transform="rotate(-12,18,16)"/>
-            <ellipse cx="18" cy="16" rx="3.5" ry="6" fill="#3d1a3d" transform="rotate(-12,18,16)"/>
-            <!-- 右耳 (圆润椭圆旋转) -->
-            <ellipse cx="46" cy="16" rx="7" ry="10" fill="#1a1a2e" transform="rotate(12,46,16)"/>
-            <ellipse cx="46" cy="16" rx="3.5" ry="6" fill="#3d1a3d" transform="rotate(12,46,16)"/>
-            <!-- 大圆脸 (微扁椭圆，更萌) -->
-            <ellipse cx="32" cy="34" rx="21" ry="18" fill="#1a1a2e"/>
+            <!-- 左耳 -->
+            <path d="M12,18 C10,8 14,2 20,3 C24,4 24,10 24,18 Z" fill="#2d2420"/>
+            <path d="M15,17 C14,10 17,5 20,5 C22,6 22,10 22,17 Z" fill="#e8a8a0"/>
+            <!-- 右耳 -->
+            <path d="M40,18 C40,10 40,4 44,3 C50,2 54,8 52,18 Z" fill="#2d2420"/>
+            <path d="M42,17 C42,10 42,6 44,5 C47,5 50,10 49,17 Z" fill="#e8a8a0"/>
+            <!-- 大圆脸 -->
+            <ellipse cx="32" cy="33" rx="21.5" ry="19.5" fill="#2d2420"/>
+            <!-- 脸颊内侧提亮 -->
+            <ellipse cx="32" cy="38" rx="16" ry="14" fill="#352b26" opacity="0.5"/>
             <!-- 腮红 -->
-            <ellipse cx="13" cy="43" rx="5" ry="3" fill="#5d2d4d" opacity="0.4"/>
-            <ellipse cx="51" cy="43" rx="5" ry="3" fill="#5d2d4d" opacity="0.4"/>
-            <!-- 眼睛组 (偏下宽距) -->
+            <ellipse cx="13" cy="42" rx="5" ry="3.5" fill="#e8b0b0" opacity="0.45"/>
+            <ellipse cx="51" cy="42" rx="5" ry="3.5" fill="#e8b0b0" opacity="0.45"/>
+            <!-- 眼睛组 -->
             <g class="cat-eye-group">
-                <ellipse cx="22" cy="37" rx="6" ry="7" fill="#00ffcc" filter="url(#cyberGlow)"/>
-                <ellipse cx="42" cy="37" rx="6" ry="7" fill="#00ffcc" filter="url(#cyberGlow)"/>
+                <!-- 左眼 -->
+                <ellipse cx="22" cy="35" rx="5.5" ry="6" fill="#f4b840"/>
+                <ellipse cx="22" cy="35" rx="3.2" ry="4.5" fill="#3d2010"/>
+                <!-- 右眼 -->
+                <ellipse cx="42" cy="35" rx="5.5" ry="6" fill="#f4b840"/>
+                <ellipse cx="42" cy="35" rx="3.2" ry="4.5" fill="#3d2010"/>
             </g>
             <!-- 眼睛高光 -->
-            <circle cx="19.5" cy="34" r="2.5" fill="#fff" class="cat-eye-shine" opacity="0.9"/>
-            <circle cx="24" cy="40" r="1.2" fill="#fff" class="cat-eye-shine" opacity="0.4"/>
-            <circle cx="39.5" cy="34" r="2.5" fill="#fff" class="cat-eye-shine" opacity="0.9"/>
-            <circle cx="44" cy="40" r="1.2" fill="#fff" class="cat-eye-shine" opacity="0.4"/>
+            <circle cx="20" cy="32" r="2.2" fill="#fff" class="cat-eye-shine" opacity="0.9"/>
+            <circle cx="23.5" cy="37" r="1" fill="#fff" class="cat-eye-shine" opacity="0.5"/>
+            <circle cx="40" cy="32" r="2.2" fill="#fff" class="cat-eye-shine" opacity="0.9"/>
+            <circle cx="43.5" cy="37" r="1" fill="#fff" class="cat-eye-shine" opacity="0.5"/>
             <!-- 鼻子 -->
-            <ellipse cx="32" cy="45" rx="2.5" ry="1.8" fill="#ff66aa"/>
+            <ellipse cx="32" cy="44" rx="2.2" ry="1.6" fill="#e89898"/>
             <!-- 嘴巴 -->
-            <path d="M28,48 Q32,51 36,48" fill="none" stroke="#4a3050" stroke-width="1.2" stroke-linecap="round"/>
-            <path d="M30,49.5 L32,50.5 L34,49.5" fill="none" stroke="#4a3050" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/>
-            <!-- 天线 -->
-            <line x1="16" y1="12" x2="16" y2="2" stroke="#00ffcc" stroke-width="1.5" opacity="0.55" stroke-linecap="round"/>
-            <circle cx="16" cy="1.5" r="2.8" fill="#00ffcc" filter="url(#cyberGlow)" class="cat-antenna-dot"/>
-            <!-- 电路胡须 -->
-            <line x1="8" y1="39" x2="18" y2="38" stroke="#00ffcc" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-            <line x1="8" y1="41" x2="17" y2="41" stroke="#00ffcc" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-            <line x1="46" y1="38" x2="56" y2="39" stroke="#00ffcc" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-            <line x1="47" y1="41" x2="56" y2="41" stroke="#00ffcc" stroke-width="1" opacity="0.4" stroke-linecap="round"/>
-            <!-- 霓虹小项圈 -->
-            <path d="M16,50 Q32,56 48,50" fill="none" stroke="#00ffcc" stroke-width="1.8" opacity="0.5" stroke-linecap="round"/>
+            <path d="M28.5,47 Q32,49.5 35.5,47" fill="none" stroke="#5a3d3d" stroke-width="1.1" stroke-linecap="round"/>
+            <path d="M30.5,48.5 L32,49.5 L33.5,48.5" fill="none" stroke="#5a3d3d" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- 胡须 -->
+            <line x1="8" y1="40" x2="18" y2="39" stroke="#4a3530" stroke-width="0.8" opacity="0.5" stroke-linecap="round"/>
+            <line x1="8" y1="42" x2="17" y2="42" stroke="#4a3530" stroke-width="0.8" opacity="0.5" stroke-linecap="round"/>
+            <line x1="46" y1="39" x2="56" y2="40" stroke="#4a3530" stroke-width="0.8" opacity="0.5" stroke-linecap="round"/>
+            <line x1="47" y1="42" x2="56" y2="42" stroke="#4a3530" stroke-width="0.8" opacity="0.5" stroke-linecap="round"/>
+            <!-- 小项圈 -->
+            <path d="M17,50 Q32,55 47,50" fill="none" stroke="#e87080" stroke-width="2.2" stroke-linecap="round"/>
+            <!-- 小铃铛 -->
+            <circle cx="32" cy="53" r="2.8" fill="#f8d848"/>
+            <circle cx="32" cy="53.5" r="1" fill="#e0c030"/>
         </svg>
         <div class="cat-bubble" id="catBubble">喵~</div>
     </button>
@@ -1795,9 +1789,9 @@
 
     <div class="easter-egg-modal" id="easterEggModal">
         <div class="ee-content">
-            <h2>🐾 捉到数码猫猫啦！</h2>
+            <h2>🐾 捉到猫猫啦！</h2>
             <p>恭喜你触发了属于我们的终极彩蛋！</p>
-            <p>这只像素黑猫从赛博空间穿越而来，不管你在日记的哪个角落，它都会闪着霓虹光芒陪着你。</p>
+            <p>就像这只调皮又黏人的小猫，不管你在这本日记的哪个角落，我都会陪着你、引导你。</p>
             <p class="ee-signature">—— 永远爱你的羊羊金/狗狗雅</p>
             <button class="ee-btn" onclick="window.closeEasterEgg()">摸摸猫头，收下爱意 💖</button>
         </div>
@@ -2383,7 +2377,7 @@
 
         let catClickCount = 0;
         const catGeneralMsgs = [
-            '01001101 01100101 01101111 01110111~ 你好呀，我在等你呢',
+            '喵~ 你好呀，我在等你呢',
             '喵~ 今天过得开心吗？ ✨',
             '喵~ 摸摸头，不许多想，我一直都在',
             '喵~ 看到你就觉得好幸福呀 >w<',
