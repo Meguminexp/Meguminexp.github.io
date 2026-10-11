@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240">
+  <!-- 《你好！一周年》徽记：星星与石头（呼应 2025.09.28《石头说》） -->
+  <defs>
+    <radialGradient id="badge" cx="0.42" cy="0.34" r="0.78">
+      <stop offset="0" stop-color="#2C2740"/><stop offset="1" stop-color="#161327"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E8B86B"/><stop offset="0.5" stop-color="#F0D6A0"/><stop offset="1" stop-color="#C1904A"/>
+    </linearGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#AEBBB2"/><stop offset="0.55" stop-color="#8E9BB5"/><stop offset="1" stop-color="#5F6B85"/>
+    </linearGradient>
+    <linearGradient id="star" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFF3D2"/><stop offset="1" stop-color="#EFBE6A"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.42" r="0.5">
+      <stop offset="0" stop-color="#FFE9B8" stop-opacity="0.5"/><stop offset="1" stop-color="#FFE9B8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120" cy="120" r="112" fill="url(#badge)"/>
+  <circle cx="120" cy="120" r="112" fill="none" stroke="url(#ring)" stroke-width="4"/>
+  <circle cx="120" cy="110" r="76" fill="url(#glow)"/>
+  <!-- 星星 -->
+  <path d="M120 40 l12.5 30.5 L164 74 l-24.5 21.5 L147 127 l-27-15.5 L93 127 l7.5-31.5 L76 74 l31.5-3.5 Z" fill="url(#star)"/>
+  <circle cx="107" cy="72" r="7" fill="#FFFDF4" opacity="0.85"/>
+  <!-- 石头（被星星照着的鹅卵石） -->
+  <ellipse cx="120" cy="176" rx="52" ry="34" fill="url(#stone)"/>
+  <path d="M74 176 C 88 158 108 151 128 153 C 150 155 166 164 172 178 C 150 194 96 196 74 176 Z" fill="#C6CFD8" opacity="0.35"/>
+  <ellipse cx="100" cy="196" rx="30" ry="10" fill="#3F4A5E" opacity="0.35"/>
+  <!-- 一点猫爪印（猫猫明信片的小记号） -->
+  <g fill="#F2C9CE" opacity="0.9" transform="translate(176 68) rotate(18)">
+    <ellipse cx="0" cy="6" rx="9" ry="7"/>
+    <circle cx="-8" cy="-4" r="3.2"/><circle cx="-1" cy="-7" r="3.4"/><circle cx="6" cy="-4" r="3.2"/>
+  </g>
+</svg>

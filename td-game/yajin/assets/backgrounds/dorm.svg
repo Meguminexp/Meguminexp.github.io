@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1A2336"/><stop offset="1" stop-color="#0E1420"/></linearGradient><linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2A3042"/><stop offset="1" stop-color="#1A1F2C"/></linearGradient><linearGradient id="curtain" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1B2438"/><stop offset="1" stop-color="#101724"/></linearGradient><linearGradient id="screen" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E4A63"/><stop offset="1" stop-color="#1B2B3C"/></linearGradient><radialGradient id="moonGlow"><stop offset="0" stop-color="#F7EED2" stop-opacity="0.35"/><stop offset="1" stop-color="#F7EED2" stop-opacity="0"/></radialGradient><radialGradient id="lampGlow"><stop offset="0" stop-color="#F5CE7E" stop-opacity="0.5"/><stop offset="1" stop-color="#F5CE7E" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <rect x="0" y="0" width="1080" height="900" fill="url(#wall)"/>
+  <rect x="1080" y="0" width="520" height="900" fill="url(#curtain)"/>
+  <rect x="1120" y="60" width="440" height="600" rx="10" fill="#20304C" opacity="0.55"/>
+  <circle cx="1420" cy="180" r="46" fill="#F5E7C0" opacity="0.85"/>
+  <circle cx="1420" cy="180" r="120" fill="url(#moonGlow)"/>
+  <rect x="60" y="520" width="900" height="26" rx="6" fill="#3A2E27"/>
+  <rect x="90" y="546" width="30" height="240" fill="#332821"/>
+  <rect x="900" y="546" width="30" height="240" fill="#332821"/>
+  <rect x="470" y="300" width="430" height="230" rx="12" fill="#1C1A20"/>
+  <rect x="486" y="316" width="398" height="198" rx="6" fill="url(#screen)"/>
+  <rect x="500" y="332" width="180" height="8" rx="4" fill="#9FD3E8" opacity="0.7"/>
+  <rect x="500" y="352" width="300" height="6" rx="3" fill="#7FB6D8" opacity="0.5"/>
+  <rect x="500" y="372" width="240" height="6" rx="3" fill="#7FB6D8" opacity="0.4"/>
+  <rect x="640" y="530" width="90" height="26" rx="6" fill="#26232A"/>
+  <rect x="120" y="640" width="360" height="18" rx="6" fill="#2C2620"/>
+  <rect x="150" y="658" width="24" height="150" fill="#2A241F"/>
+  <rect x="426" y="658" width="24" height="150" fill="#2A241F"/>
+  <path d="M600 250 L980 250 L1000 300 L580 300 Z" fill="#E8C98A" opacity="0.22"/>
+  <circle cx="940" cy="470" r="26" fill="#F0D48A" opacity="0.9"/>
+  <circle cx="940" cy="470" r="120" fill="url(#lampGlow)"/>
+  <rect x="20" y="820" width="1560" height="80" fill="#241D1A"/>
+  <g opacity="0.5"><rect x="200" y="600" width="240" height="40" rx="6" fill="#3A2F28"/>
+  <rect x="220" y="580" width="60" height="20" rx="4" fill="#4A3B31"/>
+  <rect x="300" y="576" width="120" height="24" rx="4" fill="#514135"/></g>
+
+</svg>

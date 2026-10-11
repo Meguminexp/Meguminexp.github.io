@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>素材检查页 · 你好！一周年</title>
+<style>
+  :root{--ink:#3A2E28;--soft:#6B5A50;--gold:#C89544}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#17131B;color:#EFE7DA;font-family:'PingFang SC','Noto Sans SC','Microsoft YaHei',sans-serif;padding:28px 22px 60px}
+  h1{font-size:22px;letter-spacing:3px;color:#F3D9A4;margin-bottom:6px}
+  .lead{font-size:13.5px;color:#A99B8C;line-height:1.9;margin-bottom:22px;max-width:960px}
+  .lead code{background:rgba(243,217,164,.14);padding:1px 6px;border-radius:4px;color:#F3D9A4}
+  h2{font-size:16px;letter-spacing:2px;color:#E8B86B;margin:30px 0 12px;padding-bottom:8px;border-bottom:1px solid rgba(243,217,164,.25)}
+  h2 small{font-size:12px;color:#8E8175;letter-spacing:0;margin-left:10px;font-weight:400}
+  .grid{display:grid;gap:14px}
+  .grid.bg{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+  .grid.cg{grid-template-columns:repeat(auto-fill,minmax(360px,1fr))}
+  .grid.sp{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+  figure{background:#211B26;border:1px solid rgba(243,217,164,.18);border-radius:10px;overflow:hidden;transition:transform .16s ease,border-color .16s ease}
+  figure:hover{transform:translateY(-3px);border-color:rgba(243,217,164,.5)}
+  figure img{display:block;width:100%;height:auto;background:#0F0C13}
+  figcaption{font-size:12.5px;color:#C9BBAA;padding:9px 11px;line-height:1.6}
+  figcaption b{color:#F3D9A4;display:block;font-size:13px;margin-bottom:2px}
+  figcaption code{color:#9BC7E0;font-size:11px}
+  .sp-card{background:linear-gradient(180deg,rgba(243,217,164,.09),rgba(243,217,164,.02));border:1px solid rgba(243,217,164,.2);border-radius:10px;padding:8px;text-align:center}
+  .sp-card svg{width:100%;height:auto;display:block;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5))}
+  .sp-name{font-size:12.5px;color:#E8B86B;margin-top:6px}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+  .toolbar button{font-family:inherit;cursor:pointer;font-size:13px;color:#EFE7DA;background:rgba(243,217,164,.12);
+    border:1px solid rgba(243,217,164,.35);border-radius:8px;padding:7px 15px}
+  .toolbar button:hover{background:rgba(243,217,164,.25)}
+  .note{font-size:12.5px;color:#8E8175;margin-top:10px;line-height:1.8}
+  .ok{color:#8DD3A8}.warn{color:#E0A46B}
+</style>
+</head>
+<body>
+  <h1>素材检查页 · 你好！一周年</h1>
+  <p class="lead">
+    本页用于人工核对美术一致性：背景是否同一套光影语言、两位角色在不同表情下是否一眼可辨、CG 构图是否合理。
+    所有文件都真实存在于仓库中（清单见 <code>assets/manifest.json</code>）。
+    角色立绘为程序化矢量绘制（<code>src/art.js</code>），同一 720×1080 画布生成，因此任何表情切换都天然对齐。
+  </p>
+  <div class="toolbar">
+    <button id="btn-toggle-bg">只看背景</button>
+    <button id="btn-toggle-outfit">看服装差分</button>
+<button id="btn-toggle-sp">只看立绘</button>
+    <button id="btn-toggle-cg">只看 CG</button>
+    <button id="btn-show-all">显示全部</button>
+  </div>
+
+  <h2>背景 · 9 张 <small>1600×900 · SVG · 统一暖色调与暗角</small></h2>
+  <div class="grid bg" id="bg-grid"></div>
+
+  <h2>角色立绘 · 16 种表情 <small>透明背景 · 720×1080 · 同一画布对齐</small></h2>
+  <div class="grid sp" id="sp-grid"></div>
+
+  <h2>场景 CG · 10 张 <small>1600×900 · 由「背景 + 立绘 + 氛围特效」合成</small></h2>
+  <div class="grid cg" id="cg-grid"></div>
+
+  <h2>界面素材 <small>SVG 图标 + CSS 实作</small></h2>
+  <div class="grid bg" id="ui-grid"></div>
+
+  <p class="note">
+    缺失文件会在此页显示为破图占位（本页不做兜底），以便第一时间发现素材问题。<br>
+    若要把立绘替换为手绘/AI 成品：按 <code>assets/manifest.json</code> 中每条素材的 <code>replaceHint</code> 放置文件，
+    并修改 <code>src/ui.js</code> 的 <code>svgFor()</code> 读取图片即可。
+  </p>
+
+  <script src="src/core.js"></script>
+  <script src="src/story/characters.js"></script>
+  <script src="assets/manifest.js"></script>
+<script src="assets/usage.js"></script>
+  <script src="src/art.js"></script>
+  <script>
+  (function () {
+    var YJ = window.YJ;
+    var m = YJ.manifest;
+  var usage = (window.YJ && YJ.manifestUsage) || {};
+
+    function figure(src, title, sub, cls) {
+      var f = document.createElement('figure');
+      if (cls) f.className = cls;
+      var img = document.createElement('img');
+      img.src = src; img.alt = title; img.loading = 'lazy';
+      img.onerror = function () {
+        img.replaceWith(Object.assign(document.createElement('div'), {
+          textContent: '✗ 文件缺失：' + src,
+          style: 'padding:30px;text-align:center;color:#E0A46B;font-size:13px'
+        }));
+      };
+      var cap = document.createElement('figcaption');
+      cap.innerHTML = '<b>' + title + '</b>' + sub;
+      f.appendChild(img); f.appendChild(cap);
+      return f;
+    }
+
+    /* 背景 */
+    var bgGrid = document.getElementById('bg-grid');
+    m.assets.filter(function (a) { return a.type === 'background'; }).forEach(function (a) {
+      var u = (usage && usage[a.id]) || 0;
+      bgGrid.appendChild(figure(a.file, a.name, '<code>' + a.file + '</code><br>' + (a.scene || '') + ' · 剧情中被使用 ' + u + ' 次'));
+    });
+
+    /* 立绘：两种视图 —— 全表情（默认）/ 服装差分 */
+    var spGrid = document.getElementById('sp-grid');
+    var outfitMode = false;
+    function renderSprites() {
+      spGrid.innerHTML = '';
+      Object.keys(YJ.characters).forEach(function (cid) {
+        var ch = YJ.characters[cid];
+        if (outfitMode) {
+          ch.outfits.forEach(function (o) {
+            var card = document.createElement('div');
+            card.className = 'sp-card';
+            card.innerHTML = YJ.art.characterSVG(cid, 'smile', 'idle', { outfit: o });
+            var n = document.createElement('div');
+            n.className = 'sp-name';
+            n.textContent = ch.name + ' · ' + (YJ.outfitLabel[o] || o) + ' (' + o + ')';
+            card.appendChild(n);
+            spGrid.appendChild(card);
+          });
+        } else {
+          ch.expressions.forEach(function (e) {
+            var card = document.createElement('div');
+            card.className = 'sp-card';
+            card.innerHTML = YJ.art.characterSVG(cid, e, 'idle');
+            var n = document.createElement('div');
+            n.className = 'sp-name';
+            n.textContent = ch.name + ' · ' + (YJ.exprLabel[e] || e) + ' (' + e + ')';
+            card.appendChild(n);
+            spGrid.appendChild(card);
+          });
+        }
+      });
+    }
+    renderSprites();
+    var btnOutfit = document.getElementById('btn-toggle-outfit');
+    if (btnOutfit) btnOutfit.onclick = function () {
+      outfitMode = !outfitMode;
+      btnOutfit.textContent = outfitMode ? '看全部表情' : '看服装差分';
+      renderSprites();
+    };
+
+    /* CG */
+    var cgGrid = document.getElementById('cg-grid');
+    m.assets.filter(function (a) { return a.type === 'cg'; }).forEach(function (a) {
+      var uc = (usage && usage[a.id]) || 0;
+      cgGrid.appendChild(figure(a.file, a.name, '<code>' + a.file + '</code><br>' + (a.composition || '') + '<br>剧情中出现 ' + uc + ' 次'));
+    });
+
+    /* UI */
+    var uiGrid = document.getElementById('ui-grid');
+    m.assets.filter(function (a) { return a.type === 'ui'; }).forEach(function (a) {
+      if (a.file) uiGrid.appendChild(figure(a.file, a.name, '<code>' + a.file + '</code>'));
+      else {
+        var f = document.createElement('figure');
+        f.innerHTML = '<figcaption><b>' + a.name + '</b><span class="ok">CSS 实作（无图片文件）</span><br>' +
+          '<code>' + (a.note || '') + '</code></figcaption>';
+        uiGrid.appendChild(f);
+      }
+    });
+
+    /* 过滤按钮 */
+    function only(which) {
+      var map = { bg: 'bg-grid', sp: 'sp-grid', cg: 'cg-grid', ui: 'ui-grid' };
+      Object.keys(map).forEach(function (k) {
+        var el = document.getElementById(map[k]);
+        el.style.display = (!which || which === k) ? '' : 'none';
+        el.previousElementSibling.style.display = (!which || which === k) ? '' : 'none';
+      });
+    }
+    document.getElementById('btn-toggle-bg').onclick = function () { only('bg'); };
+    document.getElementById('btn-toggle-sp').onclick = function () { only('sp'); };
+    document.getElementById('btn-toggle-cg').onclick = function () { only('cg'); };
+    document.getElementById('btn-show-all').onclick = function () { only(null); };
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <!-- hk_fireworks.svg · 夜 · 城堡前的烟花秀 · 手写矢量，1600×900
+       这一张是本章的门面：三层天光（深靛 → 紫 → 地平线的暖）＋ 五组烟花（金 / 玫瑰 / 青 / 紫 / 白）
+       ＋ 城堡剪影与暖窗 ＋ 地上的反光与人群剪影。可视带压在 y ≈ 622 以上。 -->
+  <defs>
+    <linearGradient id="fwSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#05081C"/><stop offset="0.3" stop-color="#101740"/>
+      <stop offset="0.56" stop-color="#282054"/><stop offset="0.76" stop-color="#472A57"/>
+      <stop offset="0.9" stop-color="#6B3552"/><stop offset="1" stop-color="#8A4650"/>
+    </linearGradient>
+    <radialGradient id="fwGlowGold" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFE9A8" stop-opacity="0.75"/>
+      <stop offset="0.28" stop-color="#FFC96A" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#FFC96A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwGlowRose" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFD8E6" stop-opacity="0.7"/>
+      <stop offset="0.3" stop-color="#FF9CC2" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#FF9CC2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwGlowCyan" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#D6F6FF" stop-opacity="0.7"/>
+      <stop offset="0.3" stop-color="#8FE0FF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#8FE0FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwGlowViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#E6D6FF" stop-opacity="0.6"/>
+      <stop offset="0.34" stop-color="#B18FFF" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#B18FFF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwMoonGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFF3D2" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#FFF3D2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwCastleGlow" cx="0.5" cy="1" r="0.7">
+      <stop offset="0" stop-color="#FFCE8E" stop-opacity="0.5"/>
+      <stop offset="0.5" stop-color="#FF9E86" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FF9E86" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fwHaze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFB07A" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#FFB07A" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#FF9E86" stop-opacity="0.42"/>
+    </linearGradient>
+    <linearGradient id="fwGround" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3E2A44"/><stop offset="0.35" stop-color="#2A1C33"/>
+      <stop offset="1" stop-color="#140D1C"/>
+    </linearGradient>
+    <radialGradient id="fwReflGold" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFDA95" stop-opacity="0.42"/>
+      <stop offset="0.5" stop-color="#FFDA95" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#FFDA95" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwReflRose" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFA8C8" stop-opacity="0.36"/>
+      <stop offset="0.5" stop-color="#FFA8C8" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#FFA8C8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwReflCyan" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#9FE6FF" stop-opacity="0.34"/>
+      <stop offset="0.5" stop-color="#9FE6FF" stop-opacity="0.13"/>
+      <stop offset="1" stop-color="#9FE6FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fwReflViolet" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#C3A6FF" stop-opacity="0.32"/>
+      <stop offset="0.5" stop-color="#C3A6FF" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#C3A6FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fwCastleTop" x1="0" y1="0" x2="0" y2="0.7">
+      <stop offset="0" stop-color="#FFE0B0" stop-opacity="0.5"/>
+      <stop offset="0.45" stop-color="#FFC98A" stop-opacity="0.14"/>
+      <stop offset="1" stop-color="#FFC98A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fwCastleLight" x1="0" y1="0" x2="1" y2="0.25">
+      <stop offset="0" stop-color="#7C6BC0" stop-opacity="0.55"/>
+      <stop offset="0.42" stop-color="#B27AB0" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFB877" stop-opacity="0.55"/>
+    </linearGradient>
+    <radialGradient id="fwVig" cx="0.5" cy="0.5" r="0.78">
+      <stop offset="0.46" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity="0.5"/>
+    </radialGradient>
+
+    <!-- 烟花的共用骨架：4 → 8 → 16 条放射线，颜色由外层 color 继承（currentColor） -->
+    <g id="fwRay4" stroke="currentColor" fill="none" stroke-linecap="round">
+      <path d="M0 0 L0 -176" stroke-width="3.2"/>
+      <path d="M0 0 L0 -126" stroke-width="1.5" opacity="0.55"/>
+      <g transform="rotate(90)"><path d="M0 0 L0 -176" stroke-width="3.2"/><path d="M0 0 L0 -126" stroke-width="1.5" opacity="0.55"/></g>
+      <g transform="rotate(180)"><path d="M0 0 L0 -176" stroke-width="3.2"/><path d="M0 0 L0 -126" stroke-width="1.5" opacity="0.55"/></g>
+      <g transform="rotate(270)"><path d="M0 0 L0 -176" stroke-width="3.2"/><path d="M0 0 L0 -126" stroke-width="1.5" opacity="0.55"/></g>
+    </g>
+    <g id="fwRay8"><use href="#fwRay4"/><use href="#fwRay4" transform="rotate(45)"/></g>
+    <g id="fwRay16"><use href="#fwRay8"/><use href="#fwRay8" transform="rotate(22.5)"/>
+      <use href="#fwRay8" transform="rotate(11.25) scale(0.62)" opacity="0.7"/></g>
+    <g id="fwDot4" fill="currentColor">
+      <circle cx="0" cy="-176" r="6.5"/>
+      <g transform="rotate(90)"><circle cx="0" cy="-176" r="6.5"/></g>
+      <g transform="rotate(180)"><circle cx="0" cy="-176" r="6.5"/></g>
+      <g transform="rotate(270)"><circle cx="0" cy="-176" r="6.5"/></g>
+    </g>
+    <g id="fwDot8"><use href="#fwDot4"/><use href="#fwDot4" transform="rotate(45)"/></g>
+    <g id="fwDot16"><use href="#fwDot8"/><use href="#fwDot8" transform="rotate(22.5)"/></g>
+
+    <!-- 人群剪影（夜里的观众：只剩轮廓与一点点火光） -->
+    <g id="fwPerson">
+      <path d="M-20 -42 q20 -11 40 0 l5 44 q-25 6 -50 0 z" fill="#0A0813"/>
+      <path d="M-21 -38 q-8 16 -6 34 M21 -38 q8 16 6 34" fill="none" stroke="#0A0813" stroke-width="7.5" stroke-linecap="round"/>
+      <circle cx="0" cy="-58" r="13.5" fill="#0A0813"/>
+    </g>
+    <g id="fwPhone">
+      <use href="#fwPerson"/>
+      <path d="M12 -38 l14 -28" stroke="#0A0813" stroke-width="7" stroke-linecap="round"/>
+      <rect x="22" y="-80" width="13" height="21" rx="3" fill="#FFF0C8"/>
+    </g>
+  </defs>
+
+  <!-- 天 -->
+  <rect width="1600" height="900" fill="url(#fwSky)"/>
+
+  <!-- 星与月 -->
+  <g fill="#FFF6DE">
+    <circle cx="86" cy="72" r="1.7" opacity="0.7"/><circle cx="180" cy="140" r="2.2" opacity="0.55"/>
+    <circle cx="268" cy="58" r="1.4" opacity="0.8"/><circle cx="352" cy="196" r="1.9" opacity="0.45"/>
+    <circle cx="446" cy="96" r="2.4" opacity="0.6"/><circle cx="540" cy="42" r="1.5" opacity="0.75"/>
+    <circle cx="636" cy="150" r="2.1" opacity="0.5"/><circle cx="742" cy="66" r="1.6" opacity="0.7"/>
+    <circle cx="848" cy="126" r="2.3" opacity="0.5"/><circle cx="948" cy="52" r="1.5" opacity="0.8"/>
+    <circle cx="1046" cy="168" r="1.9" opacity="0.45"/><circle cx="1152" cy="88" r="2.4" opacity="0.6"/>
+    <circle cx="1258" cy="148" r="1.6" opacity="0.7"/><circle cx="1352" cy="62" r="2.1" opacity="0.55"/>
+    <circle cx="1452" cy="182" r="1.6" opacity="0.65"/><circle cx="1540" cy="96" r="2.2" opacity="0.5"/>
+    <circle cx="110" cy="238" r="1.4" opacity="0.5"/><circle cx="1408" cy="262" r="1.5" opacity="0.45"/>
+    <circle cx="690" cy="240" r="1.3" opacity="0.5"/><circle cx="986" cy="232" r="1.4" opacity="0.45"/>
+  </g>
+  <g fill="#BFE0FF" opacity="0.9">
+    <path d="M604 84 l5 15 l15 5 l-15 5 l-5 15 l-5 -15 l-15 -5 l15 -5 z"/>
+    <path d="M1298 66 l4 12 l12 4 l-12 4 l-4 12 l-4 -12 l-12 -4 l12 -4 z"/>
+  </g>
+  <g>
+    <circle cx="254" cy="128" r="120" fill="url(#fwMoonGlow)"/>
+    <circle cx="254" cy="128" r="34" fill="#FFF6DC"/>
+    <circle cx="240" cy="118" r="30" fill="#0B0F2C" opacity="0.92"/>
+  </g>
+
+  <!-- ============ 烟花 ============ -->
+  <!-- 1) 左上 · 大金花 -->
+  <g transform="translate(470 236)">
+    <circle r="360" fill="url(#fwGlowGold)"/>
+    <g color="#FFD27A" opacity="0.95"><use href="#fwRay16"/></g>
+    <g color="#FFF3C8"><use href="#fwDot16"/></g>
+    <circle r="30" fill="#FFF9E4" opacity="0.85"/>
+    <circle r="64" fill="none" stroke="#FFE7A8" stroke-width="3" opacity="0.4"/>
+  </g>
+  <!-- 2) 右上 · 玫瑰 -->
+  <g transform="translate(1132 196) scale(0.86)">
+    <circle r="330" fill="url(#fwGlowRose)"/>
+    <g color="#FF9CC2" opacity="0.95"><use href="#fwRay16"/></g>
+    <g color="#FFE2EE"><use href="#fwDot16"/></g>
+    <circle r="26" fill="#FFF6FA" opacity="0.85"/>
+  </g>
+  <!-- 3) 顶部中央 · 青（小） -->
+  <g transform="translate(812 108) scale(0.58)">
+    <circle r="300" fill="url(#fwGlowCyan)"/>
+    <g color="#8FE0FF" opacity="0.9"><use href="#fwRay16"/></g>
+    <g color="#E4F8FF"><use href="#fwDot16"/></g>
+    <circle r="22" fill="#FFFFFF" opacity="0.8"/>
+  </g>
+  <!-- 4) 右侧 · 紫（小） -->
+  <g transform="translate(1408 330) scale(0.5)">
+    <circle r="290" fill="url(#fwGlowViolet)"/>
+    <g color="#C3A6FF" opacity="0.9"><use href="#fwRay16"/></g>
+    <g color="#EDE2FF"><use href="#fwDot16"/></g>
+  </g>
+  <!-- 5) 左侧 · 环形花（一圈亮点，安静而漂亮） -->
+  <g transform="translate(196 372)">
+    <circle r="250" fill="url(#fwGlowCyan)" opacity="0.85"/>
+    <g color="#CFEFFF">
+      <use href="#fwDot8" transform="scale(0.78)"/>
+      <use href="#fwDot8" transform="scale(0.78) rotate(22.5)"/>
+      <use href="#fwDot8" transform="scale(0.98) rotate(11.25)" opacity="0.85"/>
+    </g>
+    <circle r="16" fill="#EAF9FF" opacity="0.9"/>
+    <circle r="42" fill="none" stroke="#D6F6FF" stroke-width="2.4" opacity="0.45"/>
+  </g>
+  <!-- 升空中的三发（细线 + 亮点） -->
+  <g stroke="#FFE0A8" stroke-width="2.2" stroke-linecap="round" opacity="0.75">
+    <path d="M596 552 L606 408"/>
+    <path d="M928 560 L944 452"/>
+    <path d="M1290 566 L1296 486"/>
+  </g>
+  <g fill="#FFF6D8">
+    <circle cx="606" cy="406" r="5"/><circle cx="944" cy="450" r="4.4"/><circle cx="1296" cy="484" r="4"/>
+  </g>
+  <!-- 飘落的火星 -->
+  <g fill="#FFE7B0" opacity="0.75">
+    <circle cx="392" cy="404" r="2.6"/><circle cx="536" cy="452" r="2.2"/><circle cx="676" cy="376" r="2.4"/>
+    <circle cx="884" cy="424" r="2.2"/><circle cx="1042" cy="368" r="2.6"/><circle cx="1206" cy="440" r="2.2"/>
+    <circle cx="1352" cy="470" r="2.4"/><circle cx="234" cy="500" r="2.2"/><circle cx="1500" cy="392" r="2.2"/>
+    <circle cx="760" cy="466" r="2"/><circle cx="318" cy="316" r="2"/><circle cx="1452" cy="248" r="2"/>
+  </g>
+
+  <!-- 地平线的暖雾 -->
+  <rect x="0" y="380" width="1600" height="260" fill="url(#fwHaze)"/>
+
+  <!-- ============ 城堡剪影（被烟花照亮） ============ -->
+  <g>
+    <ellipse cx="800" cy="606" rx="440" ry="190" fill="url(#fwCastleGlow)"/>
+    <defs>
+      <g id="fwCastle">
+        <rect x="600" y="472" width="400" height="140" rx="8"/>
+        <rect x="574" y="430" width="94" height="182" rx="6"/>
+        <path d="M560 432 L682 432 L621 322 Z"/>
+        <rect x="932" y="430" width="94" height="182" rx="6"/>
+        <path d="M918 432 L1040 432 L979 322 Z"/>
+        <rect x="744" y="392" width="112" height="220" rx="6"/>
+        <path d="M728 396 L872 396 L800 262 Z"/>
+        <rect x="700" y="440" width="44" height="172" rx="5"/>
+        <path d="M692 442 L752 442 L722 364 Z"/>
+        <rect x="856" y="440" width="44" height="172" rx="5"/>
+        <path d="M848 442 L908 442 L878 364 Z"/>
+        <rect x="770" y="500" width="60" height="112" rx="4"/>
+      </g>
+      <clipPath id="fwCastleClip"><use href="#fwCastle"/></clipPath>
+    </defs>
+    <use href="#fwCastle" fill="#1A1236"/>
+    <g clip-path="url(#fwCastleClip)">
+      <rect x="520" y="240" width="1120" height="400" fill="url(#fwCastleLight)"/>
+      <rect x="520" y="240" width="1120" height="400" fill="url(#fwCastleTop)"/>
+      <rect x="900" y="240" width="200" height="400" fill="#FFC98A" opacity="0.2"/>
+      <rect x="520" y="240" width="200" height="400" fill="#8A7CC8" opacity="0.16"/>
+    </g>
+    <!-- 塔尖的金顶与窗火 -->
+    <g fill="#FFD98A">
+      <circle cx="800" cy="256" r="7"/><circle cx="621" cy="316" r="6"/><circle cx="979" cy="316" r="6"/>
+      <circle cx="722" cy="358" r="5"/><circle cx="878" cy="358" r="5"/>
+    </g>
+    <g fill="#FFE7A8" opacity="0.95">
+      <rect x="620" y="470" width="16" height="26" rx="7"/><rect x="662" y="512" width="14" height="24" rx="6"/>
+      <rect x="982" y="470" width="16" height="26" rx="7"/><rect x="944" y="512" width="14" height="24" rx="6"/>
+      <rect x="776" y="428" width="18" height="28" rx="8"/><rect x="806" y="428" width="18" height="28" rx="8"/>
+      <rect x="786" y="524" width="22" height="34" rx="10" fill="#FFC97A"/>
+    </g>
+    <path d="M760 612 L760 556 Q800 524 840 556 L840 612 Z" fill="#241640"/>
+  </g>
+
+  <!-- 广场地面与反光 -->
+  <rect x="0" y="612" width="1600" height="288" fill="url(#fwGround)"/>
+  <g opacity="0.9">
+    <ellipse cx="470" cy="716" rx="168" ry="128" fill="url(#fwReflGold)"/>
+    <ellipse cx="1132" cy="720" rx="152" ry="122" fill="url(#fwReflRose)"/>
+    <ellipse cx="812" cy="706" rx="122" ry="108" fill="url(#fwReflCyan)"/>
+    <ellipse cx="1408" cy="712" rx="132" ry="104" fill="url(#fwReflViolet)"/>
+    <ellipse cx="188" cy="718" rx="154" ry="118" fill="url(#fwReflGold)"/>
+    <ellipse cx="800" cy="690" rx="300" ry="120" fill="url(#fwReflGold)" opacity="0.5"/>
+  </g>
+  <ellipse cx="800" cy="618" rx="520" ry="26" fill="#FFB877" opacity="0.18"/>
+  <g stroke="#6E5678" stroke-width="2.2" opacity="0.35">
+    <path d="M0 656 L1600 656"/><path d="M0 706 L1600 706"/><path d="M0 786 L1600 786"/>
+    <path d="M800 612 L800 900"/><path d="M470 612 L360 900"/><path d="M1130 612 L1240 900"/>
+  </g>
+
+  <!-- 人群剪影（抬头看烟花的人，控制在对话框上沿以上） -->
+  <g>
+    <use href="#fwPerson" transform="translate(178 646) scale(1.16)"/>
+    <use href="#fwPhone" transform="translate(246 652) scale(1.1)"/>
+    <use href="#fwPerson" transform="translate(322 646) scale(1.06)"/>
+    <use href="#fwPhone" transform="translate(398 654) scale(1)"/>
+    <use href="#fwPerson" transform="translate(470 648) scale(1.02)"/>
+    <use href="#fwPerson" transform="translate(1096 646) scale(1.14)"/>
+    <use href="#fwPhone" transform="translate(1168 652) scale(1.08)"/>
+    <use href="#fwPerson" transform="translate(1246 646) scale(1.04)"/>
+    <use href="#fwPhone" transform="translate(1322 654) scale(1)"/>
+    <use href="#fwPerson" transform="translate(1394 648) scale(1)"/>
+    <use href="#fwPerson" transform="translate(690 668) scale(0.86)"/>
+    <use href="#fwPerson" transform="translate(880 672) scale(0.84)"/>
+  </g>
+
+  <!-- 光晕与暗角 -->
+  <ellipse cx="470" cy="236" rx="560" ry="400" fill="url(#fwGlowGold)" opacity="0.5"/>
+  <ellipse cx="812" cy="120" rx="420" ry="320" fill="url(#fwGlowCyan)" opacity="0.45"/>
+  <ellipse cx="1132" cy="196" rx="500" ry="360" fill="url(#fwGlowRose)" opacity="0.45"/>
+  <ellipse cx="800" cy="618" rx="820" ry="200" fill="url(#fwGlowGold)" opacity="0.35"/>
+  <rect width="1600" height="900" fill="url(#fwVig)"/>
+
+</svg>

@@ -1,0 +1,12 @@
+.DS_Store
+**/.DS_Store
+
+# 只排除"运行游戏不需要、且体积大"的开发产物
+td-game/yajin/screenshots/
+td-game/yajin/node_modules/
+**/__pycache__/
+td-game/yajin/assets/characters/.cache/
+td-game/yajin/_*.html
+
+# 压缩包/临时
+*.zip

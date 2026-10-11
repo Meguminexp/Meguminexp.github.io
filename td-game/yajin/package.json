@@ -1,0 +1,31 @@
+{
+  "name": "yajin-daily",
+  "version": "2.0.0",
+  "private": true,
+  "description": "《你好！一周年》— 中文互动式视觉小说（Galgame），真人设定 + 真实时间线（2025.06–2026.10）。零运行时依赖，双击 index.html 即可游玩。",
+  "scripts": {
+    "start": "python3 -m http.server 8123",
+    "test": "node tests/run.js",
+    "build:cg": "node tools/build-cg.js",
+    "build:manifest": "node tools/gen-manifest.js",
+    "build:script": "node tools/export-script.js",
+    "build": "node tools/build-cg.js && node tools/gen-manifest.js && node tools/export-script.js",
+    "export:text": "node tools/export-text.js",
+    "import:text": "node tools/import-text.js",
+    "build:sprites": "node tools/gen-sprites.js",
+    "check:sprites": "node tools/check-sprites.js",
+    "build:guide": "node tools/gen-art-guide.js"
+  },
+  "keywords": [
+    "galgame",
+    "visual-novel",
+    "canvas-free",
+    "svg",
+    "webaudio"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  },
+  "comment": "游戏本体不需要任何依赖（经典 <script> 加载，file:// 可运行）。devDependencies 仅用于 tests/run.js 的无头验收测试；若本目录被单独复制出去，请先 `npm i -D jsdom`。"
+}

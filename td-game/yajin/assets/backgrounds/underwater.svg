@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2E7F9C"/><stop offset="1" stop-color="#0E3B52"/></linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#water)"/>
+  <g opacity="0.25" fill="#CFEAF5">
+    <path d="M200 0 L320 0 L120 900 L0 900 Z"/>
+    <path d="M700 0 L840 0 L620 900 L480 900 Z"/>
+    <path d="M1200 0 L1300 0 L1120 900 L1020 900 Z"/>
+  </g>
+  <circle cx="800" cy="-160" r="420" fill="#E8F6FF" opacity="0.35"/>
+  <g fill="#7FB6C9" opacity="0.5">
+    <ellipse cx="300" cy="420" rx="90" ry="40"/>
+    <ellipse cx="1060" cy="520" rx="70" ry="32"/>
+  </g>
+  <g>
+    <path d="M400 380 q70 -46 140 0 q-70 46 -140 0 z" fill="#F2B25C"/>
+    <path d="M540 380 l50 -26 l0 52 z" fill="#E89B3C"/>
+    <circle cx="452" cy="372" r="7" fill="#2B2B33"/>
+    <path d="M640 300 q60 -40 120 0 q-60 40 -120 0 z" fill="#6FC0D8"/>
+    <path d="M760 300 l44 -22 l0 44 z" fill="#59A9C2"/>
+    <circle cx="686" cy="294" r="6" fill="#2B2B33"/>
+    <path d="M980 620 q64 -42 128 0 q-64 42 -128 0 z" fill="#F28C7A"/>
+    <path d="M1108 620 l48 -24 l0 48 z" fill="#DE7665"/>
+    <circle cx="1028" cy="612" r="6" fill="#2B2B33"/>
+  </g>
+  <g fill="#4E8FA6" opacity="0.6">
+    <path d="M120 800 q40 -60 80 0 q-40 40 -80 0 z"/>
+    <path d="M1360 780 q46 -66 92 0 q-46 46 -92 0 z"/>
+  </g>
+  <g fill="#BFE6F2" opacity="0.6">
+    <circle cx="260" cy="200" r="12"/><circle cx="276" cy="164" r="8"/><circle cx="244" cy="150" r="6"/>
+    <circle cx="1180" cy="260" r="14"/><circle cx="1200" cy="220" r="9"/><circle cx="1160" cy="206" r="6"/>
+    <circle cx="700" cy="740" r="10"/><circle cx="716" cy="706" r="7"/>
+  </g>
+  <rect x="0" y="760" width="1600" height="140" fill="#1B4A5E" opacity="0.6"/>
+
+</svg>

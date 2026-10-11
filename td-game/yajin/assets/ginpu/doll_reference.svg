@@ -1,0 +1,249 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 900" width="1600" height="900">
+  <title>cg_ginpu.svg 的自检对照图：玩偶部件放大 + 表情 / 配饰差分</title>
+  <defs>
+    <linearGradient id="gWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A2434"/><stop offset="1" stop-color="#171420"/>
+    </linearGradient>
+    <linearGradient id="gWindow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1B2A44"/><stop offset="1" stop-color="#0E1726"/>
+    </linearGradient>
+    <linearGradient id="gBed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A3E50"/><stop offset="0.5" stop-color="#3A3040"/><stop offset="1" stop-color="#241E2C"/>
+    </linearGradient>
+    <radialGradient id="gLamp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F5CE7E" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#F5CE7E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gRim" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F7D9A6" stop-opacity="0.2"/>
+      <stop offset="0.62" stop-color="#F7D9A6" stop-opacity="0.08"/>
+      <stop offset="1" stop-color="#F7D9A6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gMoon" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#CFE0F5" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#CFE0F5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gVig" cx="0.5" cy="0.46" r="0.78">
+      <stop offset="0.42" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#05070C" stop-opacity="0.62"/>
+    </radialGradient>
+    <linearGradient id="gTop" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#070A11" stop-opacity="0.5"/>
+      <stop offset="0.22" stop-color="#070A11" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B0910" stop-opacity="0"/>
+      <stop offset="0.72" stop-color="#0B0910" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0B0910" stop-opacity="0.5"/>
+    </linearGradient>
+
+    <clipPath id="clipBody"><path d="M0,-196 C47,-196 82,-152 82,-98 C82,-44 57,-8 0,-8 C-57,-8 -82,-44 -82,-98 C-82,-152 -47,-196 0,-196 Z"/></clipPath>
+    <clipPath id="clipBelly"><path d="M0,-214 C40,-214 63,-164 63,-106 C63,-48 39,-19 0,-19 C-39,-19 -63,-48 -63,-106 C-63,-164 -40,-214 0,-214 Z"/></clipPath>
+    <clipPath id="clipHead"><ellipse cx="0" cy="-254" rx="74" ry="72"/></clipPath>
+    <clipPath id="clipRim"><rect x="-220" y="-380" width="220" height="400"/></clipPath>
+    <clipPath id="clipFace"><rect x="616" y="16" width="984" height="628"/></clipPath>
+
+    <g id="pBody">
+  <g>
+    <g transform="translate(-48,-16) rotate(-7)">
+      <ellipse cx="0" cy="0" rx="38" ry="16" fill="#E9B45C"/>
+      <circle cx="-21" cy="8" r="10.5" fill="#E9B45C"/><circle cx="0" cy="10" r="11.5" fill="#E9B45C"/><circle cx="21" cy="8" r="10.5" fill="#E9B45C"/>
+      <path d="M-23,6 q3,7 6,9 M-4,8 q3,7 6,9 M-31,4 q2,8 5,10" stroke="#B98430" stroke-width="2.6" fill="none" opacity="0.55" stroke-linecap="round"/>
+      <path d="M-30,-6 q30,-9 60,0" stroke="#FBDD9E" stroke-width="4" fill="none" opacity="0.4" stroke-linecap="round"/>
+    </g><g transform="translate(48,-16) rotate(7)">
+      <ellipse cx="0" cy="0" rx="38" ry="16" fill="#E9B45C"/>
+      <circle cx="-21" cy="8" r="10.5" fill="#E9B45C"/><circle cx="0" cy="10" r="11.5" fill="#E9B45C"/><circle cx="21" cy="8" r="10.5" fill="#E9B45C"/>
+      <path d="M-23,6 q3,7 6,9 M-4,8 q3,7 6,9 M-31,4 q2,8 5,10" stroke="#B98430" stroke-width="2.6" fill="none" opacity="0.55" stroke-linecap="round"/>
+      <path d="M-30,-6 q30,-9 60,0" stroke="#FBDD9E" stroke-width="4" fill="none" opacity="0.4" stroke-linecap="round"/>
+    </g>
+
+    <path d="M0,-196 C47,-196 82,-152 82,-98 C82,-44 57,-8 0,-8 C-57,-8 -82,-44 -82,-98 C-82,-152 -47,-196 0,-196 Z" fill="#3B4A63"/>
+    <g clip-path="url(#clipBody)">
+      <ellipse cx="0" cy="-16" rx="82" ry="36" fill="#26314A" opacity="0.55"/>
+      <ellipse cx="56" cy="-92" rx="32" ry="72" fill="#26314A" opacity="0.42"/>
+    </g>
+    <path d="M0,-196 C47,-196 82,-152 82,-98 C82,-44 57,-8 0,-8 C-57,-8 -82,-44 -82,-98 C-82,-152 -47,-196 0,-196 Z" fill="none" stroke="#8A9CBB" stroke-width="7" opacity="0.6" clip-path="url(#clipRim)"/>
+
+    <path d="M0,-214 C40,-214 63,-164 63,-106 C63,-48 39,-19 0,-19 C-39,-19 -63,-48 -63,-106 C-63,-164 -40,-214 0,-214 Z" fill="#F6F2E9"/>
+    <g clip-path="url(#clipBelly)">
+      <ellipse cx="34" cy="-72" rx="42" ry="70" fill="#DDD6C7" opacity="0.55"/>
+      <ellipse cx="0" cy="-26" rx="58" ry="22" fill="#DDD6C7" opacity="0.6"/>
+      <ellipse cx="-24" cy="-150" rx="30" ry="30" fill="#FFFDF7" opacity="0.8"/>
+      <!-- 肚纹：Ginpu 的记号之一，肚皮正中一条竖的浅蓝纹 -->
+      <rect x="-13" y="-208" width="26" height="178" rx="13" fill="#D3E5F7" opacity="0.7"/>
+      <rect x="-13" y="-208" width="26" height="178" rx="13" fill="none" stroke="#AFC9E4" stroke-width="1.6" opacity="0.5"/>
+    </g>
+    <path d="M0,-214 C40,-214 63,-164 63,-106 C63,-48 39,-19 0,-19 C-39,-19 -63,-48 -63,-106 C-63,-164 -40,-214 0,-214 Z" fill="none" stroke="#BFB6A4" stroke-width="2.6" opacity="0.3"/>
+
+    <path d="M-56,-190 C-84,-178 -97,-138 -87,-110 C-83,-97 -67,-96 -64,-110 C-57,-140 -53,-170 -56,-190 Z" fill="#5A6E93"/>
+    <path d="M-56,-190 C-84,-178 -97,-138 -87,-110 C-83,-97 -67,-96 -64,-110 C-57,-140 -53,-170 -56,-190 Z" fill="none" stroke="#26314A" stroke-width="2.6" opacity="0.45"/>
+    <path d="M56,-190 C84,-178 97,-138 87,-110 C83,-97 67,-96 64,-110 C57,-140 53,-170 56,-190 Z" fill="#5A6E93"/>
+    <path d="M56,-190 C84,-178 97,-138 87,-110 C83,-97 67,-96 64,-110 C57,-140 53,-170 56,-190 Z" fill="none" stroke="#26314A" stroke-width="2.6" opacity="0.45"/>
+
+    <ellipse cx="0" cy="-254" rx="74" ry="72" fill="#3B4A63"/>
+    <g clip-path="url(#clipHead)">
+      <ellipse cx="0" cy="-196" rx="70" ry="24" fill="#26314A" opacity="0.5"/>
+      <ellipse cx="54" cy="-258" rx="32" ry="46" fill="#26314A" opacity="0.4"/>
+    </g>
+    <ellipse cx="0" cy="-254" rx="74" ry="72" fill="none" stroke="#8A9CBB" stroke-width="7" opacity="0.55" clip-path="url(#clipRim)"/>
+
+    <!-- 下颌一抹亮蓝灰：让头不死平，但绝不是"白脸下缘" -->
+    <ellipse cx="0" cy="-196" rx="56" ry="24" fill="#5A6E93" opacity="0.3" clip-path="url(#clipHead)"/>
+
+    <!-- 喙：短小的金黄小尖喙 -->
+    <path d="M-19,-273 C-9,-283 9,-283 19,-273 C20,-262 10,-246 0,-237 C-10,-246 -20,-262 -19,-273 Z" fill="#F2C44F"/>
+    <path d="M-19,-273 C-9,-283 9,-283 19,-273 C20,-262 10,-246 0,-237 C-10,-246 -20,-262 -19,-273 Z" fill="none" stroke="#BC8B1C" stroke-width="2.2" opacity="0.55"/>
+    <path d="M-13,-252 Q0,-247 13,-252" stroke="#BC8B1C" stroke-width="2.6" fill="none" opacity="0.85"/>
+    <path d="M-11,-272 C-5,-278 4,-279 10,-276" stroke="#FFF0B8" stroke-width="5" fill="none" opacity="0.75" stroke-linecap="round"/>
+
+    <g fill="none" stroke="#3B4A63" stroke-width="10" stroke-linecap="round">
+      <path d="M-13,-314 C-23,-331 -18,-345 -6,-343"/>
+      <path d="M2,-320 C1,-340 9,-353 20,-348"/>
+      <path d="M17,-310 C27,-324 35,-326 40,-318"/>
+    </g>
+    <g fill="none" stroke="#5A6E93" stroke-width="3.4" stroke-linecap="round" opacity="0.95">
+      <path d="M-13,-317 C-21,-331 -17,-341 -8,-340"/>
+      <path d="M3,-323 C2,-339 9,-350 17,-346"/>
+      <path d="M18,-313 C27,-323 33,-325 37,-319"/>
+    </g>
+
+    <!-- 绒布缝线 -->
+    <g fill="none" stroke="#8C97AB" stroke-width="2" stroke-dasharray="7 7" opacity="0.4">
+      <path d="M-58,-182 C-30,-198 30,-198 58,-182"/>
+      <path d="M-50,-118 C-55,-140 -54,-166 -49,-180" stroke-dasharray="6 6"/>
+      <path d="M50,-118 C55,-140 54,-166 49,-180" stroke-dasharray="6 6"/>
+    </g>
+  </g></g>
+    <g id="pBack">
+  <g>
+    <g transform="translate(-48,-16) rotate(-7)">
+      <ellipse cx="0" cy="0" rx="38" ry="16" fill="#E9B45C"/>
+      <circle cx="-21" cy="8" r="10.5" fill="#E9B45C"/><circle cx="0" cy="10" r="11.5" fill="#E9B45C"/><circle cx="21" cy="8" r="10.5" fill="#E9B45C"/>
+      <path d="M-23,6 q3,7 6,9 M-4,8 q3,7 6,9 M-31,4 q2,8 5,10" stroke="#B98430" stroke-width="2.6" fill="none" opacity="0.55" stroke-linecap="round"/>
+      <path d="M-30,-6 q30,-9 60,0" stroke="#FBDD9E" stroke-width="4" fill="none" opacity="0.4" stroke-linecap="round"/>
+    </g><g transform="translate(48,-16) rotate(7)">
+      <ellipse cx="0" cy="0" rx="38" ry="16" fill="#E9B45C"/>
+      <circle cx="-21" cy="8" r="10.5" fill="#E9B45C"/><circle cx="0" cy="10" r="11.5" fill="#E9B45C"/><circle cx="21" cy="8" r="10.5" fill="#E9B45C"/>
+      <path d="M-23,6 q3,7 6,9 M-4,8 q3,7 6,9 M-31,4 q2,8 5,10" stroke="#B98430" stroke-width="2.6" fill="none" opacity="0.55" stroke-linecap="round"/>
+      <path d="M-30,-6 q30,-9 60,0" stroke="#FBDD9E" stroke-width="4" fill="none" opacity="0.4" stroke-linecap="round"/>
+    </g>
+    <path d="M0,-196 C47,-196 82,-152 82,-98 C82,-44 57,-8 0,-8 C-57,-8 -82,-44 -82,-98 C-82,-152 -47,-196 0,-196 Z" fill="#3B4A63"/>
+    <g clip-path="url(#clipBody)">
+      <ellipse cx="0" cy="-16" rx="82" ry="36" fill="#26314A" opacity="0.55"/>
+      <ellipse cx="56" cy="-92" rx="32" ry="72" fill="#26314A" opacity="0.42"/>
+    </g>
+    <path d="M0,-196 C47,-196 82,-152 82,-98 C82,-44 57,-8 0,-8 C-57,-8 -82,-44 -82,-98 C-82,-152 -47,-196 0,-196 Z" fill="none" stroke="#8A9CBB" stroke-width="8" opacity="0.7" clip-path="url(#clipRim)"/>
+    <path d="M-56,-190 C-84,-178 -97,-138 -87,-110 C-83,-97 -67,-96 -64,-110 C-57,-140 -53,-170 -56,-190 Z" fill="#5A6E93" opacity="0.9"/>
+    <path d="M56,-190 C84,-178 97,-138 87,-110 C83,-97 67,-96 64,-110 C57,-140 53,-170 56,-190 Z" fill="#5A6E93" opacity="0.9"/>
+    <ellipse cx="0" cy="-254" rx="74" ry="72" fill="#3B4A63"/>
+    <g clip-path="url(#clipHead)">
+      <ellipse cx="54" cy="-258" rx="32" ry="46" fill="#26314A" opacity="0.4"/>
+      <ellipse cx="0" cy="-198" rx="58" ry="20" fill="#26314A" opacity="0.4"/>
+    </g>
+    <ellipse cx="0" cy="-254" rx="74" ry="72" fill="none" stroke="#8A9CBB" stroke-width="8" opacity="0.68" clip-path="url(#clipRim)"/>
+    <g fill="none" stroke="#3B4A63" stroke-width="10" stroke-linecap="round">
+      <path d="M-13,-314 C-23,-331 -18,-345 -6,-343"/>
+      <path d="M2,-320 C1,-340 9,-353 20,-348"/>
+      <path d="M17,-310 C27,-324 35,-326 40,-318"/>
+    </g>
+    <g fill="none" stroke="#5A6E93" stroke-width="3.4" stroke-linecap="round" opacity="0.95">
+      <path d="M-13,-317 C-21,-331 -17,-341 -8,-340"/>
+      <path d="M3,-323 C2,-339 9,-350 17,-346"/>
+      <path d="M18,-313 C27,-323 33,-325 37,-319"/>
+    </g>
+    <g fill="none" stroke="#8C97AB" stroke-width="2" stroke-dasharray="7 7" opacity="0.32">
+      <path d="M0,-318 L0,-192"/>
+      <path d="M-56,-180 C-30,-196 30,-196 56,-180"/>
+    </g>
+  </g></g>
+  </defs>
+  <rect width="1600" height="900" fill="#141119"/>
+  <text x="30" y="40" font-family="PingFang SC,Helvetica,sans-serif" font-size="22" fill="#B9AFA0">cg_ginpu.svg · 玩偶部件自检对照图（同一套矢量，非额外素材）</text>
+  <text x="30" y="72" font-family="PingFang SC,Helvetica,sans-serif" font-size="22" fill="#B9AFA0">左：整只 2.6×　　右上：脸部 3.6×（小尖喙 / 小眼睛 / 腮红 / 呆毛）　　下：表情与配饰差分</text>
+  <line x1="620" y1="20" x2="620" y2="880" stroke="#3A3040" stroke-width="2"/>
+
+  <g transform="translate(320,860) scale(2.6)">
+    <ellipse cx="0" cy="-6" rx="86" ry="15" fill="#000" opacity="0.45"/>
+    <use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/>
+      <ellipse cx="-26.2" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="-28.4" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.099999999999998" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>
+      <ellipse cx="27.8" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="25.6" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="29.900000000000002" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/>
+  </g>
+  <g transform="translate(560,760) scale(1.0)" opacity="0.95">
+    <ellipse cx="0" cy="-6" rx="86" ry="15" fill="#000" opacity="0.45"/>
+    <use href="#pBack" xlink:href="#pBack"/>
+  </g>
+  <text x="470" y="830" font-family="PingFang SC,Helvetica,sans-serif" font-size="22" fill="#B9AFA0">背面款</text>
+
+  <g clip-path="url(#clipFace)">
+    <g transform="translate(880,1214) scale(3.6)">
+      <use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/>
+      <ellipse cx="-26.2" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="-28.4" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.099999999999998" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>
+      <ellipse cx="27.8" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="25.6" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="29.900000000000002" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/>
+    </g>
+  </g>
+
+  <g transform="translate(640,872) scale(0.55)"><use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/>
+      <ellipse cx="-26.2" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="-28.4" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.099999999999998" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>
+      <ellipse cx="27.8" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="25.6" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="29.900000000000002" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/></g>
+    <g transform="translate(772,872) scale(0.55)"><use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><path d="M-35.4,-278.4 Q-27,-288.4 -18.6,-278.4" stroke="#16171C" stroke-width="4.2" fill="none" stroke-linecap="round"/><path d="M18.6,-278.4 Q27,-288.4 35.4,-278.4" stroke="#16171C" stroke-width="4.2" fill="none" stroke-linecap="round"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/></g>
+    <g transform="translate(904,872) scale(0.55)"><use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-282" rx="11.6" ry="13" fill="#FCFAF6"/><ellipse cx="27" cy="-282" rx="11.6" ry="13" fill="#FCFAF6"/>
+      <ellipse cx="-27" cy="-280.4" rx="5.609999999999999" ry="6.63" fill="#16171C"/>
+      <ellipse cx="-29.2" cy="-283.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.9" cy="-277.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>
+      <ellipse cx="27" cy="-280.4" rx="5.609999999999999" ry="6.63" fill="#16171C"/>
+      <ellipse cx="24.8" cy="-283.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="29.1" cy="-277.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/></g>
+    <g transform="translate(1036,872) scale(0.55)"><use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/>
+      <ellipse cx="-26.4" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="-28.599999999999998" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.299999999999997" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><path d="M18.6,-278.4 Q27,-288.4 35.4,-278.4" stroke="#16171C" stroke-width="4.2" fill="none" stroke-linecap="round"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/></g>
+    <g transform="translate(1168,872) scale(0.55)"><use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/>
+      <ellipse cx="-26.2" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="-28.4" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.099999999999998" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>
+      <ellipse cx="27.8" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="25.6" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="29.900000000000002" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><g>
+      <path d="M-48,-200 C-20,-212 20,-212 48,-200 C51,-190 44,-181 35,-181 L-35,-181 C-44,-181 -51,-190 -48,-200 Z" fill="#C0574E"/>
+      <path d="M-48,-200 C-20,-212 20,-212 48,-200" stroke="#DB766C" stroke-width="4" fill="none" opacity="0.7"/>
+      <path d="M13,-186 C30,-172 36,-150 28,-133 C22,-120 4,-123 9,-140 C15,-158 13,-174 7,-184 Z" fill="#AE4A42"/>
+      <path d="M10,-139 l-5,12 M18,-136 l-4,12" stroke="#8E3A34" stroke-width="2.4" stroke-linecap="round" opacity="0.8"/>
+    </g></g>
+    <g transform="translate(1300,872) scale(0.55)"><use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/>
+      <ellipse cx="-26.2" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="-28.4" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.099999999999998" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>
+      <ellipse cx="27.8" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="25.6" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="29.900000000000002" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><g>
+      <path d="M-56,-292 C-56,-332 -29,-348 0,-348 C29,-348 56,-332 56,-292 Z" fill="#6F8F5E"/>
+      <path d="M-56,-292 C-34,-284 34,-284 56,-292" stroke="#93B27F" stroke-width="5" fill="none" opacity="0.8"/>
+      <rect x="-61" y="-298" width="122" height="21" rx="10.5" fill="#EDE3CD"/>
+      <path d="M-38,-326 l76,0 M-44,-312 l88,0" stroke="#556F46" stroke-width="3" opacity="0.5"/>
+      <circle cx="0" cy="-352" r="11" fill="#EDE3CD"/>
+    </g></g>
+    <g transform="translate(1432,872) scale(0.55)"><use href="#pBody" xlink:href="#pBody"/><ellipse cx="-27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/><ellipse cx="27" cy="-281" rx="10.4" ry="11.8" fill="#FCFAF6"/>
+      <ellipse cx="-26.2" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="-28.4" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="-24.099999999999998" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>
+      <ellipse cx="27.8" cy="-279.4" rx="6.6" ry="7.8" fill="#16171C"/>
+      <ellipse cx="25.6" cy="-282.5" rx="2.5" ry="2.9" fill="#FFFFFF"/>
+      <ellipse cx="29.900000000000002" cy="-276.4" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/><ellipse cx="-44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><ellipse cx="44" cy="-262" rx="14.5" ry="8" fill="#E9838F" opacity="0.42"/><g transform="translate(-80,-116) rotate(-14)">
+      <path d="M-30,0 C-18,-15 12,-17 24,-6 L38,-15 L33,0 L38,15 L24,6 C12,17 -18,15 -30,0 Z" fill="#9FB3C2"/>
+      <path d="M-18,-6 C-8,-12 6,-12 14,-7" stroke="#C9D8E2" stroke-width="4" fill="none" opacity="0.8"/>
+      <circle cx="-16" cy="-3" r="2.8" fill="#16171C"/>
+    </g></g>
+  <text x="640" y="692" font-family="PingFang SC,Helvetica,sans-serif" font-size="22" fill="#B9AFA0">默认 / 开心 / 惊讶 / 眨眼 / 围巾 / 帽子 / 抱鱼</text>
+</svg>

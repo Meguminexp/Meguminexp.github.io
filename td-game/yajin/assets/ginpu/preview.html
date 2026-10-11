@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>cg_ginpu.svg 自检对照页</title>
+<style>
+  html,body{margin:0;background:#0B0910;color:#E8E2D8;font:14px/1.6 -apple-system,"PingFang SC",sans-serif}
+  .wrap{width:1600px;margin:0 auto;padding:16px 0 40px}
+  h2{font-weight:600;font-size:18px;margin:8px 0 6px;color:#F5D98D}
+  .note{color:#B9AFA0;margin:0 0 14px}
+  .box{position:relative;width:1600px;height:900px;background:#000;border:1px solid #3A3040}
+  .box img{width:100%;height:100%;display:block}
+  /* 游戏内对话框实际遮挡区域：left/right 54u、bottom 34u、总高约 244u（u = 1600/1600 = 1px） */
+  .dlgmask{position:absolute;left:54px;right:54px;bottom:34px;height:244px;border:1px dashed rgba(245,217,141,.75);background:rgba(245,217,141,.10)}
+  .dlgmask span{position:absolute;right:8px;top:6px;font-size:12px;color:#F5D98D}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h2>assets/cg/cg_ginpu.svg —— 1:1 原始尺寸（1600×900）</h2>
+  <p class="note">虚线框 = 游戏内对话框遮挡范围（y ≈ 622–866），重要内容应在其上方。</p>
+  <div class="box">
+    <img src="../cg/cg_ginpu.svg" alt="cg_ginpu">
+    <div class="dlgmask"><span>对话框遮挡区</span></div>
+  </div>
+</div>
+</body>
+</html>

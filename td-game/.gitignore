@@ -1,0 +1,3 @@
+# 依赖与缓存（运行游戏不需要, 仅测试需要 jsdom）
+node_modules/
+test/.npmcache/

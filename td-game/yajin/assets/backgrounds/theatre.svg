@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#241A22"/><stop offset="1" stop-color="#120C12"/></linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <path d="M0 0 L1600 0 L1600 160 Q800 260 0 160 Z" fill="#5A1F2A"/>
+  <path d="M0 0 Q140 240 60 460 L0 520 Z" fill="#6B2634"/>
+  <path d="M1600 0 Q1460 240 1540 460 L1600 520 Z" fill="#6B2634"/>
+  <rect x="0" y="520" width="1600" height="380" fill="#2A2028"/>
+  <g opacity="0.9">
+    <ellipse cx="800" cy="560" rx="520" ry="90" fill="#7A5C3A"/>
+    <ellipse cx="800" cy="556" rx="520" ry="80" fill="#9B7748"/>
+  </g>
+  <g fill="#F6E3B0" opacity="0.9">
+    <circle cx="420" cy="240" r="26"/><circle cx="640" cy="200" r="26"/>
+    <circle cx="960" cy="200" r="26"/><circle cx="1180" cy="240" r="26"/>
+    <circle cx="800" cy="176" r="34"/>
+  </g>
+  <g fill="#3A2A32">
+    <rect x="120" y="700" width="200" height="120" rx="10"/>
+    <rect x="380" y="720" width="200" height="120" rx="10"/>
+    <rect x="640" y="700" width="200" height="120" rx="10"/>
+    <rect x="900" y="720" width="200" height="120" rx="10"/>
+    <rect x="1160" y="700" width="200" height="120" rx="10"/>
+    <rect x="1420" y="720" width="160" height="120" rx="10"/>
+  </g>
+  <g opacity="0.35" fill="#F6E3B0">
+    <ellipse cx="800" cy="560" rx="460" ry="70"/>
+  </g>
+
+</svg>

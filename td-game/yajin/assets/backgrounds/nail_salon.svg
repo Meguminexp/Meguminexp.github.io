@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6EDF0"/><stop offset="1" stop-color="#E0D6DC"/></linearGradient><radialGradient id="lampGlow"><stop offset="0" stop-color="#F5CE7E" stop-opacity="0.35"/><stop offset="1" stop-color="#F5CE7E" stop-opacity="0"/></radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1600" height="120" fill="#F3E4E8"/>
+  <g>
+    <rect x="60" y="140" width="360" height="70" rx="10" fill="#E7D3D9"/>
+    <rect x="100" y="160" width="60" height="30" rx="6" fill="#D9A8B4"/>
+    <rect x="180" y="160" width="60" height="30" rx="6" fill="#C9B7E0"/>
+    <rect x="260" y="160" width="60" height="30" rx="6" fill="#A8C7D9"/>
+  </g>
+  <g>
+    <rect x="1180" y="140" width="360" height="70" rx="10" fill="#E7D3D9"/>
+    <rect x="1220" y="160" width="60" height="30" rx="6" fill="#E0B48C"/>
+    <rect x="1300" y="160" width="60" height="30" rx="6" fill="#B9D3B0"/>
+    <rect x="1380" y="160" width="60" height="30" rx="6" fill="#D9A8B4"/>
+  </g>
+  <rect x="0" y="520" width="1600" height="380" fill="#EFE7E4"/>
+  <g>
+    <ellipse cx="800" cy="640" rx="420" ry="110" fill="#FBF7F6"/>
+    <ellipse cx="800" cy="628" rx="420" ry="100" fill="#FFFFFF"/>
+    <rect x="700" y="560" width="200" height="70" rx="16" fill="#E3D7DC"/>
+    <rect x="730" y="520" width="140" height="50" rx="12" fill="#F0E6EA"/>
+  </g>
+  <g>
+    <rect x="120" y="700" width="240" height="26" rx="10" fill="#D8CCD2"/>
+    <rect x="140" y="726" width="18" height="150" fill="#CBBEC5"/>
+    <rect x="322" y="726" width="18" height="150" fill="#CBBEC5"/>
+    <rect x="1240" y="700" width="240" height="26" rx="10" fill="#D8CCD2"/>
+    <rect x="1260" y="726" width="18" height="150" fill="#CBBEC5"/>
+    <rect x="1442" y="726" width="18" height="150" fill="#CBBEC5"/>
+  </g>
+  <g>
+    <ellipse cx="800" cy="230" rx="150" ry="46" fill="#F7E6EA"/>
+    <rect x="790" y="0" width="20" height="230" fill="#E2CDD4"/>
+    <circle cx="800" cy="270" r="30" fill="#FFF3D8" opacity="0.9"/>
+  </g>
+  <circle cx="420" cy="420" r="34" fill="#F5D98D" opacity="0.8"/>
+  <circle cx="420" cy="420" r="150" fill="url(#lampGlow)"/>
+
+</svg>

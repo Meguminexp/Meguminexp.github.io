@@ -1,0 +1,16 @@
+{
+  "name": "stardust-td",
+  "version": "3.0.0",
+  "private": true,
+  "description": "星尘守卫 · 爱心小角落塔防 — 像素风元素肉鸽塔防 (零依赖浏览器运行, 测试依赖 jsdom)",
+  "scripts": {
+    "sim": "node test/sim.js",
+    "sim:fast": "node test/sim.js 3",
+    "sim:full": "node test/sim.js 10",
+    "test:ui": "node test/ui-smoke.js",
+    "test": "node test/ui-smoke.js && node test/sim.js 5"
+  },
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  }
+}

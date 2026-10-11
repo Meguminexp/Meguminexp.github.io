@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#243046"/><stop offset="1" stop-color="#3E4A60"/></linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <g opacity="0.9">
+    <rect x="80" y="300" width="260" height="380" fill="#1E2735"/>
+    <rect x="380" y="220" width="300" height="460" fill="#232D3C"/>
+    <rect x="720" y="320" width="240" height="360" fill="#1B2431"/>
+    <rect x="1000" y="250" width="280" height="430" fill="#212A38"/>
+    <rect x="1310" y="360" width="220" height="320" fill="#1A222E"/>
+  </g>
+  <g fill="#F2C97A" opacity="0.85">
+    <rect x="120" y="360" width="40" height="50"/><rect x="200" y="360" width="40" height="50"/>
+    <rect x="120" y="450" width="40" height="50"/><rect x="260" y="450" width="40" height="50"/>
+    <rect x="420" y="290" width="46" height="56"/><rect x="520" y="290" width="46" height="56"/>
+    <rect x="620" y="380" width="46" height="56"/><rect x="420" y="420" width="46" height="56"/>
+    <rect x="760" y="390" width="42" height="52"/><rect x="860" y="390" width="42" height="52"/>
+    <rect x="760" y="480" width="42" height="52"/>
+    <rect x="1040" y="320" width="44" height="54"/><rect x="1160" y="320" width="44" height="54"/>
+    <rect x="1040" y="430" width="44" height="54"/>
+    <rect x="1350" y="430" width="40" height="50"/>
+  </g>
+  <g opacity="0.9">
+    <rect x="520" y="150" width="12" height="70" fill="#3A3F4A"/>
+    <rect x="470" y="180" width="114" height="44" rx="8" fill="#C2554F"/>
+    <rect x="1180" y="170" width="12" height="80" fill="#3A3F4A"/>
+    <rect x="1120" y="200" width="130" height="46" rx="8" fill="#4E7FA8"/>
+  </g>
+  <path d="M0 660 Q400 640 800 664 T1600 648 L1600 900 L0 900 Z" fill="#242B36"/>
+  <ellipse cx="1320" cy="812" rx="240" ry="34" fill="#F0C070" opacity="0.22"/>
+  <g stroke="#3B4450" stroke-width="4">
+    <line x1="120" y1="820" x2="420" y2="760"/><line x1="480" y1="820" x2="780" y2="760"/>
+    <line x1="840" y1="820" x2="1140" y2="760"/>
+  </g>
+  <g opacity="0.8">
+    <rect x="240" y="700" width="140" height="90" rx="8" fill="#37404E"/>
+    <rect x="240" y="672" width="150" height="30" rx="8" fill="#C2554F"/>
+    <rect x="940" y="716" width="150" height="76" rx="8" fill="#3A4350"/>
+    <rect x="934" y="690" width="162" height="28" rx="8" fill="#4E7FA8"/>
+  </g>
+
+</svg>

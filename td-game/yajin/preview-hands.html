@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>手部特写对照页 · preview-hands</title>
+<style>
+  body { margin:0; background:#141018; color:#EDE6DA; font:14px/1.6 system-ui,"PingFang SC",sans-serif; }
+  h1 { font-size:20px; margin:22px 24px 4px; font-weight:600; }
+  h2 { font-size:16px; margin:22px 24px 4px; font-weight:600; color:#F0C58A; }
+  .note { margin:0 24px 16px; opacity:.66; font-size:13px; }
+  code { background:#241E2C; padding:1px 5px; border-radius:4px; }
+  .grid { display:flex; flex-wrap:wrap; gap:16px; padding:0 24px 8px; }
+  .card { background:#1D1822; border:1px solid #2E2735; border-radius:10px; padding:10px; }
+  .cap { font-size:13px; margin:0 0 8px; line-height:1.5; }
+  .cap b { color:#F0C58A; }
+  .cap i { color:#9FD8B4; font-style:normal; }
+  .cap s { color:#E88C8C; }
+  /* 模拟游戏内 #hand-layer：1600×900 视口 + svg width/height 100% + slice 裁切 */
+  .game-crop { position:relative; overflow:hidden; background:#3A3450; border-radius:6px; }
+  .game-crop svg { width:100%; height:100%; display:block; }
+  .mini { width:800px; height:450px; }
+  .big  { width:1180px; height:664px; }
+  .raw { width:330px; height:495px; background:repeating-conic-gradient(#252030 0 25%,#1D1822 0 50%) 0 0/16px 16px; }
+  .raw svg { width:100%; height:100%; display:block; }
+  .cgbox { width:1180px; height:664px; border-radius:6px; display:block; }
+</style>
+</head>
+<body>
+<h1>手部特写对照页（preview-hands.html）</h1>
+<p class="note">
+  每一格左边是<b>游戏内实际裁切</b>（1600×900 视口 + <code>preserveAspectRatio="xMidYMid slice"</code>，即玩家看到的样子），
+  右边是原始 720×1080 画布全貌。改动 <code>src/art.js handSVG()</code> 后刷新本页即可复核。
+  可用 <code>?only=&lt;kind&gt;</code> 只看一种。
+</p>
+
+<h2>一、美甲款式对照（这一段最重要：选哪个选项，甲油就必须是哪一种）</h2>
+<p class="note">
+  <b>左手 / 右手 = 画面左 / 画面右</b>（金是第一人称视角，低头看自己的两只手）。<br>
+  同一场景切换选项时<b>手型·构图·手指角度完全一致</b>，只有甲油与图案变。<br>
+  美甲的双手图都是"金低头看自己的两只手"⇒ <b>两只手同一套肤色</b>；只有 <code>hold</code>（他和她两个人的手相握）是两种肤色。
+</p>
+<div class="grid" id="nailgrid"></div>
+
+<h2>二、单手特写与其它 kind</h2>
+<div class="grid" id="singles"></div>
+
+<h2>三、CG 合成结果（assets/cg/cg_nail_art.svg）</h2>
+<div class="grid">
+  <div class="card"><p class="cap"><b>cg_nail_art</b> · 1600×900 原尺寸（c8_92 用）</p>
+    <img class="cgbox" src="assets/cg/cg_nail_art.svg" alt="cg_nail_art"></div>
+</div>
+
+<script src="src/core.js"></script>
+<script src="src/story/characters.js"></script>
+<script src="src/art.js"></script>
+<script>
+  const NAILS = [
+    ['both_cat',        '两只手<b>都做猫猫款</b>', '粉底 + 猫脸；左手＝<i>玫瑰粉 #F9BCC9 + 小肉垫</i>，右手＝<i>樱花粉 #F5A6B4 + 卷尾巴</i>。两只都是猫猫款，全图<s>没有黑色</s>。'],
+    ['butterfly_nails', '<b>双手 · 穿戴甲粉色蝴蝶</b>（第 9 章义乌段落）', '两只手都是<b>粉</b>（左手奶粉 #F9C6D5 / 右手甜粉 #F4A9BE），每片指甲一只<b>粉色小蝴蝶</b>（翅上白点 + 触角），甲尖有深粉渐层。全图<s>没有黑、没有银线</s>。'],
+    ['butterfly_one',   '<b>单手 · 穿戴甲粉色蝴蝶</b>（<code>butterfly_one</code>）', '一只手的蝴蝶穿戴甲：粉底 + 每片甲面一只蝴蝶，用于"抬手看自己一只手"的镜头。'],
+    ['both_nails',      '一猫一黑（现名 <code>both_nails</code>）', '左手＝<b>磨砂黑 + 银线</b>，右手＝<b>樱花粉猫猫</b>。等价于 <code>mixed_right_cat</code>。'],
+    ['mixed_right_cat', '一猫一黑（<b>右手猫猫</b>）', '左手＝磨砂黑 + 银线（仅中指），右手＝樱花粉猫猫。与下一格是<b>左右互换</b>，画面上必须一眼看出猫猫在哪只手。'],
+    ['mixed_left_cat',  '一猫一黑（<b>左手猫猫</b>）', '左手＝玫瑰粉猫猫，右手＝磨砂黑 + 银线（仅中指）。与上一格<b>左右互换</b>。'],
+    ['both_cool',       '两只手<b>都做酷黑款</b>', '两只都是磨砂黑 + 银线；左手 #33333A、右手 #2A2A31（黑度略有差别）。全图<s>没有粉色</s>。'],
+    ['cat_nails',       '单手猫猫（<code>cat_nails</code>）', '用于 c10_24 等"一只手"的镜头。'],
+    ['cool_nails',      '单手酷黑（<code>cool_nails</code>）', 'cg_nail_art 的左半边用。<b>银线只在中指那一片</b>（剧本 c8_90 原文）。']
+  ];
+  const SINGLES = [
+    ['hold', '两只手（默认 <code>hold</code>）', '60 个节点的默认值：两只手相握，<b>素甲</b>。'],
+    ['gift', '递明信片（<code>gift</code>）', 'c10_13 用（注意该节点同时有 CG，CG 层会盖住手部层）。']
+  ];
+  const only = /[?&]only=([a-z_]+)/.exec(location.search);
+  const keeps = k => !only || only[1] === k;
+  function card(k, html, cls, withRaw) {
+    return '<div class="card"><p class="cap"><b>' + k + '</b> · ' + html + '</p>' +
+      '<div style="display:flex;gap:10px">' +
+      '<div class="game-crop ' + cls + '">' + YJ.art.handSVG(k) + '</div>' +
+      (withRaw ? '<div class="raw">' + YJ.art.handSVG(k) + '</div>' : '') +
+      '</div></div>';
+  }
+  document.getElementById('nailgrid').innerHTML =
+    NAILS.filter(n => keeps(n[0])).map(n => card(n[0], n[1] + '<br>' + n[2], 'mini', true)).join('');
+  document.getElementById('singles').innerHTML =
+    SINGLES.filter(n => keeps(n[0])).map(n => card(n[0], n[1] + '<br>' + n[2], 'big', true)).join('');
+</script>
+</body>
+</html>

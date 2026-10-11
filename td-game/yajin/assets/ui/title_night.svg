@@ -1,0 +1,333 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900"
+     preserveAspectRatio="xMidYMid slice" role="img" aria-label="星空下的山脊">
+  <!-- ============================================================
+       《你好！一周年》标题插图（手写矢量，离线自足）
+       元素：深蓝→紫夜空 / 银河 / 层叠远山剪影 / 一颗特别亮的星
+             与一枚被照亮的石头（呼应 2025.09.28《石头说》）
+             / 山脊上并肩的两个人影 / 流星与星轨 / 缓慢平移的雾
+       动画全部由 index.html 的 CSS 驱动（见 .title-art .st-* / .shoot-*）
+       ============================================================ -->
+  <defs>
+    <linearGradient id="tn-sky" x1="0" y1="0" x2="0.28" y2="1">
+      <stop offset="0"    stop-color="#070B1E"/>
+      <stop offset="0.26" stop-color="#131B3E"/>
+      <stop offset="0.5"  stop-color="#232048"/>
+      <stop offset="0.7"  stop-color="#372554"/>
+      <stop offset="0.86" stop-color="#4A2C58"/>
+      <stop offset="1"    stop-color="#5B3459"/>
+    </linearGradient>
+    <radialGradient id="tn-warm" cx="0.19" cy="0.72" r="0.62">
+      <stop offset="0"   stop-color="#C98A6E" stop-opacity="0.30"/>
+      <stop offset="0.5" stop-color="#8A5A72" stop-opacity="0.12"/>
+      <stop offset="1"   stop-color="#8A5A72" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tn-cool" cx="0.72" cy="0.30" r="0.5">
+      <stop offset="0" stop-color="#7FA8E0" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#7FA8E0" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tn-milky" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0"   stop-color="#9FB4E6" stop-opacity="0"/>
+      <stop offset="0.42" stop-color="#C8D6F5" stop-opacity="0.14"/>
+      <stop offset="0.6" stop-color="#E4DCF2" stop-opacity="0.10"/>
+      <stop offset="1"   stop-color="#9FB4E6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="tn-haze" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#5B3459" stop-opacity="0"/>
+      <stop offset="0.6" stop-color="#7A4A63" stop-opacity="0.22"/>
+      <stop offset="1"   stop-color="#C08A72" stop-opacity="0.34"/>
+    </linearGradient>
+    <linearGradient id="tn-m1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3A3160"/><stop offset="1" stop-color="#161230"/>
+    </linearGradient>
+    <linearGradient id="tn-m2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A2448"/><stop offset="1" stop-color="#0D0A1E"/>
+    </linearGradient>
+    <linearGradient id="tn-m3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#171430"/><stop offset="1" stop-color="#05040F"/>
+    </linearGradient>
+    <linearGradient id="tn-ridge" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6E7FA8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#6E7FA8" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="tn-stone" x1="0.15" y1="0" x2="0.75" y2="1">
+      <stop offset="0"   stop-color="#D7C6A6"/>
+      <stop offset="0.38" stop-color="#9DA6BC"/>
+      <stop offset="1"   stop-color="#4C5470"/>
+    </linearGradient>
+    <linearGradient id="tn-figure" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#100D22"/><stop offset="1" stop-color="#05040E"/>
+    </linearGradient>
+    <linearGradient id="tn-mist" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"   stop-color="#D6C2D8" stop-opacity="0"/>
+      <stop offset="0.55" stop-color="#D6C2D8" stop-opacity="0.075"/>
+      <stop offset="1"   stop-color="#D6C2D8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="tn-moon" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#FFFDF3"/><stop offset="0.6" stop-color="#F4E9D2"/><stop offset="1" stop-color="#DCC9A8"/>
+    </linearGradient>
+    <linearGradient id="tn-shoot" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0"   stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="#FFE9BE" stop-opacity="0.55"/>
+      <stop offset="0.82" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="1"   stop-color="#FFFDF4" stop-opacity="1"/>
+    </linearGradient>
+    <radialGradient id="tn-bigstar" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0"    stop-color="#FFFDF4"/>
+      <stop offset="0.14" stop-color="#FFEFC4" stop-opacity="0.92"/>
+      <stop offset="0.34" stop-color="#FFD98A" stop-opacity="0.34"/>
+      <stop offset="0.68" stop-color="#FFC963" stop-opacity="0.08"/>
+      <stop offset="1"    stop-color="#FFC963" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tn-spill" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFE3A6" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFE3A6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="tn-soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+    <filter id="tn-soft2" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+
+  <!-- ·········· 夜空 ·········· -->
+  <rect width="1600" height="900" fill="url(#tn-sky)"/>
+  <ellipse cx="1210" cy="250" rx="760" ry="330" fill="url(#tn-cool)"/>
+  <ellipse cx="250" cy="700" rx="820" ry="300" fill="url(#tn-warm)"/>
+  <g filter="url(#tn-soft)" opacity="0.85">
+    <path d="M-60 470 C 240 330 520 400 780 300 C 1030 205 1300 250 1660 120 L1660 -40 L-60 -40 Z" fill="url(#tn-milky)"/>
+    <path d="M-60 250 C 260 200 520 260 820 180 C 1120 100 1380 150 1660 60" fill="none" stroke="url(#tn-milky)" stroke-width="90" stroke-linecap="round"/>
+  </g>
+  <rect width="1600" height="900" fill="url(#tn-haze)"/>
+
+  <!-- ·········· 星野（四组不同相位缓慢闪烁） ·········· -->
+  <g fill="#F4F1FF">
+  <g class="st-A">
+    <circle cx="1172.4" cy="433.4" r="0.86" opacity="0.78"/>
+    <circle cx="346.8" cy="551.1" r="1.33" opacity="0.82"/>
+    <circle cx="1521.4" cy="224.9" r="0.71" opacity="0.72"/>
+    <circle cx="428.9" cy="300.1" r="1.27" opacity="0.95"/>
+    <circle cx="1338.2" cy="474.5" r="0.56" opacity="0.62"/>
+    <circle cx="603.3" cy="90.1" r="1.15" opacity="0.86"/>
+    <circle cx="873.6" cy="256.4" r="1.2" opacity="0.9"/>
+    <circle cx="147.9" cy="326.5" r="1.03" opacity="0.7"/>
+    <circle cx="656.9" cy="167.6" r="0.83" opacity="0.6"/>
+    <circle cx="1450.3" cy="137.6" r="1.0" opacity="0.68"/>
+    <circle cx="779.7" cy="459.4" r="1.35" opacity="0.63"/>
+    <circle cx="524.8" cy="462.3" r="0.96" opacity="0.88"/>
+    <circle cx="237.8" cy="490.4" r="1.23" opacity="0.73"/>
+    <circle cx="1022.6" cy="126.3" r="0.6" opacity="0.82"/>
+    <circle cx="966.7" cy="326.4" r="0.61" opacity="0.93"/>
+    <circle cx="1561.1" cy="389.8" r="1.0" opacity="0.6"/>
+    <circle cx="141.5" cy="56.9" r="1.1" opacity="0.72"/>
+    <circle cx="722.5" cy="320.5" r="0.64" opacity="0.62"/>
+    <circle cx="1127.2" cy="578.8" r="1.25" opacity="0.77"/>
+    <circle cx="839.8" cy="565.5" r="0.69" opacity="0.83"/>
+    <circle cx="1264.5" cy="543.3" r="0.79" opacity="0.79"/>
+    <circle cx="258.4" cy="120.4" r="0.95" opacity="0.66"/>
+    <circle cx="1160.7" cy="88.4" r="1.08" opacity="0.91"/>
+    <circle cx="95.6" cy="431.1" r="1.29" opacity="0.87"/>
+    <circle cx="1248.7" cy="339.2" r="0.54" opacity="0.85"/>
+    <circle cx="993.7" cy="590.2" r="0.72" opacity="0.59"/>
+    <circle cx="165.1" cy="227.2" r="0.97" opacity="0.95"/>
+    <circle cx="1517.9" cy="508.2" r="1.07" opacity="0.6"/>
+    <circle cx="1206.6" cy="190.2" r="0.52" opacity="0.77"/>
+    <circle cx="444.9" cy="52.2" r="1.16" opacity="0.61"/>
+  </g>
+  <g class="st-B">
+    <circle cx="1364.6" cy="283.8" r="0.87" opacity="0.56"/>
+    <circle cx="1489.5" cy="427.4" r="1.18" opacity="0.73"/>
+    <circle cx="159.7" cy="544.1" r="1.57" opacity="0.94"/>
+    <circle cx="1027.4" cy="493.2" r="0.69" opacity="0.94"/>
+    <circle cx="1091.5" cy="270.3" r="1.24" opacity="0.86"/>
+    <circle cx="91.6" cy="349.1" r="1.3" opacity="0.62"/>
+    <circle cx="1313.1" cy="386.3" r="1.11" opacity="0.9"/>
+    <circle cx="129.2" cy="115.3" r="0.67" opacity="0.58"/>
+    <circle cx="1215.8" cy="552.7" r="1.4" opacity="0.82"/>
+    <circle cx="1411.2" cy="503.4" r="0.53" opacity="0.66"/>
+    <circle cx="629.7" cy="563.3" r="1.42" opacity="0.6"/>
+    <circle cx="932.9" cy="187.4" r="1.22" opacity="0.85"/>
+    <circle cx="1142.1" cy="304.3" r="0.61" opacity="0.55"/>
+    <circle cx="661.6" cy="441.4" r="1.23" opacity="0.7"/>
+    <circle cx="277.9" cy="391.6" r="1.41" opacity="0.94"/>
+    <circle cx="494.4" cy="229.6" r="0.9" opacity="0.77"/>
+    <circle cx="1524.5" cy="324.5" r="1.01" opacity="0.63"/>
+    <circle cx="878.4" cy="390.1" r="1.58" opacity="0.82"/>
+    <circle cx="781.2" cy="561.4" r="0.71" opacity="0.84"/>
+    <circle cx="573.7" cy="187.3" r="1.08" opacity="0.57"/>
+    <circle cx="1083.9" cy="587.9" r="1.4" opacity="0.76"/>
+    <circle cx="140.4" cy="637.3" r="0.8" opacity="0.75"/>
+    <circle cx="1265.9" cy="130.3" r="1.43" opacity="0.61"/>
+    <circle cx="315.4" cy="196.7" r="1.34" opacity="0.81"/>
+    <circle cx="1017.1" cy="339.5" r="0.89" opacity="0.62"/>
+    <circle cx="998.6" cy="418.3" r="0.58" opacity="0.66"/>
+    <circle cx="1140.5" cy="204.8" r="1.46" opacity="0.76"/>
+    <circle cx="1454.1" cy="575.7" r="1.09" opacity="0.64"/>
+    <circle cx="829.7" cy="126.4" r="1.46" opacity="0.68"/>
+    <circle cx="427.8" cy="398.5" r="1.04" opacity="0.93"/>
+  </g>
+  <g class="st-C">
+    <circle cx="562.9" cy="431.6" r="0.63" opacity="0.88"/>
+    <circle cx="1370.2" cy="561.9" r="0.62" opacity="0.56"/>
+    <circle cx="1106.4" cy="135.3" r="0.95" opacity="0.63"/>
+    <circle cx="250.1" cy="280.7" r="0.86" opacity="0.62"/>
+    <circle cx="1291.6" cy="187.4" r="0.66" opacity="0.7"/>
+    <circle cx="1038.7" cy="464.1" r="0.9" opacity="0.75"/>
+    <circle cx="655.1" cy="289.7" r="0.76" opacity="0.62"/>
+    <circle cx="502.3" cy="553.6" r="1.01" opacity="0.58"/>
+    <circle cx="1355.6" cy="80.7" r="0.85" opacity="0.79"/>
+    <circle cx="195.2" cy="571.6" r="0.55" opacity="0.88"/>
+    <circle cx="352.6" cy="149.5" r="1.02" opacity="0.71"/>
+    <circle cx="1219.5" cy="276.6" r="0.77" opacity="0.57"/>
+    <circle cx="80.6" cy="245.6" r="0.98" opacity="0.68"/>
+    <circle cx="1288.2" cy="619.5" r="0.6" opacity="0.76"/>
+    <circle cx="727.6" cy="224.4" r="1.09" opacity="0.88"/>
+    <circle cx="473.1" cy="332.5" r="0.66" opacity="0.55"/>
+    <circle cx="1122.1" cy="376.7" r="0.6" opacity="0.67"/>
+    <circle cx="1491.7" cy="190.4" r="0.62" opacity="0.62"/>
+    <circle cx="1024.9" cy="227.1" r="0.79" opacity="0.7"/>
+    <circle cx="945.6" cy="75.1" r="0.95" opacity="0.54"/>
+    <circle cx="145.3" cy="599.1" r="0.72" opacity="0.54"/>
+    <circle cx="764.4" cy="393.6" r="1.02" opacity="0.81"/>
+    <circle cx="1553.4" cy="265.8" r="0.94" opacity="0.65"/>
+    <circle cx="1338.9" cy="221.9" r="0.65" opacity="0.86"/>
+    <circle cx="1475.1" cy="60.2" r="0.92" opacity="0.58"/>
+    <circle cx="1222.3" cy="122.2" r="1.04" opacity="0.58"/>
+    <circle cx="298.1" cy="615.5" r="0.68" opacity="0.57"/>
+    <circle cx="1541.6" cy="625.3" r="0.68" opacity="0.72"/>
+  </g>
+  <g class="st-D">
+    <circle cx="763.2" cy="173.6" r="1.69" opacity="0.57"/>
+    <circle cx="1135.4" cy="519.6" r="0.81" opacity="0.97"/>
+    <circle cx="305.3" cy="74.9" r="0.8" opacity="0.6"/>
+    <circle cx="633.4" cy="623.6" r="1.31" opacity="0.89"/>
+    <circle cx="964.7" cy="113.3" r="1.83" opacity="0.91"/>
+    <circle cx="141.6" cy="451.2" r="1.29" opacity="0.96"/>
+    <circle cx="1009.1" cy="540.5" r="1.51" opacity="0.87"/>
+    <circle cx="1544.7" cy="119.3" r="1.31" opacity="0.75"/>
+    <circle cx="682.8" cy="530" r="1.54" opacity="0.84"/>
+    <circle cx="1322.1" cy="620.8" r="1.45" opacity="0.9"/>
+    <circle cx="519.4" cy="114.4" r="0.9" opacity="0.73"/>
+    <circle cx="358" cy="519.7" r="1.33" opacity="0.72"/>
+    <circle cx="993.3" cy="281.1" r="1.0" opacity="0.97"/>
+    <circle cx="55.9" cy="484.5" r="1.87" opacity="0.8"/>
+    <circle cx="656.5" cy="355.3" r="1.45" opacity="0.64"/>
+    <circle cx="410.6" cy="230.3" r="1.55" opacity="0.82"/>
+    <circle cx="1442.8" cy="349" r="1.71" opacity="0.93"/>
+    <circle cx="605.3" cy="131.5" r="1.25" opacity="0.97"/>
+    <circle cx="240.6" cy="172.5" r="1.29" opacity="0.6"/>
+    <circle cx="822" cy="321.9" r="1.06" opacity="0.79"/>
+    <circle cx="406.4" cy="610.1" r="1.06" opacity="0.63"/>
+    <circle cx="1287.6" cy="425.2" r="1.67" opacity="0.77"/>
+    <circle cx="137.2" cy="188.3" r="1.5" opacity="0.63"/>
+    <circle cx="929.3" cy="442.9" r="1.16" opacity="0.77"/>
+    <circle cx="719.1" cy="103.4" r="1.7" opacity="0.93"/>
+    <circle cx="1560.2" cy="493.5" r="1.53" opacity="0.89"/>
+  </g>
+  <g class="st-spark" fill="#FFF6DC">
+    <path transform="translate(556.7 400.2)" d="M0 -4.02 q0.68 0.68 4.02 4.02 q-0.68 0.68 -4.02 4.02 q-0.68 -0.68 -4.02 -4.02 q0.68 -0.68 4.02 -4.02 z"/>
+    <path transform="translate(1546.2 303.6)" d="M0 -6.2 q1.05 1.05 6.2 6.2 q-1.05 1.05 -6.2 6.2 q-1.05 -1.05 -6.2 -6.2 q1.05 -1.05 6.2 -6.2 z"/>
+    <path transform="translate(965.2 363.3)" d="M0 -3.78 q0.64 0.64 3.78 3.78 q-0.64 0.64 -3.78 3.78 q-0.64 -0.64 -3.78 -3.78 q0.64 -0.64 3.78 -3.78 z"/>
+    <path transform="translate(1106.6 38.6)" d="M0 -4.09 q0.7 0.7 4.09 4.09 q-0.7 0.7 -4.09 4.09 q-0.7 -0.7 -4.09 -4.09 q0.7 -0.7 4.09 -4.09 z"/>
+    <path transform="translate(253.6 60.1)" d="M0 -3.24 q0.55 0.55 3.24 3.24 q-0.55 0.55 -3.24 3.24 q-0.55 -0.55 -3.24 -3.24 q0.55 -0.55 3.24 -3.24 z"/>
+    <path transform="translate(1322.7 246.6)" d="M0 -4.27 q0.73 0.73 4.27 4.27 q-0.73 0.73 -4.27 4.27 q-0.73 -0.73 -4.27 -4.27 q0.73 -0.73 4.27 -4.27 z"/>
+    <path transform="translate(760.9 606.7)" d="M0 -5.17 q0.88 0.88 5.17 5.17 q-0.88 0.88 -5.17 5.17 q-0.88 -0.88 -5.17 -5.17 q0.88 -0.88 5.17 -5.17 z"/>
+    <path transform="translate(78 306.7)" d="M0 -3.55 q0.6 0.6 3.55 3.55 q-0.6 0.6 -3.55 3.55 q-0.6 -0.6 -3.55 -3.55 q0.6 -0.6 3.55 -3.55 z"/>
+    <path transform="translate(1400.9 149.2)" d="M0 -5.87 q1 1 5.87 5.87 q-1 1 -5.87 5.87 q-1 -1 -5.87 -5.87 q1 -1 5.87 -5.87 z"/>
+  </g>
+  </g>
+
+  <!-- ·········· 月亮（左上，留开文字与按钮的安全区） ·········· -->
+  <g class="tn-moonwrap">
+    <circle cx="230" cy="168" r="110" fill="#FFE7B8" opacity="0.09" filter="url(#tn-soft)"/>
+    <circle cx="230" cy="168" r="46" fill="#FFF6DD" opacity="0.12" filter="url(#tn-soft2)"/>
+    <circle cx="230" cy="168" r="30" fill="url(#tn-moon)" opacity="0.9"/>
+    <circle cx="321" cy="242" r="5.4" fill="#E4D2AF" opacity="0.42"/>
+    <circle cx="340" cy="260" r="3.4" fill="#E4D2AF" opacity="0.36"/>
+    <circle cx="331" cy="236" r="2.2" fill="#EFE0C2" opacity="0.45"/>
+  </g>
+
+  <!-- ·········· 星轨（静止的细弧，像长曝光留下的痕迹） ·········· -->
+  <g fill="none" stroke="#CFD9F2" stroke-linecap="round" opacity="0.22">
+    <path d="M690 470 A 420 420 0 0 1 1120 320" stroke-width="0.9"/>
+    <path d="M640 540 A 470 470 0 0 1 1120 372" stroke-width="0.7" opacity="0.75"/>
+    <path d="M596 610 A 512 512 0 0 1 1120 422" stroke-width="0.6" opacity="0.55"/>
+  </g>
+
+  <!-- ·········· 流星（CSS 动画定时划过，纯动画不占交互） ·········· -->
+  <g class="tn-shoot s1"><path d="M0 0 q -132 44 -252 106" fill="none" stroke="url(#tn-shoot)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="2" fill="#FFFDF4"/></g>
+  <g class="tn-shoot s2"><path d="M0 0 q -96 30 -186 74" fill="none" stroke="url(#tn-shoot)" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="1.5" fill="#FFF6DC"/></g>
+
+  <!-- ·········· 远山：三层剪影 ·········· -->
+  <path d="M-40 690 C 60 596 118 646 188 596 C 262 542 324 610 398 572 C 470 534 544 592 620 612 C 700 632 766 654 862 664 C 952 672 1038 672 1096 664 C 1104 664 1108 690 1116 699 C 1160 712 1214 716 1260 718 C 1310 738 1376 754 1446 747 C 1520 740 1586 712 1644 707 L1644 900 L-40 900 Z" fill="url(#tn-m1)" opacity="0.82"/>
+  <path d="M-40 766 C 76 726 152 706 246 698 C 342 690 402 740 472 742 C 542 744 604 716 682 718 C 760 720 830 748 896 750 C 972 752 1038 728 1122 707 C 1214 684 1292 678 1394 680 C 1476 682 1560 718 1640 736 L1640 900 L-40 900 Z" fill="url(#tn-m2)" opacity="0.94"/>
+
+  <!-- ·········· 山脊：两个人并肩站着的地方 ·········· -->
+  <path id="tn-ridgepath" d="M-60 900 C 20 868 96 824 162 790 C 234 754 302 726 372 716 C 444 706 492 740 548 766 C 612 794 678 816 752 830 C 836 846 902 868 964 892 C 990 902 1002 906 1046 908 L1066 900 L-60 900 Z" fill="url(#tn-m3)"/>
+  <path d="M-60 872 C 30 840 104 802 166 774 C 238 742 304 714 374 706 C 448 698 500 730 556 756 C 620 786 686 808 758 822 C 838 838 900 862 956 884" fill="none" stroke="url(#tn-ridge)" stroke-width="1.6"/>
+
+  <!-- 石缝里的小草（近景剪影，增加"地面上有人"的实感） -->
+  <g fill="#05040E" opacity="0.95">
+    <path d="M714 838 q 5 -22 16 -30 q -6 16 -3 30 z"/>
+    <path d="M722 840 q 10 -18 22 -22 q -12 12 -14 24 z"/>
+    <path d="M300 800 q 4 -18 13 -25 q -5 13 -3 25 z"/>
+    <path d="M308 802 q 8 -15 18 -18 q -10 10 -12 20 z"/>
+  </g>
+
+  <!-- 松树（左侧中景剪影） -->
+  <g fill="#100D22" opacity="0.96">
+    <path d="M214 792 l18 -34 l-9 0 l17 -32 l-8 0 l16 -30 l16 30 l-8 0 l17 32 l-9 0 l18 34 z"/>
+    <rect x="252" y="786" width="5" height="22" rx="2"/>
+  </g>
+
+  <!-- ·········· 那颗特别亮的星（比别的星亮，但不是光源） + 它照着的石头 ·········· -->
+  <g class="tn-bright">
+    <circle cx="635" cy="646" r="74" fill="url(#tn-bigstar)" opacity="0.22"/>
+    <circle cx="635" cy="646" r="24" fill="url(#tn-bigstar)"/>
+    <!-- 四道短芒：细、略带锥形，像真的在眨眼 -->
+    <path d="M 635 612 L 638.6 640 L 665 646 L 638.6 652 L 635 680 L 631.4 652 L 605 646 L 631.4 640" fill="#FFFDF4" opacity="0.92"/>
+    <path d="M 611 622 L 629 640 M 659 622 L 641 640 M 611 670 L 629 652 M 659 670 L 641 652"
+          stroke="#FFF3D2" stroke-width="1.1" stroke-linecap="round" opacity="0.4"/>
+    <circle cx="635" cy="646" r="6.4" fill="#FFFFFF"/>
+    <circle cx="635" cy="646" r="2.4" fill="#FFFBEC"/>
+  </g>
+  <!-- 石头：被星光擦亮的一角（呼应《石头说》） -->
+  <g>
+    <ellipse cx="631" cy="726" rx="54" ry="20" fill="#2A2A44" opacity="0.65"/>
+    <path d="M 575 732 C 579 710 597 700 631 699 C 669 698 691 708 697 728 C 681 742 591 743 575 732" fill="url(#tn-stone)"/>
+    <path d="M 585 716 C 595 704 613 700 631 700 C 621 710 605 717 589 722" fill="#F2E6CC" opacity="0.6"/>
+    <ellipse cx="631" cy="740" rx="66" ry="9" fill="#05040E" opacity="0.55"/>
+  </g>
+
+  <!-- ·········· 山脊上并肩的两个人影（剪影、不画五官） ·········· -->
+  <g class="tn-figures" fill="url(#tn-figure)">
+    <!-- 左侧：略高一点，肩线放松，手垂在身侧 -->
+    <path d="M 577 732 C 573 716 577 704 585 698 C 589 695 593 693 596 692 L 596 688 C 591 684 589 678 591 672 C 594 663 602 658 610 660 C 618 662 623 671 621 680 C 620 686 617 690 613 692 L 614 696 C 623 700 629 710 632 722 C 635 732 635 738 633 744 C 617 749 593 748 579 743 C 575 741 574 737 577 732"/>
+    <!-- 右侧：略矮，肩上多一层外套轮廓，发梢更长 -->
+    <path d="M 643 744 C 639 730 641 716 647 710 C 651 706 655 704 658 703 L 658 699 C 653 695 651 689 653 683 C 655 674 663 669 671 671 C 679 673 684 682 682 691 C 681 697 678 701 674 703 L 675 707 C 684 711 690 722 693 736 C 695 743 695 748 693 752 C 677 757 655 756 645 752 C 641 750 641 747 643 744"/>
+    <!-- 两个人之间的肩线高光（被星光擦到的一小段） -->
+    <path d="M 614 696 C 621 700 626 708 629 717" fill="none" stroke="#B9C2DE" stroke-width="1" opacity="0.35"/>
+    <path d="M 675 707 C 681 711 686 720 689 730" fill="none" stroke="#B9C2DE" stroke-width="1" opacity="0.28"/>
+  </g>
+
+  <!-- ·········· 底部雾气（缓慢平移，把画面压住） ·········· -->
+  <g class="tn-mistwrap">
+    <ellipse class="m1" cx="420" cy="800" rx="700" ry="70" fill="url(#tn-mist)"/>
+    <ellipse class="m2" cx="1180" cy="852" rx="820" ry="64" fill="url(#tn-mist)"/>
+    <ellipse class="m3" cx="800" cy="874" rx="900" ry="64" fill="url(#tn-mist)" opacity="0.8"/>
+  </g>
+
+  <!-- ·········· 暗角：让中间的标题与右侧菜单更清楚 ·········· -->
+  <radialGradient id="tn-vign" cx="0.5" cy="0.48" r="0.78">
+    <stop offset="0.5" stop-color="#000000" stop-opacity="0"/>
+    <stop offset="1" stop-color="#05030C" stop-opacity="0.62"/>
+  </radialGradient>
+  <rect width="1600" height="900" fill="url(#tn-vign)"/>
+  <linearGradient id="tn-bottom" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#05030C" stop-opacity="0"/>
+    <stop offset="1" stop-color="#05030C" stop-opacity="0.55"/>
+  </linearGradient>
+  <rect x="0" y="600" width="1600" height="300" fill="url(#tn-bottom)"/>
+</svg>

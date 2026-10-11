@@ -1,0 +1,238 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <!-- hk_park.svg · 香港迪士尼乐园 · 四月白天（二十周年）· 手写矢量，1600×900 -->
+  <defs>
+    <linearGradient id="hkSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FC9EE"/><stop offset="0.45" stop-color="#BEE0F4"/>
+      <stop offset="0.78" stop-color="#E6F1F4"/><stop offset="1" stop-color="#F7F1E4"/>
+    </linearGradient>
+    <radialGradient id="hkSun" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFF8DA" stop-opacity="0.95"/>
+      <stop offset="0.42" stop-color="#FFF0BE" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#FFF0BE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hkWall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFBF5"/><stop offset="0.55" stop-color="#FBEFF0"/>
+      <stop offset="1" stop-color="#EDD9DE"/>
+    </linearGradient>
+    <linearGradient id="hkRoof" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6E92D6"/><stop offset="0.55" stop-color="#4E70B8"/>
+      <stop offset="1" stop-color="#3A5591"/>
+    </linearGradient>
+    <linearGradient id="hkRoofPink" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5BFCB"/><stop offset="1" stop-color="#D68FA4"/>
+    </linearGradient>
+    <linearGradient id="hkGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFE9A8"/><stop offset="0.5" stop-color="#E8C065"/>
+      <stop offset="1" stop-color="#BE8F35"/>
+    </linearGradient>
+    <linearGradient id="hkGround" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#DCD3C6"/><stop offset="1" stop-color="#C4B9AA"/>
+    </linearGradient>
+    <linearGradient id="hkLawn" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8FBF7E"/><stop offset="1" stop-color="#6E9E60"/>
+    </linearGradient>
+    <radialGradient id="hkHaze" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFF6E2" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FFF6E2" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hkVig" cx="0.5" cy="0.46" r="0.82">
+      <stop offset="0.5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#233040" stop-opacity="0.20"/>
+    </radialGradient>
+    <!-- 人群剪影的共用部件（放进 defs 复用，避免一堆近似的 path） -->
+    <g id="hkPerson">
+      <path d="M-18 -42 q18 -9 36 0 l5 40 q-23 5 -46 0 z" fill="#57606F"/>
+      <path d="M-19 -38 q-8 16 -6 33 M19 -38 q8 16 6 33" fill="none" stroke="#57606F" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="0" cy="-56" r="12.5" fill="#57606F"/>
+    </g>
+  </defs>
+
+  <!-- 天空 -->
+  <rect width="1600" height="900" fill="url(#hkSky)"/>
+  <circle cx="1290" cy="140" r="430" fill="url(#hkSun)"/>
+  <circle cx="1290" cy="140" r="62" fill="#FFFBE8" opacity="0.85"/>
+
+  <!-- 云 -->
+  <g fill="#FFFFFF" opacity="0.86">
+    <g><ellipse cx="300" cy="150" rx="118" ry="42"/><ellipse cx="386" cy="130" rx="86" ry="46"/>
+      <ellipse cx="216" cy="132" rx="70" ry="36"/><ellipse cx="330" cy="170" rx="150" ry="30" opacity="0.7"/></g>
+    <g opacity="0.7"><ellipse cx="1010" cy="108" rx="96" ry="34"/><ellipse cx="1086" cy="96" rx="66" ry="36"/>
+      <ellipse cx="948" cy="98" rx="56" ry="28"/></g>
+    <g opacity="0.55"><ellipse cx="640" cy="228" rx="120" ry="30"/><ellipse cx="726" cy="216" rx="76" ry="30"/></g>
+    <g opacity="0.5"><ellipse cx="1430" cy="252" rx="104" ry="26"/><ellipse cx="1350" cy="242" rx="62" ry="24"/></g>
+  </g>
+
+  <!-- 远树 -->
+  <g opacity="0.55" fill="#7FAE86">
+    <ellipse cx="120" cy="470" rx="120" ry="86"/><ellipse cx="290" cy="486" rx="96" ry="70"/>
+    <ellipse cx="1330" cy="474" rx="130" ry="88"/><ellipse cx="1490" cy="492" rx="110" ry="72"/>
+  </g>
+  <g fill="#6BA075">
+    <ellipse cx="60" cy="512" rx="150" ry="92"/><ellipse cx="250" cy="524" rx="120" ry="74"/>
+    <ellipse cx="400" cy="534" rx="88" ry="52"/><ellipse cx="1380" cy="516" rx="150" ry="90"/>
+    <ellipse cx="1560" cy="530" rx="130" ry="74"/><ellipse cx="1200" cy="536" rx="80" ry="46"/>
+  </g>
+
+  <!-- 城堡：基座与城墙 -->
+  <g>
+    <ellipse cx="800" cy="556" rx="330" ry="26" fill="#B9AFA2" opacity="0.45"/>
+    <rect x="596" y="392" width="408" height="166" rx="8" fill="url(#hkWall)" stroke="#D9C2C8" stroke-width="2"/>
+    <!-- 城墙垛口 -->
+    <g fill="#FBF1F0" stroke="#D9C2C8" stroke-width="2">
+      <rect x="596" y="374" width="30" height="22"/><rect x="644" y="374" width="30" height="22"/>
+      <rect x="692" y="374" width="30" height="22"/><rect x="878" y="374" width="30" height="22"/>
+      <rect x="926" y="374" width="30" height="22"/><rect x="974" y="374" width="30" height="22"/>
+    </g>
+    <!-- 城门 -->
+    <path d="M760 558 L760 492 Q800 456 840 492 L840 558 Z" fill="#5C5170"/>
+    <path d="M760 558 L760 492 Q800 456 840 492 L840 558 Z" fill="none" stroke="#E3CBD2" stroke-width="3"/>
+    <path d="M775 558 L775 500 Q800 476 825 500 L825 558 Z" fill="#7A6E92" opacity="0.75"/>
+    <!-- 城墙窗 -->
+    <g fill="#7E90C4">
+      <path d="M624 430 h26 v40 h-26 z"/><path d="M624 430 a13 13 0 0 1 26 0 z" fill="#94A6D8"/>
+      <path d="M950 430 h26 v40 h-26 z"/><path d="M950 430 a13 13 0 0 1 26 0 z" fill="#94A6D8"/>
+    </g>
+    <g fill="#F6E4E8" opacity="0.75">
+      <rect x="690" y="424" width="20" height="34" rx="9"/><rect x="890" y="424" width="20" height="34" rx="9"/>
+    </g>
+
+    <!-- 左右塔楼 -->
+    <g>
+      <rect x="566" y="298" width="98" height="262" rx="6" fill="url(#hkWall)" stroke="#D9C2C8" stroke-width="2"/>
+      <path d="M552 300 L678 300 L615 178 Z" fill="url(#hkRoof)"/>
+      <path d="M552 300 L678 300 L615 178 Z" fill="none" stroke="#33477C" stroke-width="2"/>
+      <path d="M615 178 L615 150" stroke="#C9A24E" stroke-width="5"/>
+      <circle cx="615" cy="144" r="9" fill="url(#hkGold)"/>
+      <path d="M578 330 h24 v46 h-24 z M628 330 h24 v46 h-24 z" fill="#7E90C4" opacity="0.9"/>
+      <path d="M578 330 a12 12 0 0 1 24 0 z M628 330 a12 12 0 0 1 24 0 z" fill="#9CADDC" opacity="0.9"/>
+      <path d="M578 424 h24 v46 h-24 z M628 424 h24 v46 h-24 z" fill="#7E90C4" opacity="0.9"/>
+      <path d="M578 424 a12 12 0 0 1 24 0 z M628 424 a12 12 0 0 1 24 0 z" fill="#9CADDC" opacity="0.9"/>
+    </g>
+    <g>
+      <rect x="936" y="298" width="98" height="262" rx="6" fill="url(#hkWall)" stroke="#D9C2C8" stroke-width="2"/>
+      <path d="M922 300 L1048 300 L985 178 Z" fill="url(#hkRoof)"/>
+      <path d="M922 300 L1048 300 L985 178 Z" fill="none" stroke="#33477C" stroke-width="2"/>
+      <path d="M985 178 L985 150" stroke="#C9A24E" stroke-width="5"/>
+      <circle cx="985" cy="144" r="9" fill="url(#hkGold)"/>
+      <path d="M948 330 h24 v46 h-24 z M998 330 h24 v46 h-24 z" fill="#7E90C4" opacity="0.9"/>
+      <path d="M948 330 a12 12 0 0 1 24 0 z M998 330 a12 12 0 0 1 24 0 z" fill="#9CADDC" opacity="0.9"/>
+      <path d="M948 424 h24 v46 h-24 z M998 424 h24 v46 h-24 z" fill="#7E90C4" opacity="0.9"/>
+      <path d="M948 424 a12 12 0 0 1 24 0 z M998 424 a12 12 0 0 1 24 0 z" fill="#9CADDC" opacity="0.9"/>
+    </g>
+
+    <!-- 中央主塔 -->
+    <rect x="742" y="238" width="116" height="164" rx="6" fill="url(#hkWall)" stroke="#D9C2C8" stroke-width="2"/>
+    <path d="M726 242 L874 242 L800 92 Z" fill="url(#hkRoof)"/>
+    <path d="M726 242 L874 242 L800 92 Z" fill="none" stroke="#33477C" stroke-width="2.4"/>
+    <ellipse cx="800" cy="238" rx="78" ry="9" fill="#F0DCE2"/>
+    <path d="M800 92 L800 54" stroke="#C9A24E" stroke-width="6"/>
+    <path d="M800 62 l30 12 l-30 12 z" fill="url(#hkGold)"/>
+    <circle cx="800" cy="48" r="11" fill="url(#hkGold)"/>
+    <!-- 主塔窗与钟面 -->
+    <circle cx="800" cy="292" r="26" fill="#F8EEF0" stroke="#C9A24E" stroke-width="4"/>
+    <path d="M800 292 L800 274 M800 292 L814 298" stroke="#5C5170" stroke-width="3.4" stroke-linecap="round"/>
+    <path d="M770 342 h20 v42 h-20 z M810 342 h20 v42 h-20 z" fill="#7E90C4" opacity="0.9"/>
+    <path d="M770 342 a10 10 0 0 1 20 0 z M810 342 a10 10 0 0 1 20 0 z" fill="#9CADDC" opacity="0.9"/>
+
+    <!-- 两侧小尖塔 -->
+    <g>
+      <rect x="700" y="300" width="46" height="102" rx="5" fill="url(#hkWall)" stroke="#D9C2C8" stroke-width="2"/>
+      <path d="M692 302 L754 302 L723 216 Z" fill="url(#hkRoofPink)"/>
+      <path d="M692 302 L754 302 L723 216 Z" fill="none" stroke="#B87F95" stroke-width="2"/>
+      <circle cx="723" cy="210" r="6.5" fill="url(#hkGold)"/>
+      <rect x="854" y="300" width="46" height="102" rx="5" fill="url(#hkWall)" stroke="#D9C2C8" stroke-width="2"/>
+      <path d="M846 302 L908 302 L877 216 Z" fill="url(#hkRoofPink)"/>
+      <path d="M846 302 L908 302 L877 216 Z" fill="none" stroke="#B87F95" stroke-width="2"/>
+      <circle cx="877" cy="210" r="6.5" fill="url(#hkGold)"/>
+    </g>
+
+    <!-- 二十周年：金色绶带与徽记 -->
+    <path d="M586 402 L1014 402" stroke="#C9A24E" stroke-width="10" stroke-linecap="round"/>
+    <path d="M586 402 L1014 402" stroke="#F3D98C" stroke-width="5" stroke-linecap="round"/>
+    <g fill="#E8C065" opacity="0.95">
+      <circle cx="688" cy="402" r="10"/><circle cx="912" cy="402" r="10"/>
+    </g>
+    <g>
+      <circle cx="800" cy="410" r="32" fill="url(#hkGold)" stroke="#A87A22" stroke-width="2.5"/>
+      <circle cx="800" cy="410" r="24" fill="none" stroke="#FFF6D8" stroke-width="2" opacity="0.8"/>
+      <text x="800" y="421" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-weight="700"
+            fill="#6B4A10">20</text>
+    </g>
+  </g>
+
+  <!-- 草坪与花坛 -->
+  <rect x="0" y="556" width="1600" height="120" fill="url(#hkLawn)"/>
+  <path d="M0 556 L1600 556" stroke="#A6CE96" stroke-width="4" opacity="0.8"/>
+  <rect x="0" y="644" width="1600" height="46" fill="#E8E1D4"/>
+  <rect x="0" y="644" width="1600" height="46" fill="none" stroke="#CFC5B4" stroke-width="3"/>
+  <!-- 花坛 -->
+  <g>
+    <rect x="46" y="600" width="420" height="46" rx="16" fill="#B9A793"/>
+    <rect x="1134" y="600" width="420" height="46" rx="16" fill="#B9A793"/>
+    <g>
+      <circle cx="86" cy="600" r="12" fill="#F2A0AE"/><circle cx="122" cy="596" r="12" fill="#F7D27A"/>
+      <circle cx="158" cy="601" r="12" fill="#E88A9A"/><circle cx="196" cy="595" r="12" fill="#F6E6A8"/>
+      <circle cx="232" cy="600" r="12" fill="#EE9DB4"/><circle cx="270" cy="596" r="12" fill="#F7D27A"/>
+      <circle cx="306" cy="601" r="12" fill="#E88A9A"/><circle cx="344" cy="595" r="12" fill="#F6E6A8"/>
+      <circle cx="382" cy="600" r="12" fill="#F2A0AE"/><circle cx="420" cy="596" r="12" fill="#F7D27A"/>
+      <circle cx="104" cy="620" r="10" fill="#8FB86E"/><circle cx="178" cy="622" r="10" fill="#8FB86E"/>
+      <circle cx="252" cy="620" r="10" fill="#8FB86E"/><circle cx="326" cy="622" r="10" fill="#8FB86E"/>
+      <circle cx="400" cy="620" r="10" fill="#8FB86E"/>
+      <circle cx="1174" cy="600" r="12" fill="#F2A0AE"/><circle cx="1210" cy="596" r="12" fill="#F7D27A"/>
+      <circle cx="1246" cy="601" r="12" fill="#E88A9A"/><circle cx="1284" cy="595" r="12" fill="#F6E6A8"/>
+      <circle cx="1320" cy="600" r="12" fill="#EE9DB4"/><circle cx="1358" cy="596" r="12" fill="#F7D27A"/>
+      <circle cx="1394" cy="601" r="12" fill="#E88A9A"/><circle cx="1432" cy="595" r="12" fill="#F6E6A8"/>
+      <circle cx="1470" cy="600" r="12" fill="#F2A0AE"/><circle cx="1508" cy="596" r="12" fill="#F7D27A"/>
+    </g>
+  </g>
+
+  <!-- 地面与透视铺装 -->
+  <rect x="0" y="690" width="1600" height="210" fill="url(#hkGround)"/>
+  <!-- 通向城堡的中央步道（近大远小） -->
+  <path d="M690 690 L640 900 L960 900 L910 690 Z" fill="#E9DFD0" opacity="0.85"/>
+  <path d="M690 690 L640 900 M910 690 L960 900" stroke="#B5A896" stroke-width="3" opacity="0.8"/>
+  <g stroke="#B5A896" stroke-width="2.4" opacity="0.75">
+    <path d="M0 726 L1600 726"/><path d="M0 786 L1600 786"/><path d="M0 862 L1600 862"/>
+    <path d="M470 690 L300 900"/><path d="M1130 690 L1300 900"/>
+    <path d="M800 690 L800 900"/><path d="M640 690 L520 900"/><path d="M960 690 L1080 900"/>
+  </g>
+  <!-- 城堡在地面上的投影与逆光暖调 -->
+  <ellipse cx="800" cy="700" rx="360" ry="34" fill="#8E8574" opacity="0.22"/>
+  <ellipse cx="1190" cy="700" rx="420" ry="120" fill="#FFF0C8" opacity="0.18"/>
+
+  <!-- 路灯 -->
+  <g>
+    <path d="M212 690 L212 486" stroke="#5E6A70" stroke-width="7" stroke-linecap="round"/>
+    <path d="M212 486 q0 -26 26 -26" stroke="#5E6A70" stroke-width="6" fill="none"/>
+    <circle cx="246" cy="458" r="15" fill="#FFEFC0" stroke="#C9A24E" stroke-width="3"/>
+    <circle cx="246" cy="458" r="40" fill="url(#hkHaze)"/>
+    <path d="M1388 690 L1388 486" stroke="#5E6A70" stroke-width="7" stroke-linecap="round"/>
+    <path d="M1388 486 q0 -26 -26 -26" stroke="#5E6A70" stroke-width="6" fill="none"/>
+    <circle cx="1354" cy="458" r="15" fill="#FFEFC0" stroke="#C9A24E" stroke-width="3"/>
+    <circle cx="1354" cy="458" r="40" fill="url(#hkHaze)"/>
+  </g>
+
+  <!-- 气球 -->
+  <g>
+    <path d="M1082 690 q6 -50 -4 -92" stroke="#8A8272" stroke-width="2.4" fill="none"/>
+    <circle cx="1076" cy="570" r="26" fill="#F2A0AE"/><circle cx="1076" cy="570" r="26" fill="none" stroke="#D98A99" stroke-width="2"/>
+    <circle cx="1108" cy="588" r="22" fill="#8FC9EE"/><circle cx="1108" cy="588" r="22" fill="none" stroke="#6FA6CE" stroke-width="2"/>
+    <circle cx="1050" cy="596" r="20" fill="#F7D27A"/><circle cx="1050" cy="596" r="20" fill="none" stroke="#D8B057" stroke-width="2"/>
+  </g>
+
+  <!-- 人群剪影（站在广场上，控制在对话框上沿以上，游戏里能看见） -->
+  <g opacity="0.6">
+    <use href="#hkPerson" transform="translate(438 672) scale(0.9)"/>
+    <use href="#hkPerson" transform="translate(492 666) scale(0.78)"/>
+    <use href="#hkPerson" transform="translate(556 674) scale(0.86)"/>
+    <use href="#hkPerson" transform="translate(1052 670) scale(0.88)"/>
+    <use href="#hkPerson" transform="translate(1112 664) scale(0.76)"/>
+    <use href="#hkPerson" transform="translate(1176 672) scale(0.84)"/>
+    <use href="#hkPerson" transform="translate(704 682) scale(0.66)"/>
+    <use href="#hkPerson" transform="translate(884 684) scale(0.64)"/>
+  </g>
+
+  <!-- 空气感与暗角 -->
+  <ellipse cx="800" cy="600" rx="760" ry="180" fill="url(#hkHaze)"/>
+  <rect width="1600" height="900" fill="url(#hkVig)"/>
+
+</svg>
