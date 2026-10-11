@@ -64,8 +64,8 @@
 | 角色立绘 | **30 张真实二次元素材**（OpenGameArt《VIsual novel Character Sprite》，作者 FALLiNG_AiR，**CC0 1.0**），**表情覆盖 208/208**；雅绿→粉、金灰→蓝灰着色，雅腮红程序化补（原包无脸红差分） |
 | 手部/美甲 | 重画 `handSVG()`（解剖分层，去掉"悬空手表"）；新增 `both_nails`；**接线：17 处美甲特写 + 32 处语义不符的移除**；修 `#hand-layer` z-index 3→4（原先 CG 盖住手部层，`gift` 是死素材） |
 | 三张结局 CG | 已拉开构图（见上表） |
-| Ginpu | `cg_ginpu.svg` 重做：**纯手写 SVG、零位图**（20 只玩偶堆成小山，落实 Ginpu 识别点：黑身白肚、又大又垂的橙红喙、大眼高光、橙红三趾脚）。真实素材实测**不可得**：Wikimedia/Commons/wikipedia/archive.org/openverse 全部 000，OpenGameArt 只有 Tux 像素企鹅，GitHub 搜 ginpu 全是 ping 工具，npm 只有 CLI 包 |
-| ⚠️ Ginpu 版权 | **Ginpu 是 Mattel / HIT Entertainment 的版权角色**，本图是**手绘致敬（fan art）**、未复制任何官方图像，**仅限个人非公开使用**；声明见 `assets/CREDITS_GINPU.md`。**若要公开发布，必须替换或删除这张 CG 及相关文本** |
+| Ginpu | `cg_ginpu.svg`：**纯手写 SVG、零位图**（20 只玩偶堆成小山）。这一张原先是照某个第三方企鹅角色画的致敬版，**公开发布前已整体重画成本作原创角色 Ginpu**：深蓝灰身体、短小金黄小尖喙、小眼睛 + 腮红、三根呆毛、浅蓝肚纹、浅金三趾小脚掌 |
+| ✅ Ginpu 版权 | **Ginpu 是本作原创的企鹅玩偶角色，与任何第三方 IP 无关**：无第三方素材、无参考图、无署名义务，可随本作公开发布。设定见 `assets/CREDITS_GINPU.md` |
 | 背景 / 符号类 CG | 手写 SVG（`assets/backgrounds/` 20 张） |
 | 记录 | `assets/characters/CREDITS.md`、`assets/CREDITS_HANDS.md`、`assets/CREDITS_GINPU.md`、README「素材来源与许可」 |
 
@@ -84,7 +84,7 @@
 4. 三张结局 CG **共用同一张星空背景**（仅此一张素材）；没有侧脸/低头/回头立绘，"侧脸/半张脸"靠裁切与压暗暗示
 5. 立绘只有 720×1080 半身（头部约占图高 40%），"超大特写"做不到
 6. 音乐为**纯合成无采样**：做不出钢琴击弦/揉弦、无混响、无声场、无打击乐、无副歌记忆点
-7. Ginpu 那张是**手绘矢量致敬**：喙比官方偏厚圆、眼睛偏大、无黏土/毛绒材质；本机拿不到公开可用素材，**想要"真的像"只能由你提供照片或官方图**（子任务可 base64 内嵌成新 CG）
+7. Ginpu 那张是**平涂矢量**（不是毛绒实拍）：没有绒毛反射与布料纹理；与半写实位图立绘本来就不同画风。它已是**本作原创角色**，与任何第三方企鹅 IP 无关，详见 `assets/CREDITS_GINPU.md`
 8. `choices[].hint` 仍冻结（选项下方小字已按要求**不显示**，数据保留）
 9. 本轮并行改动较多；所有结构变更均由**归一化 hash／逐字段比对**证明为零（`chapter4.js` 与 `c3_chat_1~5` 逐字节一致）
 

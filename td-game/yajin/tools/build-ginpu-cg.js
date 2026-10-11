@@ -67,9 +67,10 @@ const WING_L = 'M-56,-190 C-84,-178 -97,-138 -87,-110 C-83,-97 -67,-96 -64,-110 
 const WING_R = 'M56,-190 C84,-178 97,-138 87,-110 C83,-97 67,-96 64,-110 C57,-140 53,-170 56,-190 Z';
 
 /* 喙：Ginpu 的**短小金尖喙**。
-   宽仅 38（约头宽 148 的 1/4）、高 46，圆顶、向下收成小尖，
-   顶在 y=-283、尖在 y=-237，正好落在两眼之间偏下；下面一条短喙缝把它分成上下喙。 */
-const BEAK_UP = 'M-19,-273 C-9,-283 9,-283 19,-273 C20,-262 10,-246 0,-237 C-10,-246 -20,-262 -19,-273 Z';
+   宽 44（约头宽 148 的 3 成，远达不到"占掉大半个脸"）、高 55，圆顶、向下收成小尖，
+   顶在 y=-288、尖在 y=-233，落在两眼之间偏下，距下巴线还有一段——
+   刻意不做"又大又宽、垂到下巴以下"的喙。 */
+const BEAK_UP = 'M-22,-277 C-10,-288 10,-288 22,-277 C23,-262 12,-245 0,-233 C-12,-245 -23,-262 -22,-277 Z';
 
 /* 头顶三根呆毛：Ginpu 自己的记号之一，也让轮廓不至于太"圆滚" */
 function tuft() {
@@ -87,22 +88,21 @@ function tuft() {
 
 /* ---------------- 眼睛：4 种情绪，全部叠在同一局部坐标上。
    小眼睛 + 腮红：白眼球 rx=10.4（约头宽的 1/14），瞳孔更小，
-   刻意不做"占满半张脸的大白眼 + 大量高光"。 ---------------- */
-const EYE_CY = -281, EYE_CX = 27;
+   刻意不做"占满半张脸的大白眼 + 大量高光"。 ---------------- */const EYE_CY = -283, EYE_CX = 29;
 function eyePair(kind) {
   const white = (x) => `<ellipse cx="${x}" cy="${EYE_CY}" rx="10.4" ry="11.8" fill="${C.eye}"/>`;
   const bigWhite = (x) => `<ellipse cx="${x}" cy="${EYE_CY - 1}" rx="11.6" ry="13" fill="${C.eye}"/>`;
   const open = (x, dx, dy, k) => `
-      <ellipse cx="${x + dx}" cy="${EYE_CY + dy}" rx="${6.6 * k}" ry="${7.8 * k}" fill="${C.pupil}"/>
-      <ellipse cx="${x + dx - 2.2}" cy="${EYE_CY + dy - 3.1}" rx="2.5" ry="2.9" fill="#FFFFFF"/>
-      <ellipse cx="${x + dx + 2.1}" cy="${EYE_CY + dy + 3}" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>`;
+      <ellipse cx="${x + dx}" cy="${EYE_CY + dy}" rx="${7.3 * k}" ry="${8.5 * k}" fill="${C.pupil}"/>
+      <ellipse cx="${x + dx - 2.4}" cy="${EYE_CY + dy - 3.4}" rx="2.6" ry="3" fill="#FFFFFF"/>
+      <ellipse cx="${x + dx + 2.3}" cy="${EYE_CY + dy + 3.3}" rx="1.2" ry="1.4" fill="#FFFFFF" opacity="0.8"/>`;
   const arc = (x) => `<path d="M${x - 8.4},${EYE_CY + 2.6} Q${x},${EYE_CY - 7.4} ${x + 8.4},${EYE_CY + 2.6}" stroke="${C.pupil}" stroke-width="4.2" fill="none" stroke-linecap="round"/>`;
   const blush = (x) => `<ellipse cx="${x}" cy="${EYE_CY + 19}" rx="14.5" ry="8" fill="${C.blush}" opacity="0.42"/>`;
   const cheeks = blush(-44) + blush(44);
   if (kind === 'happy') return white(-EYE_CX) + white(EYE_CX) + arc(-EYE_CX) + arc(EYE_CX) + cheeks;
   if (kind === 'wide') return bigWhite(-EYE_CX) + bigWhite(EYE_CX) + open(-EYE_CX, 0, 0.6, 0.85) + open(EYE_CX, 0, 0.6, 0.85) + cheeks;
   if (kind === 'wink') return white(-EYE_CX) + open(-EYE_CX, 0.6, 1.6, 1) + white(EYE_CX) + arc(EYE_CX) + cheeks;
-  return white(-EYE_CX) + white(EYE_CX) + open(-EYE_CX, 0.8, 1.6, 1) + open(EYE_CX, 0.8, 1.6, 1) + cheeks;
+  return white(-EYE_CX) + white(EYE_CX) + open(-EYE_CX, 0, 1.4, 1) + open(EYE_CX, 0, 1.4, 1) + cheeks;
 }
 
 /* ---------------- 配饰（呼应剧情："围巾的、洗澡的、抱鱼的、戴帽子的"） ---------------- */
@@ -174,8 +174,8 @@ function dollBody() {
     <!-- 喙：短小的金黄小尖喙 -->
     <path d="${BEAK_UP}" fill="${C.beak}"/>
     <path d="${BEAK_UP}" fill="none" stroke="${C.beakDeep}" stroke-width="2.2" opacity="0.55"/>
-    <path d="M-13,-252 Q0,-247 13,-252" stroke="${C.beakDeep}" stroke-width="2.6" fill="none" opacity="0.85"/>
-    <path d="M-11,-272 C-5,-278 4,-279 10,-276" stroke="${C.beakLite}" stroke-width="5" fill="none" opacity="0.75" stroke-linecap="round"/>
+    <path d="M-16,-256 Q0,-250 16,-256" stroke="${C.beakDeep}" stroke-width="2.8" fill="none" opacity="0.85"/>
+    <path d="M-13,-276 C-6,-283 5,-284 12,-280" stroke="${C.beakLite}" stroke-width="5.4" fill="none" opacity="0.75" stroke-linecap="round"/>
 
     ${tuft()}
 
