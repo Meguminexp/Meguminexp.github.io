@@ -1074,12 +1074,17 @@
       ${circle(w.x, w.y - 46, 17, '#E8E2D2', 'stroke="#8C7A62" stroke-width="3.4"')}
       ${circle(w.x, w.y - 46, 12, '#FBF7EC', 'stroke="#B8A88E" stroke-width="1.6"')}
       ${stroke(`M ${R(w.x)} ${R(w.y - 56)} L ${R(w.x)} ${R(w.y - 46)} L ${R(w.x + 8)} ${R(w.y - 41)}`, '#4A4038', 3.4)}</g>`;
-    /* Ginpu 钥匙扣：随身小物，挂在观者右侧腰间 */
+    /* Ginpu 钥匙扣：随身小物，挂在观者右侧腰间（本作原创企鹅玩偶，与 cg_ginpu.svg 同一套配色） */
     if (outfit === 'casual' || outfit === 'nails' || outfit === 'home') {
       s += `<g transform="translate(${R(cfg.cx + cfg.shoulderHalf - 56)} 1036)">
-        ${circle(0, 0, 17, '#F2F4F6', 'stroke="#C8CCD2" stroke-width="3"')}
-        ${circle(-5, -5, 3.6, '#2A2A2E')}${circle(5, -5, 3.6, '#2A2A2E')}
-        ${path('M -6 6 q 6 8 12 0', 'none', 'stroke="#E8963C" stroke-width="3.6" fill="none"')}</g>`;
+        ${circle(0, 0, 17, '#3B4A63', 'stroke="#8A9CBB" stroke-width="3"')}
+        ${path('M -7 13 C -7 0 -6 -9 0 -9 C 6 -9 7 0 7 13 Z', '#F6F2E9')}
+        ${path('M -2.6 13 L 2.6 13 L 0 -9 Z', '#D3E5F7')}
+        ${path('M -5.5 -2.5 L 5.5 -2.5 L 0 5.5 Z', '#F2C44F')}
+        ${circle(-6, -8, 2.8, '#FCFAF6')}${circle(6, -8, 2.8, '#FCFAF6')}
+        ${circle(-6, -8, 1.7, '#16171C')}${circle(6, -8, 1.7, '#16171C')}
+        ${stroke('M -4 -20 C -7 -26 -3 -29 0 -26', '#3B4A63', 2.4)}
+        ${circle(-11.5, -3, 3, '#E9838F', 'opacity="0.5"')}${circle(11.5, -3, 3, '#E9838F', 'opacity="0.5"')}</g>`;
     }
     return s;
   }
