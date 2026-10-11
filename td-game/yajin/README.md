@@ -487,6 +487,7 @@ she_first  ：其余（courage < 40）—— 他没能说出口，她替他说�
 |---|---|---|
 | **角色立绘**（雅 16 张 / 金 14 张，共 30 张 PNG） | OpenGameArt 投稿 [VIsual novel Character Sprite](https://opengameart.org/content/visual-novel-character-sprite)（作者 FALLiNG_AiR） | **CC0 1.0 公有领域**（不要求署名，此处出于尊重与可追溯性记录） |
 | 背景 24 张 / 符号类 CG 5 张 | 本项目手写 SVG | 随本项目 |
+| **Ginpu 企鹅玩偶**（`cg_ginpu.svg`，以及 `src/art.js` 里同款的小挂件） | **本作原创角色**，由 `tools/build-ginpu-cg.js` 手写矢量绘制 | 随本项目，**与任何第三方 IP 无关**（角色设定见 [`assets/CREDITS_GINPU.md`](assets/CREDITS_GINPU.md)） |
 | 合成型 CG 17 张 | 背景 + 上述立绘素材，由 `tools/build-cg.js` 合成 | 同上（CC0） |
 | 音频（11 BGM + 16 音效 + 9 环境音） | WebAudio 实时合成，无采样文件 | 随本项目 |
 
@@ -494,4 +495,6 @@ she_first  ：其余（courage < 40）—— 他没能说出口，她替他说�
 完整记录（含来源直链、加工脚本、表情映射表）见 [`assets/characters/CREDITS.md`](assets/characters/CREDITS.md)。
 
 **手部 / 美甲插图**（游戏内手部特写层与 `cg_nail_art`）是本项目**自绘的矢量图**，`handSVG(kind)` 共 11 种取值（含「单/双猫猫 / 单/双酷黑 / 一猫一黑 / 单/双手粉色蝴蝶穿戴甲」等美甲款式，未知取值一律回退 `hold`），，没有任何第三方素材（曾经系统考察过 OpenGameArt 等可达图库，没有可用的手/美甲素材），画法与几何契约见 [`assets/CREDITS_HANDS.md`](assets/CREDITS_HANDS.md)。
-本项目**不公开发布**，仅作个人纪念。
+**Ginpu 企鹅玩偶**是本作**原创的玩偶角色**（深蓝灰身体、短小金黄小尖喙、小眼睛 + 腮红、三根呆毛、浅蓝肚纹、浅金三趾小脚掌），
+与任何第三方 IP 无关，设定与画法见 [`assets/CREDITS_GINPU.md`](assets/CREDITS_GINPU.md)。
+本项目准备**公开发布到 GitHub Pages**：立绘是 CC0、其余插图与音频均为本项目自绘 / 自合成，无第三方角色或素材依赖。
